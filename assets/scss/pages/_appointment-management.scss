@@ -1,0 +1,187 @@
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none; /* 項目符號 消失 */
+}
+
+.administrator-functions-border-outside {
+    display: block;
+    width: 100%;
+    max-width: 234px;
+    text-align: center;
+    border: solid $neutral-950;
+    border-width: 1px 4px;
+}
+
+.administrator-functions-border-outside.btn:hover {
+    border: solid $neutral-950;
+    border-width: 1px 4px;
+    background-color: rgba($primary, 0.8);
+    color: $black-50;
+}
+
+.administrator-functions-border-outside.active {
+    background-color: rgba($primary, 0.8);
+    color: $black-50;
+    border-color: $neutral-950;
+}
+
+.administrator-functions-border-inside {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border: solid $neutral-950;
+    border-width: 0px 1px;
+    padding: 12px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.administrator-functions-border-outside-signout {
+    display: block;
+    width: 100%;
+    max-width: 234px;
+    text-align: center;
+    border: solid #c24747;
+    border-width: 1px 4px;
+    color: #c24747;
+}
+
+.administrator-functions-border-outside-signout.btn:hover {
+    border: solid $neutral-950;
+    border-width: 1px 4px;
+    background-color: #c24747;
+    color: $black-50;
+}
+
+.administrator-functions-border-inside-signout {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border: solid #c24747;
+    border-width: 0px 1px;
+    padding: 12px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pt-21 {
+    padding-top: 21px;
+}
+
+.check-border-outside {
+    border: solid $primary 4px;
+}
+
+.check-border-inside {
+    border: solid $primary 1px;
+}
+
+.primary-bg-01 {
+    background-color: rgba($primary, 0.1);
+}
+
+.py-22 {
+    padding-top: 22px;
+    padding-bottom: 22px;
+}
+
+.width-726 {
+    width: 726px;
+}
+
+.btn:hover {
+    background-color: rgba($primary, 0.8);
+    color: $black-50;
+}
+
+.card-title-bg {
+    background-color: rgba(#939393, 0.2);
+}
+
+.card-content-line {
+    border-bottom: 1px solid $black-300;
+}
+
+.calendar-yellow {
+    color: #a39044;
+}
+
+.calendar-green {
+    color: #5f994d;
+}
+
+.calendar-red {
+    color: #c24747;
+}
+
+.check-on {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-color: currentColor;
+    -webkit-mask: url("../assets/images/appointment-management/check-on.png")
+        no-repeat center / contain;
+    mask: url("../assets/images/appointment-management/check-on.png") no-repeat
+        center / contain;
+}
+
+.switch-51 .form-check-input {
+    width: 51px;
+    height: 31px;
+    border-radius: 31px; // 膠囊外型
+    background-color: $neutral-200; // OFF 底色
+    appearance: none; // 拿掉原生樣式
+    -webkit-appearance: none;
+    position: relative; // 給 ::before 定位
+    cursor: pointer;
+    background-image: none; // 不用 Bootstrap 內建球圖
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+
+    /* 以高度 31px 設計：球直徑=31-4=27，左右內距各 2px */
+    &::before {
+        content: "";
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        width: 27px;
+        height: 27px;
+        border-radius: 50%;
+        background-color: $black-50;
+        transition: transform 0.2s ease, background-color 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    &:checked {
+        background-color: $primary; // ON 底色
+
+        &::before {
+            transform: translateX(20px); // 51 - 27 - 4 = 20
+            background-color: $black-50;
+        }
+    }
+}
+
+.administrator-functions-border-outside-rwd {
+    display: block;
+    width: 100%;
+    text-align: center;
+    border: solid $neutral-950;
+    border-width: 1px 4px;
+}
+
+.administrator-functions-border-outside-rwd.btn:hover {
+    border: solid $neutral-950;
+    border-width: 1px 4px;
+    background-color: rgba($primary, 0.8);
+    color: $black-50;
+}
+
+.administrator-functions-border-outside-rwd.active {
+    background-color: rgba($primary, 0.8);
+    color: $black-50;
+    border-color: $neutral-950;
+}

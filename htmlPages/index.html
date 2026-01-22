@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>豬大仙命理預約 | 專業紫微斗數解析・流年運勢分析・擇日服務</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+
+<body style="background-image: url(../assets/images/index/nav-bg.png);">
+
+
+  <%- include("./layout/nav",{login:false}) %>
+
+
+
+
+
+    <header class="header py-md-160 py-80 position-relative "
+      style="background-image: url(../assets/images/index/header.png);">
+      <dotlottie-wc class="position-absolute "
+        src="https://lottie.host/08657889-c1e5-4d0b-8844-c01b6a963497/cPEKyYNdRW.lottie"
+        style="width: 100%;height: 100%;top:0" autoplay ></dotlottie-wc>
+      <div class="filter position-absolute top-0 start-0 end-0 bottom-0
+            ">
+      </div>
+      <div class="container text-center position-relative">
+        <h1 class="fs-md-40 fs-3  text-neutral-50 fw-normal mb-md-48 mb-4">
+          二十四節氣中<br>
+          看見你的節奏與命運
+        </h1>
+        <p class="fs-md-5 fs-6 text-neutral-50 mb-md-48 mb-4 text-center">用東方智慧解讀時機，<br class="d-block d-md-none ">
+          結合命理協助你的人生選擇</p>
+
+        <button type="button" class="btn bg-neutral-50 rounded-0  fs-5 py-0">
+          <div class="btn-inside-border py-3">
+            立即探索您專屬的服務
+          </div>
+        </button>
+      </div>
+
+
+    </header>
+
+    <section class="py-md-80 py-40 service">
+      <div class="container">
+        <div class="d-flex   mb-md-40 mb-4 justify-content-between">
+          <div class="d-flex align-items-md-end align-items-start position-relative pt-30
+          flex-md-row flex-column
+          ">
+            <img class="position-absolute top-0" src="../assets/images/index/title-deco.png" alt="round-deco ">
+            <h2 class="ps-md-32 mb-md-0 mb-12 me-12 fs-md-2 fs-4">熱門服務項目</h2>
+            <p class=" mb-0">命理不神秘，熱門服務助你一步步了解自己！</p>
+          </div>
+
+          <ul class="my-indicators list-unstyled mb-0 d-md-flex d-none align-items-end ">
+            <li>
+              <div class="my-indicator service-item w-120 me-12 "></div>
+            </li>
+            <li>
+              <div class="my-indicator service-item w-120 me-12"></div>
+            </li>
+            <li>
+              <div class="my-indicator service-item w-120 "></div>
+            </li>
+          </ul>
+        </div>
+
+
+
+        <div id="service-carousel" class="carousel slide mb-4 mb-md-0" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active bg-position-left"
+              style="background-image: url(../assets/images/index/banner-1.png);">
+              <div class=" d-flex align-items-center h-100">
+                <div>
+                  <h4 class="fs-5 fs-md-4 mb-4">紫微命盤精解</h4>
+                  <p class="mb-4">
+                    透過專業紫微斗數排盤，解析個人命格結構，了解內在性<br class="d-none d-md-block">
+                    格與人生方向，幫助你在迷惘中找到清晰定位。
+                  </p>
+                  <button type="button" class="btn  rounded-0  fs-md-5 fs-6 py-0 px-12 border-green-200">
+                    <div class="btn-inside-border py-2 px-3 text-white  border-green-200">
+                      立即預約
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item " style="background-image: url(../assets/images/index/banner-2.png);">
+              <div class=" d-flex align-items-center h-100">
+                <div>
+                  <h4 class="fs-5 fs-md-4 mb-4">流年運勢分析</h4>
+                  <p class="mb-4">
+                    結合八字與流年運勢，深入剖析財運、
+                    感情、事業等關鍵<br class="d-none d-md-block">
+                    面向，掌握最佳行動時機，趨吉避凶，為人生提前佈局。
+                  </p>
+                  <button type="button" class="btn  rounded-0  fs-md-5 fs-6 py-0 px-12 border-green-200">
+                    <div class="btn-inside-border py-2 px-3 text-white  border-green-200">
+                      立即預約
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item " style="background-image: url(../assets/images/index/banner-3.png);">
+              <div class=" d-flex align-items-center h-100">
+                <div>
+                  <h4 class="fs-5 fs-md-4 mb-4">擇日開運指南</h4>
+                  <p class="mb-4">
+                    無論是結婚、搬家、開業，擇日都是開啟好運的第一步。<br class="d-none d-md-block">
+                    根據你的八字量身規劃黃道吉日，讓每一個開始都更順<br class="d-none d-md-block">
+                    利。
+                  </p>
+                  <button type="button" class="btn  rounded-0  fs-md-5 fs-6 py-0 px-12 border-green-200">
+                    <div class="btn-inside-border py-2 px-3 text-white  border-green-200">
+                      立即預約
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="my-indicators list-unstyled mb-0 d-flex d-md-none  align-items-end row ">
+          <li class="col">
+            <div class="my-indicator service-item "></div>
+          </li>
+          <li class="col">
+            <div class="my-indicator service-item"></div>
+          </li>
+          <li class="col">
+            <div class="my-indicator service-item"></div>
+          </li>
+        </ul>
+
+      </div>
+
+    </section>
+
+    <section class="comment py-md-80 py-40 position-relative  ">
+      <div class="container position-relative">
+        <div class="d-md-flex d-block align-items-end position-relative mb-md-40 mb-4">
+          <img class="position-absolute" src="../assets/images/index/title-deco.png" alt="round-deco ">
+          <h2 class="ps-md-32 pt-30 pt-md-0 mb-0 me-12 fs-md-2 fs-4">有緣人評價</h2>
+          <p class="mb-0">來自四面八方的肯定，是我們前進的動力</p>
+        </div>
+
+        <div class="swiper mySwiper d-none d-md-block" navigation="true">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper  ">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <div class="card bg-transparent border-0">
+                <img src="../assets/images/index/comment-4.png" alt="women take coffee">
+                <div class="pt-4 text-center">
+                  <img class="mb-4" src="../assets/images/index/star4.png" alt="4-stars">
+                  <div class="card-title fw-bold mb-4">
+                    芷涵(新婚人妻，27歲)
+                  </div>
+                  <p class="mb-4 mb-md-0 fs-7 fs-md-6 ">
+                    幫我和另一半擇日登記結婚的服務超貼心<br>
+                    ，老師不只提供好日子，還附上注意事項<br>
+                    與祝福話語，感覺特別溫暖。
+                  </p>
+
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card bg-transparent border-0">
+                <img src="../assets/images/index/comment-1.png" alt="women take coffee">
+                <div class="pt-4 text-center">
+                  <img class="mb-4" src="../assets/images/index/star4.png" alt="4-stars">
+                  <div class="card-title fw-bold mb-4">
+                    Ken(設計師，33歲)
+                  </div>
+                  <p class="mb-4 mb-md-0 fs-7 fs-md-6 ">
+                    第一次接觸紫微命盤，本來只是好奇，沒<br>
+                    想到看完解析後對自己的個性和人際盲點<br>
+                    突然豁然開朗，真的蠻有幫助！
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card bg-transparent border-0 ">
+
+                <img src="../assets/images/index/comment-2.png" alt="women take coffee">
+                <div class="pt-4 text-center">
+                  <img class="mb-4" src="../assets/images/index/full-stars.png" alt="4-stars">
+                  <div class="card-title fw-bold mb-4">
+                    芷涵(新婚人妻，27歲)
+                  </div>
+                  <p class="mb-4 mb-md-0 fs-7 fs-md-6 ">
+                    幫我和另一半擇日登記結婚的服務超貼心<br>
+                    ，老師不只提供好日子，還附上注意事項<br>
+                    與祝福話語，感覺特別溫暖。
+                  </p>
+
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card bg-transparent border-0">
+                <img src="../assets/images/index/comment-3.png" alt="women take coffee">
+                <div class="pt-4 text-center">
+                  <img class="mb-4" src="../assets/images/index/full-stars.png" alt="4-stars">
+                  <div class="card-title fw-bold mb-4">
+                    Eric(科技業，35歲)
+                  </div>
+                  <p class="mb-4 mb-md-0 fs-7 fs-md-6 ">
+                    命理服務完全不像我以前想像的老派，介<br>
+                    面乾淨簡單，說明也清楚易懂，非常適合<br>
+                    現代人使用！
+                  </p>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- If we need navigation buttons -->
+        </div>
+        <div class="swiper-button-prev opacity-100 position-absolute
+        d-none d-md-flex  justify-content-center align-items-center">
+          <img src="../assets/images/index/angle-small-left.png" alt="angle-small-left">
+        </div>
+        <div
+          class="swiper-button-next opacity-100 position-absolute d-none d-md-flex  justify-content-center align-items-center   ">
+          <img src="../assets/images/index/angle-small-right.png" alt="angle-small-right">
+        </div>
+
+
+        <div id="comment-carousel" class="carousel slide mb-4 mb-md-0 d-md-none d-block" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item  ps-0 active swiper-slide">
+              <div class="card bg-transparent border-0">
+                <img src="../assets/images/index/comment-4.png" alt="women take coffee">
+                <div class="pt-4 text-center">
+                  <img class="mb-4" src="../assets/images/index/star4.png" alt="4-stars">
+                  <div class="card-title fw-bold mb-4">
+                    芷涵(新婚人妻，27歲)
+                  </div>
+                  <p class="mb-4 mb-md-0 fs-7 fs-md-6 ">
+                    幫我和另一半擇日登記結婚的服務超貼心<br>
+                    ，老師不只提供好日子，還附上注意事項<br>
+                    與祝福話語，感覺特別溫暖。
+                  </p>
+
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item  ps-0 swiper-slide">
+              <div class="card bg-transparent border-0">
+                <img src="../assets/images/index/comment-1.png" alt="women take coffee">
+                <div class="pt-4 text-center">
+                  <img class="mb-4" src="../assets/images/index/star4.png" alt="4-stars">
+                  <div class="card-title fw-bold mb-4">
+                    Ken(設計師，33歲)
+                  </div>
+                  <p class="mb-4 mb-md-0 fs-7 fs-md-6 ">
+                    第一次接觸紫微命盤，本來只是好奇，沒<br>
+                    想到看完解析後對自己的個性和人際盲點<br>
+                    突然豁然開朗，真的蠻有幫助！
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item  ps-0 swiper-slide">
+              <div class="card bg-transparent border-0 ">
+
+                <img src="../assets/images/index/comment-2.png" alt="women take coffee">
+                <div class="pt-4 text-center">
+                  <img class="mb-4" src="../assets/images/index/full-stars.png" alt="4-stars">
+                  <div class="card-title fw-bold mb-4">
+                    芷涵(新婚人妻，27歲)
+                  </div>
+                  <p class="mb-4 mb-md-0 fs-7 fs-md-6 ">
+                    幫我和另一半擇日登記結婚的服務超貼心<br>
+                    ，老師不只提供好日子，還附上注意事項<br>
+                    與祝福話語，感覺特別溫暖。
+                  </p>
+
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item  ps-0 swiper-slide">
+              <div class="card bg-transparent border-0">
+                <img src="../assets/images/index/comment-3.png" alt="women take coffee">
+                <div class="pt-4 text-center">
+                  <img class="mb-4" src="../assets/images/index/full-stars.png" alt="4-stars">
+                  <div class="card-title fw-bold mb-4">
+                    Eric(科技業，35歲)
+                  </div>
+                  <p class="mb-4 mb-md-0 fs-7 fs-md-6 ">
+                    命理服務完全不像我以前想像的老派，介<br>
+                    面乾淨簡單，說明也清楚易懂，非常適合<br>
+                    現代人使用！
+                  </p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <ul class="my-indicators list-unstyled mb-0 d-flex d-md-none  align-items-end row ">
+          <li class="col">
+            <div class="my-indicator  comment-item "></div>
+          </li>
+          <li class="col">
+            <div class="my-indicator  comment-item"></div>
+          </li>
+          <li class="col">
+            <div class="my-indicator  comment-item"></div>
+          </li>
+          <li class="col">
+            <div class="my-indicator  comment-item"></div>
+          </li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section class="py-md-80 py-40   position-relative overflow-x-clip ">
+      <!-- overflow-x-hidden會連y軸部分都隱藏 clip不會 -->
+      <img class="tree-deco opacity-50 position-absolute d-none d-md-block" src="../assets/images/index/tree-bg.png"
+        alt="tree">
+      <div class="container">
+        <div class="d-md-flex d-block align-items-end position-relative mb-md-40 mb-4">
+          <img class="position-absolute" src="../assets/images/index/title-deco.png" alt="round-deco ">
+          <h2 class="ps-md-32 pt-30 pt-md-0 mb-0 me-12 fs-md-2 fs-4">預約服務流程</h2>
+          <p class="mb-0">快速預約，一點就通，開始屬於你的探索</p>
+        </div>
+
+        <ul class="step card-list list-unstyled row mb-md-40 mb-4 g-4">
+          <li class="col-md-3 col-6">
+            <div class="card bg-transparent border-0 ">
+              <h1 class="fs-md-40 fs-4 text-primary text-center mb-md-3 mb-1">1</h1>
+              <div class="card-title step-item py-md-80 text-center mb-0
+              rounded-circle d-flex flex-column justify-content-center align-items-center"
+                style="background-image: url(../assets/images/index/step-1.png);">
+                <img class="mb-md-4 mb-12 card-title-icon" src="../assets/images/index/step-1-icon.png"
+                  alt="step-1-icon">
+                <h2 class="text-white mb-0 fs-md-2 fs-5">登入 or Mail</h2>
+              </div>
+              <div class="card-body d-none d-md-block">
+                <div class="d-flex justify-content-center mb-3">
+                  <div class="card-deco border border-primary"></div>
+                </div>
+                <p class="px-48 text-center mb-0 fs-7">
+                  想更快速管理預約紀錄？建議註冊會員帳號；若使用 Email預約，無需註冊也能完成，但請記得查收確認信。
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="col-md-3 col-6">
+            <div class="card bg-transparent border-0 ">
+              <h1 class="fs-md-40 fs-4 text-primary text-center mb-md-3 mb-1">2</h1>
+              <div class="card-title step-item py-md-80 text-center mb-0
+              rounded-circle d-flex flex-column justify-content-center align-items-center"
+                style="background-image: url(../assets/images/index/step-2.png);">
+                <img class="mb-md-4 mb-12 card-title-icon" src="../assets/images/index/step-2-icon.png"
+                  alt="step-2-icon">
+                <h2 class="text-white mb-0 fs-md-2 fs-5">選擇命理師</h2>
+              </div>
+              <div class="card-body d-none d-md-block">
+                <div class="d-flex justify-content-center mb-3">
+                  <div class="card-deco border border-primary"></div>
+                </div>
+                <p class="px-48 text-center mb-0 fs-7">
+                  想更快速管理預約紀錄？建議註冊會員帳號；若使用 Email預約，無需註冊也能完成，但請記得查收確認信。
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="col-md-3 col-6">
+            <div class="card bg-transparent border-0 ">
+              <h1 class="fs-md-40 fs-4 text-primary text-center mb-md-3 mb-1">3</h1>
+              <div class="card-title step-item py-md-80 text-center mb-0
+              rounded-circle d-flex flex-column justify-content-center align-items-center"
+                style="background-image: url(../assets/images/index/step-3.png);">
+                <img class="mb-md-4 mb-12 card-title-icon" src="../assets/images/index/step-3-icon.png"
+                  alt="step-3-icon">
+                <h2 class="text-white mb-0 fs-md-2 fs-5">選擇服務/時段</h2>
+              </div>
+              <div class="card-body d-none d-md-block">
+                <div class="d-flex justify-content-center mb-3">
+                  <div class="card-deco border border-primary"></div>
+                </div>
+                <p class="px-48 text-center mb-0 fs-7">
+                  想更快速管理預約紀錄？建議註冊會員帳號；若使用 Email預約，無需註冊也能完成，但請記得查收確認信。
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="col-md-3 col-6">
+            <div class="card bg-transparent border-0 ">
+              <h1 class="fs-md-40 fs-4 text-primary text-center mb-md-3 mb-1">4</h1>
+              <div class="card-title step-item py-md-80 text-center mb-0
+              rounded-circle d-flex flex-column justify-content-center align-items-center"
+                style="background-image: url(../assets/images/index/step-4.png);">
+                <img class="mb-md-4 mb-12 card-title-icon" src="../assets/images/index/step-4-icon.png"
+                  alt="step-4-icon">
+                <h2 class="text-white mb-0 fs-md-2 fs-5">登入 or Mail</h2>
+              </div>
+              <div class="card-body d-none d-md-block">
+                <div class="d-flex justify-content-center mb-3">
+                  <div class="card-deco border border-primary"></div>
+                </div>
+                <p class="px-48 text-center mb-0 fs-7">
+                  想更快速管理預約紀錄？建議註冊會員帳號；若使用 Email預約，無需註冊也能完成，但請記得查收確認信。
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="warning">
+          <div class="warning-bg py-md-98 py-3  position-relative ">
+            <img class="position-absolute warning-bg-img z-1 opacity-50 start-0 d-none d-md-block"
+              src="../assets/images/index/warning-bg.png" alt="warning-bg">
+            <div class="position-relative z-2">
+              <p class="mb-md-3 mb-0 fs-7 fs-md-6 ">預約注意事項：</p>
+              <p class="mb-md-3 mb-0 fs-7 fs-md-6 ">1. 請確認填寫的 Email 正確,預約完成後將寄送確認信至您的信箱。</p>
+              <p class="mb-md-3 mb-0 fs-7 fs-md-6 ">2. 若使用 Email 預約(免註冊),務必點擊信件中的連結完成確認。</p>
+              <p>3. 命理師每次服務名額有限,請準時參與,避免影響他人權益。</p>
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+
+    </section>
+
+    <section class="lunar-calendar bg-transparent">
+      <div class="d-block d-md-flex ">
+        <div class="me-md-60">
+          <div class="d-md-flex d-block align-items-end position-relative mb-md-40 mb-4 ps-12 ps-md-0">
+            <img class="position-absolute" src="../assets/images/index/title-deco.png" alt="round-deco ">
+            <h2 class="ps-md-32 pt-30 pt-md-0 mb-0 me-12 fs-md-2 fs-4">農民曆</h2>
+            <p class="mb-0">掌握節氣脈動。每日行事宜忌一覧</p>
+          </div>
+          <%- include('./layout/calendar') %>
+        </div>
+        <div class="flex-fill">
+          <div class="solar-term py-md-64 p-4 position-relative  mb-4">
+            <h2 class="fs-lg-80 fs-3 solar-term-title d-inline-block p-md-4 p-3 text-nowrap">大暑</h2>
+          </div>
+          <div class="detail p-md-36 pt-36 px-12 pb-md-0 pb-40 ">
+            <div class="d-flex mb-md-40 mb-4 flex-wrap flex-lg-nowrap">
+              <div class="me-md-40 me-12">
+                <div class="py-2 year  fs-7 text-center text-primary">2025</div>
+                <div class="border border-primary py-md-1 py-2 px-4 text-center text-primary">
+                  <h6 class="mb-2 fs-40">3</h6>
+                  <h6 class="mb-0 fs-5">八月</h6>
+                </div>
+                <p class="text-white text-nowrap mb-0 fs-7 bg-primary text-center py-2 px-3">民國114年</p>
+              </div>
+              <ul class="list-unstyled flex-fill">
+                <li>
+                  <p class="fs-7 p-md-4 py-md-3 p-3 mb-0 border-bottom border-black-300">
+                    國曆：2025年08月03日
+                  </p>
+                </li>
+                <li>
+                  <p class="fs-7 p-md-4 py-md-3 p-3 mb-0 border-bottom border-black-300">
+                    農曆：乙巳年閏六以初十
+                  </p>
+                </li>
+                <li>
+                  <p class="fs-7 p-md-4 py-md-3 p-3 mb-0 border-bottom border-black-300">
+                    節氣：大暑 (國曆) <br class="d-md-none">
+                    2025/07/22-2025/08/06
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <ul class="list-unstyled d-flex flex-column gap-3">
+              <li>
+                <div class="d-flex p-4 align-items-center border border-primary flex-wrap">
+                  <h5 class="fs-md-48 fs-2 mb-0 text-primary me-md-2 me-2">沖</h5>
+                  <span class=" fs-7 ps-3 py-1 me-1">屬豬(丁亥，19歲)</span>
+                  <span class=" fs-7 ps-3 py-1">屬豬(丁亥，79歲)</span>
+                </div>
+              </li>
+              <li>
+                <div class="d-flex p-4 align-items-center border border-primary">
+                  <h5 class="fs-md-48 fs-2 mb-0 text-primary me-md-2 me-3">宜</h5>
+                  <div class="d-flex flex-wrap text-nowrap ">
+                    <span class="fs-7 px-2 py-1">嫁娶</span>
+                    <span class="fs-7 px-2 py-1">納采</span>
+                    <span class="fs-7 px-2 py-1">訂盟</span>
+                    <span class="fs-7 px-2 py-1">祭祀</span>
+                    <span class="fs-7 px-2 py-1">祈福</span>
+                    <span class="fs-7 px-2 py-1">求嗣</span>
+                    <span class="fs-7 px-2 py-1">納采</span>
+                    <span class="fs-7 px-2 py-1">裁衣</span>
+                    <span class="fs-7 px-2 py-1">冠笄</span>
+                    <span class="fs-7 px-2 py-1">開光</span>
+                    <span class="fs-7 px-2 py-1">安床</span>
+                    <span class="fs-7 px-2 py-1">作樑</span>
+                    <span class="fs-7 px-2 py-1">修造</span>
+                    <span class="fs-7 px-2 py-1">動土</span>
+                    <span class="fs-7 px-2 py-1">作灶</span>
+                    <span class="fs-7 px-2 py-1">起基</span>
+                    <span class="fs-7 px-2 py-1">移徙</span>
+                    <span class="fs-7 px-2 py-1">出行</span>
+                    <span class="fs-7 px-2 py-1">破土</span>
+                    <span class="fs-7 px-2 py-1">安葬</span>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="d-flex p-4 align-items-center border border-primary">
+                  <h5 class="fs-md-48 fs-2 mb-0 text-primary me-md-2 me-3">煞</h5>
+                  <span class="fs-7 px-2 py-1">東方</span>
+                </div>
+              </li>
+              <li>
+                <div class="d-flex p-4 align-items-center border border-primary flex-wrap">
+                  <h5 class="fs-md-48 fs-2 mb-0 text-primary me-md-2 me-3">吉時</h5>
+                  <span class="fs-7 px-2 py-1">丑</span>
+                  <span class="fs-7 px-2 py-1">卯</span>
+                  <span class="fs-7 px-2 py-1">辰</span>
+                  <span class="fs-7 px-2 py-1">巳</span>
+                </div>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="QA py-md-80 py-40 position-relative">
+      <img class="position-absolute waves-bg d-none d-md-block" src="../assets/images/index/waves-bg.png"
+        alt="waves-bg">
+      <div class="container">
+        <div class="QA-title d-md-flex d-block align-items-end position-relative mb-md-40 mb-4 ">
+          <img class="position-absolute" src="../assets/images/index/title-deco.png" alt="round-deco ">
+          <h2 class="ps-md-32 pt-30 pt-md-0 mb-0 me-12 fs-md-2 fs-4">常見問答集</h2>
+        </div>
+
+        <div class="QA-content">
+          <ul class="list-unstyled">
+            <li>
+              <div class="py-md-48 py-4 border-bottom border-black-300">
+                <div class="d-flex justify-content-between mb-md-36 mb-4">
+                  <div class="d-flex align-items-center">
+                    <img class="Q-icon me-md-4 me-3" src="../assets/images/index/Q-icon.png" alt="Q-icon">
+                    <p class="mb-0">不想註冊帳號，可以直接預約嗎？</p>
+                  </div>
+                  <button type="button" class="border-0 bg-transparent" data-bs-toggle="collapse" data-bs-target="#QA1"
+                    aria-expanded="true" aria-controls="QA1">
+                    <img src="../assets/images/index/btn-social.png" alt="btn-close">
+                  </button>
+                </div>
+                <div id="QA1" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample">
+                  <div class="d-flex">
+                    <img class="A-icon me-md-4 me-3" src="../assets/images/index/A-icon.png" alt="A-icon">
+                    <p class="mb-0">可以的！<br>
+                      我們提供「Email 預約」功能，只需填寫基本資料與信箱，即可完成預約並收到確認信。建議留意信件並點擊確認連結，預約才會成立喔！
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </li>
+            <li>
+              <div class="py-md-48 py-4 border-bottom border-black-300">
+                <div class="d-flex justify-content-between mb-md-36 mb-4">
+                  <div class="d-flex align-items-center">
+                    <img class="Q-icon me-md-4 me-3" src="../assets/images/index/Q-icon.png" alt="Q-icon">
+                    <p class="mb-0">沒有收到預約確認信怎麼辦？</p>
+                  </div>
+                  <button type="button" class="border-0 bg-transparent" data-bs-toggle="collapse" data-bs-target="#QA2"
+                    aria-expanded="true" aria-controls="QA2">
+                    <img src="../assets/images/index/btn-social.png" alt="btn-close">
+                  </button>
+                </div>
+                <div id="QA2" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample">
+                  <div class="d-flex">
+                    <img class="A-icon me-md-4 me-3" src="../assets/images/index/A-icon.png" alt="A-icon">
+                    <p class="mb-0">請先檢查垃圾郵件或廣告信件匣。<br>
+                      若仍未收到，可能是信箱填寫錯誤，
+                      建議重新預約或聯繫我們的客服信箱協助處理。
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </li>
+            <li>
+              <div class="py-md-48 py-4 border-bottom border-black-300">
+                <div class="d-flex justify-content-between mb-md-36 mb-4">
+                  <div class="d-flex align-items-center">
+                    <img class="Q-icon me-md-4 me-3" src="../assets/images/index/Q-icon.png" alt="Q-icon">
+                    <p class="mb-0">預約後可以修改時間或更換命理師嗎？</p>
+                  </div>
+                  <button type="button" class="border-0 bg-transparent" data-bs-toggle="collapse" data-bs-target="#QA3"
+                    aria-expanded="true" aria-controls="QA3">
+                    <img src="../assets/images/index/btn-social.png" alt="btn-close">
+                  </button>
+                </div>
+                <div id="QA3" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample">
+                  <div class="d-flex">
+                    <img class="A-icon me-md-4 me-3" src="../assets/images/index/A-icon.png" alt="A-icon">
+                    <p class="mb-0">可以。<br>
+                      請於預約時間24小時前透過會員中心或聯絡我們，
+                      提出修改需求，我們將協助重新安排。
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </section>
+
+    <%- include("./layout/footer") %>
+
+
+
+      <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js" type="module"></script>
+      <script>
+        const serviceCarousel = document.getElementById('service-carousel');
+        const serviceIndicators = document.querySelectorAll('.service-item');
+
+        [0, 3].forEach(i => serviceIndicators[i].classList.add('border-dark'));
+        //初始化 
+        serviceCarousel.addEventListener('slide.bs.carousel', function (e) {
+          serviceIndicators.forEach(el => el.classList.remove("border-dark"));
+          [e.to, e.to + 3].forEach(i => serviceIndicators[i].classList.add('border-dark'));
+        })
+      </script>
+      <!-- <script>
+        const commentCarousel = document.getElementById('comment-carousel');
+        const commentIndicators = document.querySelectorAll('.comment-item');
+        commentIndicators[0].classList.add('border-dark');//初始化
+        commentCarousel.addEventListener('slide.bs.carousel', function (e) {
+          commentIndicators.forEach(el => el.classList.remove('border-dark'));
+          commentIndicators[e.to].classList.add('border-dark');
+        })
+
+      </script> -->
+
+
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+      <script>
+        const swiper = new Swiper(".mySwiper", {
+          slidesPerView: 1,
+          spaceBetween: 16,
+          // (手機板排版設定),
+          breakpoints: {
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 24,
+            }
+            // (RWD設定部分)
+          },
+
+          // Navigation arrows
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+
+        });
+      </script>
+      <script type="module" src="../main.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>命理師介紹</title>
+    <!-- Swiper 輪播套件 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+  </head>
+  <body style="background-image: url(../assets/images/index/nav-bg.png)">
+    <%- include("./layout/nav",{login:false}) %>
+    <!-- ========================================
+         Section 1: 英雄區塊 (Hero Section)
+         ======================================== -->
+    <section class="hero pt-md-80 pt-40">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 mb-3 mb-lg-0">
+            <div
+              class="hero-image pt-2 pt-lg-3 pb-2 pb-lg-3 ps-2 ps-lg-32 pe-2 pe-lg-48"
+            >
+              <img
+                src="../assets/images/about/hero.png"
+                alt="豬大仙插畫"
+                class="img-fluid"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div
+              class="hero-content pt-md-3 pb-md-3 ps-md-48 pe-md-48 ps-0 pe-0"
+            >
+              <div class="d-flex position-relative pt-30 mb-30 mb-md-48">
+                <img
+                  class="position-absolute top-0"
+                  src="../assets/images/index/title-deco.png"
+                  alt="round-deco"
+                />
+                <h2
+                  class="ps-md-32 mb-0 me-12 fs-md-2 fs-2 fw-bold text-black-950"
+                >
+                  豬大仙
+                </h2>
+              </div>
+
+              <!-- 特色列表 -->
+              <ul class="hero-features mb-48">
+                <li
+                  class="hero-feature-item mb-md-28 mb-3 fs-md-4 fs-6 text-black-600"
+                >
+                  學自東派紫微，從業10年
+                </li>
+                <li
+                  class="hero-feature-item mb-md-28 mb-3 fs-md-4 fs-6 text-black-600"
+                >
+                  擅長結合心理學解釋命盤，語氣溫和實用
+                </li>
+                <li
+                  class="hero-feature-item mb-md-28 mb-3 fs-md-4 fs-6 text-black-600"
+                >
+                  命不是算出來的，是活出來的
+                </li>
+                <li
+                  class="hero-feature-item mb-md-28 mb-3 fs-md-4 fs-6 text-black-600"
+                >
+                  貓派
+                </li>
+                <li
+                  class="hero-feature-item mb-md-28 mb-3 fs-md-4 fs-6 text-black-600"
+                >
+                  報憂不報喜
+                </li>
+                <li class="hero-feature-item fs-md-4 fs-6 text-black-600">
+                  不是在看盤，就是在看盤的路上
+                </li>
+              </ul>
+              <button
+                type="button"
+                class="btn hero-btn rounded-0 fs-md-5 fs-6 py-0 px-12 border-green-200 d-block d-md-inline-block"
+              >
+                <div
+                  class="btn-inside-border py-2 px-3 text-white border-green-200"
+                >
+                  立即預約
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ========================================
+         Section 2: 服務項目 (Services)
+         ======================================== -->
+    <section class="services py-md-80 py-40">
+      <div class="container">
+        <div
+          class="d-flex align-items-end position-relative mb-40 mb-md-0 pt-40"
+        >
+          <img
+            class="position-absolute"
+            src="../assets/images/index/title-deco.png"
+            alt="round-deco"
+          />
+          <h2 class="ps-md-32 pt-30 pt-md-0 mb-0 me-12 fs-md-2 fs-4 fw-bold">
+            服務項目
+          </h2>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 pt-md-80 ps-md-4 pe-md-4 mb-md-0 mb-4">
+            <div class="service-card h-100 d-flex">
+              <div
+                class="service-image flex-shrink-0 me-md-4 me-3 mb-md-0 mb-2"
+              >
+                <img
+                  src="../assets/images/about/service-1.png"
+                  alt="紫微命盤"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="service-content pt-3 ps-3 pe-3 pb-3 pb-md-0">
+                <h3 class="service-title mb-4 fs-3 text-black-950">紫微命盤</h3>
+                <p class="service-desc text-black-600 mb-0">
+                  透過專業紫微斗數排盤，解析個人命格結構，了解內在性格與人生方向，幫助你在迷惘中找到清晰定位。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 pt-md-40 pb-md-40 ps-md-4 pe-md-4 mb-md-0 mb-4">
+            <div class="service-card h-100 d-flex">
+              <div
+                class="service-image flex-shrink-0 me-md-4 me-3 mb-md-0 mb-2"
+              >
+                <img
+                  src="../assets/images/about/service-2.png"
+                  alt="擇日開運"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="service-content pt-3 ps-3 pe-3 pb-3 pb-md-0">
+                <h3 class="service-title mb-4 fs-3 text-black-950">擇日開運</h3>
+                <p class="service-desc text-black-600 mb-0">
+                  無論是結婚、搬家、開業，擇日都是開啟好運的第一步。根據你的八字量身規劃黃道吉日，讓每一個開始都更順利。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 pt-md-80 ps-md-4 pe-md-4 mb-md-0 mb-4">
+            <div class="service-card h-100 d-flex">
+              <div
+                class="service-image flex-shrink-0 me-md-4 me-3 mb-md-0 mb-2"
+              >
+                <img
+                  src="../assets/images/about/service-3.png"
+                  alt="小流年運勢分析"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="service-content pt-3 ps-3 pe-3 pb-3 pb-md-0">
+                <h3 class="service-title mb-4 fs-3 text-black-950">
+                  小流年運勢分析
+                </h3>
+                <p class="service-desc text-black-600 mb-0">
+                  結合八字與流年運勢，深入剖析財運、感情、事業等關鍵面向，掌握最佳
+                  行動時機，趨吉避凶，為人生提前佈局。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 pt-md-40 pb-md-40 ps-md-4 pe-md-4">
+            <div class="service-card h-100 d-flex">
+              <div
+                class="service-image flex-shrink-0 me-md-4 me-3 mb-md-0 mb-2"
+              >
+                <img
+                  src="../assets/images/about/service-4.png"
+                  alt="姻緣與感情合盤"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="service-content pt-3 ps-3 pe-3 pb-3 pb-md-0">
+                <h3 class="service-title mb-4 fs-3 text-black-950">
+                  姻緣與感情合盤
+                </h3>
+                <p class="service-desc text-black-600 mb-0">
+                  分析您與對象的命盤合度，探討性格互動、相處潜力與未來發展走向。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ========================================
+         Section 3: 客戶推薦 (Testimonials)
+         手機版：Bootstrap Carousel 輪播
+         ======================================== -->
+    <section class="testimonials py-md-80 py-40 position-relative">
+      <!-- 跨區域裝飾背景圖 
+           注意：此圖片使用絕對定位，會延伸到下一個 section
+           使用 d-none d-md-block 在手機版隱藏 -->
+      <img
+        class="about-tree opacity-50 position-absolute d-none d-md-block"
+        src="../assets/images/about/about-tree.png"
+        alt="tree"
+      />
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="d-flex align-items-end position-relative mb-md-40 mb-4">
+              <img
+                class="position-absolute"
+                src="../assets/images/index/title-deco.png"
+                alt="round-deco"
+              />
+              <h2
+                class="ps-md-32 pt-30 pt-md-0 mb-0 me-12 fs-md-2 fs-4 fw-bold text-black-950"
+              >
+                客戶推薦
+              </h2>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="testimonials-grid d-none d-md-block">
+              <div class="row g-0">
+                <div class="col-md-6">
+                  <div
+                    class="testimonial-card h-100 pt-md-48 pb-md-48 ps-md-36 pe-md-36"
+                  >
+                    <div class="d-flex mb-4">
+                      <img
+                        src="../assets/images/about/avatar-1.png"
+                        alt="阿憲"
+                        class="testimonial-avatar"
+                      />
+                      <div class="testimonial-header">
+                        <h5
+                          class="testimonial-name text-black-950 mb-2 fw-bold fs-md-5"
+                        >
+                          阿憲
+                        </h5>
+                        <p class="testimonial-info text-black-950 mb-0">
+                          咖啡店老闆 彰化
+                        </p>
+                      </div>
+                    </div>
+                    <p class="testimonial-content text-black-600 mb-md-4">
+                      我是開店創業的人，很多事情都得靠直覺和經驗，但經過幾次經營瓶頸，我開始思考是否還有其他角度能協助決策。經朋友介紹認識豬大仙，他幫我看了開店的時辰與店面格局，甚至指出我的Logo設計有小小破格，會影響整體氣場。照他的建議微調之後，生意真的有比較順，客人也反映空間感覺更舒服。我不是迷信的人，但我相信結合專業與直覺的智慧。
+                    </p>
+                    <div
+                      class="testimonial-footer d-flex justify-content-between align-items-center"
+                    >
+                      <span class="testimonial-date text-primary"
+                        >2025/05/04</span
+                      >
+                      <div class="testimonial-rating text-primary">★★★★☆</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div
+                    class="testimonial-card h-100 pt-md-48 pb-md-48 ps-md-36 pe-md-36"
+                  >
+                    <div class="d-flex mb-4">
+                      <img
+                        src="../assets/images/about/avatar-2.png"
+                        alt="Kevin"
+                        class="testimonial-avatar me-3"
+                      />
+                      <div class="testimonial-header">
+                        <h5
+                          class="testimonial-name text-black-950 mb-2 fw-bold fs-md-5"
+                        >
+                          Kevin
+                        </h5>
+                        <p class="testimonial-info text-black-950 mb-0">
+                          軟體工程師 台中
+                        </p>
+                      </div>
+                    </div>
+                    <p class="testimonial-content text-black-600 mb-md-4">
+                      剛進入30歲，一直很焦慮自己是不是選錯工作
+                      方向，人生到底有沒有在往對的路上。豬大仙幫我看了一次大運與本命盤，解釋得很細，每一段流年都能對應到我的人生轉折，真的有種命盤是人生成績單的感覺。他不會強硬說你該怎樣，而是提供一種分析和參考，讓你有信心做選擇。我覺得這才是我需要的命理師：不只是預測未來，
+                      而是理解自己。
+                    </p>
+                    <div
+                      class="testimonial-footer d-flex justify-content-between align-items-center"
+                    >
+                      <span class="testimonial-date text-primary"
+                        >2025/03/23</span
+                      >
+                      <div class="testimonial-rating text-primary">★★★★☆</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div
+                    class="testimonial-card h-100 pt-md-48 pb-md-48 ps-md-36 pe-md-36"
+                  >
+                    <div class="d-flex mb-4">
+                      <img
+                        src="../assets/images/about/avatar-3.png"
+                        alt="Mandy"
+                        class="testimonial-avatar me-3"
+                      />
+                      <div class="testimonial-header">
+                        <h5
+                          class="testimonial-name text-black-950 mb-2 fw-bold fs-md-5"
+                        >
+                          Mandy
+                        </h5>
+                        <p class="testimonial-info text-black-950 mb-0">
+                          上班族 台北
+                        </p>
+                      </div>
+                    </div>
+                    <p class="testimonial-content text-black-600 mb-md-4">
+                      本來只是好奇想算一下流年，結果豬大仙直接點出我一直沒說出口的煩惱，嚇到！而且還很溫柔地給了我具體建議，真的有被療癒到~
+                    </p>
+                    <div
+                      class="testimonial-footer d-flex justify-content-between align-items-center"
+                    >
+                      <span class="testimonial-date text-primary"
+                        >2024/12/03</span
+                      >
+                      <div class="testimonial-rating text-primary">★★★★☆</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div
+                    class="testimonial-card h-100 pt-md-48 pb-md-48 ps-md-36 pe-md-36"
+                  >
+                    <div class="d-flex mb-4">
+                      <img
+                        src="../assets/images/about/avatar-4.png"
+                        alt="Anson"
+                        class="testimonial-avatar me-3"
+                      />
+                      <div class="testimonial-header">
+                        <h5
+                          class="testimonial-name text-black-950 mb-2 fw-bold fs-md-5"
+                        >
+                          Anson
+                        </h5>
+                        <p class="testimonial-info text-black-950 mb-0">
+                          自由工作者 高雄
+                        </p>
+                      </div>
+                    </div>
+                    <p class="testimonial-content text-black-600 mb-md-4">
+                      跟男友吵架吵到快分手，朋友推薦我找豬大仙做合盤，居然分析得超精準，連我們什麼時候容易起衝突都說得出來，超神後來我們也慢慢找到彼此的相處方式。
+                    </p>
+                    <div
+                      class="testimonial-footer d-flex justify-content-between align-items-center"
+                    >
+                      <span class="testimonial-date text-primary"
+                        >2025/01/17</span
+                      >
+                      <div class="testimonial-rating text-primary">★★★★☆</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div
+                    class="testimonial-card h-100 pt-md-48 pb-md-48 ps-md-36 pe-md-36"
+                  >
+                    <div class="d-flex mb-4">
+                      <img
+                        src="../assets/images/about/avatar-5.png"
+                        alt="Cindy"
+                        class="testimonial-avatar me-3"
+                      />
+                      <div class="testimonial-header">
+                        <h5
+                          class="testimonial-name text-black-950 mb-2 fw-bold fs-md-5"
+                        >
+                          Cindy
+                        </h5>
+                        <p class="testimonial-info text-black-950 mb-0">
+                          品牌行銷 彰化
+                        </p>
+                      </div>
+                    </div>
+                    <p class="testimonial-content text-black-600 mb-md-4">
+                      我一直對命理抱著半信半疑的態度，但某天在低潮期無意間滑到豬大仙的文章，覺得他的觀點很接地氣，不像一般命理師那麼高高在上。實際預約後,我完全被說服。他不只是把命盤讀出來，而是用很有邏輯的方式讓我理解自己當下的情況、個性矛盾的根源，甚至給了我幾個能立刻實踐的方向。這不只是一次命理諮詢，更像是一次自我認識的深度對話。
+                    </p>
+                    <div
+                      class="testimonial-footer d-flex justify-content-between align-items-center"
+                    >
+                      <span class="testimonial-date text-primary"
+                        >2025/06/12</span
+                      >
+                      <div class="testimonial-rating text-primary">★★★★☆</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div
+                    class="testimonial-card h-100 pt-md-48 pb-md-48 ps-md-36 pe-md-36"
+                  >
+                    <div class="d-flex mb-4">
+                      <img
+                        src="../assets/images/about/avatar-6.png"
+                        alt="Lisa"
+                        class="testimonial-avatar me-3"
+                      />
+                      <div class="testimonial-header">
+                        <h5
+                          class="testimonial-name text-black-950 mb-2 fw-bold fs-md-5"
+                        >
+                          Lisa
+                        </h5>
+                        <p class="testimonial-info text-black-950 mb-0">
+                          插畫師 新北
+                        </p>
+                      </div>
+                    </div>
+                    <p class="testimonial-content text-black-600 mb-md-4">
+                      豬大仙的感情合盤真的神準。我和男友一直相處上有些問題，吵架的點很固定，但又說不上來到底為什麼。他分析了我們雙方命格的互動特性，指出我們在表達情緒這塊完全不對頻，讓我整個豁然開朗。也因為他給的具體建議，我開始調整溝通方式，關係有很大的改善。現在我們每半年還會一起來複盤一次流年運勢，當成感情健檢！
+                    </p>
+                    <div
+                      class="testimonial-footer d-flex justify-content-between align-items-center"
+                    >
+                      <span class="testimonial-date text-primary"
+                        >2025/02/14</span
+                      >
+                      <div class="testimonial-rating text-primary">★★★★☆</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 手機版：Bootstrap Carousel 輪播 -->
+        <div
+          id="testimonials-carousel"
+          class="carousel slide d-md-none d-block mb-4"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <!-- 輪播項目結構與桌面版相同，但一次只顯示一張 -->
+            <div class="carousel-item active">
+              <div class="testimonial-card p-4">
+                <div class="d-flex mb-4">
+                  <img
+                    src="../assets/images/about/avatar-1.png"
+                    alt="阿憲"
+                    class="testimonial-avatar"
+                  />
+                  <div class="testimonial-header ms-3">
+                    <h5
+                      class="testimonial-name text-black-950 mb-2 fw-bold fs-20"
+                    >
+                      阿憲
+                    </h5>
+                    <p class="testimonial-info text-black-950 mb-0">
+                      咖啡店老闆 彰化
+                    </p>
+                  </div>
+                </div>
+                <p class="testimonial-content text-black-600 mb-4">
+                  我是開店創業的人，很多事情都得靠直覺和經驗，但經過幾次經營瓶頸，我開始思考是否還有其他角度能協助決策。經朋友介紹認識豬大仙，他幫我看了開店的時辰與店面格局，甚至指出我的Logo設計有小小破格，會影響整體氣場。照他的建議微調之後，生意真的有比較順，客人也反映空間感覺更舒服。我不是迷信的人，但我相信結合專業與直覺的智慧。
+                </p>
+                <div
+                  class="testimonial-footer d-flex justify-content-between align-items-center"
+                >
+                  <span class="testimonial-date text-primary">2025/05/04</span>
+                  <div class="testimonial-rating text-primary">★★★★☆</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="testimonial-card p-4">
+                <div class="d-flex mb-4">
+                  <img
+                    src="../assets/images/about/avatar-2.png"
+                    alt="Kevin"
+                    class="testimonial-avatar"
+                  />
+                  <div class="testimonial-header ms-3">
+                    <h5
+                      class="testimonial-name text-black-950 mb-2 fw-bold fs-20"
+                    >
+                      Kevin
+                    </h5>
+                    <p class="testimonial-info text-black-950 mb-0">
+                      軟體工程師 台中
+                    </p>
+                  </div>
+                </div>
+                <p class="testimonial-content text-black-600 mb-4">
+                  剛進入30歲，一直很焦慮自己是不是選錯工作方向，人生到底有沒有在往對的路上。豬大仙幫我看了一次大運與本命盤，解釋得很細，每一段流年都能對應到我的人生轉折，真的有種命盤是人生成績單的感覺。他不會強硬說你該怎樣，而是提供一種分析和參考，讓你有信心做選擇。我覺得這才是我需要的命理師：不只是預測未來，而是理解自己。
+                </p>
+                <div
+                  class="testimonial-footer d-flex justify-content-between align-items-center"
+                >
+                  <span class="testimonial-date text-primary">2025/03/23</span>
+                  <div class="testimonial-rating text-primary">★★★★☆</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="testimonial-card p-4">
+                <div class="d-flex mb-4">
+                  <img
+                    src="../assets/images/about/avatar-3.png"
+                    alt="Mandy"
+                    class="testimonial-avatar"
+                  />
+                  <div class="testimonial-header ms-3">
+                    <h5
+                      class="testimonial-name text-black-950 mb-2 fw-bold fs-20"
+                    >
+                      Mandy
+                    </h5>
+                    <p class="testimonial-info text-black-950 mb-0">
+                      上班族 台北
+                    </p>
+                  </div>
+                </div>
+                <p class="testimonial-content text-black-600 mb-4">
+                  本來只是好奇想算一下流年，結果豬大仙直接點出我一直沒說出口的煩惱，嚇到！而且還很溫柔地給了我具體建議，真的有被療癒到~
+                </p>
+                <div
+                  class="testimonial-footer d-flex justify-content-between align-items-center"
+                >
+                  <span class="testimonial-date text-primary">2024/12/03</span>
+                  <div class="testimonial-rating text-primary">★★★★☆</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="testimonial-card p-4">
+                <div class="d-flex mb-4">
+                  <img
+                    src="../assets/images/about/avatar-4.png"
+                    alt="Anson"
+                    class="testimonial-avatar"
+                  />
+                  <div class="testimonial-header ms-3">
+                    <h5
+                      class="testimonial-name text-black-950 mb-2 fw-bold fs-20"
+                    >
+                      Anson
+                    </h5>
+                    <p class="testimonial-info text-black-950 mb-0">
+                      自由工作者 高雄
+                    </p>
+                  </div>
+                </div>
+                <p class="testimonial-content text-black-600 mb-4">
+                  跟男友吵架吵到快分手，朋友推薦我找豬大仙做合盤，居然分析得超精準，連我們什麼時候容易起衝突都說得出來，超神後來我們也慢慢找到彼此的相處方式。
+                </p>
+                <div
+                  class="testimonial-footer d-flex justify-content-between align-items-center"
+                >
+                  <span class="testimonial-date text-primary">2025/01/17</span>
+                  <div class="testimonial-rating text-primary">★★★★☆</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="testimonial-card p-4">
+                <div class="d-flex mb-4">
+                  <img
+                    src="../assets/images/about/avatar-5.png"
+                    alt="Cindy"
+                    class="testimonial-avatar"
+                  />
+                  <div class="testimonial-header ms-3">
+                    <h5
+                      class="testimonial-name text-black-950 mb-2 fw-bold fs-20"
+                    >
+                      Cindy
+                    </h5>
+                    <p class="testimonial-info text-black-950 mb-0">
+                      品牌行銷 彰化
+                    </p>
+                  </div>
+                </div>
+                <p class="testimonial-content text-black-600 mb-4">
+                  我一直對命理抱著半信半疑的態度，但某天在低潮期無意間滑到豬大仙的文章，覺得他的觀點很接地氣，不像一般命理師那麼高高在上。實際預約後,我完全被說服。他不只是把命盤讀出來，而是用很有邏輯的方式讓我理解自己當下的情況、個性矛盾的根源，甚至給了我幾個能立刻實踐的方向。這不只是一次命理諮詢，更像是一次自我認識的深度對話。
+                </p>
+                <div
+                  class="testimonial-footer d-flex justify-content-between align-items-center"
+                >
+                  <span class="testimonial-date text-primary">2025/06/12</span>
+                  <div class="testimonial-rating text-primary">★★★★☆</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="testimonial-card p-4">
+                <div class="d-flex mb-4">
+                  <img
+                    src="../assets/images/about/avatar-6.png"
+                    alt="Lisa"
+                    class="testimonial-avatar"
+                  />
+                  <div class="testimonial-header ms-3">
+                    <h5
+                      class="testimonial-name text-black-950 mb-2 fw-bold fs-20"
+                    >
+                      Lisa
+                    </h5>
+                    <p class="testimonial-info text-black-950 mb-0">
+                      插畫師 新北
+                    </p>
+                  </div>
+                </div>
+                <p class="testimonial-content text-black-600 mb-4">
+                  豬大仙的感情合盤真的神準。我和男友一直相處上有些問題，吵架的點很固定，但又說不上來到底為什麼。他分析了我們雙方命格的互動特性，指出我們在表達情緒這塊完全不對頻，讓我整個豁然開朗。也因為他給的具體建議，我開始調整溝通方式，關係有很大的改善。現在我們每半年還會一起來複盤一次流年運勢，當成感情健檢！
+                </p>
+                <div
+                  class="testimonial-footer d-flex justify-content-between align-items-center"
+                >
+                  <span class="testimonial-date text-primary">2025/02/14</span>
+                  <div class="testimonial-rating text-primary">★★★★☆</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ul
+          class="my-indicators list-unstyled mb-0 d-flex d-md-none align-items-end row"
+        >
+          <li class="col">
+            <div class="my-indicator testimonial-item"></div>
+          </li>
+          <li class="col">
+            <div class="my-indicator testimonial-item"></div>
+          </li>
+          <li class="col">
+            <div class="my-indicator testimonial-item"></div>
+          </li>
+          <li class="col">
+            <div class="my-indicator testimonial-item"></div>
+          </li>
+          <li class="col">
+            <div class="my-indicator testimonial-item"></div>
+          </li>
+          <li class="col">
+            <div class="my-indicator testimonial-item"></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========================================
+         Section 4: 關於豬大仙 (About Master)
+         手機版：直接顯示背面內容
+         ======================================== -->
+    <section class="about-master">
+      <div class="container">
+        <div class="section-title d-flex align-items-end position-relative">
+          <img
+            class="position-absolute"
+            src="../assets/images/index/title-deco.png"
+            alt="round-deco"
+          />
+          <h2 class="ps-md-32 pt-30 pt-md-0 mb-0 me-12 fs-md-2 fs-4 fw-bold">
+            關於豬大仙
+          </h2>
+        </div>
+
+        <div class="master-cards-grid">
+          <!-- 卡片1: 名字由來 -->
+          <div class="master-card-wrapper p-md-4">
+            <div class="master-card">
+              <div class="card-front">
+                <h3>名字由來</h3>
+              </div>
+              <div class="card-back">
+                <h3 class="d-md-none fw-bold fs-5 text-secondary-400 mb-4">
+                  名字由來
+                </h3>
+                <div class="card-content">
+                  <ul>
+                    <li class="text-black-600 mb-md-4 mb-3">
+                      ⌈豬⌋取其憨厚、靈敏、知天命的形象
+                    </li>
+                    <li class="text-black-600 mb-md-4 mb-3">
+                      ⌈大仙⌋代表通曉天機、協助人間的命理導師
+                    </li>
+                    <li class="text-black-600">
+                      結合即是—外表無害，內心精明的命理守護神
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡片2: 角色個性 -->
+          <div class="master-card-wrapper p-md-4">
+            <div class="master-card">
+              <div class="card-front">
+                <h3>角色個性</h3>
+              </div>
+              <div class="card-back">
+                <h3 class="d-md-none fw-bold fs-5 text-secondary-400 mb-4">
+                  角色個性
+                </h3>
+                <div class="card-content">
+                  <ul>
+                    <li class="text-black-600 mb-md-4 mb-3">
+                      懶得講廢話，但句句有料
+                    </li>
+                    <li class="text-black-600 mb-md-4 mb-3">
+                      喜歡喝茶、曬太陽、翻命盤
+                    </li>
+                    <li class="text-black-600 mb-md-4 mb-3">
+                      最討厭「只信命不行動」的人
+                    </li>
+                    <li class="text-black-600">
+                      擅長用一句話點醒人、順便翻白眼
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡片3: 專長技能 -->
+          <div class="master-card-wrapper p-md-4">
+            <div class="master-card">
+              <div class="card-front">
+                <h3>專長技能</h3>
+              </div>
+              <div class="card-back">
+                <h3 class="d-md-none fw-bold fs-5 text-secondary-400 mb-4">
+                  專長技能
+                </h3>
+                <div class="card-content">
+                  <ul>
+                    <li class="text-black-600 mb-md-4 mb-3">
+                      精通:八字、節氣、流年分析
+                    </li>
+                    <li class="text-black-600 mb-md-4 mb-3">
+                      擅長：將命理與日常結合，轉成白話智慧
+                    </li>
+                    <li class="text-black-600">
+                      招牌絕活：⌈一看就知你卡在哪裡,還不快改⌋!
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡片4: 豬大仙的名言 -->
+          <div class="master-card-wrapper p-md-4">
+            <div class="master-card">
+              <div class="card-front">
+                <h3>豬大仙的名言</h3>
+              </div>
+              <div class="card-back">
+                <h3 class="d-md-none fw-bold fs-5 text-secondary-400 mb-4">
+                  豬大仙的名言
+                </h3>
+                <div class="card-content">
+                  <ul>
+                    <li class="text-black-600 mb-md-4 mb-3">
+                      ⌈不是命不好，是你還沒用對方式。⌋
+                    </li>
+                    <li class="text-black-600 mb-md-4 mb-3">
+                      ⌈節氣到了，人要跟上節奏。⌋
+                    </li>
+                    <li class="text-black-600 mb-md-4 mb-3">
+                      ⌈化解不如提升，擋煞不如轉念⌋
+                    </li>
+                    <li class="text-black-600">⌈修命，也修心，這才叫修行。⌋</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡片5: 豬大仙的任務 -->
+          <div class="master-card-wrapper p-md-4">
+            <div class="master-card">
+              <div class="card-front">
+                <h3>豬大仙的任務</h3>
+              </div>
+              <div class="card-back">
+                <h3 class="d-md-none fw-bold fs-5 text-secondary-400 mb-4">
+                  豬大仙的任務
+                </h3>
+                <div class="card-content">
+                  <ul>
+                    <li class="text-black-600 mb-md-4 mb-3">
+                      替你指一盞燈，但不幫你走路
+                    </li>
+                    <li class="text-black-600 mb-md-4 mb-3">
+                      在關鍵節氣提醒你該轉念/轉運/轉行動
+                    </li>
+                    <li class="text-black-600">
+                      教你看懂自己的命，不再只是被命牽著走
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡片6: 豬大仙出沒地點 -->
+          <div class="master-card-wrapper p-md-4">
+            <div class="master-card">
+              <div class="card-front">
+                <h3>豬大仙出沒地點</h3>
+              </div>
+              <div class="card-back">
+                <h3 class="d-md-none fw-bold fs-5 text-secondary-400 mb-4">
+                  豬大仙出沒地點
+                </h3>
+                <div class="card-content">
+                  <ul>
+                    <li class="text-black-600 mb-md-4 mb-3">
+                      命理適手記每一頁的角落
+                    </li>
+                    <li class="text-black-600 mb-md-4 mb-3">
+                      天赦日、節氣轉換、關鍵流年
+                    </li>
+                    <li class="text-black-600">有需要被提醒時的你腦海裡</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <%- include("./layout/footer") %>
+
+    <script>
+      // ==========================
+      // 1. 客戶推薦輪播控制
+      // ==========================
+      const testimonialsCarousel = document.getElementById(
+        'testimonials-carousel'
+      )
+      const testimonialIndicators =
+        document.querySelectorAll('.testimonial-item')
+
+      // 初始化第一個指示器為 active
+      testimonialIndicators[0].classList.add('border-dark')
+
+      // 監聽 Bootstrap Carousel 切換事件
+      testimonialsCarousel.addEventListener('slide.bs.carousel', function (e) {
+        // 清除所有指示器的 active 狀態
+        testimonialIndicators.forEach((el) =>
+          el.classList.remove('border-dark')
+        )
+        // 設定當前頁面的指示器為 active
+        testimonialIndicators[e.to].classList.add('border-dark')
+      })
+
+      // 儲存每張卡片的計時器
+      let autoFlipTimers = new Map()
+
+      function flipCard(card) {
+        // 只在非手機版時執行翻轉
+        if (window.innerWidth > 768) {
+          card.classList.toggle('flipped')
+
+          // 清除該卡片的舊計時器（如果存在）
+          if (autoFlipTimers.has(card)) {
+            clearTimeout(autoFlipTimers.get(card))
+            autoFlipTimers.delete(card)
+          }
+
+          // 如果卡片翻開了，設定5秒後自動翻回去
+          if (card.classList.contains('flipped')) {
+            const timer = setTimeout(() => {
+              card.classList.remove('flipped')
+              autoFlipTimers.delete(card)
+            }, 5000) // 5秒後自動翻回
+
+            autoFlipTimers.set(card, timer)
+          }
+        }
+      }
+
+      // 文檔載入完成後
+      document.addEventListener('DOMContentLoaded', function () {
+        const cards = document.querySelectorAll('.master-card')
+
+        // 為每張卡片添加點擊事件
+        cards.forEach((card) => {
+          card.addEventListener('click', function (e) {
+            // 只在桌面版和平板版執行
+            if (window.innerWidth > 768) {
+              e.stopPropagation()
+              flipCard(this)
+            }
+          })
+        })
+
+        // 移除了原本的 document 點擊事件監聽器
+        // 現在點擊其他地方不會關閉卡片
+      })
+
+      // 視窗大小改變時的處理
+      window.addEventListener('resize', function () {
+        if (window.innerWidth <= 768) {
+          // 手機版時移除所有翻轉狀態
+          document.querySelectorAll('.master-card.flipped').forEach((card) => {
+            card.classList.remove('flipped')
+            // 清除計時器
+            if (autoFlipTimers.has(card)) {
+              clearTimeout(autoFlipTimers.get(card))
+              autoFlipTimers.delete(card)
+            }
+          })
+        }
+      })
+    </script>
+    <script type="module" src="../main.js"></script>
+  </body>
+</html>

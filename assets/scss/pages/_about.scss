@@ -1,0 +1,374 @@
+// ==================================
+// Section 1: Hero 英雄區塊
+// ==================================
+.hero {
+  &-image {
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  &-content {
+    .hero-features {
+      list-style-position: inside;
+      .hero-feature-item {
+        text-indent: 36px;
+        &::marker {
+          color: #866654;
+        }
+      }
+    }
+  }
+  &-btn {
+    background: rgba(53, 63, 30, 0.8);
+    margin-left: 52px;
+    border: #0a0a0a solid;
+    border-width: 1px 4px;
+    padding-right: 10px;
+    padding-left: 10px;
+    color: white;
+    &:hover {
+      background: rgba(53, 63, 30, 1);
+      color: white;
+    }
+    .btn-inside-border {
+      border-left: #0a0a0a solid 1px;
+      border-right: #0a0a0a solid 1px;
+      padding-left: 22px;
+      padding-right: 22px;
+    }
+  }
+}
+
+// ==================================
+// Section 2: Services 服務項目
+// ==================================
+.services {
+  .service-card {
+    .service-image {
+      width: 320px;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .service-content {
+      flex: 1;
+      .service-title {
+        color: #2c3e50;
+      }
+      .service-desc {
+        color: #666;
+      }
+    }
+  }
+}
+
+// ==================================
+// Section 3: Testimonials 客戶推薦
+// 功能：展示客戶評價
+// 手機版：Carousel 輪播
+// ==================================
+.testimonials {
+  // 複用首頁的指示器樣式（全域使用）
+  .my-indicator {
+    border: 4px solid rgba(198, 198, 198, 1);
+  }
+
+  &-grid {
+    // 控制卡片間距
+    .row {
+      --bs-gutter-x: 36px; // 左右間距 36px
+      margin-left: -18px;
+      margin-right: -18px;
+      > [class*="col-"] {
+        padding-left: 18px;
+        padding-right: 18px;
+        margin-bottom: 36px;
+        &:nth-last-child(-n + 2) {
+          margin-bottom: 0; // 最後一排不需要下方間距
+        }
+      }
+    }
+    .testimonial-card {
+      height: 100%;
+      border: 1px solid #c6c6c6;
+      .testimonial-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  // 手機版 Bootstrap Carousel 樣式
+  #testimonials-carousel {
+    .testimonial-card {
+      border: 1px solid #e0e0e0;
+      .testimonial-avatar {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+      }
+    }
+  }
+}
+// ==================================
+// Section 4: About Master 關於豬大仙
+// 特效：3D 翻轉動畫
+// ==================================
+.about-master {
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  // 標題樣式（與服務項目、客戶推薦相同）
+  .section-title {
+    position: relative;
+    margin-bottom: 60px;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    h2 {
+      padding-left: 32px;
+      padding-top: 30px;
+      margin-bottom: 0;
+      margin-right: 12px;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  }
+
+  // 卡片容器
+  .master-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    .master-card-wrapper {
+      perspective: 1000px;
+      height: 320px;
+      // 為每張卡片的正面設定不同背景圖
+      &:nth-child(1) .card-front {
+        // background-image: url('../assets/images/about/master-card-1.png');
+        background-image: url("https://github.com/YoKingX7/ZDX-Club-Booking/blob/main/assets/images/about/master-card-1.png?raw=true");
+      }
+
+      &:nth-child(2) .card-front {
+        // background-image: url('../assets/images/about/master-card-2.png');
+        background-image: url("https://github.com/YoKingX7/ZDX-Club-Booking/blob/main/assets/images/about/master-card-2.png?raw=true");
+      }
+
+      &:nth-child(3) .card-front {
+        // background-image: url('../assets/images/about/master-card-3.png');
+        background-image: url("https://github.com/YoKingX7/ZDX-Club-Booking/blob/main/assets/images/about/master-card-3.png?raw=true");
+      }
+
+      &:nth-child(4) .card-front {
+        // background-image: url('../assets/images/about/master-card-4.png');
+        background-image: url("https://github.com/YoKingX7/ZDX-Club-Booking/blob/main/assets/images/about/master-card-4.png?raw=true");
+      }
+      &:nth-child(5) .card-front {
+        // background-image: url('../assets/images/about/master-card-5.png');
+        background-image: url("https://github.com/YoKingX7/ZDX-Club-Booking/blob/main/assets/images/about/master-card-5.png?raw=true");
+      }
+
+      &:nth-child(6) .card-front {
+        // background-image: url('../assets/images/about/master-card-6.png');
+        background-image: url("https://github.com/YoKingX7/ZDX-Club-Booking/blob/main/assets/images/about/master-card-6.png?raw=true");
+      }
+
+      .master-card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s; // 翻轉動畫時間
+        transform-style: preserve-3d; // 保留 3D 效果
+        cursor: pointer;
+        // 顯示可點擊
+
+        // 翻轉狀態
+        &.flipped {
+          transform: rotateY(180deg); // Y 軸旋轉 180 度
+        }
+
+        // 卡片正反面共用樣式
+        .card-front,
+        .card-back {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          backface-visibility: hidden; // 背面不可見
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid #c6c6c6;
+        }
+
+        // 卡片正面（圖片面）
+        .card-front {
+          padding: 8px; // 新增：8px 內距
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-clip: content-box; // 新增：背景只在內容區顯示
+          background-origin: content-box; // 新增：背景從內容區開始
+          h3 {
+            display: none;
+          }
+        }
+
+        // 卡片背面（內容面）
+        .card-back {
+          background: rgba(183, 183, 164, 0.2); // 淡綠色背景
+          transform: rotateY(180deg); // 預先翻轉 180 度
+          padding: 8px;
+          background-clip: content-box; // 背景只在內容區顯示
+          background-origin: content-box; // 背景從內容區開始
+
+          // 內容區
+          .card-content {
+            ul {
+              list-style-position: inside; // 列表符號在內
+              padding-left: 0;
+              text-align: left; // 文字靠左
+              margin: 0;
+
+              li {
+                // 自訂列表符號顏色
+                &::marker {
+                  color: #353f1e;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// ==================================
+// 跨區域背景裝飾
+// 功能：樹葉圖片跨越兩個 section
+// ==================================
+.about-tree {
+  width: 684px;
+  left: 0px; // 從左側開始（不會造成橫向滾動）
+  top: 245px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+// 手機版樣式
+@media (max-width: 768px) {
+  .hero {
+    &-content {
+      .hero-features {
+        padding-left: 0;
+        text-align: left;
+        display: inline-block;
+        .hero-feature-item {
+          text-indent: 0px;
+        }
+      }
+    }
+    &-btn {
+      margin: 0 auto;
+      width: 100%;
+      .btn-inside-border {
+        width: 100%;
+      }
+    }
+  }
+
+  .services {
+    .service-card {
+      flex-direction: column;
+      overflow: hidden;
+      .service-image {
+        width: 100%;
+      }
+    }
+  }
+  .about-master {
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    .section-title {
+      margin-bottom: 40px;
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .master-cards-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+
+      .master-card-wrapper {
+        height: auto;
+
+        .master-card {
+          cursor: default; // 手機版不需要點擊游標
+          transform: none !important; // 禁止翻轉
+
+          .card-front {
+            display: none;
+          }
+
+          .card-back {
+            position: static; // 改為靜態定位
+            transform: none; // 移除翻轉
+            border: 1px solid #c6c6c6;
+            background: rgba(183, 183, 164, 0.2);
+            padding: 8px;
+            display: block; // 確保顯示
+            background-clip: content-box; // 背景只在內容區顯示
+            background-origin: content-box; // 背景從內容區開始
+
+            h3 {
+              text-align: left;
+              display: block; // 確保標題顯示
+              padding-top: 24px;
+              padding-left: 24px;
+            }
+
+            .card-content {
+              padding: 0px 24px 24px 24px;
+              ul {
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// 平板版樣式
+@media (min-width: 769px) and (max-width: 1024px) {
+  .services {
+    .service-card {
+      .service-image {
+        width: 160px;
+      }
+    }
+  }
+  // 關於豬大仙 - 平板版
+  .about-master {
+    .master-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .master-card-wrapper {
+      height: 280px;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.member-menu {
+  width: 166px;
+}
+@media (max-width: 768px) {
+  .nav,
+  .footer {
+    .logo-mb {
+      width: 160px;
+    }
+    &-collapse {
+      top: 76.18px;
+      z-index: 100;
+    }
+  }
+}

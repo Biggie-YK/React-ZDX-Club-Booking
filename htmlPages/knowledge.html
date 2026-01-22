@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>命理知識</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body style="background-image: url(../assets/images/index/nav-bg.png)">
+    <%- include("./layout/nav",{login:false}) %>
+
+    <header class="km-header-bg py-80 position-relative">
+      <dotlottie-wc
+        class="position-absolute"
+        src="https://lottie.host/08657889-c1e5-4d0b-8844-c01b6a963497/cPEKyYNdRW.lottie"
+        style="
+          width: 100%;
+          height: 100%;
+          top: 0;
+          opacity: 0.1;
+          filter: brightness(0.8);
+        "
+        autoplay
+      ></dotlottie-wc>
+      <div class="container text-black-800">
+        <h1
+          class="fs-md-48 fs-2 text-md-start text-center mb-md-5 mb-32 fw-bold lh-sm text-black-800"
+        >
+          命理知識
+        </h1>
+        <p class="fs-md-5 fs-6 text-md-start text-center">
+          節氣循環，不只影響四季。<br />
+          天時流轉，也牽動命運節奏。<br />
+          一年24節氣，寫下你的命理故事。
+        </p>
+      </div>
+    </header>
+
+    <section class="py-40 py-md-80">
+      <div class="container">
+        <div class="km-section-title pt-4 pt-md-32 ps-12 ps-md-32 mb-40">
+          <p class="fs-4 fs-md-2 lh-base lh-md-sm fw-bold lh-sm text-black-950">
+            跟著豬大仙，<br />探索節氣與命理的神秘連結
+          </p>
+        </div>
+        <div
+          class="km-solar-terms row d-flex flex-md-row flex-column-reverse align-items-center"
+          data-aos="flip-up"
+          data-aos-anchor-placement="center-bottom"
+        >
+          <div
+            class="content col-md-5 px-48 px-md-64 py-40 py-md-80"
+            id="solar-term-content"
+            style="
+              background-image: url('../assets/images/knowledge/season-1.png');
+            "
+          >
+            <p
+              id="term-title"
+              class="fs-2 fs-md-80 fw-bold lh-sm text-black-800 mb-32"
+            >
+              立春
+            </p>
+            <p id="term-description" class="fs-6 fs-md-4">
+              一年開始，五行屬木，適合立下新計劃，命理上為陽氣漸升，萬物生發之始。
+            </p>
+          </div>
+          <div class="col-md-7 selections">
+            <div
+              class="d-flex align-items-center justify-content-between p-2 p-md-3 mb-2 mb-md-32 bg-sp"
+            >
+              <div
+                class="sel-title fs-3 fs-md-48 px-md-4 py-2 lh-1 text-center"
+              >
+                春
+              </div>
+              <ol
+                class="sel-items p-0 mb-0 d-flex justify-content-start align-items-center gap-2 gap-md-3 flex-wrap flex-md-nowrap"
+              >
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50 active"
+                >
+                  立春
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  雨水
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  驚蟄
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  春分
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  清明
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  穀雨
+                </li>
+              </ol>
+            </div>
+            <div
+              class="d-flex align-items-center justify-content-between p-2 p-md-3 mb-2 mb-md-32 bg-su"
+            >
+              <div
+                class="sel-title fs-3 fs-md-48 px-md-4 py-2 lh-1 text-center"
+              >
+                夏
+              </div>
+              <ol
+                class="sel-items p-0 mb-0 d-flex justify-content-start align-items-center gap-2 gap-md-3 flex-wrap flex-md-nowrap"
+              >
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  立夏
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  小滿
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  芒種
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  夏至
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  小暑
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  大暑
+                </li>
+              </ol>
+            </div>
+            <div
+              class="d-flex align-items-center justify-content-between p-2 p-md-3 mb-2 mb-md-32 bg-fa"
+            >
+              <div
+                class="sel-title fs-3 fs-md-48 px-md-4 py-2 lh-1 text-center"
+              >
+                秋
+              </div>
+              <ol
+                class="sel-items p-0 mb-0 d-flex justify-content-start align-items-center gap-2 gap-md-3 flex-wrap flex-md-nowrap"
+              >
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  立秋
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  處暑
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  白露
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  秋分
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  寒露
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  霜降
+                </li>
+              </ol>
+            </div>
+            <div
+              class="d-flex align-items-center justify-content-between p-2 p-md-3 mb-2 mb-md-32 bg-wi"
+            >
+              <div
+                class="sel-title fs-3 fs-md-48 px-md-4 py-2 lh-1 text-center"
+              >
+                冬
+              </div>
+              <ol
+                class="sel-items p-0 mb-0 d-flex justify-content-start align-items-center gap-2 gap-md-3 flex-wrap flex-md-nowrap"
+              >
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  立冬
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  小雪
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  大雪
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  冬至
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  小寒
+                </li>
+                <li
+                  type="button"
+                  class="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
+                >
+                  大寒
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="timeline py-40 py-md-80">
+      <div class="container">
+        <div class="km-section-title pt-4 pt-md-32 ps-12 ps-md-32 mb-40">
+          <p class="fs-4 fs-md-2 lh-base lh-md-sm fw-bold lh-sm text-black-950">
+            節氣人生圖譜，看見時序中的自己
+          </p>
+          <p class="">
+            透過二十四節氣，映照人生階段的節奏與智慧，感受自然與內在的同频共振。
+          </p>
+        </div>
+        <ol class="timeline-items px-0">
+          <li
+            class="timeline-item d-md-row d-flex align-items-center justify-content-start justify-content-md-end"
+          >
+            <div
+              class="timeline-tag fs-md-2 fs-4 fw-bold lh-sm text-black-800 col-md-2 d-flex justify-content-center"
+            >
+              <p
+                class="tag-line d-flex justify-content-center align-items-center mb-0"
+              >
+                嬰
+              </p>
+            </div>
+            <div
+              class="timeline-card col col-md-5"
+              data-aos="fade-left"
+              data-aos-anchor-placement="bottom-bottom"
+            >
+              <div
+                class="timeline-content py-3 py-md-36 ps-36 ps-md-48 pe-3 pe-md-4 d-flex justify-content-between align-items-center gap-md-3 gap-1"
+              >
+                <div class="timeline-text">
+                  <p
+                    class="fs-5 fs-md-2 lh-base lh-sm fw-bold text-black-800 mb-0"
+                  >
+                    嬰兒期
+                  </p>
+                  <p class="fs-6 fs-md-5 fw-bold text-primary mb-0">
+                    立春| 雨水 | 驚蟄
+                  </p>
+                  <p class="text-black-600 mb-0">
+                    萬物初生，人生開端，學會感受世界。
+                  </p>
+                </div>
+                <div class="timeline-img-div">
+                  <img
+                    class="timeline-img"
+                    src="../assets/images/knowledge/life-stage-1.png"
+                    alt="嬰兒期"
+                  />
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li
+            class="timeline-item d-md-row d-flex flex-md-row-reverse align-items-center justify-content-start justify-content-md-end"
+          >
+            <div
+              class="timeline-tag fs-md-2 fs-4 fw-bold lh-sm text-black-800 col-md-2 d-flex justify-content-center"
+            >
+              <p
+                class="tag-line d-flex justify-content-center align-items-center mb-0"
+              >
+                青
+              </p>
+            </div>
+            <div
+              class="timeline-card col col-md-5"
+              data-aos="fade-right"
+              data-aos-anchor-placement="bottom-bottom"
+            >
+              <div
+                class="timeline-content py-3 py-md-36 ps-36 ps-md-48 pe-3 pe-md-4 d-flex justify-content-between align-items-center gap-md-3 gap-1"
+              >
+                <div class="timeline-text">
+                  <p
+                    class="fs-5 fs-md-2 lh-base lh-sm fw-bold text-black-800 mb-0"
+                  >
+                    青年期
+                  </p>
+                  <p class="fs-6 fs-md-5 fw-bold text-primary mb-0">
+                    春分 | 清明 | 穀雨 | 立夏
+                  </p>
+                  <p class="text-black-600 mb-0">
+                    陽氣漸旺，意志堅定，發展自我。
+                  </p>
+                </div>
+                <div class="timeline-img-div">
+                  <img
+                    class="timeline-img"
+                    src="../assets/images/knowledge/life-stage-2.png"
+                    alt="青年期"
+                  />
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li
+            class="timeline-item d-md-row d-flex align-items-center justify-content-start justify-content-md-end"
+          >
+            <div
+              class="timeline-tag fs-md-2 fs-4 fw-bold lh-sm text-black-800 col-md-2 d-flex justify-content-center"
+            >
+              <p
+                class="tag-line d-flex justify-content-center align-items-center mb-0"
+              >
+                壯
+              </p>
+            </div>
+            <div
+              class="timeline-card col col-md-5"
+              data-aos="fade-left"
+              data-aos-anchor-placement="bottom-bottom"
+            >
+              <div
+                class="timeline-content py-3 py-md-36 ps-36 ps-md-48 pe-3 pe-md-4 d-flex justify-content-between align-items-center gap-md-3 gap-1"
+              >
+                <div class="timeline-text">
+                  <p
+                    class="fs-5 fs-md-2 lh-base lh-sm fw-bold text-black-800 mb-0"
+                  >
+                    壯年期
+                  </p>
+                  <p class="fs-6 fs-md-5 fw-bold text-primary mb-0">
+                    小滿 | 芒種 | 夏至 | 小暑
+                  </p>
+                  <p class="text-black-600 mb-0">
+                    成就與挑戰並存，收與放皆須智慧。
+                  </p>
+                </div>
+                <div class="timeline-img-div">
+                  <img
+                    class="timeline-img"
+                    src="../assets/images/knowledge/life-stage-3.png"
+                    alt="壯年期"
+                  />
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li
+            class="timeline-item d-md-row d-flex flex-md-row-reverse align-items-center justify-content-start justify-content-md-end"
+          >
+            <div
+              class="timeline-tag fs-md-2 fs-4 fw-bold lh-sm text-black-800 col-md-2 d-flex justify-content-center"
+            >
+              <p
+                class="tag-line d-flex justify-content-center align-items-center mb-0"
+              >
+                成
+              </p>
+            </div>
+            <div
+              class="timeline-card col col-md-5"
+              data-aos="fade-right"
+              data-aos-anchor-placement="bottom-bottom"
+            >
+              <div
+                class="timeline-content py-3 py-md-36 ps-36 ps-md-48 pe-3 pe-md-4 d-flex justify-content-between align-items-center gap-md-3 gap-1"
+              >
+                <div class="timeline-text">
+                  <p
+                    class="fs-5 fs-md-2 lh-base lh-sm fw-bold text-black-800 mb-0"
+                  >
+                    成熟期
+                  </p>
+                  <p class="fs-6 fs-md-5 fw-bold text-primary mb-0">
+                    大暑 | 立秋 | 處暑 | 白露
+                  </p>
+                  <p class="text-black-600 mb-0">
+                    經歷高峰後的整理期，迎向內在穩定。
+                  </p>
+                </div>
+                <div class="timeline-img-div">
+                  <img
+                    class="timeline-img"
+                    src="../assets/images/knowledge/life-stage-4.png"
+                    alt="成熟期"
+                  />
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li
+            class="timeline-item d-md-row d-flex align-items-center justify-content-start justify-content-md-end"
+          >
+            <div
+              class="timeline-tag fs-md-2 fs-4 fw-bold lh-sm text-black-800 col-md-2 d-flex justify-content-center"
+            >
+              <p
+                class="tag-line d-flex justify-content-center align-items-center mb-0"
+              >
+                晚
+              </p>
+            </div>
+            <div
+              class="timeline-card col col-md-5"
+              data-aos="fade-left"
+              data-aos-anchor-placement="bottom-bottom"
+            >
+              <div
+                class="timeline-content py-3 py-md-36 ps-36 ps-md-48 pe-3 pe-md-4 d-flex justify-content-between align-items-center gap-md-3 gap-1"
+              >
+                <div class="timeline-text">
+                  <p
+                    class="fs-5 fs-md-2 lh-base lh-sm fw-bold text-black-800 mb-0"
+                  >
+                    晚年期
+                  </p>
+                  <p class="fs-6 fs-md-5 fw-bold text-primary mb-0">
+                    秋分 寒露 | 霜降 | 立冬
+                  </p>
+                  <p class="text-black-600 mb-0">
+                    外放轉為內省，智慧與慈悲的階段。
+                  </p>
+                </div>
+                <div class="timeline-img-div">
+                  <img
+                    class="timeline-img"
+                    src="../assets/images/knowledge/life-stage-5.png"
+                    alt="晚年期"
+                  />
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li
+            class="timeline-item d-md-row d-flex flex-md-row-reverse align-items-center justify-content-start justify-content-md-end"
+          >
+            <div
+              class="timeline-tag fs-md-2 fs-4 fw-bold lh-sm text-black-800 col-md-2 d-flex justify-content-center"
+            >
+              <p
+                class="tag d-flex justify-content-center align-items-center mb-0"
+              >
+                歸
+              </p>
+            </div>
+            <div
+              class="timeline-card col col-md-5"
+              data-aos="fade-right"
+              data-aos-anchor-placement="bottom-bottom"
+            >
+              <div
+                class="timeline-content py-3 py-md-36 ps-36 ps-md-48 pe-3 pe-md-4 d-flex justify-content-between align-items-center gap-md-3 gap-1"
+              >
+                <div class="timeline-text">
+                  <p
+                    class="fs-5 fs-md-2 lh-base lh-sm fw-bold text-black-800 mb-0"
+                  >
+                    歸藏期
+                  </p>
+                  <p class="fs-6 fs-md-5 fw-bold text-primary mb-0">
+                    小雪|大雪|冬至|小寒|大寒
+                  </p>
+                  <p class="text-black-600 mb-0">
+                    潛藏與準備的時節，為下一次的誕生儲備能量。
+                  </p>
+                </div>
+                <div class="timeline-img-div">
+                  <img
+                    class="timeline-img"
+                    src="../assets/images/knowledge/life-stage-6.png"
+                    alt="歸藏期"
+                  />
+                </div>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="article py-40 pt-md-160 pb-md-80 mb-40">
+      <div class="container">
+        <div
+          class="km-section-title pt-4 pt-md-32 ps-12 ps-md-32 mb-md-80 mb-40"
+        >
+          <p class="fs-4 fs-md-2 lh-base lh-md-sm fw-bold lh-sm text-black-950">
+            豬大仙的命理隨手記
+          </p>
+          <p class="">紀錄命理、節氣、運勢與人生體悟的智慧手記</p>
+        </div>
+
+        <div class="row d-flex px-12 px-md-0">
+          <!-- 手機版顯示 -->
+          <div class="dropdown mb-3 px-0 d-md-none d-block">
+            <div
+              class="article-nav-title btn btn-background-beige w-100 py-0 rounded-0"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <div
+                class="border-in px-4 py-12 d-flex justify-content-between align-items-center"
+              >
+                <div class="fs-5 text-black-800">精選文章</div>
+                <i class="bi bi-chevron-down"></i>
+              </div>
+            </div>
+
+            <ul class="dropdown-menu w-100 p-12">
+              <li class="article-nav-item px-12 mb-2" data-id="1" type="button">
+                <div
+                  class="border-in px-4 py-12 d-flex justify-content-between"
+                >
+                  <p class="km-h6 mb-0">立秋×天赦吉日</p>
+                  <time datetime="2025-08-07">2025/08/07</time>
+                </div>
+              </li>
+              <li class="article-nav-item px-12 mb-2" data-id="2" type="button">
+                <div
+                  class="border-in px-4 py-12 d-flex justify-content-between"
+                >
+                  <p class="km-h6 mb-0">立春×迎新啟運日</p>
+                  <time datetime="2025-02-04">2025/02/04</time>
+                </div>
+              </li>
+              <li class="article-nav-item px-12 mb-2" data-id="3" type="button">
+                <div
+                  class="border-in px-4 py-12 d-flex justify-content-between"
+                >
+                  <p class="km-h6 mb-0">春分 × 陽平陰長之時</p>
+                  <time datetime="2025-03-20">2025/03/20</time>
+                </div>
+              </li>
+              <li class="article-nav-item px-12 mb-2" data-id="4" type="button">
+                <div
+                  class="border-in px-4 py-12 d-flex justify-content-between"
+                >
+                  <p class="km-h6 mb-0">立夏×財運萌芽日</p>
+                  <time datetime="2025-05-05">2025/05/05</time>
+                </div>
+              </li>
+              <li class="article-nav-item px-12 mb-2" data-id="5" type="button">
+                <div
+                  class="border-in px-4 py-12 d-flex justify-content-between"
+                >
+                  <p class="km-h6 mb-0">夏至×陽極盛吉日</p>
+                  <time datetime="2025-06-21">2025/06/21</time>
+                </div>
+              </li>
+              <li class="article-nav-item px-12 mb-2" data-id="6" type="button">
+                <div
+                  class="border-in px-4 py-12 d-flex justify-content-between"
+                >
+                  <p class="km-h6 mb-0">秋分×收斂聚財時</p>
+                  <time datetime="2025-09-23">2025/09/23</time>
+                </div>
+              </li>
+              <li class="article-nav-item px-12" data-id="7" type="button">
+                <div
+                  class="border-in px-4 py-12 d-flex justify-content-between"
+                >
+                  <p class="km-h6 mb-0">冬至×藏鋒養勢日</p>
+                  <time datetime="2025-12-21">2025/12/21</time>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 電版顯示 -->
+          <ul
+            class="article-nav list-unstyled text-center lh-sm text-black-800 px-64 d-none d-md-block"
+          >
+            <li class="article-nav-title km-h6 px-12 mb-4">
+              <div class="border-in py-12">精選文章</div>
+            </li>
+            <li
+              class="article-nav-item px-12 mb-4 active"
+              data-id="1"
+              type="button"
+            >
+              <div class="border-in py-12">
+                <p class="km-h6 mb-0">立秋×天赦吉日</p>
+                <time datetime="2025-08-07">2025/08/07</time>
+              </div>
+            </li>
+            <li class="article-nav-item px-12 mb-4" data-id="2" type="button">
+              <div class="border-in py-12">
+                <p class="km-h6 mb-0">立春×迎新啟運日</p>
+                <time datetime="2025-02-04">2025/02/04</time>
+              </div>
+            </li>
+            <li class="article-nav-item px-12 mb-4" data-id="3" type="button">
+              <div class="border-in py-12">
+                <p class="km-h6 mb-0">春分 × 陽平陰長之時</p>
+                <time datetime="2025-03-20">2025/03/20</time>
+              </div>
+            </li>
+            <li class="article-nav-item px-12 mb-4" data-id="4" type="button">
+              <div class="border-in py-12">
+                <p class="km-h6 mb-0">立夏×財運萌芽日</p>
+                <time datetime="2025-05-05">2025/05/05</time>
+              </div>
+            </li>
+            <li class="article-nav-item px-12 mb-4" data-id="5" type="button">
+              <div class="border-in py-12">
+                <p class="km-h6 mb-0">夏至×陽極盛吉日</p>
+                <time datetime="2025-06-21">2025/06/21</time>
+              </div>
+            </li>
+            <li class="article-nav-item px-12 mb-4" data-id="6" type="button">
+              <div class="border-in py-12">
+                <p class="km-h6 mb-0">秋分×收斂聚財時</p>
+                <time datetime="2025-09-23">2025/09/23</time>
+              </div>
+            </li>
+            <li class="article-nav-item px-12 mb-4" data-id="7" type="button">
+              <div class="border-in py-12">
+                <p class="km-h6 mb-0">冬至×藏鋒養勢日</p>
+                <time datetime="2025-12-21">2025/12/21</time>
+              </div>
+            </li>
+          </ul>
+
+          <div class="article-content px-3 py-4 px-md-160 py-md-80 lh-lg col">
+            <div class="row d-flex flex-nowrap align-items-center"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <%- include("./layout/footer") %>
+
+    <script
+      src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js"
+      type="module"
+    ></script>
+    <script type="module" src="../main.js"></script>
+    <script type="module" src="../assets/js/solarTermsData.js"></script>
+    <script type="module" src="../assets/js/article.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1000,
+        once: false, // 改為 false，讓動畫可以重複觸發
+        offset: 100,
+        mirror: true, // 加入這個屬性，讓元素離開視窗時也有動畫
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>農曆日曆範例</title>
+    <!-- FullCalendar CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* 自訂顏色 */
+        --black-800: #262626;
+        --dark-red: #c24747;
+        --steel-blue: #4786c2;
+        --medium-gray: #a3a3a3;
+        --dark-beige-10: #8668541a;
+        --dark-beige-30: #86685433;
+        --dark-beige-40: #8668544d;
+
+        --fc-page-bg-color: #ffffb2; /* 設定全局背景色 */
+
+        --fc-today-bg-color: #8666541a; /* 設定今天背景色 */
+
+        /* --fc-button-text-color: #fff; */
+        --fc-button-text-color: #262626; /* button 文字顏色 */
+        /* --fc-button-bg-color: #2c3e50; */
+        --fc-button-bg-color: var(--dark-beige-10); /* button 背景色*/
+        /* --fc-button-hover-bg-color: #1e2b37; */
+        --fc-button-hover-bg-color: var(--dark-beige-30);
+        /* --fc-button-active-bg-color: #1a252f; */
+        --fc-button-active-bg-color: var(--dark-beige-40);
+      }
+
+      body {
+        font-family: "Microsoft JhengHei", Arial, sans-serif;
+        margin: 20px;
+      }
+
+      .fc-daygrid-day {
+        background-color: var(--fc-page-bg-color); /* 設定日期格子的背景色 */
+      }
+
+      /* 自訂日曆大小 */
+      .calendar {
+        max-width: 526px;
+        margin: 0 auto;
+        padding: 36px;
+      }
+
+      /* 星期樣式 */
+      .fc-scrollgrid-sync-inner {
+        font-size: 0.875rem;
+      }
+      .fc .fc-col-header-cell-cushion {
+        padding: 16px 0;
+        margin-bottom: 8px;
+      }
+
+      /* 自訂日曆格子樣式 */
+      .fc .fc-daygrid-day-number {
+        padding: 12px 0 0 0;
+        margin-bottom: 8px;
+      }
+
+      /* 自訂日曆數字樣式 */
+      .fc-daygrid-day-number {
+        font-size: 1rem;
+        font-weight: 700;
+        margin: 0 auto;
+        color: var(--black-800);
+      }
+
+      /* 農民曆文字樣式、位置 */
+      .lunar-text,
+      .jieqi-text {
+        font-size: 0.75rem; /* 調整字體大小 */
+        color: var(--black-800); /*調整顏色*/
+        font-weight: 700; /* 加粗 */
+        position: absolute; /* 絕對定位 */
+        top: 36px; /* 距離格子底部 16px */
+        left: 50%; /* 水平居中 */
+        transform: translateX(-50%); /* 調整位置使其居中 */
+      }
+
+      .fc-scrollgrid-sync-inner .fc-col-header-cell-cushion {
+        color: var(--black-800);
+      }
+
+      /* 星期日樣式 */
+      .fc-day.fc-day-sun .fc-daygrid-day-number,
+      .fc-day.fc-day-sun > .lunar-text,
+      .fc-day.fc-day-sun > .jieqi-text {
+        color: var(--dark-red);
+      }
+      /* 星期六樣式 */
+      .fc-day.fc-day-sat .fc-daygrid-day-number,
+      .fc-day.fc-day-sat > .lunar-text,
+      .fc-day.fc-day-sat > .jieqi-text {
+        color: var(--steel-blue);
+      }
+
+      /* 過去日期樣式 */
+      .fc .fc-day-past .fc-daygrid-day-number,
+      .fc .fc-daygrid-day.fc-day-past > .lunar-text {
+        color: var(--medium-gray);
+      }
+
+      .fc .fc-daygrid-body-natural .fc-daygrid-day-events {
+        margin: 0;
+      }
+
+      .fc-theme-standard td,
+      .fc-theme-standard th {
+        border: none;
+      }
+
+      /* 頁腳設定 */
+      .fc .fc-toolbar.fc-footer-toolbar {
+        margin-top: 8px;
+        padding: 16px 0;
+      }
+
+      .fc .fc-button {
+        width: 98px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        font-size: 0.75rem;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 style="text-align: center">西曆 + 農曆 + 節氣 日曆</h2>
+    <div class="calendar" id="calendar"></div>
+
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <!-- lunar-javascript JS -->
+    <script src="https://cdn.jsdelivr.net/npm/lunar-javascript/lunar.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var calendarEl = document.getElementById("calendar");
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: "dayGridMonth",
+          locale: "zh-tw",
+          firstDay: 0, // 星期日為第一天
+          dayHeaders: true, // 顯示星期標題
+          dayHeaderContent: function (arg) {
+            const days = [
+              "星期日",
+              "星期一",
+              "星期二",
+              "星期三",
+              "星期四",
+              "星期五",
+              "星期六",
+            ];
+            return days[arg.date.getDay()];
+          },
+          headerToolbar: false, // 隱藏標題工具列
+          aspectRatio: 1.355, // 設定日曆寬高比
+          height: "auto", // 自動高度
+          footerToolbar: {
+            left: "prev",
+            center: "today",
+            right: "next",
+          },
+          buttonText: {
+            today: "今天",
+            prev: "上一月",
+            next: "下一月",
+          },
+          dayCellContent: function (arg) {
+            return { html: `<span>${arg.date.getDate()}</span>` }; // 只顯示日期數字
+          },
+          dayCellDidMount: function (info) {
+            let date = info.date;
+            let lunar = Lunar.fromDate(date);
+
+            // 設置父元素的相對定位
+            info.el.style.position = "relative";
+
+            // 農曆日期
+            let lunarText = lunar.getDayInChinese();
+            if (lunar.getDay() === 1) {
+              lunarText = lunar.getMonthInChinese() + "月";
+            }
+
+            // 節氣
+            let jieqi = lunar.getJieQi();
+
+            // 創建顯示元素
+            let lunarEl = document.createElement("div");
+            lunarEl.className = jieqi ? "jieqi-text" : "lunar-text";
+            lunarEl.innerText = jieqi || lunarText;
+
+            // 添加到日期格子
+            info.el.appendChild(lunarEl);
+          },
+        });
+
+        calendar.render();
+      });
+    </script>
+  </body>
+</html>

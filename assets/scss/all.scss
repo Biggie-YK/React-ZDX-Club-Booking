@@ -1,0 +1,18 @@
+// Google 字體 Serif TC
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap");
+
+@import "../../node_modules/bootstrap/scss/functions";
+@import "./utils/variables";
+@import "../../node_modules/bootstrap";
+
+@import "./utils/utilities";
+@import "bootstrap/scss/utilities/api";
+
+@import "./layout/nav.scss";
+@import "./layout/footer.scss";
+
+@import "./pages/index.scss";
+@import "./pages/knowledge.scss";
+@import "./pages/about.scss";
+@import "./pages/appointment-management.scss";
+@import "./pages/reserve.scss";

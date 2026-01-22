@@ -1,0 +1,225 @@
+body {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+img {
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+}
+.pt-33 {
+  padding-top: 33px;
+}
+.pb-96 {
+  padding-bottom: 96px;
+}
+.py-55 {
+  padding-top: 55px;
+  padding-bottom: 55px;
+}
+
+.reserve-text {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 24px;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 5%;
+    bottom: 0;
+    width: 60%;
+    height: 1px;
+    background-color: $primary-500;
+  }
+}
+p {
+  margin-bottom: 0;
+}
+.outside-border {
+  border-top: 4px solid $primary-500;
+  border-bottom: 4px solid $primary-500;
+  padding: 12px 0;
+}
+.inside-border {
+  border-top: 1px solid $primary-500;
+  border-bottom: 1px solid $primary-500;
+  padding: 72px 0;
+}
+input.form-control,
+select.form-control {
+  padding: 14px 16px; /* 控制高度 */
+}
+
+textarea.form-control {
+  padding: 22px 16px; /* 留言框保持原樣 */
+}
+input[type="radio"] {
+  display: none;
+}
+.card-option {
+  border: 1px solid $black-400;
+  border-radius: 10px;
+  padding: 16px;
+  transition: 0.3s;
+  cursor: pointer;
+  position: relative;
+  width: 100%; /*  讓它自動填滿 col 寬度 */
+  height: 100%; /*  在 col 內撐滿高度 */
+}
+input[type="radio"]:checked + label.card-option {
+  background-color: #eee7dd;
+  border-color: #a7927c;
+}
+.bi-radio-icon {
+  font-size: 20px;
+  color: #6d5844;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 預設未選中圖示 */
+.card-option .icon-unchecked {
+  display: inline;
+}
+
+.card-option .icon-checked {
+  display: none;
+}
+#date.form-control {
+  padding: 14px 16px;
+}
+/* 選中後切換 icon 顯示 */
+input[type="radio"]:checked + label .icon-unchecked {
+  display: none;
+}
+input[type="radio"]:checked + label .icon-checked {
+  display: inline;
+}
+
+.service-img {
+  width: 120px;
+  height: auto;
+  border-radius: 6px;
+}
+
+.service-info .title {
+  font-weight: bold;
+  font-size: 18px;
+  color: #3a2f28;
+}
+
+.service-info .price {
+  color: #905b33;
+  font-size: 16px;
+}
+
+label.card-option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.radio-icon-wrapper {
+  width: 24px;
+  height: 24px;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  img {
+    width: 160px;
+    height: auto;
+  }
+}
+.text-danger {
+  color: red;
+}
+.form-control {
+  background-color: $background-beige;
+  border: 1px solid #888888;
+  border-radius: 4px;
+  padding: 22px 16px;
+}
+input[type="date"] {
+  cursor: pointer;
+
+  // 關鍵：讓整個 input 都可以點擊
+  &::-webkit-calendar-picker-indicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; // 透明但保持可點擊
+    cursor: pointer;
+  }
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+.btn-modals {
+  color: $primary-500;
+  background-color: $background-beige;
+  border: none;
+  padding: 0 4px;
+  text-decoration: underline;
+}
+.btn-outside {
+  padding: 0 6px;
+  border-width: 1px 4px;
+}
+.btn-inside {
+  display: block;
+  width: 100%;
+  padding: 16px 85px;
+  font-size: 20px;
+  border-left: 1px solid $black-950;
+  border-right: 1px solid $black-950;
+}
+.send-btn-bg {
+  background-color: $primary;
+  color: $black-50;
+}
+.list-style {
+  list-style: disc;
+  margin-left: 60px;
+  &::marker {
+    color: $primary;
+  }
+}
+.image-bg {
+  position: relative;
+  // 手機版背景色和內距
+  background-color: rgba($primary, 0.1);
+  border-radius: 8px;
+  @media (min-width: 768px) {
+    background-color: $background-beige;
+  }
+}
+
+.list-bg {
+  // 桌機版才顯示，用絕對定位
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 10%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.image-bg .content {
+  position: relative;
+  // 桌機版才用絕對定位
+  @media (min-width: 768px) {
+    top: 0;
+    left: 0;
+  }
+}

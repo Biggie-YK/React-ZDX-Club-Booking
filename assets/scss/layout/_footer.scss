@@ -1,0 +1,52 @@
+.footer {
+  &-item {
+    width: 23.61111%;
+  }
+  &-center {
+    width: 31.94444%;
+  }
+  &-icon {
+    width: 40px;
+    height: 40px;
+    border: rgb(135, 103, 85, 0.4) solid;
+  }
+  &-deco {
+    width: 12px;
+    &-mb {
+      height: 12px;
+    }
+  }
+  &-border-up-1 {
+    width: 31.94444%;
+    border-width: 0.5px !important;
+    height: 1px;
+  }
+  &-border-up-2 {
+    width: 36.88271%;
+    border-width: 0.5px !important;
+    height: 1px;
+  }
+  &-logo {
+    width: 32.09876%;
+  }
+
+  .ic-mail {
+    width: 24px;
+    object-fit: cover;
+    height: 24px;
+  }
+  .input-email::placeholder {
+    color: $primary;
+    opacity: 50%;
+  }
+}
+@media (max-width: 768px) {
+  .footer {
+    &-item {
+      width: 100%;
+    }
+    &-center {
+    width: 100%;
+  }
+  }
+}
