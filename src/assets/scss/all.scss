@@ -1,9 +1,10 @@
 // Google 字體 Serif TC
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap");
 
-@import "../../node_modules/bootstrap/scss/functions";
+// @import "../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/functions";
 @import "./utils/variables";
-@import "../../node_modules/bootstrap";
+@import "../../../node_modules/bootstrap";
 
 @import "./utils/utilities";
 @import "bootstrap/scss/utilities/api";
