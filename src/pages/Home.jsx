@@ -1,10 +1,38 @@
+import { Carousel } from "bootstrap";
+import { useEffect, useRef, useState } from "react";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 export default function Home() {
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const carouselRef = useRef(null);
+
+  const QAcontent = [
+    {
+      ask: "不想註冊帳號，可以直接預約嗎？",
+      ans: "可以的！我們提供「Email預約」功能，只需填寫基本資料與信箱，即可完成預約並收到確認信。建議留意信件並點擊確認連結，預約才會成立喔！",
+    },
+    {
+      ask: "沒有收到預約確認信怎麼辦？",
+      ans: "請先檢查垃圾郵件或廣告信件匣。若仍未收到，可能是信箱填寫錯誤，建議重新預約或聯繫我們的客服信箱協助處理。",
+    },
+    {
+      ask: "預約後可以修改時間或更換命理師嗎？",
+      ans: "可以。 請於預約時間24小時前透過會員中心或聯絡我們，提出修改需求，我們將協助重新安排。",
+    },
+  ];
+  const [collapseOpen, setCollapseOpen] = useState([true, true, true]);
+
+  useEffect(() => {
+    const carousel = new Carousel(carouselRef.current);
+    carouselRef.current.addEventListener("slid.bs.carousel", (e) => {
+      setCarouselIndex(e.to);
+    });
+  }, []);
+
   return (
     <>
-      {/* <body style="background-image: url(../assets/images/index/nav-bg.png);"> */}
-
-      {/* <%- include("./layout/nav",{login:false}) %> */}
-
       <header
         className="header py-md-160 py-80 position-relative "
         style={{ backgroundImage: "url(../assets/images/index/header.png)" }}
@@ -15,6 +43,7 @@ export default function Home() {
           style={{width: "100%",height: "100%",top:"0"}}
           autoplay
         ></dotlottie-wc> */}
+
         <div
           className="filter position-absolute top-0 start-0 end-0 bottom-0
             "
@@ -60,15 +89,21 @@ export default function Home() {
             </div>
 
             <ul className="my-indicators list-unstyled mb-0 d-md-flex d-none align-items-end ">
-              <li>
-                <div className="my-indicator service-item w-120 me-12 "></div>
-              </li>
-              <li>
-                <div className="my-indicator service-item w-120 me-12"></div>
-              </li>
-              <li>
-                <div className="my-indicator service-item w-120 "></div>
-              </li>
+              {[
+                ...Array(3)
+                  .keys()
+                  .map((_, i) => {
+                    return (
+                      <li key={i}>
+                        <div
+                          className={`my-indicator service-item w-120 me-12
+                          ${carouselIndex === i ? "border-dark" : ""}
+                          `}
+                        ></div>
+                      </li>
+                    );
+                  }),
+              ]}
             </ul>
           </div>
 
@@ -76,6 +111,7 @@ export default function Home() {
             id="service-carousel"
             className="carousel slide mb-4 mb-md-0"
             data-bs-ride="carousel"
+            ref={carouselRef}
           >
             <div className="carousel-inner">
               <div
@@ -186,128 +222,118 @@ export default function Home() {
             <p className="mb-0">來自四面八方的肯定，是我們前進的動力</p>
           </div>
 
-          <div className="swiper mySwiper d-none d-md-block" navigation="true">
-            {/* <!-- Additional required wrapper --> */}
-            <div className="swiper-wrapper  ">
-              {/* <!-- Slides --> */}
-              <div className="swiper-slide">
-                <div className="card bg-transparent border-0">
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={16}
+            slidesPerView={1}
+            breakpoints={{
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 24,
+              },
+            }}
+            navigation
+          >
+            <SwiperSlide>
+              <div className="card bg-transparent border-0">
+                <img
+                  src="../assets/images/index/comment-4.png"
+                  alt="women take coffee"
+                />
+                <div className="pt-4 text-center">
                   <img
-                    src="../assets/images/index/comment-4.png"
-                    alt="women take coffee"
+                    className="mb-4"
+                    src="../assets/images/index/star4.png"
+                    alt="4-stars"
                   />
-                  <div className="pt-4 text-center">
-                    <img
-                      className="mb-4"
-                      src="../assets/images/index/star4.png"
-                      alt="4-stars"
-                    />
-                    <div className="card-title fw-bold mb-4">
-                      芷涵(新婚人妻，27歲)
-                    </div>
-                    <p className="mb-4 mb-md-0 fs-7 fs-md-6 ">
-                      幫我和另一半擇日登記結婚的服務超貼心
-                      <br />
-                      ，老師不只提供好日子，還附上注意事項
-                      <br />
-                      與祝福話語，感覺特別溫暖。
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="swiper-slide">
-                <div className="card bg-transparent border-0">
-                  <img
-                    src="../assets/images/index/comment-1.png"
-                    alt="women take coffee"
-                  />
-                  <div className="pt-4 text-center">
-                    <img
-                      className="mb-4"
-                      src="../assets/images/index/star4.png"
-                      alt="4-stars"
-                    />
-                    <div className="card-title fw-bold mb-4">
-                      Ken(設計師，33歲)
-                    </div>
-                    <p className="mb-4 mb-md-0 fs-7 fs-md-6 ">
-                      第一次接觸紫微命盤，本來只是好奇，沒
-                      <br />
-                      想到看完解析後對自己的個性和人際盲點
-                      <br />
-                      突然豁然開朗，真的蠻有幫助！
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="swiper-slide">
-                <div className="card bg-transparent border-0 ">
-                  <img
-                    src="../assets/images/index/comment-2.png"
-                    alt="women take coffee"
-                  />
-                  <div className="pt-4 text-center">
-                    <img
-                      className="mb-4"
-                      src="../assets/images/index/full-stars.png"
-                      alt="4-stars"
-                    />
-                    <div className="card-title fw-bold mb-4">
-                      芷涵(新婚人妻，27歲)
-                    </div>
-                    <p className="mb-4 mb-md-0 fs-7 fs-md-6 ">
-                      幫我和另一半擇日登記結婚的服務超貼心
-                      <br />
-                      ，老師不只提供好日子，還附上注意事項
-                      <br />
-                      與祝福話語，感覺特別溫暖。
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="swiper-slide">
-                <div className="card bg-transparent border-0">
-                  <img
-                    src="../assets/images/index/comment-3.png"
-                    alt="women take coffee"
-                  />
-                  <div className="pt-4 text-center">
-                    <img
-                      className="mb-4"
-                      src="../assets/images/index/full-stars.png"
-                      alt="4-stars"
-                    />
-                    <div className="card-title fw-bold mb-4" />
-                    Eric(科技業，35歲)
+                  <div className="card-title fw-bold mb-4">
+                    芷涵(新婚人妻，27歲)
                   </div>
                   <p className="mb-4 mb-md-0 fs-7 fs-md-6 ">
-                    命理服務完全不像我以前想像的老派，介
+                    幫我和另一半擇日登記結婚的服務超貼心
                     <br />
-                    面乾淨簡單，說明也清楚易懂，非常適合
+                    ，老師不只提供好日子，還附上注意事項
                     <br />
-                    現代人使用！
+                    與祝福話語，感覺特別溫暖。
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* <!-- If we need navigation buttons --> */}
-        </div>
-        <div
-          className="swiper-button-prev opacity-100 position-absolute
-        d-none d-md-flex  justify-content-center align-items-center"
-        >
-          <img
-            src="../assets/images/index/angle-small-left.png"
-            alt="angle-small-left"
-          />
-        </div>
-        <div className="swiper-button-next opacity-100 position-absolute d-none d-md-flex  justify-content-center align-items-center   ">
-          <img
-            src="../assets/images/index/angle-small-right.png"
-            alt="angle-small-right"
-          />
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="card bg-transparent border-0">
+                <img
+                  src="../assets/images/index/comment-1.png"
+                  alt="women take coffee"
+                />
+                <div className="pt-4 text-center">
+                  <img
+                    className="mb-4"
+                    src="../assets/images/index/star4.png"
+                    alt="4-stars"
+                  />
+                  <div className="card-title fw-bold mb-4">
+                    Ken(設計師，33歲)
+                  </div>
+                  <p className="mb-4 mb-md-0 fs-7 fs-md-6 ">
+                    第一次接觸紫微命盤，本來只是好奇，沒
+                    <br />
+                    想到看完解析後對自己的個性和人際盲點
+                    <br />
+                    突然豁然開朗，真的蠻有幫助！
+                  </p>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="card bg-transparent border-0 ">
+                <img
+                  src="../assets/images/index/comment-2.png"
+                  alt="women take coffee"
+                />
+                <div className="pt-4 text-center">
+                  <img
+                    className="mb-4"
+                    src="../assets/images/index/full-stars.png"
+                    alt="4-stars"
+                  />
+                  <div className="card-title fw-bold mb-4">
+                    芷涵(新婚人妻，27歲)
+                  </div>
+                  <p className="mb-4 mb-md-0 fs-7 fs-md-6 ">
+                    幫我和另一半擇日登記結婚的服務超貼心
+                    <br />
+                    ，老師不只提供好日子，還附上注意事項
+                    <br />
+                    與祝福話語，感覺特別溫暖。
+                  </p>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="card bg-transparent border-0">
+                <img
+                  src="../assets/images/index/comment-3.png"
+                  alt="women take coffee"
+                />
+                <div className="pt-4 text-center">
+                  <img
+                    className="mb-4"
+                    src="../assets/images/index/full-stars.png"
+                    alt="4-stars"
+                  />
+                  <div className="card-title fw-bold mb-4" />
+                  Eric(科技業，35歲)
+                </div>
+                <p className="mb-4 mb-md-0 fs-7 fs-md-6 ">
+                  命理服務完全不像我以前想像的老派，介
+                  <br />
+                  面乾淨簡單，說明也清楚易懂，非常適合
+                  <br />
+                  現代人使用！
+                </p>
+              </div>
+            </SwiperSlide>
+          </Swiper>
         </div>
 
         <div
@@ -744,147 +770,59 @@ export default function Home() {
 
           <div className="QA-content">
             <ul className="list-unstyled">
-              <li>
-                <div className="py-md-48 py-4 border-bottom border-black-300">
-                  <div className="d-flex justify-content-between mb-md-36 mb-4">
-                    <div className="d-flex align-items-center">
-                      <img
-                        className="Q-icon me-md-4 me-3"
-                        src="../assets/images/index/Q-icon.png"
-                        alt="Q-icon"
-                      />
-                      <p className="mb-0">不想註冊帳號，可以直接預約嗎？</p>
-                    </div>
-                    <button
-                      type="button"
-                      className="border-0 bg-transparent"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#QA1"
-                      aria-expanded="true"
-                      aria-controls="QA1"
-                    >
-                      <img
-                        src="../assets/images/index/btn-social.png"
-                        alt="btn-close"
-                      />
-                    </button>
-                  </div>
-                  <div
-                    id="QA1"
-                    className="accordion-collapse collapse show"
-                    aria-labelledby="headingOne"
-                    data-bs-parent="#accordionExample"
-                  >
-                    <div className="d-flex">
-                      <img
-                        className="A-icon me-md-4 me-3"
-                        src="../assets/images/index/A-icon.png"
-                        alt="A-icon"
-                      />
-                      <p className="mb-0">
-                        可以的！
-                        <br />
-                        我們提供「Email
-                        預約」功能，只需填寫基本資料與信箱，即可完成預約並收到確認信。建議留意信件並點擊確認連結，預約才會成立喔！
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="py-md-48 py-4 border-bottom border-black-300">
-                  <div className="d-flex justify-content-between mb-md-36 mb-4">
-                    <div className="d-flex align-items-center">
-                      <img
-                        className="Q-icon me-md-4 me-3"
-                        src="../assets/images/index/Q-icon.png"
-                        alt="Q-icon"
-                      />
-                      <p className="mb-0">沒有收到預約確認信怎麼辦？</p>
-                    </div>
-                    <button
-                      type="button"
-                      className="border-0 bg-transparent"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#QA2"
-                      aria-expanded="true"
-                      aria-controls="QA2"
-                    >
-                      <img
-                        src="../assets/images/index/btn-social.png"
-                        alt="btn-close"
-                      />
-                    </button>
-                  </div>
-                  <div
-                    id="QA2"
-                    className="accordion-collapse collapse show"
-                    aria-labelledby="headingOne"
-                    data-bs-parent="#accordionExample"
-                  >
-                    <div className="d-flex">
-                      <img
-                        className="A-icon me-md-4 me-3"
-                        src="../assets/images/index/A-icon.png"
-                        alt="A-icon"
-                      />
-                      <p className="mb-0">
-                        請先檢查垃圾郵件或廣告信件匣。
-                        <br />
-                        若仍未收到，可能是信箱填寫錯誤，
-                        建議重新預約或聯繫我們的客服信箱協助處理。
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="py-md-48 py-4 border-bottom border-black-300">
-                  <div className="d-flex justify-content-between mb-md-36 mb-4">
-                    <div className="d-flex align-items-center">
-                      <img
-                        className="Q-icon me-md-4 me-3"
-                        src="../assets/images/index/Q-icon.png"
-                        alt="Q-icon"
-                      />
-                      <p className="mb-0">預約後可以修改時間或更換命理師嗎？</p>
-                    </div>
-                    <button
-                      type="button"
-                      className="border-0 bg-transparent"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#QA3"
-                      aria-expanded="true"
-                      aria-controls="QA3"
-                    >
-                      <img
-                        src="../assets/images/index/btn-social.png"
-                        alt="btn-close"
-                      />
-                    </button>
-                  </div>
-                  <div
-                    id="QA3"
-                    className="accordion-collapse collapse show"
-                    aria-labelledby="headingOne"
-                    data-bs-parent="#accordionExample"
-                  >
-                    <div className="d-flex">
-                      <img
-                        className="A-icon me-md-4 me-3"
-                        src="../assets/images/index/A-icon.png"
-                        alt="A-icon"
-                      />
-                      <p className="mb-0">
-                        可以。
-                        <br />
-                        請於預約時間24小時前透過會員中心或聯絡我們，
-                        提出修改需求，我們將協助重新安排。
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </li>
+              {[
+                QAcontent.map((item, index) => {
+                  return (
+                    <li key={index}>
+                      <div className="py-md-48 py-4 border-bottom border-black-300">
+                        <div className="d-flex justify-content-between mb-md-36 mb-4">
+                          <div className="d-flex align-items-center">
+                            <img
+                              className="Q-icon me-md-4 me-3"
+                              src="../assets/images/index/Q-icon.png"
+                              alt="Q-icon"
+                            />
+                            <p className="mb-0">{item.ask}</p>
+                          </div>
+                          <button
+                            type="button"
+                            className="border-0 bg-transparent"
+                            data-bs-toggle="collapse"
+                          >
+                            <img
+                              src="../assets/images/index/btn-social.png"
+                              alt="btn-close"
+                              onClick={() => {
+                                console.log("test");
+                                
+                                setCollapseOpen((prev) =>
+                                  prev.map((item, i) => {
+                                    return i === index ? !item : item;
+                                  }),
+                                );
+                              }}
+                            />
+                          </button>
+                        </div>
+                        <div
+                          id="QA1"
+                          className={`accordion-collapse collapse ${collapseOpen[index] ? "show" : ""}`}
+                          aria-labelledby="headingOne"
+                        >
+                          <div className="d-flex">
+                            <img
+                              className="A-icon me-md-4 me-3"
+                              src="../assets/images/index/A-icon.png"
+                              alt="A-icon"
+                            />
+                            <p className="mb-0">{item.ans}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                }),
+              ]}
             </ul>
           </div>
         </div>
@@ -895,53 +833,7 @@ export default function Home() {
       {/* 
 
       <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js" type="module"></script>
-      <script>
-        const serviceCarousel = document.getElementById('service-carousel');
-        const serviceIndicators = document.querySelectorAll('.service-item');
-
-        [0, 3].forEach(i => serviceIndicators[i].classList.add('border-dark'));
-        //初始化 
-        serviceCarousel.addEventListener('slide.bs.carousel', function (e) {
-          serviceIndicators.forEach(el => el.classList.remove("border-dark"));
-          [e.to, e.to + 3].forEach(i => serviceIndicators[i].classList.add('border-dark'));
-        })
-      </script>
-      <!-- <script>
-        const commentCarousel = document.getElementById('comment-carousel');
-        const commentIndicators = document.querySelectorAll('.comment-item');
-        commentIndicators[0].classList.add('border-dark');//初始化
-        commentCarousel.addEventListener('slide.bs.carousel', function (e) {
-          commentIndicators.forEach(el => el.classList.remove('border-dark'));
-          commentIndicators[e.to].classList.add('border-dark');
-        })
-
-      </script> -->
-
-
-      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-      <script>
-        const swiper = new Swiper(".mySwiper", {
-          slidesPerView: 1,
-          spaceBetween: 16,
-          // (手機板排版設定),
-          breakpoints: {
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 24,
-            }
-            // (RWD設定部分)
-          },
-
-          // Navigation arrows
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-
-        });
-      </script>
-      <script type="module" src="../main.js"></script> */}
+       */}
     </>
   );
 }

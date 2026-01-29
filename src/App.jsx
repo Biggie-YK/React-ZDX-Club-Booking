@@ -5,21 +5,31 @@ import AppointmentManagement from "./pages/AppointmentManagement";
 import Knowledge from "./pages/Knowledge";
 import Reserve from "./pages/Reserve";
 import Nav from "./layout/Nav";
+import Footer from "./layout/Footer";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 function App() {
   return (
     <>
-      <Nav />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route
-          path="/appointment-management"
-          element={<AppointmentManagement />}
-        ></Route>
-        <Route path="/knowledge" element={<Knowledge />}></Route>
-        <Route path="/reserve" element={<Reserve />}></Route>
-      </Routes>
+      <div
+        style={{ backgroundImage: "url(../assets/images/index/nav-bg.png)" }}
+      >
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route
+            path="/appointment-management"
+            element={<AppointmentManagement />}
+          ></Route>
+          <Route path="/knowledge" element={<Knowledge />}></Route>
+          <Route path="/reserve" element={<Reserve />}></Route>
+        </Routes>
+        <Footer />
+      </div>
     </>
   );
 }
