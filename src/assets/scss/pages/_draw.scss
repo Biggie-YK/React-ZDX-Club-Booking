@@ -1,0 +1,38 @@
+.draw{
+  &-hint{
+    top: 56px;
+    right: 41px;
+    width: 41px;
+  }
+  .sign-tube-img{
+    margin-top: 120px;
+    margin-bottom: 48px;
+  }
+  &-btn{
+    width: 70.509%;
+    &-img{
+      width: 300px;
+      height: 300px;
+      transform: scaleX(-1);
+    }
+    &-box{
+      width: 44px;
+      top: 15px;
+      right: 100px;
+    }
+  }
+}
+.intro{
+  &-jp{
+    width: 57.561%;
+    padding-left: 36px;
+    &-img{
+      width: 454px;
+      height: 300px;
+    }
+    &-text{
+      width: 454px;
+      letter-spacing: 0.2rem;
+    }
+  }
+}

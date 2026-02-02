@@ -6,6 +6,7 @@ import Knowledge from "./pages/Knowledge";
 import Reserve from "./pages/Reserve";
 import Nav from "./layout/Nav";
 import Footer from "./layout/Footer";
+import Draw from "./pages/Draw";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -27,6 +28,7 @@ function App() {
           ></Route>
           <Route path="/knowledge" element={<Knowledge />}></Route>
           <Route path="/reserve" element={<Reserve />}></Route>
+          <Route path="/draw" element={<Draw />}></Route>
         </Routes>
         <Footer />
       </div>
