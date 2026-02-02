@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import FarmerCalender from "../components/FarmerCalender";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export default function Home() {
   const [carouselIndex, setCarouselIndex] = useState(0);
@@ -34,16 +36,15 @@ export default function Home() {
   return (
     <>
       <header
-        className="header py-md-160 py-80 position-relative "
+        className="header  py-md-160 py-80  position-relative "
+        //
         style={{ backgroundImage: "url(../assets/images/index/header.png)" }}
       >
-        {/* <dotlottie-wc
-          className="position-absolute "
+        <DotLottieReact
           src="https://lottie.host/08657889-c1e5-4d0b-8844-c01b6a963497/cPEKyYNdRW.lottie"
-          style={{width: "100%",height: "100%",top:"0"}}
           autoplay
-        ></dotlottie-wc> */}
-
+          className="position-absolute w-100 h-100 top-0"
+        />
         <div
           className="filter position-absolute top-0 start-0 end-0 bottom-0
             "
@@ -445,7 +446,7 @@ export default function Home() {
           </div>
         </div>
 
-        <ul className="my-indicators list-unstyled mb-0 d-flex d-md-none  align-items-end row ">
+        <ul className="my-indicators list-unstyled mb-0 d-flex d-md-none  align-items-end row w-100">
           <li className="col">
             <div className="my-indicator  comment-item "></div>
           </li>
@@ -642,7 +643,7 @@ export default function Home() {
               </h2>
               <p className="mb-0">掌握節氣脈動。每日行事宜忌一覧</p>
             </div>
-            {/* <%- include('./layout/calendar') %> */}
+            <FarmerCalender />
           </div>
           <div className="flex-fill">
             <div className="solar-term py-md-64 p-4 position-relative  mb-4">
@@ -794,7 +795,7 @@ export default function Home() {
                               alt="btn-close"
                               onClick={() => {
                                 console.log("test");
-                                
+
                                 setCollapseOpen((prev) =>
                                   prev.map((item, i) => {
                                     return i === index ? !item : item;
@@ -827,13 +828,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* <%- include("./layout/footer") %> */}
-
-      {/* 
-
-      <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js" type="module"></script>
-       */}
     </>
   );
 }
