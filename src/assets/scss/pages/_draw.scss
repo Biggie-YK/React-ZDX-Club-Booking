@@ -1,38 +1,117 @@
-.draw{
-  &-hint{
+.draw {
+  &-hint {
     top: 56px;
     right: 41px;
     width: 41px;
   }
-  .sign-tube-img{
+  .sign-tube-img {
     margin-top: 120px;
     margin-bottom: 48px;
   }
-  &-btn{
+  &-btn {
+    cursor: pointer;
     width: 70.509%;
-    &-img{
+    &-img {
       width: 300px;
       height: 300px;
       transform: scaleX(-1);
     }
-    &-box{
+    &-box {
       width: 44px;
       top: 15px;
       right: 100px;
     }
   }
 }
-.intro{
-  &-jp{
+.intro {
+  padding-top: 80px;
+  padding-bottom: 160px;
+  &-jp {
     width: 57.561%;
     padding-left: 36px;
-    &-img{
+    padding-bottom: 48px;
+    &-img {
       width: 454px;
       height: 300px;
     }
-    &-text{
+    &-text {
       width: 454px;
       letter-spacing: 0.2rem;
     }
   }
+  &-title {
+    font-size: 96px;
+    margin-top: 120px;
+    width: 86px;
+    line-height: 120%;
+  }
+  &-tw {
+    width: 57.561%;
+    top: 152px;
+    right: 36px;
+  }
+}
+
+.notice {
+  &-img {
+    width: 526px;
+    height: 530px;
+  }
+  .notice-hints {
+    &-words {
+      letter-spacing: 0.2rem;
+    }
+  }
+}
+.draw-modal{
+  box-shadow: none !important;
+  .modal-content{
+    padding-bottom: 88px;
+    border-radius: 48px;
+
+  }
+  &-yes-img{
+    width: 584px ;
+    margin-top: 8px;
+    margin-left: 160px;
+  }
+  &-title{
+    font-size: 120px;
+    right: 151px;
+    bottom: 149px;
+  }
+  &-close{
+    width: 48px;
+    height: 48px;
+    margin-top: 48px;
+    margin-left: 140px;
+  }
+  .pick-explain{
+    font-size: 20px;
+    letter-spacing: 0.2rem;
+    line-height: 1.5;
+  }
+  &-again{
+    &-btn{
+      width: 196px;
+      cursor: pointer;
+    }
+    &-img{
+      width: 120px;
+      height: 120px;
+      margin-top: 16px;
+      margin-left: 38px;
+    }
+  }
+  
+}
+
+.rotate-180 {
+  transform: scaleX(-1);
+}
+.vertical-text {
+  writing-mode: vertical-rl; /* 由右到左直排 */
+}
+.fs-20{
+  font-size: 20px;
 }

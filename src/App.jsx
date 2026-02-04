@@ -7,6 +7,7 @@ import Reserve from "./pages/Reserve";
 import Nav from "./layout/Nav";
 import Footer from "./layout/Footer";
 import Draw from "./pages/Draw";
+import OtherPicks from "./pages/OtherPicks";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/knowledge" element={<Knowledge />}></Route>
           <Route path="/reserve" element={<Reserve />}></Route>
           <Route path="/draw" element={<Draw />}></Route>
+          <Route path="/other-picks" element={<OtherPicks />}></Route>
         </Routes>
         <Footer />
       </div>

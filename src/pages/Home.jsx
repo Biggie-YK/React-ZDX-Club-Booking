@@ -794,8 +794,6 @@ export default function Home() {
                               src="../assets/images/index/btn-social.png"
                               alt="btn-close"
                               onClick={() => {
-                                console.log("test");
-
                                 setCollapseOpen((prev) =>
                                   prev.map((item, i) => {
                                     return i === index ? !item : item;
