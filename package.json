@@ -15,6 +15,7 @@
         "@fullcalendar/daygrid": "^6.1.20",
         "@fullcalendar/react": "^6.1.20",
         "@lottiefiles/dotlottie-react": "^0.17.13",
+        "aos": "^2.3.4",
         "bootstrap": "^5.3.8",
         "gh-pages": "^6.3.0",
         "lottie-react": "^2.4.1",

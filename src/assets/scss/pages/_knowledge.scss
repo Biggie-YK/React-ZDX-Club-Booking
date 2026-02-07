@@ -13,7 +13,8 @@ body {
 }
 
 .km-header-bg {
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       circle at 23.59% 50%,
       #f8f5ec 0%,
       rgba(248, 245, 236, 0) 100%
@@ -142,10 +143,12 @@ body {
     border-radius: 24px;
     border: 1px solid $black-600;
     position: relative;
-    z-index: -1;
+    z-index: 1;
   }
   .timeline-tag {
     margin-right: -30px;
+    z-index: 2;
+    position: relative;
   }
   .tag,
   .tag-line {
@@ -227,16 +230,14 @@ body {
   @media (min-width: 767px) {
     .article-content {
       border: none;
-      background-image: linear-gradient(
-          rgba(255, 255, 255, 0.8),
-          rgba(255, 255, 255, 0.8)
-        ),
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
         url(../images/knowledge/bg-article.png);
       position: relative;
       background-size: 100% 100%;
       background-position: center;
       background-repeat: no-repeat;
-      z-index: -1;
+      z-index: 0;
     }
   }
 }
