@@ -1,9 +1,44 @@
-import { useState } from "react";
-import "bootstrap-icons/font/bootstrap-icons.css";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 
+import "bootstrap-icons/font/bootstrap-icons.css";
+import axios from "axios";
 export default function Reserve() {
+  const serviceOptions = [
+    {
+      id: "card1",
+      value: "紫微命盤",
+      title: "紫微命盤",
+      price: "$6,666",
+      image: "../assets/images/reserve/service.png",
+      alt: "紫微命盤",
+    },
+    {
+      id: "card2",
+      value: "擇日開運",
+      title: "擇日開運",
+      price: "$6,666",
+      image: "../assets/images/reserve/service2.png",
+      alt: "擇日開運",
+    },
+    {
+      id: "card3",
+      value: "小流年運勢分析",
+      title: "小流年運勢分析",
+      price: "$6,666",
+      image: "../assets/images/reserve/service3.jpg",
+      alt: "小流年運勢分析",
+    },
+    {
+      id: "card4",
+      value: "因緣與感情合盤",
+      title: "因緣與感情合盤",
+      price: "$6,666",
+      image: "../assets/images/reserve/service4.png",
+      alt: "因緣與感情合盤",
+    },
+  ];
   const timeOptions = [
-    { value: "0", label: "請選擇時段" },
     { value: "1", label: "上午9:00" },
     { value: "2", label: "上午10:00" },
     { value: "3", label: "上午11:00" },
@@ -14,11 +49,28 @@ export default function Reserve() {
     { value: "8", label: "晚上20:00" },
     { value: "9", label: "晚上21:00" },
   ];
-  const [selectedTime, setSelectedTime] = useState(0);
 
-  const handleChangeTime = (event) => {
-    setSelectedTime(event.target.value);
-    console.log("Selected time:", selectedTime);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const navigate = useNavigate();
+
+  // API 串接
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  const apiBooking = async (data) => {
+    console.log(`預約資料data:`, data);
+    try {
+      const response = await axios.post(`${API_URL}/bookings`, data);
+      console.log(`預約成功: ${data.email}`);
+      // 送出成功後跳轉到指定頁面
+      navigate("/");
+    } catch (error) {
+      console.error(error.response);
+    }
   };
 
   return (
@@ -65,138 +117,109 @@ export default function Reserve() {
       <section className="container  py-40 py-md-80">
         <div className="outside-border">
           <div className="inside-border py-md-72 py-36">
-            <form action="" className="reserve-form">
+            <form className="reserve-form" onSubmit={handleSubmit(apiBooking)}>
               <div className="row service-list ">
                 <div className="col-md-6 p-md-5">
-                  <h2 className="fs-4 text-black-600 pb-4">選擇服務類型 :</h2>
+                  <h2 className="fs-4 text-black-600 pb-4">
+                    選擇服務類型 :
+                    {errors.service && (
+                      <span className="fs-6 text-danger">*必填</span>
+                    )}
+                  </h2>
+
                   <div className="row ">
-                    <div className="mb-4 col-6 col-md-12 ">
-                      <input
-                        type="radio"
-                        name="service"
-                        value="紫微命盤"
-                        id="card1"
-                      />
-                      <label
-                        htmlFor="card1"
-                        className="card-option py-36 flex-column flex-md-row"
-                      >
-                        <div className="radio-icon-wrapper position-relative">
-                          <i className="bi bi-circle bi-radio-icon icon-unchecked"></i>
-                          <i className="bi bi-check-circle-fill bi-radio-icon icon-checked"></i>
-                        </div>
-                        <img
-                          src="../assets/images/reserve/service.png"
-                          className="service-img"
-                          alt="紫微命盤"
+                    {serviceOptions.map((service) => (
+                      <div key={service.id} className="mb-4 col-6 col-md-12">
+                        <input
+                          type="radio"
+                          name="service"
+                          value={service.value}
+                          id={service.id}
+                          {...register("service", {
+                            required: "請選擇服務類型",
+                          })}
                         />
-                        <div className="service-info d-flex flex-column ">
-                          <span className="title">紫微命盤</span>
-                          <span className="price">$6,666</span>
-                        </div>
-                      </label>
-                    </div>
-                    <div className="mb-4 col-6 col-md-12">
-                      <input type="radio" name="service" id="card2" />
-                      <label
-                        htmlFor="card2"
-                        className="card-option py-36 flex-column flex-md-row"
-                      >
-                        <div className="radio-icon-wrapper position-relative">
-                          <i className="bi bi-circle bi-radio-icon icon-unchecked"></i>
-                          <i className="bi bi-check-circle-fill bi-radio-icon icon-checked"></i>
-                        </div>
-                        <img
-                          src="../assets/images/reserve/service2.png"
-                          className="service-img"
-                          alt="擇日開運"
-                        />
-                        <div className="service-info d-flex flex-column">
-                          <span className="title ">擇日開運</span>
-                          <span className="price">$6,666</span>
-                        </div>
-                      </label>
-                    </div>
-                    <div className="mb-4 col-6 col-md-12">
-                      <input type="radio" name="service" id="card3" />
-                      <label
-                        htmlFor="card3"
-                        className="card-option py-36 flex-column flex-md-row"
-                      >
-                        <div className="radio-icon-wrapper position-relative">
-                          <i className="bi bi-circle bi-radio-icon icon-unchecked"></i>
-                          <i className="bi bi-check-circle-fill bi-radio-icon icon-checked"></i>
-                        </div>
-                        <img
-                          src="../assets/images/reserve/service3.jpg"
-                          className="service-img"
-                          alt="小流年運勢分析"
-                        />
-                        <div className="service-info d-flex flex-column">
-                          <span className="title">小流年運勢分析</span>
-                          <span className="price">$6,666</span>
-                        </div>
-                      </label>
-                    </div>
-                    <div className="mb-4  col-6 col-md-12">
-                      <input type="radio" name="service" id="card4" />
-                      <label
-                        htmlFor="card4"
-                        className="card-option py-36 flex-column flex-md-row"
-                      >
-                        <div className="radio-icon-wrapper position-relative">
-                          <i className="bi bi-circle bi-radio-icon icon-unchecked"></i>
-                          <i className="bi bi-check-circle-fill bi-radio-icon icon-checked"></i>
-                        </div>
-                        <img
-                          src="../assets/images/reserve/service4.png"
-                          className="service-img"
-                          alt="因緣與感情合盤"
-                        />
-                        <div className="service-info d-flex flex-column">
-                          <span className="title">因緣與感情合盤</span>
-                          <span className="price">$6,666</span>
-                        </div>
-                      </label>
-                    </div>
+                        <label
+                          htmlFor={service.id}
+                          className="card-option py-36 flex-column flex-md-row"
+                        >
+                          <div className="radio-icon-wrapper position-relative">
+                            <i className="bi bi-circle bi-radio-icon icon-unchecked"></i>
+                            <i className="bi bi-check-circle-fill bi-radio-icon icon-checked"></i>
+                          </div>
+                          <img
+                            src={service.image}
+                            className="service-img"
+                            alt={service.alt}
+                          />
+                          <div className="service-info d-flex flex-column">
+                            <span className="title">{service.title}</span>
+                            <span className="price">{service.price}</span>
+                          </div>
+                        </label>
+                      </div>
+                    ))}
                   </div>
+
+                  {errors.service && (
+                    <p className="text-danger fs-6 mt-2">
+                      {errors.service.message}
+                    </p>
+                  )}
                 </div>
                 <div className="col-md-6 col-12 p-md-5 p-3">
                   <ul>
+                    {/* date */}
                     <li className=" mb-4 W-540">
                       <label
                         htmlFor="date"
                         className="form-label mb-12 fs-6 pe-4"
                       >
-                        選擇日期<span className="fs-6 text-danger">*必填</span>
+                        選擇日期
+                        {errors.date && (
+                          <span className="fs-6 text-danger">*必填</span>
+                        )}
                       </label>
                       <div className="position-relative ">
                         <input
                           type="date"
                           name="date"
                           id="date"
-                          className="form-control pe-5 "
+                          className={`form-control pe-5 ${errors.date ? "input-error" : ""}`}
                           placeholder="年/月/日"
+                          {...register("date", { required: "請選擇日期" })}
                         />
                         <i className="bi bi-calendar4-week position-absolute top-50 end-0 translate-middle-y me-3 text-muted pointer-events-none"></i>
                       </div>
+                      {errors.date && (
+                        <p className="text-danger fs-6 mt-2">
+                          {errors.date.message}
+                        </p>
+                      )}
                     </li>
+                    {/* time */}
                     <li className=" mb-4 W-540">
                       <label
                         htmlFor="time"
                         className="form-label mb-12 fs-6 pe-4"
                       >
-                        預約時段<span className="fs-6 text-danger">*必填</span>
+                        預約時段
+                        {errors.time && (
+                          <span className="fs-6 text-danger">*必填</span>
+                        )}
                       </label>
                       <div className="position-relative">
                         <select
                           name="time"
                           id="time"
-                          className="form-control"
+                          className={`form-control ${errors.time ? "input-error" : ""}`}
                           aria-label="Default select example"
-                          value={selectedTime}
-                          onChange={handleChangeTime}
+                          defaultValue=""
+                          {...register("time", { required: "請選擇預約時段" })}
                         >
+                          <option value="" disabled>
+                            請選擇時段
+                          </option>
                           {timeOptions.map((item) => (
                             <option key={item.value} value={item.value}>
                               {item.label}
@@ -206,61 +229,113 @@ export default function Reserve() {
 
                         <i className="bi bi-chevron-down position-absolute top-50 end-0 translate-middle-y me-3 text-muted pointer-events-none"></i>
                       </div>
+
+                      {errors.time && (
+                        <p className="text-danger fs-6 mt-2">
+                          {errors.time.message}
+                        </p>
+                      )}
                     </li>
+                    {/* name */}
                     <li className=" mb-4 W-540">
                       <label
                         htmlFor="name"
-                        className="form-label mb-12 fs-6 pe-4"
+                        className={`form-label mb-12 fs-6 pe-4`}
                       >
-                        姓名<span className="fs-6 text-danger">*必填</span>
+                        姓名
+                        {errors.name && (
+                          <span className="fs-6 text-danger">*必填</span>
+                        )}
                       </label>
                       <div className="position-relative">
                         <input
                           name="name"
                           type="text"
                           id="name"
-                          className="form-control "
+                          className={`form-control ${errors.name ? "input-error" : ""}`}
                           placeholder="請輸入姓名"
+                          {...register("name", { required: "請輸入姓名" })}
                         />
                         <i className="bi bi-person position-absolute top-50 end-0 translate-middle-y me-3 text-muted pointer-events-none"></i>
                       </div>
+                      {errors.name && (
+                        <p className="text-danger fs-6 mt-2">
+                          {errors.name.message}
+                        </p>
+                      )}
                     </li>
+                    {/* phone */}
                     <li className=" mb-4 W-540">
                       <label
                         htmlFor="tel"
                         className="form-label mb-12 fs-6 pe-4"
                       >
-                        聯絡電話<span className="fs-6 text-danger">*必填</span>
+                        聯絡電話
+                        {errors.phone && (
+                          <span className="fs-6 text-danger">*必填</span>
+                        )}
                       </label>
                       <div className="position-relative">
                         <input
                           name="phone"
                           type="tel"
                           id="tel"
-                          className="form-control "
-                          placeholder="請輸入方便聯絡之電話"
+                          className={`form-control ${errors.phone ? "input-error" : ""}`}
+                          {...register("phone", {
+                            required: "請輸入聯絡電話",
+                            pattern: {
+                              value: /^(09\d{8}|0\d{1,2}-?\d{6,8})$/,
+                              message:
+                                "請輸入有效的電話格式 (手機: 0912345678 或 市話: 02-12345678)",
+                            },
+                            validate: {
+                              isMobileOrLandline: (value) => {
+                                if (/^09\d{8}$/.test(value)) return true;
+                                if (/^0\d{1,2}-?\d{6,8}$/.test(value))
+                                  return true;
+                                return "手機格式: 0912345678 或 市話格式: 02-12345678";
+                              },
+                            },
+                          })}
+                          placeholder="手機: 0912345678 或 市話: 02-12345678"
                         />
                         <i className="bi bi-phone position-absolute top-50 end-0 translate-middle-y me-3 text-muted pointer-events-none"></i>
                       </div>
+                      {errors.phone && (
+                        <p className="text-danger fs-6 mt-2">
+                          {errors.phone.message}
+                        </p>
+                      )}
                     </li>
+                    {/* email */}
                     <li className=" mb-4 W-540">
                       <label
                         htmlFor="email"
                         className="form-label mb-12 fs-6 pe-4"
                       >
-                        電子郵件<span className="fs-6 text-danger">*必填</span>
+                        電子郵件
+                        {errors.email && (
+                          <span className="fs-6 text-danger">*必填</span>
+                        )}
                       </label>
                       <div className="position-relative">
                         <input
                           name="email"
                           type="email"
                           id="email"
-                          className="form-control"
-                          placeholder="example@gmail.com "
+                          className={`form-control ${errors.email ? "input-error" : ""}`}
+                          placeholder="example@gmail.com"
+                          {...register("email", { required: "請輸入電子郵件" })}
                         />
                         <i className="bi bi-envelope position-absolute top-50 end-0 translate-middle-y me-3 text-muted pointer-events-none"></i>
                       </div>
+                      {errors.email && (
+                        <p className="text-danger fs-6 mt-2">
+                          {errors.email.message}
+                        </p>
+                      )}
                     </li>
+                    {/* comment */}
                     <li className=" mb-4 W-540">
                       <label htmlFor="comment" className="mb-12">
                         想告訴豬大仙...
@@ -271,12 +346,22 @@ export default function Reserve() {
                           id="comment"
                           className="form-control mb-4"
                           rows="4"
-                          placeholder="年/月/日"
+                          placeholder="請輸入訊息"
+                          {...register("comment")}
                         ></textarea>
                       </div>
                     </li>
-                    <div className="d-flex align-items-center ">
-                      <input type="checkbox" name="agreement" />
+                    {/* agreement */}
+                    <div className="d-flex align-items-center">
+                      <input
+                        type="checkbox"
+                        name="agreement"
+                        id="agreement"
+                        className={`form-check-input ${errors.agreement ? "input-error" : ""}`}
+                        {...register("agreement", {
+                          required: "請同意隱私權條款",
+                        })}
+                      />
                       <p className="">我同意</p>
 
                       {/* Button trigger modal */}
@@ -447,9 +532,15 @@ export default function Reserve() {
                         </div>
                       </div>
                     </div>
+                    {errors.agreement && (
+                      <p className="text-danger fs-6 my-0">
+                        {errors.agreement.message}
+                      </p>
+                    )}
                   </ul>
                 </div>
               </div>
+              {/* 回上頁、送出按扭 */}
               <div className="d-flex flex-column flex-md-row justify-content-md-center align-items-center">
                 <button className="me-md-36 mb-md-0 mb-3 btn-outside bg-transparent">
                   <div className="btn-inside">回上一步</div>
@@ -463,6 +554,7 @@ export default function Reserve() {
         </div>
       </section>
 
+      {/* 注意事項 */}
       <section className="container py-40">
         <div className="row flex-md-nowrap">
           {/* 注意事項 */}

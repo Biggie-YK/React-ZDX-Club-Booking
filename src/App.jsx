@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, useLocation } from "react-router";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import AppointmentManagement from "./pages/AppointmentManagement";
@@ -7,12 +7,17 @@ import Reserve from "./pages/Reserve";
 import Nav from "./layout/Nav";
 import Footer from "./layout/Footer";
 import Draw from "./pages/Draw";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 function App() {
+  const location = useLocation();
+  const hideFooterPaths = ["/login", "/register"]; // 不顯示 footer 的路徑
+
   return (
     <>
       <div
@@ -29,8 +34,10 @@ function App() {
           <Route path="/knowledge" element={<Knowledge />}></Route>
           <Route path="/reserve" element={<Reserve />}></Route>
           <Route path="/draw" element={<Draw />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
         </Routes>
-        <Footer />
+        {!hideFooterPaths.includes(location.pathname) && <Footer />}
       </div>
     </>
   );

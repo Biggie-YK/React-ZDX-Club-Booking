@@ -223,3 +223,28 @@ input[type="date"] {
     left: 0;
   }
 }
+
+
+$error-color: #ef4444;
+$error-color-dark: #dc2626;
+
+.input-error {
+  border-color: $error-color;
+  animation: pulse-border 1.5s ease-in-out infinite;
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($error-color, 0.2);
+  }
+}
+
+@keyframes pulse-border {
+  0%, 100% { 
+    border-color: $error-color; 
+  }
+  50% { 
+    border-color: $error-color-dark; 
+    box-shadow: 0 0 0 3px rgba($error-color, 0.2); 
+  }
+}
+
