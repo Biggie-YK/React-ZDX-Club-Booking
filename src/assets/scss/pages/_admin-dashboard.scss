@@ -1,0 +1,21 @@
+.sidebar {
+  width: 240px;
+  min-height: 100vh;
+  background: #212529;
+}
+
+.sidebar .sidebar-item {
+  color: #adb5bd;
+  text-decoration: none;
+  padding: 12px 20px;
+  display: block;
+}
+
+.sidebar .sidebar-item:hover {
+  background: #343a40;
+  color: white;
+}
+
+.content {
+  padding: 20px;
+}
