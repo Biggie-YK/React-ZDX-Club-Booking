@@ -33,7 +33,12 @@ export default function Footer() {
               <ul className="list-unstyled mb-0">
                 <li className="text-center mb-md-20 mb-3">預約服務流程</li>
                 <li className="text-center mb-md-20 mb-3">網站地圖</li>
-                <li className="text-center ">預約查詢</li>
+                <li className="text-center mb-md-20 mb-3">預約查詢</li>
+                <li className="text-center mb-md-20 mb-3">
+                  <a className="text-decoration-none" href="/#/admin-dashboard">
+                    後台管理
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

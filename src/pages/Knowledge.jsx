@@ -1,9 +1,37 @@
-import "../assets/scss/pages/_knowledge.scss";
 import { useState, useEffect } from "react";
-
-import SolarTermsSection from "../components/Knowledge/SeasonSection.jsx";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import "../assets/scss/pages/_knowledge.scss";
+import KnowledgeArticle from "../components/KnowledgeArticle";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export default function Knowledge() {
+  // 初始化 AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // 動畫持續時間 (ms)
+      once: false, // 動畫是否只執行一次
+      mirror: true, // 向上滾動時是否重複動畫
+    });
+
+    // 重新整理 AOS (當內容動態變化時)
+    AOS.refresh();
+  }, []);
+
+  // 添加狀態管理
+  const [activeTerm, setActiveTerm] = useState("立春");
+  const [termContent, setTermContent] = useState({
+    title: "立春",
+    text: "一年開始,五行屬木,適合立下新計劃,命理上為陽氣漸升,萬物生發之始。",
+    season: 1,
+  });
+
+  // 節氣按鈕 function
+  const handleTermClick = (term) => {
+    setActiveTerm(term.title);
+    setTermContent(term);
+  };
+
   const solarTermsData = [
     {
       id: 1,
@@ -153,21 +181,27 @@ export default function Knowledge() {
     },
   ];
 
+  const seasonImages = {
+    1: `https://github.com/YoKingX7/ZDX-Club-Booking/blob/main/assets/images/knowledge/season-1.png?raw=true`,
+    2: `https://github.com/YoKingX7/ZDX-Club-Booking/blob/main/assets/images/knowledge/season-2.png?raw=true`,
+    3: `https://github.com/YoKingX7/ZDX-Club-Booking/blob/main/assets/images/knowledge/season-3.png?raw=true`,
+    4: `https://github.com/YoKingX7/ZDX-Club-Booking/blob/main/assets/images/knowledge/season-4.png?raw=true`,
+  };
+
   return (
     <>
       <header className="km-header-bg py-80 position-relative">
-        {/* <dotlottie-wc
-          className="position-absolute"
-          src="https://lottie.host/08657889-c1e5-4d0b-8844-c01b6a963497/cPEKyYNdRW.lottie"
-          style={{
-            width: "100%",
-            height: "100%",
-            top: 0,
-            opacity: 0.1,
-            filter: "brightness(0.8)",
-          }}
-          autoplay
-        ></dotlottie-wc> */}
+        <div
+          className="position-absolute w-100 h-100 top-0 "
+          style={{ opacity: 0.15 }}
+        >
+          <DotLottieReact
+            src="https://lottie.host/08657889-c1e5-4d0b-8844-c01b6a963497/cPEKyYNdRW.lottie"
+            autoplay
+            className="position-absolute w-100 h-100 top-0"
+          />
+        </div>
+
         <div className="container text-black-800">
           <h1 className="fs-md-48 fs-2 text-md-start text-center mb-md-5 mb-32 fw-bold lh-sm text-black-800">
             命理知識
@@ -182,6 +216,7 @@ export default function Knowledge() {
         </div>
       </header>
 
+      {/* 24節氣區塊 */}
       <section className="py-40 py-md-80">
         <div className="container">
           <div className="km-section-title pt-4 pt-md-32 ps-12 ps-md-32 mb-40">
@@ -196,44 +231,45 @@ export default function Knowledge() {
             data-aos="flip-up"
             data-aos-anchor-placement="center-bottom"
           >
+            {/* 左側內容區 */}
             <div
               className="content col-md-5 px-48 px-md-64 py-40 py-md-80"
               id="solar-term-content"
               style={{
-                backgroundImage:
-                  "url('../assets/images/knowledge/sseason-1.png')",
+                backgroundImage: `url('${seasonImages[termContent.season]}')`,
               }}
             >
               <p
                 id="term-title"
                 className="fs-2 fs-md-80 fw-bold lh-sm text-black-800 mb-32"
               >
-                立春
+                {termContent.title}
               </p>
               <p id="term-description" className="fs-6 fs-md-4">
-                一年開始，五行屬木，適合立下新計劃，命理上為陽氣漸升，萬物生發之始。
+                {termContent.text}
               </p>
             </div>
+            {/* 右側選擇區 */}
             <div className="col-md-7 selections">
               <div className="d-flex align-items-center justify-content-between p-2 p-md-3 mb-2 mb-md-32 bg-sp">
                 <div className="sel-title fs-3 fs-md-48 px-md-4 py-2 lh-1 text-center">
                   春
                 </div>
                 <ol className="sel-items p-0 mb-0 d-flex justify-content-start align-items-center gap-2 gap-md-3 flex-wrap flex-md-nowrap">
-                  {solarTermsData.map((term) => {
-                    if (term.season === 1) {
-                      return (
-                        <>
-                          <li
-                            type="button"
-                            className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50 active"
-                          >
-                            {term.title}
-                          </li>
-                        </>
-                      );
-                    }
-                  })}
+                  {solarTermsData
+                    .filter((term) => term.season === 1)
+                    .map((term) => (
+                      <li
+                        key={term.id}
+                        type="button"
+                        className={`fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white ${
+                          activeTerm === term.title ? "active" : "opacity-50"
+                        }`}
+                        onClick={() => handleTermClick(term)}
+                      >
+                        {term.title}
+                      </li>
+                    ))}
                 </ol>
               </div>
               <div className="d-flex align-items-center justify-content-between p-2 p-md-3 mb-2 mb-md-32 bg-su">
@@ -241,42 +277,20 @@ export default function Knowledge() {
                   夏
                 </div>
                 <ol className="sel-items p-0 mb-0 d-flex justify-content-start align-items-center gap-2 gap-md-3 flex-wrap flex-md-nowrap">
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    立夏
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    小滿
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    芒種
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    夏至
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    小暑
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    大暑
-                  </li>
+                  {solarTermsData
+                    .filter((term) => term.season === 2)
+                    .map((term) => (
+                      <li
+                        key={term.id}
+                        type="button"
+                        className={`fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white ${
+                          activeTerm === term.title ? "active" : "opacity-50"
+                        }`}
+                        onClick={() => handleTermClick(term)}
+                      >
+                        {term.title}
+                      </li>
+                    ))}
                 </ol>
               </div>
               <div className="d-flex align-items-center justify-content-between p-2 p-md-3 mb-2 mb-md-32 bg-fa">
@@ -284,42 +298,20 @@ export default function Knowledge() {
                   秋
                 </div>
                 <ol className="sel-items p-0 mb-0 d-flex justify-content-start align-items-center gap-2 gap-md-3 flex-wrap flex-md-nowrap">
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    立秋
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    處暑
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    白露
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    秋分
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    寒露
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    霜降
-                  </li>
+                  {solarTermsData
+                    .filter((term) => term.season === 3)
+                    .map((term) => (
+                      <li
+                        key={term.id}
+                        type="button"
+                        className={`fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white ${
+                          activeTerm === term.title ? "active" : "opacity-50"
+                        }`}
+                        onClick={() => handleTermClick(term)}
+                      >
+                        {term.title}
+                      </li>
+                    ))}
                 </ol>
               </div>
               <div className="d-flex align-items-center justify-content-between p-2 p-md-3 mb-2 mb-md-32 bg-wi">
@@ -327,42 +319,20 @@ export default function Knowledge() {
                   冬
                 </div>
                 <ol className="sel-items p-0 mb-0 d-flex justify-content-start align-items-center gap-2 gap-md-3 flex-wrap flex-md-nowrap">
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    立冬
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    小雪
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    大雪
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    冬至
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    小寒
-                  </li>
-                  <li
-                    type="button"
-                    className="fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white opacity-50"
-                  >
-                    大寒
-                  </li>
+                  {solarTermsData
+                    .filter((term) => term.season === 4)
+                    .map((term) => (
+                      <li
+                        key={term.id}
+                        type="button"
+                        className={`fs-5 fs-md-4 sel-item text-center py-1 py-md-2 bg-white ${
+                          activeTerm === term.title ? "active" : "opacity-50"
+                        }`}
+                        onClick={() => handleTermClick(term)}
+                      >
+                        {term.title}
+                      </li>
+                    ))}
                 </ol>
               </div>
             </div>
@@ -370,8 +340,7 @@ export default function Knowledge() {
         </div>
       </section>
 
-      {/* <SolarTermsSection data={solarTermsData} /> */}
-
+      {/* 人生圖譜 */}
       <section className="timeline py-40 py-md-80">
         <div className="container">
           <div className="km-section-title pt-4 pt-md-32 ps-12 ps-md-32 mb-40">
@@ -409,7 +378,7 @@ export default function Knowledge() {
                   <div className="timeline-img-div">
                     <img
                       className="timeline-img"
-                      src="../assets/images/knowledge/life-stage-1.png"
+                      src="/assets/images/knowledge/life-stage-1.png"
                       alt="嬰兒期"
                     />
                   </div>
@@ -590,187 +559,9 @@ export default function Knowledge() {
         </div>
       </section>
 
-      <section className="article py-40 pt-md-160 pb-md-80 mb-40">
-        <div className="container">
-          <div className="km-section-title pt-4 pt-md-32 ps-12 ps-md-32 mb-md-80 mb-40">
-            <p className="fs-4 fs-md-2 lh-base lh-md-sm fw-bold lh-sm text-black-950">
-              豬大仙的命理隨手記
-            </p>
-            <p className="">紀錄命理、節氣、運勢與人生體悟的智慧手記</p>
-          </div>
+      {/* 命理隨手記 */}
 
-          <div className="row d-flex px-12 px-md-0">
-            {/* <!-- 手機版顯示 --> */}
-            <div className="dropdown mb-3 px-0 d-md-none d-block">
-              <div
-                className="article-nav-title btn btn-background-beige w-100 py-0 rounded-0"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <div className="border-in px-4 py-12 d-flex justify-content-between align-items-center">
-                  <div className="fs-5 text-black-800">精選文章</div>
-                  <i className="bi bi-chevron-down"></i>
-                </div>
-              </div>
-
-              <ul className="dropdown-menu w-100 p-12">
-                <li
-                  className="article-nav-item px-12 mb-2"
-                  data-id="1"
-                  type="button"
-                >
-                  <div className="border-in px-4 py-12 d-flex justify-content-between">
-                    <p className="km-h6 mb-0">立秋×天赦吉日</p>
-                    <time dateTime="2025-08-07">2025/08/07</time>
-                  </div>
-                </li>
-                <li
-                  className="article-nav-item px-12 mb-2"
-                  data-id="2"
-                  type="button"
-                >
-                  <div className="border-in px-4 py-12 d-flex justify-content-between">
-                    <p className="km-h6 mb-0">立春×迎新啟運日</p>
-                    <time dateTime="2025-02-04">2025/02/04</time>
-                  </div>
-                </li>
-                <li
-                  className="article-nav-item px-12 mb-2"
-                  data-id="3"
-                  type="button"
-                >
-                  <div className="border-in px-4 py-12 d-flex justify-content-between">
-                    <p className="km-h6 mb-0">春分 × 陽平陰長之時</p>
-                    <time dateTime="2025-03-20">2025/03/20</time>
-                  </div>
-                </li>
-                <li
-                  className="article-nav-item px-12 mb-2"
-                  data-id="4"
-                  type="button"
-                >
-                  <div className="border-in px-4 py-12 d-flex justify-content-between">
-                    <p className="km-h6 mb-0">立夏×財運萌芽日</p>
-                    <time dateTime="2025-05-05">2025/05/05</time>
-                  </div>
-                </li>
-                <li
-                  className="article-nav-item px-12 mb-2"
-                  data-id="5"
-                  type="button"
-                >
-                  <div className="border-in px-4 py-12 d-flex justify-content-between">
-                    <p className="km-h6 mb-0">夏至×陽極盛吉日</p>
-                    <time dateTime="2025-06-21">2025/06/21</time>
-                  </div>
-                </li>
-                <li
-                  className="article-nav-item px-12 mb-2"
-                  data-id="6"
-                  type="button"
-                >
-                  <div className="border-in px-4 py-12 d-flex justify-content-between">
-                    <p className="km-h6 mb-0">秋分×收斂聚財時</p>
-                    <time dateTime="2025-09-23">2025/09/23</time>
-                  </div>
-                </li>
-                <li
-                  className="article-nav-item px-12 mb-2"
-                  data-id="7"
-                  type="button"
-                >
-                  <div className="border-in px-4 py-12 d-flex justify-content-between">
-                    <p className="km-h6 mb-0">冬至×藏鋒養勢日</p>
-                    <time dateTime="2025-12-21">2025/12/21</time>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            {/* <!-- 電版顯示 --> */}
-            <ul className="article-nav list-unstyled text-center lh-sm text-black-800 px-64 d-none d-md-block">
-              <li className="article-nav-title km-h6 px-12 mb-4">
-                <div className="border-in py-12">精選文章</div>
-              </li>
-              <li
-                className="article-nav-item px-12 mb-4 active"
-                data-id="1"
-                type="button"
-              >
-                <div className="border-in py-12">
-                  <p className="km-h6 mb-0">立秋×天赦吉日</p>
-                  <time dateTime="2025-08-07">2025/08/07</time>
-                </div>
-              </li>
-              <li
-                className="article-nav-item px-12 mb-4"
-                data-id="2"
-                type="button"
-              >
-                <div className="border-in py-12">
-                  <p className="km-h6 mb-0">立春×迎新啟運日</p>
-                  <time dateTime="2025-02-04">2025/02/04</time>
-                </div>
-              </li>
-              <li
-                className="article-nav-item px-12 mb-4"
-                data-id="3"
-                type="button"
-              >
-                <div className="border-in py-12">
-                  <p className="km-h6 mb-0">春分 × 陽平陰長之時</p>
-                  <time dateTime="2025-03-20">2025/03/20</time>
-                </div>
-              </li>
-              <li
-                className="article-nav-item px-12 mb-4"
-                data-id="4"
-                type="button"
-              >
-                <div className="border-in py-12">
-                  <p className="km-h6 mb-0">立夏×財運萌芽日</p>
-                  <time dateTime="2025-05-05">2025/05/05</time>
-                </div>
-              </li>
-              <li
-                className="article-nav-item px-12 mb-4"
-                data-id="5"
-                type="button"
-              >
-                <div className="border-in py-12">
-                  <p className="km-h6 mb-0">夏至×陽極盛吉日</p>
-                  <time dateTime="2025-06-21">2025/06/21</time>
-                </div>
-              </li>
-              <li
-                className="article-nav-item px-12 mb-4"
-                data-id="6"
-                type="button"
-              >
-                <div className="border-in py-12">
-                  <p className="km-h6 mb-0">秋分×收斂聚財時</p>
-                  <time dateTime="2025-09-23">2025/09/23</time>
-                </div>
-              </li>
-              <li
-                className="article-nav-item px-12 mb-4"
-                data-id="7"
-                type="button"
-              >
-                <div className="border-in py-12">
-                  <p className="km-h6 mb-0">冬至×藏鋒養勢日</p>
-                  <time dateTime="2025-12-21">2025/12/21</time>
-                </div>
-              </li>
-            </ul>
-
-            <div className="article-content px-3 py-4 px-md-160 py-md-80 lh-lg col">
-              <div className="row d-flex flex-nowrap align-items-center"></div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <KnowledgeArticle />
     </>
   );
 }
