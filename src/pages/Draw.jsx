@@ -3,11 +3,14 @@ import Swal from "sweetalert2";
 import "animate.css";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useEffect, useRef, useState } from "react";
+import picks from "../assets/picks.json";
 
 export default function Draw() {
   const [successCount, setSuccessCount] = useState(0);
   const resultsTextRef = useRef(null);
   const drawModal = useRef(null);
+  const [hasDrawPicks, setHasDrawPicks] = useState(false);
+  const [pickNum, setPickNum] = useState(0);
   const results = [
     {
       url: "https://lottie.host/26747bda-1d8f-4126-bc34-8f8d91293586/Qwc2ZB1vku.lottie",
@@ -26,7 +29,6 @@ export default function Draw() {
   const [showText, setShowText] = useState(false);
   const [imgKey, setImgKey] = useState(0);
   const [textKey, setTextKey] = useState(-1);
-
   useEffect(() => {
     drawModal.current = new Modal(drawModal.current);
   }, []);
@@ -37,21 +39,11 @@ export default function Draw() {
     // const i = Math.floor(Math.random() * 3);
     setResult(results[i]);
     setImgKey((prev) => prev + 1);
-    // if (isSecondRound) {
-    //   if (i === 0) {
-    //     setSuccessCount((prev) => prev + 1);
-    //     Swal.fire({
-    //       title: `目前已求得聖筊：${successCount + 1}`,
-    //       icon: "success",
-    //       confirmButtonColor: "rgba(134, 102, 84, 1)",
-    //       confirmButtonText: "繼續擲杯",
-    //     }).then((result) => {
-    //       if (result.isConfirmed) {
-    //         // handleDrawPicks(true);
-    //       }
-    //     });
-    //   }
-    // }
+    if (isSecondRound) {
+      if (i === 0) {
+        setSuccessCount((prev) => prev + 1);
+      }
+    }
   }
 
   function handleOpenModal() {
@@ -64,25 +56,75 @@ export default function Draw() {
     setShowText(true);
   }
   function handleAnimationEnd() {
-    if (result.text === "聖筊") {
+    if (successCount > 0 && successCount < 3) {
       Swal.fire({
-        title: "聖筊 已可求籤",
-        icon: "success",
+        title: `目前已求得聖筊：${successCount}`,
+        icon: "warning",
         confirmButtonColor: "rgba(134, 102, 84, 1)",
-        confirmButtonText: "開始求籤",
+        confirmButtonText: "繼續擲杯",
       }).then((result) => {
         if (result.isConfirmed) {
           handleDrawPicks(true);
         }
       });
-    } else {
+    } else if (successCount === 3) {
       Swal.fire({
-        title: "Good job!",
-        text: "You clicked the button!",
+        title: `目前已求得聖筊：${successCount}`,
         icon: "success",
+        confirmButtonColor: "rgba(134, 102, 84, 1)",
+        confirmButtonText: "前往解籤",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setHasDrawPicks(true);
+        }
       });
+    } else {
+      if (result.text === "聖筊") {
+        Swal.fire({
+          title: "聖筊 已可求籤",
+          icon: "success",
+          confirmButtonColor: "rgba(134, 102, 84, 1)",
+          confirmButtonText: "開始求籤",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const i = Math.floor(Math.random() * 100 + 1);
+            setPickNum(i);
+            Swal.fire({
+              title: `求得籤詩 第${i}首`,
+              text: "您必須擲出3次聖筊,方能解籤",
+              icon: "info",
+              confirmButtonColor: "rgba(134, 102, 84, 1)",
+              confirmButtonText: "確認賜籤",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                handleDrawPicks(true);
+              }
+            });
+          }
+        });
+      } else {
+        Swal.fire({
+          title: "Good job!",
+          text: "You clicked the button!",
+          icon: "success",
+        });
+      }
     }
   }
+  // useEffect(() => {
+  //   if (successCount > 0) {
+  //     Swal.fire({
+  //       title: `目前已求得聖筊：${successCount + 1}`,
+  //       icon: "success",
+  //       confirmButtonColor: "rgba(134, 102, 84, 1)",
+  //       confirmButtonText: "繼續擲杯",
+  //     }).then((result) => {
+  //       if (result.isConfirmed) {
+  //         handleDrawPicks(true);
+  //       }
+  //     });
+  //   }
+  // }, [successCount]);
 
   return (
     <>
@@ -252,110 +294,114 @@ export default function Draw() {
 
         <div className="modal draw-modal" tabIndex="-1" ref={drawModal}>
           <div className="modal-dialog modal-lg-plus modal-dialog-centered">
-            <div
-              className="modal-content position-relative px-5"
-              style={{
-                background: "url(../assets/images/index/nav-bg.png)",
-              }}
-            >
-              <div className="d-flex">
-                <DotLottieReact
-                  key={imgKey}
-                  src={result.url}
-                  autoplay
-                  className="draw-modal-yes-img"
-                  fit="cover"
-                  dotLottieRefCallback={(dotLottie) => {
-                    if (!dotLottie) return;
-                    dotLottie.addEventListener("complete", handleComplete);
-                  }}
-                />
-                {showText && (
-                  <h2
-                    key={textKey}
-                    className="draw-modal-title position-absolute
-                    text-primary animate__animated animate__fadeIn"
-                    ref={resultsTextRef}
-                    onAnimationEnd={handleAnimationEnd}
-                  >
-                    {result.text}
-                  </h2>
-                )}
-
-                <button
-                  className="draw-modal-close border-0  bg-transparent"
-                  type="button"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <img
-                    src="../assets/images/draw/icon-close.png"
-                    alt="關視窗按鈕"
+            {!hasDrawPicks ? (
+              <div
+                className="modal-content position-relative px-5"
+                style={{
+                  background: "url(../assets/images/index/nav-bg.png)",
+                }}
+              >
+                <div className="d-flex">
+                  <DotLottieReact
+                    key={imgKey}
+                    src={result.url}
+                    autoplay
+                    className="draw-modal-yes-img"
+                    fit="cover"
+                    dotLottieRefCallback={(dotLottie) => {
+                      if (!dotLottie) return;
+                      dotLottie.addEventListener("complete", handleComplete);
+                    }}
                   />
-                </button>
-              </div>
-            </div>
-            {/* <div
-              className="modal-content position-relative px-5"
-              style={{
-                background: "url(../assets/images/index/nav-bg.png)",
-              }}
-            >
-              <div className="pt-5">
-                <div className="pt-64 d-flex">
-                  <h2 className="draw-modal-title vertical-text m-0 text-primary me-4">
-                    解籤
-                  </h2>
-                  <div className="w-100 px-40">
-                    <h2 className="text-primary mb-40 fw-bold">第一籤</h2>
-                    <p className="fs-1 fw-bold mb-40">
-                      巍巍獨步向雲間，玉殿千官第一班 <br />
-                      富貴榮華天付汝，福如東海壽如山
-                    </p>
-                    <p className="pick-explain mb-40 fw-bold">
-                      此籤為上上籤，大吉大利，你所企盼期望的事，皆能稱心順利完成，官運能高升。
-                    </p>
-                    <p className="lh-1 mb-40">尚有其餘疑問，欲再請示？</p>
+                  {showText && (
+                    <h2
+                      key={textKey}
+                      className="draw-modal-title position-absolute
+                    text-primary animate__animated animate__fadeIn"
+                      ref={resultsTextRef}
+                      onAnimationEnd={handleAnimationEnd}
+                    >
+                      {result.text}
+                    </h2>
+                  )}
 
-                    <div className="d-flex px-80 justify-content-between align-items-center">
-                      <div className="draw-modal-again-btn">
-                        <img
-                          className="draw-modal-again-img"
-                          src="../assets/images/draw/draw-again.png"
-                          alt="再抽一次？"
-                        />
-                        <div
-                          className="border border-secondary
+                  <button
+                    className="draw-modal-close border-0  bg-transparent"
+                    type="button"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <img
+                      src="../assets/images/draw/icon-close.png"
+                      alt="關視窗按鈕"
+                    />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div
+                className="modal-content position-relative px-5"
+                style={{
+                  background: "url(../assets/images/index/nav-bg.png)",
+                }}
+              >
+                <div className="pt-5">
+                  <div className="pt-64 d-flex">
+                    <h2 className="draw-modal-title vertical-text m-0 text-primary me-4">
+                      解籤
+                    </h2>
+                    <div className="w-100 px-40">
+                      <h2 className="text-primary mb-40 fw-bold">
+                        第{pickNum}籤
+                      </h2>
+                      <p className="fs-1 fw-bold mb-40">
+                        {picks[pickNum - 1]["籤詩"]}
+                      </p>
+                      <p className="pick-explain mb-40 fw-bold">
+                        {picks[pickNum - 1]["中文解析"]}
+                      </p>
+                      <p className="lh-1 mb-40">尚有其餘疑問，欲再請示？</p>
+
+                      <div className="d-flex px-80 justify-content-between align-items-center">
+                        <div className="draw-modal-again-btn">
+                          <img
+                            className="draw-modal-again-img"
+                            src="../assets/images/draw/draw-again.png"
+                            alt="再抽一次？"
+                          />
+                          <div
+                            className="border border-secondary
                         px-2
                         "
-                        >
-                          <div
-                            className="border border-secondary 
+                          >
+                            <div
+                              className="border border-secondary 
                           text-center
                           "
-                          >
-                            再次求籤
+                            >
+                              再次求籤
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <h2 className="text-primary">或者</h2>
-                      <div className="draw-modal-again-btn">
-                        <img
-                          className="draw-modal-again-img"
-                          src="../assets/images/draw/others.png"
-                          alt="再抽一次？"
-                        />
-                        <div
-                          className="border border-secondary
+                        <h2 className="text-primary">或者</h2>
+                        <div className="draw-modal-again-btn">
+                          <img
+                            className="draw-modal-again-img"
+                            src="../assets/images/draw/others.png"
+                            alt="再抽一次？"
+                          />
+                          <div
+                            className="border border-secondary
                         px-2
                         "
-                        >
-                          <div
-                            className="border border-secondary 
+                          >
+                            <div
+                              className="border border-secondary 
                           text-center
                           "
-                          >
-                            想了解其他籤詩?
+                            >
+                              想了解其他籤詩?
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -363,7 +409,7 @@ export default function Draw() {
                   </div>
                 </div>
               </div>
-            </div> */}
+            )}
           </div>
         </div>
       </div>
