@@ -1,4 +1,4 @@
-import { handleLogout } from "../api/api";
+import { userLogout } from "../api/api";
 
 export default function UserAuthCard({ userData, pageInfo }) {
   return (
@@ -45,7 +45,7 @@ export default function UserAuthCard({ userData, pageInfo }) {
                 </a>
                 <button
                   onClick={() => {
-                    handleLogout();
+                    userLogout();
                   }}
                   className="btn btn-secondary"
                 >

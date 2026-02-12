@@ -3,6 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "../assets/scss/pages/_knowledge.scss";
 import KnowledgeArticle from "../components/KnowledgeArticle";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export default function Knowledge() {
   // 初始化 AOS
@@ -190,18 +191,17 @@ export default function Knowledge() {
   return (
     <>
       <header className="km-header-bg py-80 position-relative">
-        {/* <dotlottie-wc
-          className="position-absolute"
-          src="https://lottie.host/08657889-c1e5-4d0b-8844-c01b6a963497/cPEKyYNdRW.lottie"
-          style={{
-            width: "100%",
-            height: "100%",
-            top: 0,
-            opacity: 0.1,
-            filter: "brightness(0.8)",
-          }}
-          autoplay
-        ></dotlottie-wc> */}
+        <div
+          className="position-absolute w-100 h-100 top-0 "
+          style={{ opacity: 0.15 }}
+        >
+          <DotLottieReact
+            src="https://lottie.host/08657889-c1e5-4d0b-8844-c01b6a963497/cPEKyYNdRW.lottie"
+            autoplay
+            className="position-absolute w-100 h-100 top-0"
+          />
+        </div>
+
         <div className="container text-black-800">
           <h1 className="fs-md-48 fs-2 text-md-start text-center mb-md-5 mb-32 fw-bold lh-sm text-black-800">
             命理知識
@@ -560,7 +560,6 @@ export default function Knowledge() {
       </section>
 
       {/* 命理隨手記 */}
-
 
       <KnowledgeArticle />
     </>

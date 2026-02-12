@@ -5,8 +5,8 @@ import Users from "../../components/AdminDashboard/Users";
 
 import {
   checkIsAuth,
-  handleLogin,
-  handleLogout,
+  userLogin,
+  userLogout,
   fetchAllData,
 } from "../../api/api";
 

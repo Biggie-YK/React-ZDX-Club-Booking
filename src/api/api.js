@@ -35,7 +35,7 @@ export const checkIsAuth = async () => {
   }
 };
 
-export const handleLogin = async (data) => {
+export const userLogin = async (data) => {
   const loginUrl = `${API_URL}/login`;
   try {
     const response = await axios.post(loginUrl, data);
@@ -61,7 +61,7 @@ export const handleLogin = async (data) => {
   }
 };
 
-export const handleLogout = () => {
+export const userLogout = () => {
   Cookies.remove("token", { path: "/" });
   Cookies.remove("userData", { path: "/" });
   delete axios.defaults.headers.common["Authorization"];
@@ -69,7 +69,7 @@ export const handleLogout = () => {
 };
 
 // register api
-export const handleRegister = async (data) => {
+export const userRegister = async (data) => {
   const registerUrl = `${API_URL}/register`;
   try {
     const response = await axios.post(registerUrl, {
@@ -83,6 +83,28 @@ export const handleRegister = async (data) => {
     return { success: true, data: response.data };
   } catch (error) {
     console.error("註冊失敗:", error.response?.data || error.message);
+    return { success: false, error: error.response?.data || error.message };
+  }
+};
+
+export const userDelete = async (userId) => {
+  try {
+    const response = await axios.delete(`${API_URL}/users/${userId}`);
+    console.log("刪除成功:", response.data);
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.error("刪除失敗:", error.response?.data || error.message);
+    return { success: false, error: error.response?.data || error.message };
+  }
+};
+
+export const userEdit = async (userId, data) => {
+  try {
+    const response = await axios.put(`${API_URL}/users/${userId}`, data);
+    console.log("編輯成功:", response.data);
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.error("編輯失敗:", error.response?.data || error.message);
     return { success: false, error: error.response?.data || error.message };
   }
 };
@@ -108,9 +130,11 @@ export const fetchAllData = async () => {
 };
 
 export default {
+  userLogin,
   checkIsAuth,
-  handleLogin,
-  handleLogout,
-  handleRegister,
+  userLogout,
+  userRegister,
+  userDelete,
+  userEdit,
   fetchAllData,
 };

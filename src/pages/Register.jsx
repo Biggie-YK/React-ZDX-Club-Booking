@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { handleRegister } from "../api/api";
+import { userRegister } from "../api/api";
 import UserAuthCard from "../components/UserAuthCard";
 
 export default function Register() {
@@ -26,7 +26,7 @@ export default function Register() {
 
   const onSubmit = async (formData) => {
     try {
-      await handleRegister(formData);
+      await userRegister(formData);
       setIsRigistered(true);
       setUserData({
         name: formData.name,

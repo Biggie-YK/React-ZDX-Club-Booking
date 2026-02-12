@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useState, useRef, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import Register from "../../pages/Register";
+import { set, useForm } from "react-hook-form";
+
+import { userRegister, userEdit, userDelete } from "../../api/api";
 
 const INITIAL_USER_DATA = {
   name: "",
@@ -11,9 +11,9 @@ const INITIAL_USER_DATA = {
 };
 
 export default function Users({ users }) {
-  const API_URL = import.meta.env.VITE_API_URL;
-  const usersUrl = `${API_URL}/users`;
-  console.log("usersUrl:", usersUrl);
+  const [usersData, setUsersData] = useState([]);
+  const [currentUserId, setCurrentUserId] = useState(null);
+  const [modalType, setModalType] = useState("create"); // "create" 或 "edit"
 
   const {
     register,
@@ -24,12 +24,11 @@ export default function Users({ users }) {
     defaultValues: INITIAL_USER_DATA,
   });
 
-  const [modalType, setModalType] = useState("create");
-  const [currentUserId, setCurrentUserId] = useState(null);
   const userModalRef = useRef(null);
   const bsModalRef = useRef(null);
 
   useEffect(() => {
+    setUsersData(users);
     if (userModalRef.current) {
       const bootstrap = window.bootstrap;
       if (bootstrap && bootstrap.Modal) {
@@ -60,33 +59,44 @@ export default function Users({ users }) {
     setCurrentUserId(null);
   };
 
-  const onSubmit = async (data) => {
-    console.log("提交的使用者資料:", data);
+  const handleUserRegister = async (data) => {
     try {
-      if (modalType === "create") {
-        console.log("正在新增使用者...");
-        await axios.post(usersUrl, data);
-      } else if (modalType === "edit") {
-        await axios.put(`${usersUrl}/${currentUserId}`, data);
+      const response = await userRegister(data); // 呼叫 API 註冊
+      if (response.success) {
+        closeModal();
+        setUsersData((prevData) => [...prevData, response.data]);
+      } else {
+        alert(`註冊失敗: ${response.error}`);
       }
       closeModal();
-      // 可以在這裡觸發重新載入使用者列表
-      window.location.reload();
+      setUsersData((prevData) => [...prevData, response.data.user]);
     } catch (error) {
-      console.error("儲存使用者失敗:", error);
-      alert("儲存失敗,請稍後再試");
+      console.log(error);
     }
   };
 
-  const handleDelete = async (userId) => {
-    if (confirm("確定要刪除此使用者嗎?")) {
-      try {
-        await axios.delete(`${usersUrl}/${userId}`);
-        window.location.reload();
-      } catch (error) {
-        console.error("刪除使用者失敗:", error);
-        alert("刪除失敗,請稍後再試");
+  const handleUserEdit = async (data) => {
+    try {
+      const response = await userEdit(currentUserId, data); // 呼叫 API 編輯  
+      if (response.success) {
+        closeModal();
+        setUsersData((prevData) =>
+          prevData.map((user) => (user.id === currentUserId ? response.data : user))
+        );
+      } else {
+        alert(`編輯失敗: ${response.error}`);
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDeleteUser = async (userId) => {
+    try {
+      await userDelete(userId);
+      setUsersData((prevData) => prevData.filter((user) => user.id !== userId));
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -120,44 +130,42 @@ export default function Users({ users }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {users && users.length > 0 ? (
-                    users.map((user) => {
+                  {usersData && usersData.length > 0 ? (
+                    usersData.map((user) => {
                       const { id, name, email, role, remark } = user;
                       return id === undefined ? null : (
-                        <>
-                          <tr key={id} className="align-middle py-3">
-                            <td>{id}</td>
-                            <td>{email}</td>
-                            <td>{name}</td>
-                            <td>{role}</td>
-                            <td>{remark}</td>
-                            <td className="text-center">
-                              <div className="btn-group">
-                                <a
-                                  href="#"
-                                  className="btn btn-outline-primary btn-sm"
-                                  aria-current="page"
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    openModal("edit", user);
-                                  }}
-                                >
-                                  編輯
-                                </a>
-                                <a
-                                  href="#"
-                                  className="btn btn-outline-danger btn-sm"
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    handleDelete(id);
-                                  }}
-                                >
-                                  刪除
-                                </a>
-                              </div>
-                            </td>
-                          </tr>
-                        </>
+                        <tr key={id} className="align-middle py-3">
+                          <td>{id}</td>
+                          <td>{email}</td>
+                          <td>{name}</td>
+                          <td>{role}</td>
+                          <td>{remark}</td>
+                          <td className="text-start">
+                            <div className="btn-group">
+                              <a
+                                href="#"
+                                className="btn btn-outline-primary btn-sm"
+                                aria-current="page"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  openModal("edit", user);
+                                }}
+                              >
+                                編輯
+                              </a>
+                              <a
+                                href="#"
+                                className="btn btn-outline-danger btn-sm"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  handleDeleteUser(id);
+                                }}
+                              >
+                                刪除
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
                       );
                     })
                   ) : (
@@ -201,7 +209,12 @@ export default function Users({ users }) {
             {modalType === "edit" ? "編輯使用者" : "新增使用者"}
 
             <div className="modal-body bg-secondary bg-opacity-10 p-4">
-              <form onSubmit={handleSubmit(onSubmit)} id="userForm">
+              <form
+                onSubmit={handleSubmit(
+                  modalType === "edit" ? handleUserEdit : handleUserRegister,
+                )}
+                id="userForm"
+              >
                 <div className="row g-3 text-center">
                   <div className="row text-start g-3">
                     {/* 姓名 */}
@@ -249,6 +262,29 @@ export default function Users({ users }) {
                         </div>
                       )}
                     </div>
+
+                    {/* 密碼 */}
+                    {modalType === "create" && (
+                      <div className="col-12 mb-3">
+                        <label htmlFor="password" className="form-label mb-1">
+                          密碼 <span className="text-danger">*</span>
+                        </label>
+                        <input
+                          type="password"
+                          className={`form-control ${errors.password ? "is-invalid" : ""}`}
+                          id="password"
+                          placeholder="請輸入密碼"
+                          {...register("password", {
+                            required: "密碼為必填欄位",
+                          })}
+                        />
+                        {errors.password && (
+                          <div className="invalid-feedback">
+                            {errors.password.message}
+                          </div>
+                        )}
+                      </div>
+                    )}
 
                     {/* 角色 */}
                     <div className="col-12 mb-3">
@@ -300,7 +336,7 @@ export default function Users({ users }) {
                 關閉
               </button>
               <button type="submit" form="userForm" className="btn btn-primary">
-                儲存變更
+                {modalType === "edit" ? "儲存變更" : "新增使用者"}
               </button>
             </div>
           </div>

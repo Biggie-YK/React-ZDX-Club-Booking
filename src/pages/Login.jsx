@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import { checkIsAuth, handleLogin, handleLogout } from "../api/api.js";
+import { checkIsAuth, userLogin } from "../api/api.js";
 import UserAuthCard from "../components/UserAuthCard";
 
 
@@ -36,7 +36,7 @@ export default function Login() {
   // 處理表單提交
   const onSubmit = async (formData) => {
     try {
-      await handleLogin(formData);
+      await userLogin(formData);
       checkAuth();
     } catch (err) {
       console.error(err);
