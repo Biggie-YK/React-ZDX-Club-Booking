@@ -64,11 +64,12 @@
   }
 }
 .draw-modal{
-  box-shadow: none !important;
   .modal-content{
     padding-bottom: 88px;
     border-radius: 48px;
-
+    canvas{
+      height: 584px !important;
+    }
   }
   &-yes-img{
     width: 584px ;

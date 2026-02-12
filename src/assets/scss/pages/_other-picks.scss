@@ -1,0 +1,25 @@
+.picks {
+  &-img{
+    width: 480px;
+    height: 480px;
+    opacity: 15%;
+  }
+  &-box {
+    width: 124px;
+    border: solid rgba(183, 183, 164, 1);
+    border-width: 1px 4px;
+    &-pick {
+      border: solid rgba(183, 183, 164, 1);
+      border-width: 0 1px;
+    }
+  }
+  &-again-img{
+    width: 306px;
+  }
+  &-again-btn{
+    width: 306px;
+    height: 65px;
+    line-height: 1.5;
+    letter-spacing: 0.2rem;
+  }
+}

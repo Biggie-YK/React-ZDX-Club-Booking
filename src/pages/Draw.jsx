@@ -1,23 +1,102 @@
 import { Modal } from "bootstrap";
-import { useEffect, useRef } from "react";
+import Swal from "sweetalert2";
+import "animate.css";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Draw() {
+  const [successCount, setSuccessCount] = useState(0);
+  const resultsTextRef = useRef(null);
   const drawModal = useRef(null);
+  const results = [
+    {
+      url: "https://lottie.host/26747bda-1d8f-4126-bc34-8f8d91293586/Qwc2ZB1vku.lottie",
+      text: "聖筊",
+    },
+    {
+      url: "https://lottie.host/5cf67520-0482-4983-a632-7f4a469edc8b/fA2qfqMmUx.lottie",
+      text: "蓋筊",
+    },
+    {
+      url: "https://lottie.host/5c9f1d53-0676-4afc-b59b-91f01d307ca4/h9ipvPpd2W.lottie",
+      text: "笑筊",
+    },
+  ];
+  const [result, setResult] = useState(results[0]);
+  const [showText, setShowText] = useState(false);
+  const [imgKey, setImgKey] = useState(0);
+  const [textKey, setTextKey] = useState(-1);
+
   useEffect(() => {
     drawModal.current = new Modal(drawModal.current);
   }, []);
 
+  function handleDrawPicks(isSecondRound) {
+    setShowText(false);
+    const i = 0;
+    // const i = Math.floor(Math.random() * 3);
+    setResult(results[i]);
+    setImgKey((prev) => prev + 1);
+    // if (isSecondRound) {
+    //   if (i === 0) {
+    //     setSuccessCount((prev) => prev + 1);
+    //     Swal.fire({
+    //       title: `目前已求得聖筊：${successCount + 1}`,
+    //       icon: "success",
+    //       confirmButtonColor: "rgba(134, 102, 84, 1)",
+    //       confirmButtonText: "繼續擲杯",
+    //     }).then((result) => {
+    //       if (result.isConfirmed) {
+    //         // handleDrawPicks(true);
+    //       }
+    //     });
+    //   }
+    // }
+  }
+
   function handleOpenModal() {
     drawModal.current.show();
+    handleDrawPicks(false);
+  }
+
+  function handleComplete() {
+    setTextKey((prev) => prev - 1);
+    setShowText(true);
+  }
+  function handleAnimationEnd() {
+    if (result.text === "聖筊") {
+      Swal.fire({
+        title: "聖筊 已可求籤",
+        icon: "success",
+        confirmButtonColor: "rgba(134, 102, 84, 1)",
+        confirmButtonText: "開始求籤",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          handleDrawPicks(true);
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "Good job!",
+        text: "You clicked the button!",
+        icon: "success",
+      });
+    }
   }
 
   return (
     <>
       <div className="container">
         <section className="draw py-80">
-          <div className="d-flex py-3 justify-content-center">
-            <h6 className="me-4 mt-4 mb-0 fw-bold text-primary">線上服務</h6>
-            <h1 className="mb-0 fw-bold">線上求籤</h1>
+          <div className="row py-3 ">
+            <div className="col-5">
+              <h6 className=" mt-4 mb-0 fw-bold text-primary text-end ">
+                線上服務
+              </h6>
+            </div>
+            <div className="col-7">
+              <h1 className="mb-0 fw-bold">線上求籤</h1>
+            </div>
           </div>
           <div className="row">
             <div className="col-2"></div>
@@ -173,25 +252,36 @@ export default function Draw() {
 
         <div className="modal draw-modal" tabIndex="-1" ref={drawModal}>
           <div className="modal-dialog modal-lg-plus modal-dialog-centered">
-            {/* <div
+            <div
               className="modal-content position-relative px-5"
               style={{
                 background: "url(../assets/images/index/nav-bg.png)",
               }}
             >
               <div className="d-flex">
-                <img
-                  className="draw-modal-yes-img rotate-180"
-                  src="../assets/images/draw/god-say-yes.png"
-                  alt="聖筊圖"
+                <DotLottieReact
+                  key={imgKey}
+                  src={result.url}
+                  autoplay
+                  className="draw-modal-yes-img"
+                  fit="cover"
+                  dotLottieRefCallback={(dotLottie) => {
+                    if (!dotLottie) return;
+                    dotLottie.addEventListener("complete", handleComplete);
+                  }}
                 />
-                <h2
-                  className="draw-modal-title position-absolute
-                text-primary
-                "
-                >
-                  聖筊
-                </h2>
+                {showText && (
+                  <h2
+                    key={textKey}
+                    className="draw-modal-title position-absolute
+                    text-primary animate__animated animate__fadeIn"
+                    ref={resultsTextRef}
+                    onAnimationEnd={handleAnimationEnd}
+                  >
+                    {result.text}
+                  </h2>
+                )}
+
                 <button
                   className="draw-modal-close border-0  bg-transparent"
                   type="button"
@@ -204,8 +294,8 @@ export default function Draw() {
                   />
                 </button>
               </div>
-            </div> */}
-            <div
+            </div>
+            {/* <div
               className="modal-content position-relative px-5"
               style={{
                 background: "url(../assets/images/index/nav-bg.png)",
@@ -273,7 +363,7 @@ export default function Draw() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
