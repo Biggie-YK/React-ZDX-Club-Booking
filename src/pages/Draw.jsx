@@ -4,13 +4,17 @@ import "animate.css";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useEffect, useRef, useState } from "react";
 import picks from "../assets/picks.json";
+import Nzh from "nzh";
+import { useNavigate } from "react-router";
 
 export default function Draw() {
   const [successCount, setSuccessCount] = useState(0);
   const resultsTextRef = useRef(null);
   const drawModal = useRef(null);
-  const [hasDrawPicks, setHasDrawPicks] = useState(false);
+  const [hasThreeSuccess, setHasThreeSuccess] = useState(false);
+  const drawPickRef = useRef(null);
   const [pickNum, setPickNum] = useState(0);
+
   const results = [
     {
       url: "https://lottie.host/26747bda-1d8f-4126-bc34-8f8d91293586/Qwc2ZB1vku.lottie",
@@ -29,56 +33,38 @@ export default function Draw() {
   const [showText, setShowText] = useState(false);
   const [imgKey, setImgKey] = useState(0);
   const [textKey, setTextKey] = useState(-1);
+  const navigate = useNavigate();
   useEffect(() => {
     drawModal.current = new Modal(drawModal.current);
   }, []);
 
-  function handleDrawPicks(isSecondRound) {
+  function handleTossingBlocks(isSecondRound) {
     setShowText(false);
     const i = 0;
-    // const i = Math.floor(Math.random() * 3);
+    // const i = getRendomNum(3);
     setResult(results[i]);
     setImgKey((prev) => prev + 1);
     if (isSecondRound) {
       if (i === 0) {
         setSuccessCount((prev) => prev + 1);
+      } else {
+        setSuccessCount(0);
+        drawPickRef.current=true;
       }
     }
   }
 
   function handleOpenModal() {
     drawModal.current.show();
-    handleDrawPicks(false);
+    handleTossingBlocks(false);
   }
 
   function handleComplete() {
     setTextKey((prev) => prev - 1);
     setShowText(true);
   }
-  function handleAnimationEnd() {
-    if (successCount > 0 && successCount < 3) {
-      Swal.fire({
-        title: `目前已求得聖筊：${successCount}`,
-        icon: "warning",
-        confirmButtonColor: "rgba(134, 102, 84, 1)",
-        confirmButtonText: "繼續擲杯",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          handleDrawPicks(true);
-        }
-      });
-    } else if (successCount === 3) {
-      Swal.fire({
-        title: `目前已求得聖筊：${successCount}`,
-        icon: "success",
-        confirmButtonColor: "rgba(134, 102, 84, 1)",
-        confirmButtonText: "前往解籤",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          setHasDrawPicks(true);
-        }
-      });
-    } else {
+  function handleAnimationEnd() {    
+    if (!drawPickRef.current) {
       if (result.text === "聖筊") {
         Swal.fire({
           title: "聖筊 已可求籤",
@@ -87,44 +73,87 @@ export default function Draw() {
           confirmButtonText: "開始求籤",
         }).then((result) => {
           if (result.isConfirmed) {
-            const i = Math.floor(Math.random() * 100 + 1);
-            setPickNum(i);
-            Swal.fire({
-              title: `求得籤詩 第${i}首`,
-              text: "您必須擲出3次聖筊,方能解籤",
-              icon: "info",
-              confirmButtonColor: "rgba(134, 102, 84, 1)",
-              confirmButtonText: "確認賜籤",
-            }).then((result) => {
-              if (result.isConfirmed) {
-                handleDrawPicks(true);
-              }
-            });
+            handleDrawPicks();
           }
         });
       } else {
         Swal.fire({
-          title: "Good job!",
-          text: "You clicked the button!",
+          title: "請再擲一次",
+          icon: "error",
+          confirmButtonColor: "rgba(134, 102, 84, 1)",
+          confirmButtonText: "擲杯",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            handleTossingBlocks(false);
+          }
+        });
+      }
+    } else {
+      if (successCount > 0 && successCount < 3) {
+        Swal.fire({
+          title: `目前已求得聖筊：${successCount}`,
+          icon: "warning",
+          confirmButtonColor: "rgba(134, 102, 84, 1)",
+          confirmButtonText: "繼續擲杯",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            handleTossingBlocks(true);
+          }
+        });
+      } else if (successCount === 3) {
+        Swal.fire({
+          title: `目前已求得聖筊：${successCount}`,
           icon: "success",
+          confirmButtonColor: "rgba(134, 102, 84, 1)",
+          confirmButtonText: "前往解籤",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            setHasThreeSuccess(true);
+          }
+        });
+      } else {
+        Swal.fire({
+          title: "請重新求籤",
+          icon: "error",
+          confirmButtonColor: "rgba(134, 102, 84, 1)",
+          confirmButtonText: "開始求籤",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            handleDrawPicks();
+          }
         });
       }
     }
   }
-  // useEffect(() => {
-  //   if (successCount > 0) {
-  //     Swal.fire({
-  //       title: `目前已求得聖筊：${successCount + 1}`,
-  //       icon: "success",
-  //       confirmButtonColor: "rgba(134, 102, 84, 1)",
-  //       confirmButtonText: "繼續擲杯",
-  //     }).then((result) => {
-  //       if (result.isConfirmed) {
-  //         handleDrawPicks(true);
-  //       }
-  //     });
-  //   }
-  // }, [successCount]);
+  function handleOtherPicks() {
+    drawModal.current.hide();
+    navigate("/other-picks");
+  }
+  function handleDrawAgain() {
+    setSuccessCount(0);
+    setHasThreeSuccess(false);
+    handleTossingBlocks(false);
+  }
+
+  function handleDrawPicks() {
+    const i = getRendomNum(100) + 1;
+    setPickNum(i);
+    Swal.fire({
+      title: `求得籤詩 第${Nzh.hk.encodeS(i)}首`,
+      text: "您必須擲出3次聖筊,方能解籤",
+      icon: "info",
+      confirmButtonColor: "rgba(134, 102, 84, 1)",
+      confirmButtonText: "確認賜籤",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleTossingBlocks(true);
+      }
+    });
+  }
+
+  function getRendomNum(range) {
+    return Math.floor(Math.random() * range);
+  }
 
   return (
     <>
@@ -294,7 +323,7 @@ export default function Draw() {
 
         <div className="modal draw-modal" tabIndex="-1" ref={drawModal}>
           <div className="modal-dialog modal-lg-plus modal-dialog-centered">
-            {!hasDrawPicks ? (
+            {!hasThreeSuccess ? (
               <div
                 className="modal-content position-relative px-5"
                 style={{
@@ -352,7 +381,7 @@ export default function Draw() {
                     </h2>
                     <div className="w-100 px-40">
                       <h2 className="text-primary mb-40 fw-bold">
-                        第{pickNum}籤
+                        第{Nzh.hk.encodeS(pickNum)}籤
                       </h2>
                       <p className="fs-1 fw-bold mb-40">
                         {picks[pickNum - 1]["籤詩"]}
@@ -363,7 +392,10 @@ export default function Draw() {
                       <p className="lh-1 mb-40">尚有其餘疑問，欲再請示？</p>
 
                       <div className="d-flex px-80 justify-content-between align-items-center">
-                        <div className="draw-modal-again-btn">
+                        <div
+                          className="draw-modal-again-btn"
+                          onClick={handleDrawAgain}
+                        >
                           <img
                             className="draw-modal-again-img"
                             src="../assets/images/draw/draw-again.png"
@@ -388,7 +420,7 @@ export default function Draw() {
                           <img
                             className="draw-modal-again-img"
                             src="../assets/images/draw/others.png"
-                            alt="再抽一次？"
+                            alt="其他籤詩？"
                           />
                           <div
                             className="border border-secondary
@@ -396,6 +428,7 @@ export default function Draw() {
                         "
                           >
                             <div
+                              onClick={handleOtherPicks}
                               className="border border-secondary 
                           text-center
                           "
