@@ -4,6 +4,28 @@ import { Collapse } from "bootstrap";
 
 export default function Nav() {
   const [showMenu, setShowMenu] = useState(true);
+  const navDatas = [
+    {
+      url: "/knowledge",
+      title: "命理知識",
+    },
+    {
+      url: "/about",
+      title: "命理師介紹",
+    },
+    {
+      url: "/",
+      img: "../assets/images/nav/nav-mb/logo-mb.png",
+    },
+    {
+      url: "/reserve",
+      title: "立即預約",
+    },
+    {
+      url: "/appointment-management",
+      title: "登入/註冊",
+    },
+  ];
   const menuBtnRef = useRef(null);
   const closeBtnRef = useRef(null);
   const navCollapse = useRef(null);
@@ -14,7 +36,7 @@ export default function Nav() {
     });
   }, []);
 
-  function handleCollapse(state) {    
+  function handleCollapse(state) {
     setShowMenu(state);
     if (state) {
       navCollapse.current.hide();
@@ -67,39 +89,15 @@ export default function Nav() {
         </div>
 
         <ul className="list-unstyled d-md-flex d-none px-106 align-items-center justify-content-between w-100">
-          <li className="py-3 px-4">
-            <Link to="/knowledge" className="text-dark text-decoration-none">
-              命理知識
-            </Link>
-          </li>
-          <li className="py-3 px-4">
-            <Link to="/about" className="text-dark text-decoration-none">
-              命理師介紹
-            </Link>
-          </li>
-          <li>
-            <Link to="/">
-              <img
-                src="../assets/images/nav/logo.png"
-                alt="首頁連結
-              (圖掛了還沒修)"
-              />
-            </Link>
-          </li>
-          <li className="py-3 px-4">
-            <Link to="/reserve" className="text-dark text-decoration-none">
-              {" "}
-              立即預約{" "}
-            </Link>
-          </li>
-          <li className="py-3 px-4 <%= login ===false?'d-block':'d-none' %>">
-            <Link
-              to="/appointment-management"
-              className="text-dark text-decoration-none"
-            >
-              登入/註冊
-            </Link>
-          </li>
+          {navDatas.map((data, i) => {
+            return (
+              <li key={i} className="py-3 px-4">
+                <Link to={data.url} className="text-dark text-decoration-none">
+                  {data.img ? <img src={data.img} /> : data.title}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
       <div
@@ -113,69 +111,24 @@ export default function Nav() {
           style={{ backgroundImage: "url(../assets/images/index/nav-bg.png)" }}
         >
           <ul className="list-unstyled text-center">
-            <li className="py-3">
-              <Link className="text-dark text-decoration-none" to="/knowledge">
-                命理知識
-              </Link>
-            </li>
-            <li className="py-3">
-              <Link className="text-dark text-decoration-none" to="/about">
-                命理師介紹
-              </Link>
-            </li>
-            <li className="py-3">
-              <Link to="/reserve" className="text-dark text-decoration-none">
-                {" "}
-                立即預約{" "}
-              </Link>
-            </li>
-            <li className="py-3 <%= login ===false?'d-block':'d-none' %>">
-              <Link
-                to="/appointment-management"
-                className="text-dark text-decoration-none"
-              >
-                登入/註冊
-              </Link>
-            </li>
-            <li className="dropdown <%= login ===true?'d-block':'d-none' %>">
-              <button
-                type="button"
-                className="py-3 px-4 border-0 bg-transparent text-decoration-none"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <img src="../assets/images/nav/user.png" alt="icon-user" />
-                <span>使用者姓名</span>
-                <img
-                  src="../assets/images/nav/angle-small-down.png"
-                  alt="angle-small-down"
-                />
-              </button>
-              <ul
-                className="dropdown-menu member-menu mt-0 py-0 border-0 w-100 px-4"
-                style={{
-                  backgroundImage: "url('../assets/images/index/nav-bg.png')",
-                }}
-                aria-labelledby="dropdownMenuButton1"
-              >
-                <li className="border-top border-1 border-black-400">
-                  <a className="dropdown-item py-3 text-center" href="#">
-                    預約查詢
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item py-3 text-center" href="#">
-                    會員中心
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item py-3 text-center" href="#">
-                    修改密碼
-                  </a>
-                </li>
-              </ul>
-            </li>
+            {navDatas.map((data, i) => {
+              return (
+                <>
+                  {data.title ? (
+                    <li key={i} className="py-3">
+                      <Link
+                        className="text-dark text-decoration-none"
+                        to={data.url}
+                      >
+                        {data.title}
+                      </Link>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+                </>
+              );
+            })}
           </ul>
         </div>
       </div>
