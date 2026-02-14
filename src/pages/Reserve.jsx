@@ -1,54 +1,15 @@
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
-import axios from "axios";
+import { createBooking, checkIsAuth } from "../api/api.js";
+
+import { timeOptions, serviceOptions } from "../api/fromOptionsData.js";
+
 export default function Reserve() {
-  const serviceOptions = [
-    {
-      id: "card1",
-      value: "紫微命盤",
-      title: "紫微命盤",
-      price: "$6,666",
-      image: "../assets/images/reserve/service.png",
-      alt: "紫微命盤",
-    },
-    {
-      id: "card2",
-      value: "擇日開運",
-      title: "擇日開運",
-      price: "$6,666",
-      image: "../assets/images/reserve/service2.png",
-      alt: "擇日開運",
-    },
-    {
-      id: "card3",
-      value: "小流年運勢分析",
-      title: "小流年運勢分析",
-      price: "$6,666",
-      image: "../assets/images/reserve/service3.jpg",
-      alt: "小流年運勢分析",
-    },
-    {
-      id: "card4",
-      value: "因緣與感情合盤",
-      title: "因緣與感情合盤",
-      price: "$6,666",
-      image: "../assets/images/reserve/service4.png",
-      alt: "因緣與感情合盤",
-    },
-  ];
-  const timeOptions = [
-    { value: "1", label: "上午9:00" },
-    { value: "2", label: "上午10:00" },
-    { value: "3", label: "上午11:00" },
-    { value: "4", label: "下午15:00" },
-    { value: "5", label: "下午16:00" },
-    { value: "6", label: "下午17:00" },
-    { value: "7", label: "晚上19:00" },
-    { value: "8", label: "晚上20:00" },
-    { value: "9", label: "晚上21:00" },
-  ];
+  const [isAuth, setIsAuth] = useState(true);
+  const [userData, setUserData] = useState(null);
 
   const {
     register,
@@ -58,18 +19,30 @@ export default function Reserve() {
 
   const navigate = useNavigate();
 
-  // API 串接
-  const API_URL = import.meta.env.VITE_API_URL;
+  // 檢查是否已登入
+  useEffect(() => {
+    const checkAuth = async () => {
+      const [authStatus, userData] = await checkIsAuth();
+      setIsAuth(authStatus);
+      setUserData(userData);
+    };
+    checkAuth();
+  }, []);
 
-  const apiBooking = async (data) => {
-    console.log(`預約資料data:`, data);
+  // API 串接
+  const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`${API_URL}/bookings`, data);
-      console.log(`預約成功: ${data.email}`);
-      // 送出成功後跳轉到指定頁面
+      // 若已登入且有 userData，將 userId 加入表單資料
+      const bookingData = userData?.userId
+        ? { ...data, userId: userData.userId }
+        : data;
+
+      await createBooking(bookingData);
+      alert("預約成功！我們將盡快與您聯繫確認細節。");
       navigate("/");
     } catch (error) {
-      console.error(error.response);
+      alert("預約失敗，請稍後再試。");
+      console.error("預約失敗:", error);
     }
   };
 
@@ -117,7 +90,24 @@ export default function Reserve() {
       <section className="container  py-40 py-md-80">
         <div className="outside-border">
           <div className="inside-border py-md-72 py-36">
-            <form className="reserve-form" onSubmit={handleSubmit(apiBooking)}>
+            {!isAuth && (
+              <div
+                className="alert alert-warning m-0 d-md-flex align-items-center justify-content-center fs-5"
+                role="alert"
+              >
+                <div className="mb-3 m-md-3">
+                  您尚未登入,登入後可享有更便利的服務體驗
+                </div>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => navigate("/login")}
+                >
+                  前往登入
+                </button>
+              </div>
+            )}
+
+            <form className="reserve-form" onSubmit={handleSubmit(onSubmit)}>
               <div className="row service-list ">
                 <div className="col-md-6 p-md-5">
                   <h2 className="fs-4 text-black-600 pb-4">
@@ -252,6 +242,7 @@ export default function Reserve() {
                           name="name"
                           type="text"
                           id="name"
+                          value={userData ? userData.name : ""}
                           className={`form-control ${errors.name ? "input-error" : ""}`}
                           placeholder="請輸入姓名"
                           {...register("name", { required: "請輸入姓名" })}
@@ -325,6 +316,7 @@ export default function Reserve() {
                           id="email"
                           className={`form-control ${errors.email ? "input-error" : ""}`}
                           placeholder="example@gmail.com"
+                          value={userData ? userData.email : ""}
                           {...register("email", { required: "請輸入電子郵件" })}
                         />
                         <i className="bi bi-envelope position-absolute top-50 end-0 translate-middle-y me-3 text-muted pointer-events-none"></i>

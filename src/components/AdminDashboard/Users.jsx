@@ -77,11 +77,13 @@ export default function Users({ users }) {
 
   const handleUserEdit = async (data) => {
     try {
-      const response = await userEdit(currentUserId, data); // 呼叫 API 編輯  
+      const response = await userEdit(currentUserId, data); // 呼叫 API 編輯
       if (response.success) {
         closeModal();
         setUsersData((prevData) =>
-          prevData.map((user) => (user.id === currentUserId ? response.data : user))
+          prevData.map((user) =>
+            user.id === currentUserId ? response.data : user,
+          ),
         );
       } else {
         alert(`編輯失敗: ${response.error}`);
@@ -205,8 +207,6 @@ export default function Users({ users }) {
                 aria-label="Close"
               ></button>
             </div>
-
-            {modalType === "edit" ? "編輯使用者" : "新增使用者"}
 
             <div className="modal-body bg-secondary bg-opacity-10 p-4">
               <form
