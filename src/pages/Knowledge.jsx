@@ -378,7 +378,7 @@ export default function Knowledge() {
                   <div className="timeline-img-div">
                     <img
                       className="timeline-img"
-                      src="/assets/images/knowledge/life-stage-1.png"
+                      src="assets/images/knowledge/life-stage-1.png"
                       alt="嬰兒期"
                     />
                   </div>
@@ -412,7 +412,7 @@ export default function Knowledge() {
                   <div className="timeline-img-div">
                     <img
                       className="timeline-img"
-                      src="../assets/images/knowledge/life-stage-2.png"
+                      src="assets/images/knowledge/life-stage-2.png"
                       alt="青年期"
                     />
                   </div>
@@ -446,7 +446,7 @@ export default function Knowledge() {
                   <div className="timeline-img-div">
                     <img
                       className="timeline-img"
-                      src="../assets/images/knowledge/life-stage-3.png"
+                      src="assets/images/knowledge/life-stage-3.png"
                       alt="壯年期"
                     />
                   </div>
@@ -480,7 +480,7 @@ export default function Knowledge() {
                   <div className="timeline-img-div">
                     <img
                       className="timeline-img"
-                      src="../assets/images/knowledge/life-stage-4.png"
+                      src="assets/images/knowledge/life-stage-4.png"
                       alt="成熟期"
                     />
                   </div>
@@ -514,7 +514,7 @@ export default function Knowledge() {
                   <div className="timeline-img-div">
                     <img
                       className="timeline-img"
-                      src="../assets/images/knowledge/life-stage-5.png"
+                      src="assets/images/knowledge/life-stage-5.png"
                       alt="晚年期"
                     />
                   </div>
@@ -548,7 +548,7 @@ export default function Knowledge() {
                   <div className="timeline-img-div">
                     <img
                       className="timeline-img"
-                      src="../assets/images/knowledge/life-stage-6.png"
+                      src="assets/images/knowledge/life-stage-6.png"
                       alt="歸藏期"
                     />
                   </div>
