@@ -81,6 +81,7 @@ export default function OtherPicks() {
                       <div
                         key={i}
                         className="picks-box px-12 me-20 mb-3 d-md-none d-block"
+                        onClick={() => handleOpenModal(n + 50)}
                       >
                         <div className="picks-box-pick text-center ">
                           第{Nzh.hk.encodeS(n + 50)}首
@@ -98,7 +99,11 @@ export default function OtherPicks() {
               <div className="d-md-flex flex-wrap justify-content-end">
                 {picks.map((n, i) => {
                   return (
-                    <div key={i} className="picks-box px-12 me-20 mb-3">
+                    <div
+                      key={i}
+                      className="picks-box px-12 me-20 mb-3"
+                      onClick={() => handleOpenModal(n+50)}
+                    >
                       <div className="picks-box-pick text-center ">
                         第{Nzh.hk.encodeS(n + 50)}首
                       </div>

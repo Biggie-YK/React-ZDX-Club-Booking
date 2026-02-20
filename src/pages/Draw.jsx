@@ -130,8 +130,8 @@ export default function Draw() {
   function handleTossingBlocks(isSecondRound) {
     setShowText(false);
 
-    const i = getRendomNum(3);
-
+    // const i = getRendomNum(3);
+    const i=0;
     setResult(results[i]);
     setImgKey((prev) => prev + 1);
 
