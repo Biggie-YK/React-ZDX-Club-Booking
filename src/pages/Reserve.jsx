@@ -55,7 +55,7 @@ export default function Reserve() {
               <div className=" mx-24 position-relative  py-55">
                 <img
                   className="position-absolute align-items-center"
-                  src="../assets/images/reserve/title-deco.png"
+                  src="assets/images/reserve/title-deco.png"
                   alt="reserve-dot"
                 />
                 <h1 className="text-black-950 px-4 pt-33 pb-64 fs-2 lh-sm fw-bold ">
@@ -77,7 +77,7 @@ export default function Reserve() {
               <div className=" d-flex">
                 <img
                   className="img-fluid"
-                  src="../assets/images/reserve/pig.png"
+                  src="assets/images/reserve/pig.png"
                   alt="豬大仙"
                 />
               </div>
@@ -553,14 +553,14 @@ export default function Reserve() {
           <div className="col-12 col-md-8  image-bg p-md-5 me-lg-3 mb-4 mb-md-0">
             <img
               className="list-bg img-fluid d-none d-md-block "
-              src="../assets/images/reserve/memo-bg1.png"
+              src="assets/images/reserve/memo-bg1.png"
               alt="memo-bg1"
             />
             <div className="content ">
               <div className="position-relative pt-4 mb-40">
                 <img
                   className="position-absolute top-0 "
-                  src="../assets/images/reserve/title-deco.png"
+                  src="assets/images/reserve/title-deco.png"
                   alt="title-deco"
                 />
                 <h2 className="fs-2 fw-bold ps-32 mb-0">注意事項</h2>
@@ -585,14 +585,14 @@ export default function Reserve() {
           <div className="col-12 col-md-4  image-bg p-md-5">
             <img
               className="list-bg img-fluid d-none d-md-block"
-              src="../assets/images/reserve/memo-bg2.png"
+              src="assets/images/reserve/memo-bg2.png"
               alt="memo-bg2"
             />
             <div className="content ">
               <div className="position-relative mb-80 pt-4">
                 <img
                   className="position-absolute top-0 "
-                  src="../assets/images/reserve/title-deco.png"
+                  src="assets/images/reserve/title-deco.png"
                   alt="title-deco"
                 />
                 <h2 className="fs-2 fw-bold ps-32 mb-0">需要協助</h2>

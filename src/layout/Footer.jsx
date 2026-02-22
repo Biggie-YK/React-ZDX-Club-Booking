@@ -7,12 +7,12 @@ export default function Footer() {
           <picture className="mx-auto">
             <source
               className="footer-logo logo-mb"
-              srcSet="../assets/images/nav/logo.png"
+              srcSet='assets/images/nav/logo.png'
               media="(min-width: 768px)"
             />
             <img
               className="logo-mb  d-block"
-              src="../assets/images/nav/nav-mb/logo-mb.png"
+              src='assets/images/nav/nav-mb/logo-mb.png'
               alt="pig-logo"
             />
           </picture>
@@ -60,7 +60,7 @@ export default function Footer() {
             </h6>
             <img
               className="d-none d-md-block mx-auto"
-              src="../assets/images/footer/pay.png"
+              src='assets/images/footer/pay.png'
               alt="pay"
             />
           </div>
@@ -70,7 +70,7 @@ export default function Footer() {
               <div className=" border-end-0 p-11 ps-2 border border-primary">
                 <img
                   className="ic-mail"
-                  src="../assets/images/footer/ic_mail.png"
+                  src='assets/images/footer/ic_mail.png'
                   alt="icon mail"
                 />
               </div>
@@ -86,28 +86,28 @@ export default function Footer() {
             <ul className="list-unstyled d-flex gap-20">
               <li className="p-2 footer-icon ">
                 <a href="#">
-                  <img src="../assets/images/footer/ic-fb.png" alt="icon fb" />
+                  <img src='assets/images/footer/ic-fb.png' alt="icon fb" />
                 </a>
               </li>
               <li className="p-2 footer-icon ">
                 <a href="#">
                   <img
-                    src="../assets/images/footer/ic-line.png"
-                    alt="icon fb"
+                    src='assets/images/footer/ic-line.png'
+                    alt="icon line"
                   />
                 </a>
               </li>
               <li className="p-2 footer-icon ">
                 <a href="#">
                   <img
-                    src="../assets/images/footer/ic-youtube.png"
+                    src='assets/images/footer/ic-youtube.png'
                     alt="icon fb"
                   />
                 </a>
               </li>
               <li className="p-2 footer-icon ">
                 <a href="#">
-                  <img src="../assets/images/footer/ic-ig.png" alt="icon fb" />
+                  <img src='assets/images/footer/ic-ig.png' alt="icon fb" />
                 </a>
               </li>
             </ul>
