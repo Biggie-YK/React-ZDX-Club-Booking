@@ -52,7 +52,7 @@ export default function Nav() {
           <Link to="/">
             <img
               className="logo-mb d-block"
-              src="/assets/images/nav/nav-mb/logo-mb.png"
+              src="../assets/images/nav/nav-mb/logo-mb.png"
               alt="pig logo"
             />
           </Link>
