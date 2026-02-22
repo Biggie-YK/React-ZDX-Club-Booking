@@ -52,7 +52,7 @@ export default function Nav() {
           <Link to="/">
             <img
               className="logo-mb d-block"
-              src={`assets/images/nav/nav-mb/logo-mb.png`}
+              src="assets/images/nav/nav-mb/logo-mb.png"
               alt="pig logo"
             />
           </Link>
@@ -68,10 +68,7 @@ export default function Nav() {
             ref={menuBtnRef}
             onClick={() => handleCollapse(false)}
           >
-            <img
-              src={`assets/images/nav/nav-mb/menu.png`}
-              alt="menu button"
-            />
+            <img src="assets/images/nav/nav-mb/menu.png" alt="menu button" />
           </button>
           <button
             type="button"
@@ -85,7 +82,7 @@ export default function Nav() {
             onClick={() => handleCollapse(true)}
           >
             <img
-              src={`assets/images/nav/nav-mb/close-btn.png`}
+              src="assets/images/nav/nav-mb/close-btn.png"
               alt="menu button"
             />
           </button>
@@ -113,7 +110,7 @@ export default function Nav() {
       >
         <div
           className="card card-body p-0 border-0"
-          style={{ backgroundImage: "url(../assets/images/index/nav-bg.png)" }}
+          style={{ backgroundImage: "url(assets/images/index/nav-bg.png)" }}
         >
           <ul className="list-unstyled text-center">
             {navDatas.map((data, i) => {
