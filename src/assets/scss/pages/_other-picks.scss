@@ -1,10 +1,11 @@
 .picks {
-  &-img{
+  &-img {
     width: 480px;
     height: 480px;
     opacity: 15%;
   }
   &-box {
+    cursor: pointer;
     width: 124px;
     border: solid rgba(183, 183, 164, 1);
     border-width: 1px 4px;
@@ -13,22 +14,22 @@
       border-width: 0 1px;
     }
   }
-  &-again-img{
+  &-again-img {
     width: 306px;
   }
-  &-again-btn{
+  &-again-btn {
     width: 100%;
     height: 65px;
     line-height: 1.5;
     letter-spacing: 0.2rem;
   }
-  .mobile-img-other{
+  .mobile-img-other {
     width: 120px;
   }
 }
 @media (max-width: 768px) {
   .picks {
-    &-zone{
+    &-zone {
       background: rgba(134, 102, 84, 0.1);
       height: 520px;
     }
@@ -36,9 +37,8 @@
       width: 35.32763%;
       height: 28px;
     }
-    &-again-img{
+    &-again-img {
       width: 28.49002%;
     }
   }
-
 }
