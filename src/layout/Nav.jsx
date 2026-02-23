@@ -15,7 +15,7 @@ export default function Nav() {
     },
     {
       url: "/",
-      img: "../assets/images/nav/nav-mb/logo-mb.png",
+      img: `assets/images/nav/nav-mb/logo-mb.png`,
     },
     {
       url: "/reserve",
@@ -52,7 +52,7 @@ export default function Nav() {
           <Link to="/">
             <img
               className="logo-mb d-block"
-              src="../assets/images/nav/nav-mb/logo-mb.png"
+              src="assets/images/nav/nav-mb/logo-mb.png"
               alt="pig logo"
             />
           </Link>
@@ -62,19 +62,19 @@ export default function Nav() {
             type="button"
             role="button"
             style={{
-              backgroundImage: "url(../assets/images/index/nav-bg.png)",
+              backgroundImage: `url(assets/images/index/nav-bg.png)`,
             }}
             id="nav-toggle"
             ref={menuBtnRef}
             onClick={() => handleCollapse(false)}
           >
-            <img src="../assets/images/nav/nav-mb/menu.png" alt="menu button" />
+            <img src="assets/images/nav/nav-mb/menu.png" alt="menu button" />
           </button>
           <button
             type="button"
             role="button"
             style={{
-              backgroundImage: "url(../assets/images/index/nav-bg.png)",
+              backgroundImage: `url(assets/images/index/nav-bg.png)`,
             }}
             id="nav-close"
             ref={closeBtnRef}
@@ -82,7 +82,7 @@ export default function Nav() {
             onClick={() => handleCollapse(true)}
           >
             <img
-              src="../assets/images/nav/nav-mb/close-btn.png"
+              src="assets/images/nav/nav-mb/close-btn.png"
               alt="menu button"
             />
           </button>
@@ -103,12 +103,14 @@ export default function Nav() {
       <div
         className="nav-collapse collapse w-100 py-4 shadow position-absolute left-0 border-top border-black-400"
         id="collapseExample"
-        style={{ backgroundImage: "url(../assets/images/index/nav-bg.png)" }}
+        style={{
+          backgroundImage: `url(assets/images/index/nav-bg.png)`,
+        }}
         ref={navCollapse}
       >
         <div
           className="card card-body p-0 border-0"
-          style={{ backgroundImage: "url(../assets/images/index/nav-bg.png)" }}
+          style={{ backgroundImage: "url(assets/images/index/nav-bg.png)" }}
         >
           <ul className="list-unstyled text-center">
             {navDatas.map((data, i) => {

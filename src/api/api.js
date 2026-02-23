@@ -3,6 +3,30 @@ import Cookies from "js-cookie";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
+// 一次獲取所有users資料的 API
+export const fetchAllData = async () => {
+  const urlItems = [`users`, `bookings`, `posts`, `services`];
+
+  try {
+    // Promise.all 並行請求
+    const promises = urlItems.map((item) => axios.get(`${API_URL}/${item}`));
+    const responses = await Promise.all(promises);
+
+    // 將結果整理成物件
+    const result = {};
+
+    urlItems.forEach((item, index) => {
+      result[item] = responses[index].data;
+    });
+    return result;
+  } catch (error) {
+    console.error("API 請求錯誤:", error);
+  }
+};
+
+// 使用者相關 API
+const loginUrl = `${API_URL}/login`;
+
 const setUserCookie = (userData) => {
   const userInfo = {
     userId: userData.id,
@@ -35,8 +59,8 @@ export const checkIsAuth = async () => {
   }
 };
 
+// 登入 API
 export const userLogin = async (data) => {
-  const loginUrl = `${API_URL}/login`;
   try {
     const response = await axios.post(loginUrl, data);
     console.log(`登入成功: ${response.data.user.email}`);
@@ -61,6 +85,7 @@ export const userLogin = async (data) => {
   }
 };
 
+// 登出 API
 export const userLogout = () => {
   Cookies.remove("token", { path: "/" });
   Cookies.remove("userData", { path: "/" });
@@ -68,7 +93,7 @@ export const userLogout = () => {
   console.log("已登出，token 和 userData 已從 cookie 中移除");
 };
 
-// register api
+// 註冊 API
 export const userRegister = async (data) => {
   const registerUrl = `${API_URL}/register`;
   try {
@@ -87,6 +112,7 @@ export const userRegister = async (data) => {
   }
 };
 
+// 刪除使用者 API
 export const userDelete = async (userId) => {
   try {
     const response = await axios.delete(`${API_URL}/users/${userId}`);
@@ -98,6 +124,7 @@ export const userDelete = async (userId) => {
   }
 };
 
+// 編輯使用者 API
 export const userEdit = async (userId, data) => {
   try {
     const response = await axios.put(`${API_URL}/users/${userId}`, data);
@@ -109,23 +136,52 @@ export const userEdit = async (userId, data) => {
   }
 };
 
-export const fetchAllData = async () => {
-  const urlItems = [`users`, `bookings`, `posts`, `services`];
-
+// 預約相關 API createBooking
+// 新增預約 API
+export const createBooking = async (data) => {
+  console.log(`預約資料data:`, data);
   try {
-    // Promise.all 並行請求
-    const promises = urlItems.map((item) => axios.get(`${API_URL}/${item}`));
-    const responses = await Promise.all(promises);
-
-    // 將結果整理成物件
-    const result = {};
-
-    urlItems.forEach((item, index) => {
-      result[item] = responses[index].data;
-    });
-    return result;
+    const response = await axios.post(`${API_URL}/bookings`, data);
+    console.log(`預約成功: ${data.email}`);
+    return response.data;
   } catch (error) {
-    console.error("API 請求錯誤:", error);
+    console.error("預約錯誤:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+// 取得所有預約 API
+export const fetchBookings = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/bookings`);
+    return response.data;
+  } catch (error) {
+    console.error("取得預約資料失敗:", error.response?.data || error.message);
+    return [];
+  }
+};
+
+// 修改預約 API
+export const updateBooking = async (bookingId, data) => {
+  try {
+    const response = await axios.put(`${API_URL}/bookings/${bookingId}`, data);
+    console.log("修改預約成功:", response.data);
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.error("修改預約失敗:", error.response?.data || error.message);
+    return { success: false, error: error.response?.data || error.message };
+  }
+};
+
+// 刪除預約 API
+export const deleteBooking = async (bookingId) => {
+  try {
+    const response = await axios.delete(`${API_URL}/bookings/${bookingId}`);
+    console.log("刪除預約成功:", response.data);
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.error("刪除預約失敗:", error.response?.data || error.message);
+    return { success: false, error: error.response?.data || error.message };
   }
 };
 
@@ -137,4 +193,8 @@ export default {
   userDelete,
   userEdit,
   fetchAllData,
+  createBooking,
+  fetchBookings,
+  updateBooking,
+  deleteBooking,
 };

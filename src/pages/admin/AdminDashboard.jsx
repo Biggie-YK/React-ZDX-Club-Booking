@@ -2,18 +2,14 @@ import "../../assets/scss/pages/_admin-dashboard.scss";
 import { useState, useEffect } from "react";
 import Dashboard from "../../components/AdminDashboard/Dashboard";
 import Users from "../../components/AdminDashboard/Users";
+import Bookings from "../../components/AdminDashboard/Bookings";
 
-import {
-  checkIsAuth,
-  userLogin,
-  userLogout,
-  fetchAllData,
-} from "../../api/api";
+import { fetchAllData } from "../../api/api";
 
 export default function AdminDashboard() {
   const [datas, setDatas] = useState({});
   const [loading, setLoading] = useState(true);
-  const [mainContent, setMainContent] = useState("dashboard");
+  const [mainContent, setMainContent] = useState("bookings"); // dashboard
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,11 +42,11 @@ export default function AdminDashboard() {
           </div>
           <div
             className="sidebar-item"
-            onClick={() => setMainContent("reservations")}
+            onClick={() => setMainContent("bookings")}
           >
             <i className="bi bi-box"></i> 預約管理
           </div>
-          <div
+          {/* <div
             className="sidebar-item"
             onClick={() => setMainContent("services")}
           >
@@ -61,7 +57,7 @@ export default function AdminDashboard() {
             onClick={() => setMainContent("articles")}
           >
             <i className="bi bi-gear"></i> 文章管理
-          </div>
+          </div> */}
         </div>
 
         {/* <!-- Main --> */}
@@ -71,6 +67,9 @@ export default function AdminDashboard() {
             <div className="row g-4">
               {mainContent === "dashboard" && <Dashboard datas={datas} />}
               {mainContent === "users" && <Users users={datas.users} />}
+              {mainContent === "bookings" && (
+                <Bookings bookings={datas.bookings} />
+              )}
             </div>
           </div>
         </div>

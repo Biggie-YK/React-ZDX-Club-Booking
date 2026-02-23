@@ -1,75 +1,61 @@
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
-import axios from "axios";
+import { createBooking, checkIsAuth } from "../api/api.js";
+
+import { timeOptions, serviceOptions } from "../api/fromOptionsData.js";
+
 export default function Reserve() {
-  const serviceOptions = [
-    {
-      id: "card1",
-      value: "紫微命盤",
-      title: "紫微命盤",
-      price: "$6,666",
-      image: "../assets/images/reserve/service.png",
-      alt: "紫微命盤",
-    },
-    {
-      id: "card2",
-      value: "擇日開運",
-      title: "擇日開運",
-      price: "$6,666",
-      image: "../assets/images/reserve/service2.png",
-      alt: "擇日開運",
-    },
-    {
-      id: "card3",
-      value: "小流年運勢分析",
-      title: "小流年運勢分析",
-      price: "$6,666",
-      image: "../assets/images/reserve/service3.jpg",
-      alt: "小流年運勢分析",
-    },
-    {
-      id: "card4",
-      value: "因緣與感情合盤",
-      title: "因緣與感情合盤",
-      price: "$6,666",
-      image: "../assets/images/reserve/service4.png",
-      alt: "因緣與感情合盤",
-    },
-  ];
-  const timeOptions = [
-    { value: "1", label: "上午9:00" },
-    { value: "2", label: "上午10:00" },
-    { value: "3", label: "上午11:00" },
-    { value: "4", label: "下午15:00" },
-    { value: "5", label: "下午16:00" },
-    { value: "6", label: "下午17:00" },
-    { value: "7", label: "晚上19:00" },
-    { value: "8", label: "晚上20:00" },
-    { value: "9", label: "晚上21:00" },
-  ];
+  const [isAuth, setIsAuth] = useState(false);
+  const [userData, setUserData] = useState(null);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    reset,
+  } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+    },
+  });
 
   const navigate = useNavigate();
 
-  // API 串接
-  const API_URL = import.meta.env.VITE_API_URL;
+  // 檢查是否已登入
+  useEffect(() => {
+    const checkAuth = async () => {
+      const [authStatus, userData] = await checkIsAuth();
+      setIsAuth(authStatus);
+      setUserData(userData);
 
-  const apiBooking = async (data) => {
-    console.log(`預約資料data:`, data);
+      // 如果有 userData，將姓名和電子郵件預填入表單
+      if (userData) {
+        reset(userData);
+      }
+    };
+    checkAuth();
+    if (userData) {
+    }
+  }, []);
+
+  // API 串接
+  const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`${API_URL}/bookings`, data);
-      console.log(`預約成功: ${data.email}`);
-      // 送出成功後跳轉到指定頁面
+      // 若已登入且有 userData，將 userId 加入表單資料
+      const bookingData = userData?.userId
+        ? { ...data, userId: userData.userId }
+        : data;
+
+      await createBooking(bookingData);
+      alert("預約成功！我們將盡快與您聯繫確認細節。");
       navigate("/");
     } catch (error) {
-      console.error(error.response);
+      alert("預約失敗，請稍後再試。");
+      console.error("預約失敗:", error);
     }
   };
 
@@ -82,7 +68,7 @@ export default function Reserve() {
               <div className=" mx-24 position-relative  py-55">
                 <img
                   className="position-absolute align-items-center"
-                  src="../assets/images/reserve/title-deco.png"
+                  src="assets/images/reserve/title-deco.png"
                   alt="reserve-dot"
                 />
                 <h1 className="text-black-950 px-4 pt-33 pb-64 fs-2 lh-sm fw-bold ">
@@ -104,7 +90,7 @@ export default function Reserve() {
               <div className=" d-flex">
                 <img
                   className="img-fluid"
-                  src="../assets/images/reserve/pig.png"
+                  src="assets/images/reserve/pig.png"
                   alt="豬大仙"
                 />
               </div>
@@ -117,7 +103,24 @@ export default function Reserve() {
       <section className="container  py-40 py-md-80">
         <div className="outside-border">
           <div className="inside-border py-md-72 py-36">
-            <form className="reserve-form" onSubmit={handleSubmit(apiBooking)}>
+            {!isAuth && (
+              <div
+                className="alert alert-warning m-0 d-md-flex align-items-center justify-content-center fs-5"
+                role="alert"
+              >
+                <div className="mb-3 m-md-3">
+                  您尚未登入,登入後可享有更便利的服務體驗
+                </div>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => navigate("/login")}
+                >
+                  前往登入
+                </button>
+              </div>
+            )}
+
+            <form className="reserve-form" onSubmit={handleSubmit(onSubmit)}>
               <div className="row service-list ">
                 <div className="col-md-6 p-md-5">
                   <h2 className="fs-4 text-black-600 pb-4">
@@ -561,14 +564,14 @@ export default function Reserve() {
           <div className="col-12 col-md-8  image-bg p-md-5 me-lg-3 mb-4 mb-md-0">
             <img
               className="list-bg img-fluid d-none d-md-block "
-              src="../assets/images/reserve/memo-bg1.png"
+              src="assets/images/reserve/memo-bg1.png"
               alt="memo-bg1"
             />
             <div className="content ">
               <div className="position-relative pt-4 mb-40">
                 <img
                   className="position-absolute top-0 "
-                  src="../assets/images/reserve/title-deco.png"
+                  src="assets/images/reserve/title-deco.png"
                   alt="title-deco"
                 />
                 <h2 className="fs-2 fw-bold ps-32 mb-0">注意事項</h2>
@@ -593,14 +596,14 @@ export default function Reserve() {
           <div className="col-12 col-md-4  image-bg p-md-5">
             <img
               className="list-bg img-fluid d-none d-md-block"
-              src="../assets/images/reserve/memo-bg2.png"
+              src="assets/images/reserve/memo-bg2.png"
               alt="memo-bg2"
             />
             <div className="content ">
               <div className="position-relative mb-80 pt-4">
                 <img
                   className="position-absolute top-0 "
-                  src="../assets/images/reserve/title-deco.png"
+                  src="assets/images/reserve/title-deco.png"
                   alt="title-deco"
                 />
                 <h2 className="fs-2 fw-bold ps-32 mb-0">需要協助</h2>

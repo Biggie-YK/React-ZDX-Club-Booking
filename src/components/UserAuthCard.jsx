@@ -43,6 +43,9 @@ export default function UserAuthCard({ userData, pageInfo }) {
                 <a href="/#/" className="btn btn-primary">
                   回到首頁
                 </a>
+                <a href="/#/reserve" className="btn btn-primary">
+                  立即預約
+                </a>
                 <button
                   onClick={() => {
                     userLogout();
