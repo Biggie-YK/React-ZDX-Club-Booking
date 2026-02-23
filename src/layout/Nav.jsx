@@ -114,8 +114,7 @@ export default function Nav() {
         >
           <ul className="list-unstyled text-center">
             {navDatas.map((data, i) => {
-              return (
-                <>
+              
                   {data.title ? (
                     <li key={i} className="py-3">
                       <Link
@@ -128,8 +127,7 @@ export default function Nav() {
                   ) : (
                     ""
                   )}
-                </>
-              );
+               ;
             })}
           </ul>
         </div>

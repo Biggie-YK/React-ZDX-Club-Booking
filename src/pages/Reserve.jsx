@@ -8,14 +8,20 @@ import { createBooking, checkIsAuth } from "../api/api.js";
 import { timeOptions, serviceOptions } from "../api/fromOptionsData.js";
 
 export default function Reserve() {
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
   const [userData, setUserData] = useState(null);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    reset,
+  } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+    },
+  });
 
   const navigate = useNavigate();
 
@@ -25,8 +31,15 @@ export default function Reserve() {
       const [authStatus, userData] = await checkIsAuth();
       setIsAuth(authStatus);
       setUserData(userData);
+
+      // 如果有 userData，將姓名和電子郵件預填入表單
+      if (userData) {
+        reset(userData);
+      }
     };
     checkAuth();
+    if (userData) {
+    }
   }, []);
 
   // API 串接
@@ -242,7 +255,6 @@ export default function Reserve() {
                           name="name"
                           type="text"
                           id="name"
-                          value={userData ? userData.name : ""}
                           className={`form-control ${errors.name ? "input-error" : ""}`}
                           placeholder="請輸入姓名"
                           {...register("name", { required: "請輸入姓名" })}
@@ -316,7 +328,6 @@ export default function Reserve() {
                           id="email"
                           className={`form-control ${errors.email ? "input-error" : ""}`}
                           placeholder="example@gmail.com"
-                          value={userData ? userData.email : ""}
                           {...register("email", { required: "請輸入電子郵件" })}
                         />
                         <i className="bi bi-envelope position-absolute top-50 end-0 translate-middle-y me-3 text-muted pointer-events-none"></i>
