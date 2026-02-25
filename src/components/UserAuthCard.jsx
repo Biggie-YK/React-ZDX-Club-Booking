@@ -43,17 +43,21 @@ export default function UserAuthCard({ userData, pageInfo }) {
                 </div>
               </div>
               <div className="d-flex gap-3 justify-content-center p-3 bg-neutral-1050">
-                {/* <a href="/#/" className="btn btn-primary">
-                  回到首頁
-                </a> */}
-
+    
                 <Link to="/" className="btn btn-primary">
                   回到首頁
                 </Link>
 
                 <Link to="/reserve" className="btn btn-primary">
-                  立即預約
+                  {userData?.role === "admin" ? "代客預約" : "立即預約"}
                 </Link>
+
+                {userData?.role === "admin" && (
+                  <Link to="/admin-dashboard" className="btn btn-primary-200">
+                    後台管理頁面
+                  </Link>
+                )}
+               
                 <button
                   onClick={() => {
                     userLogout();

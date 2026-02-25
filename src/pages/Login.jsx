@@ -11,12 +11,9 @@ export default function Login() {
 
   const checkAuth = async () => {
     const [authStatus, user] = await checkIsAuth();
-    console.log("登入狀態:", authStatus, "使用者資料:", user);
     if (authStatus) {
       setIsAuth(authStatus);
       setUserData(user);
-    } else {
-      alert("您尚未登入，請先登入以繼續使用預約功能。");
     }
   };
 

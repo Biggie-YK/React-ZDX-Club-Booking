@@ -1,4 +1,7 @@
-export default function Dashboard({ users, bookings, posts, services }) {
+
+export default function Dashboard({ datas }) {
+  const { users, bookings, posts, services } = datas;
+
   const dashboardData = [
     {
       id: 1,
