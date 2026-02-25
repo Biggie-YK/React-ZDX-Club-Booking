@@ -5,10 +5,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import FarmerCalender from "../components/FarmerCalender";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { Link, useNavigate  } from "react-router-dom";
 
 export default function Home() {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const carouselRef = useRef(null);
+  const navigate = useNavigate();
 
   const QAcontent = [
     {
@@ -38,7 +40,7 @@ export default function Home() {
       <header
         className="header  py-md-160 py-80  position-relative "
         //
-        style={{ backgroundImage: "url(../assets/images/index/header.png)" }}
+        style={{ backgroundImage: "url(assets/images/index/header.png)" }}
       >
         <DotLottieReact
           src="https://lottie.host/08657889-c1e5-4d0b-8844-c01b6a963497/cPEKyYNdRW.lottie"
@@ -65,7 +67,9 @@ export default function Home() {
             type="button"
             className="btn bg-neutral-50 rounded-0  fs-5 py-0"
           >
-            <div className="btn-inside-border py-3">立即探索您專屬的服務</div>
+            <Link to="/reserve" className="btn-inside-border py-3 d-block text-center">
+              立即探索您專屬的服務
+            </Link>
           </button>
         </div>
       </header>
@@ -80,7 +84,7 @@ export default function Home() {
             >
               <img
                 className="position-absolute top-0"
-                src="../assets/images/index/title-deco.png"
+                src="assets/images/index/title-deco.png"
                 alt="round-deco "
               />
               <h2 className="ps-md-32 mb-md-0 mb-12 me-12 fs-md-2 fs-4">
@@ -118,7 +122,7 @@ export default function Home() {
               <div
                 className="carousel-item active bg-position-left"
                 style={{
-                  backgroundImage: "url(../assets/images/index/banner-1.png)",
+                  backgroundImage: "url(assets/images/index/banner-1.png)",
                 }}
               >
                 <div className=" d-flex align-items-center h-100">
@@ -132,6 +136,7 @@ export default function Home() {
                     <button
                       type="button"
                       className="btn  rounded-0  fs-md-5 fs-6 py-0 px-12 border-green-200"
+                      onClick={() => navigate("/reserve")}
                     >
                       <div className="btn-inside-border py-2 px-3 text-white  border-green-200">
                         立即預約
@@ -143,7 +148,7 @@ export default function Home() {
               <div
                 className="carousel-item "
                 style={{
-                  backgroundImage: "url(../assets/images/index/banner-2.png)",
+                  backgroundImage: "url(assets/images/index/banner-2.png)",
                 }}
               >
                 <div className=" d-flex align-items-center h-100">
@@ -157,6 +162,7 @@ export default function Home() {
                     <button
                       type="button"
                       className="btn  rounded-0  fs-md-5 fs-6 py-0 px-12 border-green-200"
+                      onClick={() => navigate("/reserve")}
                     >
                       <div className="btn-inside-border py-2 px-3 text-white  border-green-200">
                         立即預約
@@ -168,7 +174,7 @@ export default function Home() {
               <div
                 className="carousel-item "
                 style={{
-                  backgroundImage: "url(../assets/images/index/banner-3.png)",
+                  backgroundImage: "url(assets/images/index/banner-3.png)",
                 }}
               >
                 <div className=" d-flex align-items-center h-100">
@@ -184,6 +190,7 @@ export default function Home() {
                     <button
                       type="button"
                       className="btn  rounded-0  fs-md-5 fs-6 py-0 px-12 border-green-200"
+                      onClick={() => navigate("/reserve")}
                     >
                       <div className="btn-inside-border py-2 px-3 text-white  border-green-200">
                         立即預約
@@ -214,7 +221,7 @@ export default function Home() {
           <div className="d-md-flex d-block align-items-end position-relative mb-md-40 mb-4">
             <img
               className="position-absolute"
-              src="../assets/images/index/title-deco.png"
+              src="assets/images/index/title-deco.png"
               alt="round-deco "
             />
             <h2 className="ps-md-32 pt-30 pt-md-0 mb-0 me-12 fs-md-2 fs-4">
@@ -238,13 +245,13 @@ export default function Home() {
             <SwiperSlide>
               <div className="card bg-transparent border-0">
                 <img
-                  src="../assets/images/index/comment-4.png"
+                  src="assets/images/index/comment-4.png"
                   alt="women take coffee"
                 />
                 <div className="pt-4 text-center">
                   <img
                     className="mb-4"
-                    src="../assets/images/index/star4.png"
+                    src="assets/images/index/star4.png"
                     alt="4-stars"
                   />
                   <div className="card-title fw-bold mb-4">
@@ -263,13 +270,13 @@ export default function Home() {
             <SwiperSlide>
               <div className="card bg-transparent border-0">
                 <img
-                  src="../assets/images/index/comment-1.png"
+                  src="assets/images/index/comment-1.png"
                   alt="women take coffee"
                 />
                 <div className="pt-4 text-center">
                   <img
                     className="mb-4"
-                    src="../assets/images/index/star4.png"
+                    src="assets/images/index/star4.png"
                     alt="4-stars"
                   />
                   <div className="card-title fw-bold mb-4">
@@ -288,13 +295,13 @@ export default function Home() {
             <SwiperSlide>
               <div className="card bg-transparent border-0 ">
                 <img
-                  src="../assets/images/index/comment-2.png"
+                  src="assets/images/index/comment-2.png"
                   alt="women take coffee"
                 />
                 <div className="pt-4 text-center">
                   <img
                     className="mb-4"
-                    src="../assets/images/index/full-stars.png"
+                    src="assets/images/index/full-stars.png"
                     alt="4-stars"
                   />
                   <div className="card-title fw-bold mb-4">
@@ -313,13 +320,13 @@ export default function Home() {
             <SwiperSlide>
               <div className="card bg-transparent border-0">
                 <img
-                  src="../assets/images/index/comment-3.png"
+                  src="assets/images/index/comment-3.png"
                   alt="women take coffee"
                 />
                 <div className="pt-4 text-center">
                   <img
                     className="mb-4"
-                    src="../assets/images/index/full-stars.png"
+                    src="assets/images/index/full-stars.png"
                     alt="4-stars"
                   />
                   <div className="card-title fw-bold mb-4" />
@@ -346,13 +353,13 @@ export default function Home() {
             <div className="carousel-item  ps-0 active swiper-slide">
               <div className="card bg-transparent border-0">
                 <img
-                  src="../assets/images/index/comment-4.png"
+                  src="assets/images/index/comment-4.png"
                   alt="women take coffee"
                 />
                 <div className="pt-4 text-center">
                   <img
                     className="mb-4"
-                    src="../assets/images/index/star4.png"
+                    src="assets/images/index/star4.png"
                     alt="4-stars"
                   />
                   <div className="card-title fw-bold mb-4">
@@ -371,13 +378,13 @@ export default function Home() {
             <div className="carousel-item  ps-0 swiper-slide">
               <div className="card bg-transparent border-0">
                 <img
-                  src="../assets/images/index/comment-1.png"
+                  src="assets/images/index/comment-1.png"
                   alt="women take coffee"
                 />
                 <div className="pt-4 text-center">
                   <img
                     className="mb-4"
-                    src="../assets/images/index/star4.png"
+                    src="assets/images/index/star4.png"
                     alt="4-stars"
                   />
                   <div className="card-title fw-bold mb-4">
@@ -396,13 +403,13 @@ export default function Home() {
             <div className="carousel-item  ps-0 swiper-slide">
               <div className="card bg-transparent border-0 ">
                 <img
-                  src="../assets/images/index/comment-2.png"
+                  src="assets/images/index/comment-2.png"
                   alt="women take coffee"
                 />
                 <div className="pt-4 text-center">
                   <img
                     className="mb-4"
-                    src="../assets/images/index/full-stars.png"
+                    src="assets/images/index/full-stars.png"
                     alt="4-stars"
                   />
                   <div className="card-title fw-bold mb-4">
@@ -421,13 +428,13 @@ export default function Home() {
             <div className="carousel-item  ps-0 swiper-slide">
               <div className="card bg-transparent border-0">
                 <img
-                  src="../assets/images/index/comment-3.png"
+                  src="assets/images/index/comment-3.png"
                   alt="women take coffee"
                 />
                 <div className="pt-4 text-center">
                   <img
                     className="mb-4"
-                    src="../assets/images/index/full-stars.png"
+                    src="assets/images/index/full-stars.png"
                     alt="4-stars"
                   />
                   <div className="card-title fw-bold mb-4">
@@ -466,14 +473,14 @@ export default function Home() {
         {/* <!-- overflow-x-hidden會連y軸部分都隱藏 clip不會 --> */}
         <img
           className="tree-deco opacity-50 position-absolute d-none d-md-block"
-          src="../assets/images/index/tree-bg.png"
+          src="assets/images/index/tree-bg.png"
           alt="tree"
         />
         <div className="container">
           <div className="d-md-flex d-block align-items-end position-relative mb-md-40 mb-4">
             <img
               className="position-absolute"
-              src="../assets/images/index/title-deco.png"
+              src="assets/images/index/title-deco.png"
               alt="round-deco "
             />
             <h2 className="ps-md-32 pt-30 pt-md-0 mb-0 me-12 fs-md-2 fs-4">
@@ -492,12 +499,12 @@ export default function Home() {
                   className="card-title step-item py-md-80 text-center mb-0
               rounded-circle d-flex flex-column justify-content-center align-items-center"
                   style={{
-                    backgroundImage: "url(../assets/images/index/step-1.png)",
+                    backgroundImage: "url(assets/images/index/step-1.png)",
                   }}
                 >
                   <img
                     className="mb-md-4 mb-12 card-title-icon"
-                    src="../assets/images/index/step-1-icon.png"
+                    src="assets/images/index/step-1-icon.png"
                     alt="step-1-icon"
                   />
                   <h2 className="text-white mb-0 fs-md-2 fs-5">登入 or Mail</h2>
@@ -522,12 +529,12 @@ export default function Home() {
                   className="card-title step-item py-md-80 text-center mb-0
               rounded-circle d-flex flex-column justify-content-center align-items-center"
                   style={{
-                    backgroundImage: "url(../assets/images/index/step-2.png)",
+                    backgroundImage: "url(assets/images/index/step-2.png)",
                   }}
                 >
                   <img
                     className="mb-md-4 mb-12 card-title-icon"
-                    src="../assets/images/index/step-2-icon.png"
+                    src="assets/images/index/step-2-icon.png"
                     alt="step-2-icon"
                   />
                   <h2 className="text-white mb-0 fs-md-2 fs-5">選擇命理師</h2>
@@ -552,12 +559,12 @@ export default function Home() {
                   className="card-title step-item py-md-80 text-center mb-0
               rounded-circle d-flex flex-column justify-content-center align-items-center"
                   style={{
-                    backgroundImage: "url(../assets/images/index/step-3.png)",
+                    backgroundImage: "url(assets/images/index/step-3.png)",
                   }}
                 >
                   <img
                     className="mb-md-4 mb-12 card-title-icon"
-                    src="../assets/images/index/step-3-icon.png"
+                    src="assets/images/index/step-3-icon.png"
                     alt="step-3-icon"
                   />
                   <h2 className="text-white mb-0 fs-md-2 fs-5">
@@ -584,12 +591,12 @@ export default function Home() {
                   className="card-title step-item py-md-80 text-center mb-0
               rounded-circle d-flex flex-column justify-content-center align-items-center"
                   style={{
-                    backgroundImage: "url(../assets/images/index/step-4.png)",
+                    backgroundImage: "url(assets/images/index/step-4.png)",
                   }}
                 >
                   <img
                     className="mb-md-4 mb-12 card-title-icon"
-                    src="../assets/images/index/step-4-icon.png"
+                    src="assets/images/index/step-4-icon.png"
                     alt="step-4-icon"
                   />
                   <h2 className="text-white mb-0 fs-md-2 fs-5">登入 or Mail</h2>
@@ -611,7 +618,7 @@ export default function Home() {
             <div className="warning-bg py-md-98 py-3  position-relative ">
               <img
                 className="position-absolute warning-bg-img z-1 opacity-50 start-0 d-none d-md-block"
-                src="../assets/images/index/warning-bg.png"
+                src="assets/images/index/warning-bg.png"
                 alt="warning-bg"
               />
               <div className="position-relative z-2">
@@ -635,7 +642,7 @@ export default function Home() {
             <div className="d-md-flex d-block align-items-end position-relative mb-md-40 mb-4 ps-12 ps-md-0">
               <img
                 className="position-absolute"
-                src="../assets/images/index/title-deco.png"
+                src="assets/images/index/title-deco.png"
                 alt="round-deco "
               />
               <h2 className="ps-md-32 pt-30 pt-md-0 mb-0 me-12 fs-md-2 fs-4">
@@ -754,14 +761,14 @@ export default function Home() {
       <section className="QA py-md-80 py-40 position-relative">
         <img
           className="position-absolute waves-bg d-none d-md-block"
-          src="../assets/images/index/waves-bg.png"
+          src="assets/images/index/waves-bg.png"
           alt="waves-bg"
         />
         <div className="container">
           <div className="QA-title d-md-flex d-block align-items-end position-relative mb-md-40 mb-4 ">
             <img
               className="position-absolute"
-              src="../assets/images/index/title-deco.png"
+              src="assets/images/index/title-deco.png"
               alt="round-deco "
             />
             <h2 className="ps-md-32 pt-30 pt-md-0 mb-0 me-12 fs-md-2 fs-4">
@@ -780,7 +787,7 @@ export default function Home() {
                           <div className="d-flex align-items-center">
                             <img
                               className="Q-icon me-md-4 me-3"
-                              src="../assets/images/index/Q-icon.png"
+                              src="assets/images/index/Q-icon.png"
                               alt="Q-icon"
                             />
                             <p className="mb-0">{item.ask}</p>
@@ -791,7 +798,7 @@ export default function Home() {
                             data-bs-toggle="collapse"
                           >
                             <img
-                              src="../assets/images/index/btn-social.png"
+                              src="assets/images/index/btn-social.png"
                               alt="btn-close"
                               onClick={() => {
                                 setCollapseOpen((prev) =>
@@ -811,7 +818,7 @@ export default function Home() {
                           <div className="d-flex">
                             <img
                               className="A-icon me-md-4 me-3"
-                              src="../assets/images/index/A-icon.png"
+                              src="assets/images/index/A-icon.png"
                               alt="A-icon"
                             />
                             <p className="mb-0">{item.ans}</p>

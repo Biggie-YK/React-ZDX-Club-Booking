@@ -367,9 +367,7 @@ export default function KnowledgeArticle() {
 
   const [activeArticle, setActiveArticle] = useState(articles[0]);
 
-  console.log("文章資料", activeArticle.content);
-
-  const handleArticleClick = (id) => {
+    const handleArticleClick = (id) => {
     setActiveArticle(articles.find((article) => article.id === id));
     // 手機版點擊後關閉 dropdown
     const dropdown = document.querySelector(".dropdown-menu");

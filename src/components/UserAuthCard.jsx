@@ -1,7 +1,9 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { userLogout } from "../api/api";
 
 export default function UserAuthCard({ userData, pageInfo }) {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="container py-5">
@@ -55,6 +57,8 @@ export default function UserAuthCard({ userData, pageInfo }) {
                 <button
                   onClick={() => {
                     userLogout();
+                    alert("已成功登出！");
+                    navigate("/");
                   }}
                   className="btn btn-secondary"
                 >

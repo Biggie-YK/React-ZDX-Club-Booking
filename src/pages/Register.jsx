@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+
 
 import { userRegister } from "../api/api";
 import UserAuthCard from "../components/UserAuthCard";
@@ -31,7 +33,7 @@ export default function Register() {
       setUserData({
         name: formData.name,
         email: formData.email,
-        role: "user", // 預設角色為 user，實際情況可能需要從後端獲取
+        role: "user", // 預設角色為 user
       });
     } catch (err) {
       console.error(err);
@@ -195,9 +197,9 @@ export default function Register() {
                       <div className="text-center mt-3">
                         <p className="mb-0">
                           已經有帳戶了？{" "}
-                          <a href="/#/login" className="text-decoration-none">
+                          <Link to="/login" className="text-decoration-none">
                             立即登入
-                          </a>
+                          </Link>
                         </p>
                       </div>
                     </form>

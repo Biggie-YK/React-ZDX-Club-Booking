@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 import { checkIsAuth, userLogin } from "../api/api.js";
 import UserAuthCard from "../components/UserAuthCard";
 
-
 export default function Login() {
   const [isAuth, setIsAuth] = useState(false);
   const [userData, setUserData] = useState(null);
+
   const checkAuth = async () => {
     const [authStatus, user] = await checkIsAuth();
-    setIsAuth(authStatus);
-    setUserData(user);
+    console.log("登入狀態:", authStatus, "使用者資料:", user);
+    if (authStatus) {
+      setIsAuth(authStatus);
+      setUserData(user);
+    } else {
+      alert("您尚未登入，請先登入以繼續使用預約功能。");
+    }
   };
 
   // 使用 useEffect 檢查登入狀態
@@ -36,8 +42,10 @@ export default function Login() {
   // 處理表單提交
   const onSubmit = async (formData) => {
     try {
-      await userLogin(formData);
-      checkAuth();
+      const loginResult = await userLogin(formData);
+      if (loginResult.success) {
+        checkAuth();
+      }
     } catch (err) {
       console.error(err);
     }
@@ -46,62 +54,6 @@ export default function Login() {
   return (
     <>
       {isAuth ? (
-        // <div className="container py-5">
-        //   <div className="row justify-content-center">
-        //     <div className="col-md-6 col-lg-5">
-        //       <div className="card shadow">
-        //         <div className="card-body p-4 bg-neutral-100">
-        //           <div className="km-section-title pt-4 pt-md-32 ps-12 ps-md-32 mb-40">
-        //             <p className="text-start fs-4 fs-md-2 lh-base lh-md-sm fw-bold lh-sm text-black-950">
-        //               歡迎 {userData?.name} 蒞臨！！！
-        //             </p>
-        //           </div>
-        //           <div className="d-flex flex-column gap-2 mb-4">
-        //             <div className="d-flex align-items-center">
-        //               <i className="bi bi-person-circle me-2 fs-5"></i>
-        //               <span className="fw-semibold me-2">姓名：</span>
-        //               <span>{userData?.name}</span>
-        //             </div>
-        //             <div className="d-flex align-items-center">
-        //               <i className="bi bi-envelope-fill me-2 fs-5"></i>
-        //               <span className="fw-semibold me-2">Email：</span>
-        //               <span className="text-break">{userData?.email}</span>
-        //             </div>
-        //             <div className="d-flex align-items-center">
-        //               <i className="bi bi-shield-check me-2 fs-5"></i>
-        //               <span className="fw-semibold me-2">身份：</span>
-        //               <span className="badge bg-primary">{userData?.role}</span>
-        //             </div>
-        //             {userData?.uid && (
-        //               <div className="d-flex align-items-center">
-        //                 <i className="bi bi-key-fill me-2 fs-5"></i>
-        //                 <span className="fw-semibold me-2">UID：</span>
-        //                 <span className="text-muted small">
-        //                   {userData?.uid}
-        //                 </span>
-        //               </div>
-        //             )}
-        //           </div>
-        //         </div>
-        //         <div className="d-flex gap-3 justify-content-center p-3 bg-neutral-1050">
-        //           <a href="/#/" className="btn btn-primary">
-        //             回到首頁
-        //           </a>
-        //           <button
-        //             onClick={() => {
-        //               handleLogout();
-        //               setIsAuth(false);
-        //               setUserData(null);
-        //             }}
-        //             className="btn btn-secondary"
-        //           >
-        //             登出
-        //           </button>
-        //         </div>
-        //       </div>
-        //     </div>
-        //   </div>
-        // </div>
         <UserAuthCard userData={userData} pageInfo="login" />
       ) : (
         <div className="container py-5">
@@ -162,10 +114,10 @@ export default function Login() {
                     </button>
                     <div className="text-center mt-3">
                       <p className="mb-0">
-                        還沒有帳戶？{" "}
-                        <a href="/#/register" className="text-decoration-none">
+                        還沒有帳戶？
+                        <Link to="/register" className="text-decoration-none">
                           立即註冊
-                        </a>
+                        </Link>
                       </p>
                     </div>
                   </form>

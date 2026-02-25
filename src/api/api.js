@@ -40,8 +40,6 @@ const setUserCookie = (userData) => {
     path: "/",
     sameSite: "lax",
   });
-
-  console.log(`userData 已寫入 cookie：${Cookies.get("userData")}`);
 };
 
 // 檢查是否已登入，並返回登入狀態和 userData
@@ -51,10 +49,8 @@ export const checkIsAuth = async () => {
   if (token) {
     // 讀取 userData
     const userData = Cookies.get("userData");
-    console.log(` ${userData.email} 已登入，token: ${token}`);
     return [true, userData ? JSON.parse(userData) : null];
   } else {
-    console.log(`尚未登入`);
     return [false, null];
   }
 };
@@ -63,7 +59,6 @@ export const checkIsAuth = async () => {
 export const userLogin = async (data) => {
   try {
     const response = await axios.post(loginUrl, data);
-    console.log(`登入成功: ${response.data.user.email}`);
 
     // user data 寫入 cookie
     setUserCookie(response.data.user);
@@ -76,11 +71,11 @@ export const userLogin = async (data) => {
     });
     // 設定 axios 預設 header
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    console.log(`Token 已寫入 cookie：${Cookies.get("token")}`);
 
     return { success: true, data: response.data };
   } catch (error) {
     console.error("登入失敗:", error.response?.data || error.message);
+    alert("登入失敗，請檢查您的電子郵件和密碼是否正確。");
     return { success: false, error: error.response?.data || error.message };
   }
 };
@@ -90,7 +85,6 @@ export const userLogout = () => {
   Cookies.remove("token", { path: "/" });
   Cookies.remove("userData", { path: "/" });
   delete axios.defaults.headers.common["Authorization"];
-  console.log("已登出，token 和 userData 已從 cookie 中移除");
 };
 
 // 註冊 API
@@ -104,7 +98,6 @@ export const userRegister = async (data) => {
       role: "user",
       remark: "",
     });
-    console.log("註冊成功:", response.data);
     return { success: true, data: response.data };
   } catch (error) {
     console.error("註冊失敗:", error.response?.data || error.message);
@@ -116,7 +109,6 @@ export const userRegister = async (data) => {
 export const userDelete = async (userId) => {
   try {
     const response = await axios.delete(`${API_URL}/users/${userId}`);
-    console.log("刪除成功:", response.data);
     return { success: true, data: response.data };
   } catch (error) {
     console.error("刪除失敗:", error.response?.data || error.message);
@@ -128,7 +120,6 @@ export const userDelete = async (userId) => {
 export const userEdit = async (userId, data) => {
   try {
     const response = await axios.put(`${API_URL}/users/${userId}`, data);
-    console.log("編輯成功:", response.data);
     return { success: true, data: response.data };
   } catch (error) {
     console.error("編輯失敗:", error.response?.data || error.message);
@@ -142,7 +133,6 @@ export const createBooking = async (data) => {
   console.log(`預約資料data:`, data);
   try {
     const response = await axios.post(`${API_URL}/bookings`, data);
-    console.log(`預約成功: ${data.email}`);
     return response.data;
   } catch (error) {
     console.error("預約錯誤:", error.response?.data || error.message);
@@ -165,7 +155,6 @@ export const fetchBookings = async () => {
 export const updateBooking = async (bookingId, data) => {
   try {
     const response = await axios.put(`${API_URL}/bookings/${bookingId}`, data);
-    console.log("修改預約成功:", response.data);
     return { success: true, data: response.data };
   } catch (error) {
     console.error("修改預約失敗:", error.response?.data || error.message);
@@ -177,7 +166,6 @@ export const updateBooking = async (bookingId, data) => {
 export const deleteBooking = async (bookingId) => {
   try {
     const response = await axios.delete(`${API_URL}/bookings/${bookingId}`);
-    console.log("刪除預約成功:", response.data);
     return { success: true, data: response.data };
   } catch (error) {
     console.error("刪除預約失敗:", error.response?.data || error.message);
