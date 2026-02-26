@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { Collapse } from "bootstrap";
-import navBg from "../assets/images/nav/nav-bg.png";
 
 export default function Nav() {
+  const navBg = "https://biggie-yk.github.io/React-ZDX-Club-Booking/assets/images/index/nav-bg.png";
   const [showMenu, setShowMenu] = useState(true);
   const navDatas = [
     {
