@@ -229,7 +229,7 @@ export default function Draw() {
                 </h3>
                 <img
                   className="sign-tube-img"
-                  src="../assets/images/draw/sign-tube.png"
+                  src="assets/images/draw/sign-tube.png"
                   alt="籤筒"
                 />
               </div>
@@ -262,7 +262,7 @@ export default function Draw() {
                 </div>
                 <img
                   className="draw-btn-img object-fit-cover"
-                  src="../assets/images/draw/draw-btn.png"
+                  src="assets/images/draw/draw-btn.png"
                   alt="手拿筊"
                 />
               </div>
@@ -285,7 +285,7 @@ export default function Draw() {
                 <h3 className="text-primary fw-bold">求籤指引</h3>
                 <img
                   className="sign-tube-img object-fit-cover"
-                  src="../assets/images/draw/sign-tube.png"
+                  src="assets/images/draw/sign-tube.png"
                   alt="籤筒"
                 />
               </div>
@@ -295,7 +295,7 @@ export default function Draw() {
               >
                 <img
                   className="draw-btn-img "
-                  src="../assets/images/draw/draw-btn.png"
+                  src="assets/images/draw/draw-btn.png"
                   alt="手拿筊"
                 />
                 <div
@@ -319,7 +319,7 @@ export default function Draw() {
               <h2 className="text-primary p-3 mb-0">日本</h2>
               <img
                 className="intro-jp-img object-fit-cover"
-                src="../assets/images/draw/intro-jp.png"
+                src="assets/images/draw/intro-jp.png"
                 alt="日本神社巫女"
               />
               <div className="intro-jp-text py-md-36 py-3 px-4">
@@ -343,7 +343,7 @@ export default function Draw() {
             <div>
               <img
                 className="intro-jp-img object-fit-cover"
-                src="../assets/images/draw/intro-tw.png"
+                src="assets/images/draw/intro-tw.png"
                 alt="日本神社巫女"
               />
               <div className="intro-tw-text py-36 px-4 border-primary">
@@ -362,7 +362,7 @@ export default function Draw() {
           <div className="d-flex  flex-column flex-md-row align-items-center">
             <img
               className="notice-img me-md-4 "
-              src="../assets/images/draw/notice.png"
+              src="assets/images/draw/notice.png"
               alt="豬大仙要你注意"
             />
             <div
@@ -388,7 +388,7 @@ export default function Draw() {
                         >
                           <h4 className="ps-12 py-3 mb-0">{hint.title}</h4>
                           <img
-                            src="../assets/images/index/btn-social.png"
+                            src="assets/images/index/btn-social.png"
                             alt=""
                             onClick={() => {
                               setCollapseOpen((prev) =>
@@ -422,7 +422,7 @@ export default function Draw() {
               <div
                 className="modal-content position-relative px-5"
                 style={{
-                  background: "url(../assets/images/index/nav-bg.png)",
+                  background: "url(assets/images/index/nav-bg.png)",
                 }}
               >
                 <div className="draw-modal-inside">
@@ -454,7 +454,7 @@ export default function Draw() {
               <div
                 className="modal-content position-relative px-5"
                 style={{
-                  background: "url(../assets/images/index/nav-bg.png)",
+                  background: "url(assets/images/index/nav-bg.png)",
                 }}
               >
                 <div className="pt-5">
@@ -483,7 +483,7 @@ export default function Draw() {
                         >
                           <img
                             className="draw-modal-again-img object-fit-cover"
-                            src="../assets/images/draw/draw-again.png"
+                            src="assets/images/draw/draw-again.png"
                             alt="再抽一次？"
                           />
                           <div
@@ -504,7 +504,7 @@ export default function Draw() {
                         <div className="d-flex d-md-block flex-row-reverse align-items-center">
                           <img
                             className="draw-modal-again-img"
-                            src="../assets/images/draw/others.png"
+                            src="assets/images/draw/others.png"
                             alt="其他籤詩？"
                           />
                           <div
