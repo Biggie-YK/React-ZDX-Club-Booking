@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { Collapse } from "bootstrap";
+import navBg from "../assets/images/nav/nav-bg.png";
 
 export default function Nav() {
   const [showMenu, setShowMenu] = useState(true);
@@ -62,7 +63,8 @@ export default function Nav() {
             type="button"
             role="button"
             style={{
-              backgroundImage: `url(assets/images/index/nav-bg.png)`,
+             
+              backgroundImage: `url(${navBg})` 
             }}
             id="nav-toggle"
             ref={menuBtnRef}
@@ -74,7 +76,7 @@ export default function Nav() {
             type="button"
             role="button"
             style={{
-              backgroundImage: `url(assets/images/index/nav-bg.png)`,
+              backgroundImage: `url(${navBg})` 
             }}
             id="nav-close"
             ref={closeBtnRef}
@@ -104,13 +106,13 @@ export default function Nav() {
         className="nav-collapse collapse w-100 py-4 shadow position-absolute left-0 border-top border-black-400"
         id="collapseExample"
         style={{
-          backgroundImage: `url(assets/images/index/nav-bg.png)`,
+         backgroundImage: `url(${navBg})` 
         }}
         ref={navCollapse}
       >
         <div
           className="card card-body p-0 border-0"
-          style={{ backgroundImage: "url(assets/images/index/nav-bg.png)" }}
+          style={{ backgroundImage: `url(${navBg})`  }}
         >
           <ul className="list-unstyled text-center">
             {navDatas.map((data, i) => {
