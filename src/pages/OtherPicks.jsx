@@ -21,6 +21,9 @@ export default function OtherPicks() {
     setPickNum(n);
     picksModalRef.current.show();
   }
+  function handleCloseModal() {
+    picksModalRef.current.hide();
+  }
 
   return (
     <>
@@ -102,7 +105,7 @@ export default function OtherPicks() {
                     <div
                       key={i}
                       className="picks-box px-12 me-20 mb-3"
-                      onClick={() => handleOpenModal(n+50)}
+                      onClick={() => handleOpenModal(n + 50)}
                     >
                       <div className="picks-box-pick text-center ">
                         第{Nzh.hk.encodeS(n + 50)}首
@@ -142,7 +145,11 @@ export default function OtherPicks() {
           </div>
         </div>
       </div>
-      <ShowPicksModal pickNum={pickNum} picksModalRef={picksModalRef} />
+      <ShowPicksModal
+        handleCloseModal={handleCloseModal}
+        pickNum={pickNum}
+        picksModalRef={picksModalRef}
+      />
     </>
   );
 }

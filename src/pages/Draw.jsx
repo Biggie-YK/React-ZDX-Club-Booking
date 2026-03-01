@@ -38,14 +38,17 @@ export default function Draw() {
     {
       url: "https://lottie.host/26747bda-1d8f-4126-bc34-8f8d91293586/Qwc2ZB1vku.lottie",
       text: "聖筊",
+      weight: 90,
     },
     {
       url: "https://lottie.host/5cf67520-0482-4983-a632-7f4a469edc8b/fA2qfqMmUx.lottie",
       text: "蓋筊",
+      weight: 5,
     },
     {
       url: "https://lottie.host/5c9f1d53-0676-4afc-b59b-91f01d307ca4/h9ipvPpd2W.lottie",
       text: "笑筊",
+      weight: 5,
     },
   ];
   const [result, setResult] = useState(results[0]);
@@ -54,7 +57,9 @@ export default function Draw() {
   const [textKey, setTextKey] = useState(-1);
   const navigate = useNavigate();
   useEffect(() => {
-    drawModal.current = new Modal(drawModal.current);
+    drawModal.current = new Modal(drawModal.current, {
+      backdrop: "static",
+    });
   }, []);
 
   function handleShowAlert(state, successCount) {
@@ -130,20 +135,19 @@ export default function Draw() {
   function handleTossingBlocks(isSecondRound) {
     setShowText(false);
 
-    // const i = getRendomNum(3);
-    const i=0;
-    setResult(results[i]);
+    const result = getRandomByWeight(results);
+    setResult(result);
     setImgKey((prev) => prev + 1);
 
     if (!isSecondRound) {
       nextActionRef.current =
-        i === 0
+        result.text === "聖筊"
           ? () => handleShowAlert("canDraw")
           : () => handleShowAlert("retry");
       return;
     }
 
-    if (i === 0) {
+    if (result.text === "聖筊") {
       setSuccessCount((prev) => {
         const next = prev + 1;
 
@@ -164,6 +168,7 @@ export default function Draw() {
   function handleOpenModal() {
     drawModal.current.show();
     handleTossingBlocks(false);
+    setHasThreeSuccess(false);
   }
 
   function handleComplete() {
@@ -187,7 +192,7 @@ export default function Draw() {
   }
 
   function handleDrawPicks() {
-    const i = getRendomNum(100) + 1;
+    const i = getRandom(100) + 1;
     setPickNum(i);
     Swal.fire({
       title: `求得籤詩 第${Nzh.hk.encodeS(i)}首`,
@@ -201,9 +206,28 @@ export default function Draw() {
       }
     });
   }
-
-  function getRendomNum(range) {
+  function getRandom(range) {
     return Math.floor(Math.random() * range);
+  }
+
+  function getRandomByWeight(items) {
+    const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
+
+    const random = Math.random() * totalWeight;
+
+    let comulative = 0;
+
+    for (const item of items) {
+      comulative += item.weight;
+
+      if (random < comulative) {
+        return item;
+      }
+    }
+  }
+
+  function handleCloseModal() {
+    drawModal.current.hide();
   }
 
   return (
@@ -458,6 +482,12 @@ export default function Draw() {
                 }}
               >
                 <div className="pt-5">
+                  <div className="d-flex position-relative">
+                    <i
+                      className="bi bi-x-circle display-1 position-absolute end-0 text-primary cursor-pointer"
+                      onClick={handleCloseModal}
+                    />
+                  </div>
                   <div className="pt-64 d-md-flex">
                     <h2 className="answer-title vertical-md-text m-md-0 mb-3 fw-bold text-center text-primary me-4">
                       解籤
@@ -500,7 +530,9 @@ export default function Draw() {
                             </div>
                           </div>
                         </div>
-                        <h2 className="text-primary fs-4 fs-md-2 text-center">或者</h2>
+                        <h2 className="text-primary fs-4 fs-md-2 text-center">
+                          或者
+                        </h2>
                         <div className="d-flex d-md-block flex-row-reverse align-items-center">
                           <img
                             className="draw-modal-again-img"

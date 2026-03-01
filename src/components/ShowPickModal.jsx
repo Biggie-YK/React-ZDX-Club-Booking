@@ -1,7 +1,11 @@
 import picks from "../assets/picks.json";
 import Nzh from "nzh";
 
-export default function ShowPicksModal({ pickNum, picksModalRef }) {
+export default function ShowPicksModal({
+  pickNum,
+  picksModalRef,
+  handleCloseModal,
+}) {
   return (
     <div className="modal draw-modal" tabIndex="-1" ref={picksModalRef}>
       <div className="modal-dialog modal-lg-plus modal-dialog-centered">
@@ -12,6 +16,12 @@ export default function ShowPicksModal({ pickNum, picksModalRef }) {
           }}
         >
           <div className="pt-5">
+            <div className="d-flex position-relative">
+              <i
+                className="bi bi-x-circle display-1 position-absolute end-0 text-primary cursor-pointer"
+                onClick={handleCloseModal}
+              />
+            </div>
             <div className="pt-64 d-md-flex">
               <h2 className="answer-title vertical-md-text m-md-0 mb-3 fw-bold text-center text-primary me-4">
                 解籤
