@@ -3,7 +3,9 @@ import { Link } from "react-router";
 import { Collapse } from "bootstrap";
 
 export default function Nav() {
-  const navBg = "https://biggie-yk.github.io/React-ZDX-Club-Booking/assets/images/index/nav-bg.png";
+  const DownNavRef = useRef(null);
+  const navBg =
+    "https://biggie-yk.github.io/React-ZDX-Club-Booking/assets/images/index/nav-bg.png";
   const [showMenu, setShowMenu] = useState(true);
   const navDatas = [
     {
@@ -27,12 +29,35 @@ export default function Nav() {
       title: "登入/註冊",
     },
   ];
+  const DownNavData = [
+    {
+      url: "/",
+      title: "服務內容",
+    },
+    {
+      url: "/draw",
+      title: "線上求籤",
+    },
+    {
+      url: "/knowledge-article",
+      title: "命理文章",
+    },
+    {
+      url: "/appointment-management",
+      title: "預約管理",
+    },
+  ];
   const menuBtnRef = useRef(null);
   const closeBtnRef = useRef(null);
   const navCollapse = useRef(null);
 
   useEffect(() => {
     navCollapse.current = new Collapse(navCollapse.current, {
+      toggle: false,
+    });
+  }, []);
+  useEffect(() => {
+    DownNavRef.current = new Collapse(DownNavRef.current, {
       toggle: false,
     });
   }, []);
@@ -46,9 +71,20 @@ export default function Nav() {
     }
   }
 
+  function handleDownNavShow() {
+    DownNavRef.current.show();
+  }
+  function handleDownNavHide() {
+    DownNavRef.current.hide();
+  }
+
   return (
-    <nav className="nav navbar position-relative py-0">
-      <div className="container border-bottom border-black-400 py-md-40 py-3">
+    <nav
+      className="nav navbar position-relative py-0"
+      onMouseEnter={handleDownNavShow}
+      onMouseLeave={handleDownNavHide}
+    >
+      <div className="container border-bottom border-black-400 py-md-40 py-3 ">
         <div className="d-flex d-md-none justify-content-between px-12 w-100">
           <Link to="/">
             <img
@@ -89,11 +125,31 @@ export default function Nav() {
           </button>
         </div>
 
-        <ul className="list-unstyled d-md-flex d-none px-106 align-items-center justify-content-between w-100">
+        <ul
+          className="list-unstyled d-md-flex d-none px-106 align-items-center justify-content-between w-100
+        "
+        >
           {navDatas.map((data, i) => {
             return (
-              <li key={i} className="py-3 px-4">
+              <li key={i} className=" py-3 px-4">
                 <Link to={data.url} className="text-dark text-decoration-none">
+                  {data.img ? <img src={data.img} /> : data.title}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+        <ul
+          className="list-unstyled  px-106 align-items-center  w-100 justify-content-around downNav collapse "
+          ref={DownNavRef}
+        >
+          {DownNavData.map((data, i) => {
+            return (
+              <li key={i} className=" py-3 px-4  ">
+                <Link
+                  to={data.url}
+                  className="text-dark text-decoration-none  "
+                >
                   {data.img ? <img src={data.img} /> : data.title}
                 </Link>
               </li>

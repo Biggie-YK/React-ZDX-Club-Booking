@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import AppointmentManagement from "./pages/AppointmentManagement";
 import Knowledge from "./pages/Knowledge";
+import KnowledgeArticle from "./components/KnowledgeArticle";
 import Reserve from "./pages/Reserve";
 import Nav from "./layout/Nav";
 import Footer from "./layout/Footer";
@@ -34,6 +35,10 @@ function App() {
             element={<AppointmentManagement />}
           ></Route>
           <Route path="/knowledge" element={<Knowledge />}></Route>
+          <Route
+            path="/knowledge-article"
+            element={<KnowledgeArticle />}
+          ></Route>
           <Route path="/reserve" element={<Reserve />}></Route>
           <Route path="/draw" element={<Draw />}></Route>
           <Route path="/other-picks" element={<OtherPicks />}></Route>

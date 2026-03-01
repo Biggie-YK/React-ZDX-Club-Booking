@@ -1,6 +1,10 @@
 .member-menu {
   width: 166px;
 }
+.downNav {
+  display: flex;
+  justify-content: space-around;
+}
 @media (max-width: 768px) {
   .nav,
   .footer {
@@ -11,5 +15,8 @@
       top: 76.18px;
       z-index: 100;
     }
+  }
+  .downNav {
+    display: none;
   }
 }
