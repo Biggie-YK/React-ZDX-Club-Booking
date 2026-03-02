@@ -5,12 +5,21 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import FarmerCalender from "../components/FarmerCalender";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const carouselRef = useRef(null);
   const navigate = useNavigate();
+  const [date, setDate] = useState(new Date());
+
+  const dateDetail = {
+    year: date.getFullYear(),
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+  };
+
+  const { year, month, day } = dateDetail;
 
   const QAcontent = [
     {
@@ -67,7 +76,10 @@ export default function Home() {
             type="button"
             className="btn bg-neutral-50 rounded-0  fs-5 py-0"
           >
-            <Link to="/reserve" className="btn-inside-border py-3 d-block text-center">
+            <Link
+              to="/reserve"
+              className="btn-inside-border py-3 d-block text-center"
+            >
               立即探索您專屬的服務
             </Link>
           </button>
@@ -120,12 +132,13 @@ export default function Home() {
           >
             <div className="carousel-inner">
               <div
-                className="carousel-item active bg-position-left"
+                className="carousel-item active bg-position-left
+                "
                 style={{
                   backgroundImage: "url(assets/images/index/banner-1.png)",
                 }}
               >
-                <div className=" d-flex align-items-center h-100">
+                <div className=" d-flex align-items-center h-100 ">
                   <div>
                     <h4 className="fs-5 fs-md-4 mb-4">紫微命盤精解</h4>
                     <p className="mb-4">
@@ -230,118 +243,120 @@ export default function Home() {
             <p className="mb-0">來自四面八方的肯定，是我們前進的動力</p>
           </div>
 
-          <Swiper
-            modules={[Navigation]}
-            spaceBetween={16}
-            slidesPerView={1}
-            breakpoints={{
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 24,
-              },
-            }}
-            navigation
-          >
-            <SwiperSlide>
-              <div className="card bg-transparent border-0">
-                <img
-                  src="assets/images/index/comment-4.png"
-                  alt="women take coffee"
-                />
-                <div className="pt-4 text-center">
+          <div className="d-none d-md-block">
+            <Swiper
+              modules={[Navigation]}
+              spaceBetween={16}
+              slidesPerView={1}
+              breakpoints={{
+                768: {
+                  slidesPerView: 3,
+                  spaceBetween: 24,
+                },
+              }}
+              navigation
+            >
+              <SwiperSlide>
+                <div className="card bg-transparent border-0">
                   <img
-                    className="mb-4"
-                    src="assets/images/index/star4.png"
-                    alt="4-stars"
+                    src="assets/images/index/comment-4.png"
+                    alt="women take coffee"
                   />
-                  <div className="card-title fw-bold mb-4">
-                    芷涵(新婚人妻，27歲)
+                  <div className="pt-4 text-center">
+                    <img
+                      className="mb-4"
+                      src="assets/images/index/star4.png"
+                      alt="4-stars"
+                    />
+                    <div className="card-title fw-bold mb-4">
+                      芷涵(新婚人妻，27歲)
+                    </div>
+                    <p className="mb-4 mb-md-0 fs-7 fs-md-6 ">
+                      幫我和另一半擇日登記結婚的服務超貼心
+                      <br />
+                      ，老師不只提供好日子，還附上注意事項
+                      <br />
+                      與祝福話語，感覺特別溫暖。
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="card bg-transparent border-0">
+                  <img
+                    src="assets/images/index/comment-1.png"
+                    alt="women take coffee"
+                  />
+                  <div className="pt-4 text-center">
+                    <img
+                      className="mb-4"
+                      src="assets/images/index/star4.png"
+                      alt="4-stars"
+                    />
+                    <div className="card-title fw-bold mb-4">
+                      Ken(設計師，33歲)
+                    </div>
+                    <p className="mb-4 mb-md-0 fs-7 fs-md-6 ">
+                      第一次接觸紫微命盤，本來只是好奇，沒
+                      <br />
+                      想到看完解析後對自己的個性和人際盲點
+                      <br />
+                      突然豁然開朗，真的蠻有幫助！
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="card bg-transparent border-0 ">
+                  <img
+                    src="assets/images/index/comment-2.png"
+                    alt="women take coffee"
+                  />
+                  <div className="pt-4 text-center">
+                    <img
+                      className="mb-4"
+                      src="assets/images/index/full-stars.png"
+                      alt="4-stars"
+                    />
+                    <div className="card-title fw-bold mb-4">
+                      芷涵(新婚人妻，27歲)
+                    </div>
+                    <p className="mb-4 mb-md-0 fs-7 fs-md-6 ">
+                      幫我和另一半擇日登記結婚的服務超貼心
+                      <br />
+                      ，老師不只提供好日子，還附上注意事項
+                      <br />
+                      與祝福話語，感覺特別溫暖。
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="card bg-transparent border-0">
+                  <img
+                    src="assets/images/index/comment-3.png"
+                    alt="women take coffee"
+                  />
+                  <div className="pt-4 text-center">
+                    <img
+                      className="mb-4"
+                      src="assets/images/index/full-stars.png"
+                      alt="4-stars"
+                    />
+                    <div className="card-title fw-bold mb-4" />
+                    Eric(科技業，35歲)
                   </div>
                   <p className="mb-4 mb-md-0 fs-7 fs-md-6 ">
-                    幫我和另一半擇日登記結婚的服務超貼心
+                    命理服務完全不像我以前想像的老派，介
                     <br />
-                    ，老師不只提供好日子，還附上注意事項
+                    面乾淨簡單，說明也清楚易懂，非常適合
                     <br />
-                    與祝福話語，感覺特別溫暖。
+                    現代人使用！
                   </p>
                 </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="card bg-transparent border-0">
-                <img
-                  src="assets/images/index/comment-1.png"
-                  alt="women take coffee"
-                />
-                <div className="pt-4 text-center">
-                  <img
-                    className="mb-4"
-                    src="assets/images/index/star4.png"
-                    alt="4-stars"
-                  />
-                  <div className="card-title fw-bold mb-4">
-                    Ken(設計師，33歲)
-                  </div>
-                  <p className="mb-4 mb-md-0 fs-7 fs-md-6 ">
-                    第一次接觸紫微命盤，本來只是好奇，沒
-                    <br />
-                    想到看完解析後對自己的個性和人際盲點
-                    <br />
-                    突然豁然開朗，真的蠻有幫助！
-                  </p>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="card bg-transparent border-0 ">
-                <img
-                  src="assets/images/index/comment-2.png"
-                  alt="women take coffee"
-                />
-                <div className="pt-4 text-center">
-                  <img
-                    className="mb-4"
-                    src="assets/images/index/full-stars.png"
-                    alt="4-stars"
-                  />
-                  <div className="card-title fw-bold mb-4">
-                    芷涵(新婚人妻，27歲)
-                  </div>
-                  <p className="mb-4 mb-md-0 fs-7 fs-md-6 ">
-                    幫我和另一半擇日登記結婚的服務超貼心
-                    <br />
-                    ，老師不只提供好日子，還附上注意事項
-                    <br />
-                    與祝福話語，感覺特別溫暖。
-                  </p>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="card bg-transparent border-0">
-                <img
-                  src="assets/images/index/comment-3.png"
-                  alt="women take coffee"
-                />
-                <div className="pt-4 text-center">
-                  <img
-                    className="mb-4"
-                    src="assets/images/index/full-stars.png"
-                    alt="4-stars"
-                  />
-                  <div className="card-title fw-bold mb-4" />
-                  Eric(科技業，35歲)
-                </div>
-                <p className="mb-4 mb-md-0 fs-7 fs-md-6 ">
-                  命理服務完全不像我以前想像的老派，介
-                  <br />
-                  面乾淨簡單，說明也清楚易懂，非常適合
-                  <br />
-                  現代人使用！
-                </p>
-              </div>
-            </SwiperSlide>
-          </Swiper>
+              </SwiperSlide>
+            </Swiper>
+          </div>
         </div>
 
         <div
@@ -650,7 +665,7 @@ export default function Home() {
               </h2>
               <p className="mb-0">掌握節氣脈動。每日行事宜忌一覧</p>
             </div>
-            <FarmerCalender />
+            <FarmerCalender setDate={setDate} year={year} month={month} />
           </div>
           <div className="flex-fill">
             <div className="solar-term py-md-64 p-4 position-relative  mb-4">
@@ -662,20 +677,20 @@ export default function Home() {
               <div className="d-flex mb-md-40 mb-4 flex-wrap flex-lg-nowrap">
                 <div className="me-md-40 me-12">
                   <div className="py-2 year  fs-7 text-center text-primary">
-                    2025
+                    {year}
                   </div>
                   <div className="border border-primary py-md-1 py-2 px-4 text-center text-primary">
-                    <h6 className="mb-2 fs-40">3</h6>
-                    <h6 className="mb-0 fs-5">八月</h6>
+                    <h6 className="mb-2 fs-40">{day}</h6>
+                    <h6 className="mb-0 fs-5">{month}月</h6>
                   </div>
                   <p className="text-white text-nowrap mb-0 fs-7 bg-primary text-center py-2 px-3">
-                    民國114年
+                    民國{year - 1911}年
                   </p>
                 </div>
                 <ul className="list-unstyled flex-fill">
                   <li>
                     <p className="fs-7 p-md-4 py-md-3 p-3 mb-0 border-bottom border-black-300">
-                      國曆：2025年08月03日
+                      國曆：{year}年{month}月{day}日
                     </p>
                   </li>
                   <li>

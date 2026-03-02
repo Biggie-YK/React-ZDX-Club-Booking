@@ -127,7 +127,7 @@ export default function Nav() {
 
         <ul
           className="list-unstyled d-md-flex d-none px-106 align-items-center justify-content-between w-100
-        "
+         mb-3"
         >
           {navDatas.map((data, i) => {
             return (
@@ -140,12 +140,12 @@ export default function Nav() {
           })}
         </ul>
         <ul
-          className="list-unstyled  px-106 align-items-center  w-100 justify-content-around downNav collapse "
+          className="list-unstyled  px-106  w-100  downNav collapse "
           ref={DownNavRef}
         >
           {DownNavData.map((data, i) => {
             return (
-              <li key={i} className=" py-3 px-4  ">
+              <li key={i} className="  px-4  ">
                 <Link
                   to={data.url}
                   className="text-dark text-decoration-none  "
@@ -186,6 +186,18 @@ export default function Nav() {
                     ""
                   )}
                 </div>
+              );
+            })}
+            {DownNavData.map((data, i) => {
+              return (
+                <li key={i} className="py-3  px-4  ">
+                  <Link
+                    to={data.url}
+                    className="text-dark text-decoration-none  "
+                  >
+                    {data.img ? <img src={data.img} /> : data.title}
+                  </Link>
+                </li>
               );
             })}
           </ul>

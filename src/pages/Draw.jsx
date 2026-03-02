@@ -508,7 +508,7 @@ export default function Draw() {
 
                       <div className="d-flex px-md-80 flex-column flex-md-row justify-content-between align-items-center">
                         <div
-                          className=" d-flex d-md-block align-items-center"
+                          className=" d-flex d-md-block align-items-center cursor-pointer"
                           onClick={handleDrawAgain}
                         >
                           <img
@@ -533,7 +533,10 @@ export default function Draw() {
                         <h2 className="text-primary fs-4 fs-md-2 text-center">
                           或者
                         </h2>
-                        <div className="d-flex d-md-block flex-row-reverse align-items-center">
+                        <div
+                          className="d-flex d-md-block flex-row-reverse align-items-center cursor-pointer"
+                          onClick={handleOtherPicks}
+                        >
                           <img
                             className="draw-modal-again-img"
                             src="assets/images/draw/others.png"
@@ -545,7 +548,6 @@ export default function Draw() {
                         "
                           >
                             <div
-                              onClick={handleOtherPicks}
                               className="border border-secondary 
                           text-center
                           "

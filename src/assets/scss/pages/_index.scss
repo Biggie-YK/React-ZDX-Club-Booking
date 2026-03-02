@@ -29,7 +29,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    height: 396px;
     padding-left: 25.46296%;
   }
   .btn {
@@ -45,6 +44,17 @@
       padding-left: 22px;
       padding-right: 22px;
     }
+  }
+}
+
+.service {
+  .carousel-item {
+    height: 396px;
+  }
+}
+.comment {
+  .carousel-item {
+    min-height: 396px;
   }
 }
 .container {
