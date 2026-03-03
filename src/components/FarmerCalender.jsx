@@ -1,12 +1,11 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import interactionPlugin from "@fullcalendar/interaction";
-
 import { Lunar } from "lunar-javascript";
 import "../assets/scss/components/farmerCalender.scss";
 import { useEffect, useState } from "react";
 
-export default function Calendar({ setDate, year, month }) {
+export default function Calendar({ setDate }) {
   const renderDayHeader = (arg) => {
     const days = ["日", "一", "二", "三", "四", "五", "六"];
     return days[arg.date.getDay()];

@@ -6,20 +6,55 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import FarmerCalender from "../components/FarmerCalender";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Link, useNavigate } from "react-router-dom";
+import moment from "moment/moment";
+import {
+  sixtyJiaziDays,
+  jueQiImg,
+} from "../../htmlPages/Farmer-Calendar/sixtyJiaziDays";
+import { Lunar } from "lunar-javascript";
 
 export default function Home() {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const carouselRef = useRef(null);
   const navigate = useNavigate();
   const [date, setDate] = useState(new Date());
+  const [lunar, setLunar] = useState({});
+  const [Jiazi, setJiazi] = useState({});
 
-  const dateDetail = {
-    year: date.getFullYear(),
-    month: date.getMonth() + 1,
-    day: date.getDate(),
-  };
+  useEffect(() => {
+    let lunar = Lunar.fromDate(date);
+    const jueQi = lunar.getPrevJieQi()._p.name;
+    const jueQiStr =
+      `${lunar.getPrevJieQi()._p.name}(國曆)${lunar.getPrevJieQi().getSolar().toYmd()}~${lunar.getNextJieQi().getSolar().toYmd()}`.replace(
+        /-/g,
+        "/",
+      );
 
-  const { year, month, day } = dateDetail;
+    setLunar({
+      year: lunar.getYearInGanZhiByLiChun(),
+      month: lunar.getMonthInChinese(),
+      day: lunar.getDayInChinese(),
+      jueQi: jueQi,
+      jueQiStr: jueQiStr,
+    });
+  }, [date]);
+
+  function dayDiff(date) {
+    const dateDetail = {
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate(),
+    };
+    const { year, month, day } = dateDetail;
+    const diff =
+      Math.abs(moment([year, month, day]).diff([2026, 3, 3], "days")) % 60;
+    if (typeof diff !== "number" || Number.isNaN(diff)) return;
+    setJiazi(sixtyJiaziDays[diff]);
+  }
+
+  useEffect(() => {
+    dayDiff(date);
+  }, [date]);
 
   const QAcontent = [
     {
@@ -665,43 +700,48 @@ export default function Home() {
               </h2>
               <p className="mb-0">掌握節氣脈動。每日行事宜忌一覧</p>
             </div>
-            <FarmerCalender setDate={setDate} year={year} month={month} />
+            <FarmerCalender setDate={setDate} />
           </div>
           <div className="flex-fill">
-            <div className="solar-term py-md-64 p-4 position-relative  mb-4">
+            <div
+              className="solar-term py-md-64 p-4 position-relative  mb-4 "
+              style={{
+                backgroundImage: `url(${jueQiImg[lunar?.jueQi]})`,
+              }}
+            >
               <h2 className="fs-lg-80 fs-3 solar-term-title d-inline-block p-md-4 p-3 text-nowrap">
-                大暑
+                {lunar.jueQi}
               </h2>
             </div>
             <div className="detail p-md-36 pt-36 px-12 pb-md-0 pb-40 ">
               <div className="d-flex mb-md-40 mb-4 flex-wrap flex-lg-nowrap">
                 <div className="me-md-40 me-12">
                   <div className="py-2 year  fs-7 text-center text-primary">
-                    {year}
+                    {date.getFullYear()}
                   </div>
                   <div className="border border-primary py-md-1 py-2 px-4 text-center text-primary">
-                    <h6 className="mb-2 fs-40">{day}</h6>
-                    <h6 className="mb-0 fs-5">{month}月</h6>
+                    <h6 className="mb-2 fs-40">{date.getDate()}</h6>
+                    <h6 className="mb-0 fs-5">{date.getMonth() + 1}月</h6>
                   </div>
                   <p className="text-white text-nowrap mb-0 fs-7 bg-primary text-center py-2 px-3">
-                    民國{year - 1911}年
+                    民國{date.getFullYear() - 1911}年
                   </p>
                 </div>
                 <ul className="list-unstyled flex-fill">
                   <li>
                     <p className="fs-7 p-md-4 py-md-3 p-3 mb-0 border-bottom border-black-300">
-                      國曆：{year}年{month}月{day}日
+                      國曆：{date.getFullYear()}年{date.getMonth() + 1}月
+                      {date.getDate()}日
                     </p>
                   </li>
                   <li>
                     <p className="fs-7 p-md-4 py-md-3 p-3 mb-0 border-bottom border-black-300">
-                      農曆：乙巳年閏六以初十
+                      農曆：{lunar?.year}年{lunar?.month}月{lunar?.day}
                     </p>
                   </li>
                   <li>
                     <p className="fs-7 p-md-4 py-md-3 p-3 mb-0 border-bottom border-black-300">
-                      節氣：大暑 (國曆) <br className="d-md-none" />
-                      2025/07/22-2025/08/06
+                      節氣：{lunar?.jueQiStr}
                     </p>
                   </li>
                 </ul>
@@ -714,9 +754,8 @@ export default function Home() {
                       沖
                     </h5>
                     <span className=" fs-7 ps-3 py-1 me-1">
-                      屬豬(丁亥，19歲)
+                      屬{Jiazi?.沖煞?.沖}
                     </span>
-                    <span className=" fs-7 ps-3 py-1">屬豬(丁亥，79歲)</span>
                   </div>
                 </li>
                 <li>
@@ -725,26 +764,13 @@ export default function Home() {
                       宜
                     </h5>
                     <div className="d-flex flex-wrap text-nowrap ">
-                      <span className="fs-7 px-2 py-1">嫁娶</span>
-                      <span className="fs-7 px-2 py-1">納采</span>
-                      <span className="fs-7 px-2 py-1">訂盟</span>
-                      <span className="fs-7 px-2 py-1">祭祀</span>
-                      <span className="fs-7 px-2 py-1">祈福</span>
-                      <span className="fs-7 px-2 py-1">求嗣</span>
-                      <span className="fs-7 px-2 py-1">納采</span>
-                      <span className="fs-7 px-2 py-1">裁衣</span>
-                      <span className="fs-7 px-2 py-1">冠笄</span>
-                      <span className="fs-7 px-2 py-1">開光</span>
-                      <span className="fs-7 px-2 py-1">安床</span>
-                      <span className="fs-7 px-2 py-1">作樑</span>
-                      <span className="fs-7 px-2 py-1">修造</span>
-                      <span className="fs-7 px-2 py-1">動土</span>
-                      <span className="fs-7 px-2 py-1">作灶</span>
-                      <span className="fs-7 px-2 py-1">起基</span>
-                      <span className="fs-7 px-2 py-1">移徙</span>
-                      <span className="fs-7 px-2 py-1">出行</span>
-                      <span className="fs-7 px-2 py-1">破土</span>
-                      <span className="fs-7 px-2 py-1">安葬</span>
+                      {Jiazi?.宜?.map((item, i) => {
+                        return (
+                          <span className="fs-7 px-2 py-1" key={i}>
+                            {item}
+                          </span>
+                        );
+                      })}
                     </div>
                   </div>
                 </li>
@@ -753,18 +779,23 @@ export default function Home() {
                     <h5 className="fs-md-48 fs-2 mb-0 text-primary me-md-2 me-3">
                       煞
                     </h5>
-                    <span className="fs-7 px-2 py-1">東方</span>
+                    <span className="fs-7 px-2 py-1">{Jiazi?.沖煞?.煞}方</span>
                   </div>
                 </li>
                 <li>
-                  <div className="d-flex p-4 align-items-center border border-primary flex-wrap">
+                  <div className="d-flex p-4 align-items-center border border-primary">
                     <h5 className="fs-md-48 fs-2 mb-0 text-primary me-md-2 me-3">
-                      吉時
+                      忌
                     </h5>
-                    <span className="fs-7 px-2 py-1">丑</span>
-                    <span className="fs-7 px-2 py-1">卯</span>
-                    <span className="fs-7 px-2 py-1">辰</span>
-                    <span className="fs-7 px-2 py-1">巳</span>
+                    <div className="d-flex flex-wrap text-nowrap ">
+                      {Jiazi?.忌?.map((item, i) => {
+                        return (
+                          <span className="fs-7 px-2 py-1" key={i}>
+                            {item}
+                          </span>
+                        );
+                      })}
+                    </div>
                   </div>
                 </li>
               </ul>
