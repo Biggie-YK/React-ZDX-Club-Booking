@@ -6,9 +6,11 @@ import { useEffect, useRef, useState } from "react";
 import picks from "../assets/picks.json";
 import Nzh from "nzh";
 import { useNavigate } from "react-router";
+import Intro from "../components/Draw/Intro";
+import Notice from "../components/Draw/Notice";
+import DrawModal from "../components/Draw/DrawModal";
 
 export default function Draw() {
-  const [collapseOpen, setCollapseOpen] = useState([true, true, true]);
   const [successCount, setSuccessCount] = useState(0);
   const resultsTextRef = useRef(null);
   const drawModal = useRef(null);
@@ -16,23 +18,6 @@ export default function Draw() {
   const nextActionRef = useRef(null);
   const [pickNum, setPickNum] = useState(0);
 
-  const hints = [
-    {
-      title: "一事一籤，避免反覆求問",
-      content:
-        "多次求籤容易讓心情更加混亂，也可能讓原本的提醒失去意義。抽到籤後，建議先理解籤意、冷靜思考，再決定後續行動。",
-    },
-    {
-      title: "勿在不適當時機抽籤",
-      content:
-        "請避免在情緒不穩、疲倦、醉酒或精神緊張時求籤。籤意易受心境影響，建議先靜心再求，這樣更容易領會籤詩提醒的意義。",
-    },
-    {
-      title: "勿以籤詩代替重要決策",
-      content:
-        "籤詩之意，在於提醒與啟發,並非具體指令。凡涉及醫療診斷、法律判斷、重大投資、財務規劃、生涯抉擇等重要事項，皆不宜僅憑籤詩內容作為決策依據。",
-    },
-  ];
 
   const results = [
     {
@@ -336,105 +321,9 @@ export default function Draw() {
           </div>
         </section>
 
-        <section className="intro   position-relative">
-          <div className="intro-jp d-flex  border-primary">
-            <div className="me-md-36">
-              <h2 className="text-primary p-3 mb-0">日本</h2>
-              <img
-                className="intro-jp-img object-fit-cover"
-                src="assets/images/draw/intro-jp.png"
-                alt="日本神社巫女"
-              />
-              <div className="intro-jp-text py-md-36 py-3 px-4">
-                <p className="mb-4">
-                  御神籤(日語：御神籤∕おみくじomikuji)，也稱神籤，是日本傳統神社、佛寺提供用來祈願、占卜個人運勢的求籤活動。
-                </p>
-                <p>
-                  參加這一活動者通常要先向寺社支付較少的的賽錢(香火錢)，稱為
-                  「初穂料」，隨後在寺社提供的抽籤盒中隨機抽取籤紙。籤紙上會以漢字書寫「吉」、「凶」等占卜結果，並附有漢詩或和歌以及現代日語解說。時至今日，為了服務外國人遊客，也有著名寺社會提供用英語書寫的籤紙。
-                </p>
-              </div>
-            </div>
-            <div className="intro-title fw-bold text-primary ms-4 d-none d-lg-block">
-              日本
-            </div>
-            <div className="intro-title fw-bold text-primary  align-items-center ms-4 d-none d-lg-flex">
-              臺灣
-            </div>
-          </div>
-          <div className="intro-tw d-flex  border-top border-primary  justify-content-md-end justify-content-center pt-5">
-            <div>
-              <img
-                className="intro-jp-img object-fit-cover"
-                src="assets/images/draw/intro-tw.png"
-                alt="日本神社巫女"
-              />
-              <div className="intro-tw-text py-36 px-4 border-primary">
-                <p className="mb-4">
-                  在福建、辜灣、潮汕地區，籤筒供人直接抽取一支籤條，閩、臺、潮等地的聖籤長約40至50公分，寬3公分，厚約0.5公分，一般為竹片或木片削成，放於籤筒內，抽籤者應從籤筒抽取一支聖籤。
-                </p>
-                <p>
-                  而抽出聖籤後，聖籤上所刻或寫的干支號碼就是籤詩的首別號碼。抽取籤條之後，祈福問事者必須確定此聖籤為「神佛欽定」。確定方式即為擲筊。呈現一正一反的聖筊即可以認定此籤為神佛認定，若非，則必須將此聖籤放置籤筒，重新再抽。有些人的抽籤方法，把笑筊忽略不計，只看成是神靈喜笑，就重新擲。
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Intro />
 
-        <section className="notice py-md-80 py-40">
-          <div className="d-flex  flex-column flex-md-row align-items-center">
-            <img
-              className="notice-img me-md-4 "
-              src="assets/images/draw/notice.png"
-              alt="豬大仙要你注意"
-            />
-            <div
-              className="notice-hints w-100
-            "
-            >
-              <div className="p-md-4 ">
-                <h2
-                  className="pb-md-36 pb-4 mb-0 border-bottom border-secondary text-center text-md-start
-                fs-4 fs-md-2
-                "
-                >
-                  求籤時，須留意
-                </h2>
-                <ul className="pt-md-36 pt-4">
-                  {hints.map((hint, index) => {
-                    return (
-                      <li key={index}>
-                        <div
-                          className="d-flex align-items-center 
-                    justify-content-between mb-2
-                    "
-                        >
-                          <h4 className="ps-12 py-3 mb-0">{hint.title}</h4>
-                          <img
-                            src="assets/images/index/btn-social.png"
-                            alt=""
-                            onClick={() => {
-                              setCollapseOpen((prev) =>
-                                prev.map((item, i) => {
-                                  return i === index ? !item : item;
-                                }),
-                              );
-                            }}
-                          />
-                        </div>
-                        <p
-                          className={`ps-4 pe-5 ps-md-12 notice-hints-words mb-4 accordion-collapse collapse ${collapseOpen[index] ? "show" : ""}`}
-                        >
-                          {hint.content}
-                        </p>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Notice />
 
         <div className="modal draw-modal" tabIndex="-1" ref={drawModal}>
           <div
