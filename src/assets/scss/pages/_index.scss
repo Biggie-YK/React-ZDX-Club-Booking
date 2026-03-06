@@ -116,6 +116,9 @@
   top: -120px;
 }
 .lunar-calendar {
+  &-white{
+    margin-bottom: 300px;
+  }
   margin-left: 16.25%;
   .solar-term {
     max-width: 100%;
@@ -127,20 +130,9 @@
     }
     background-size:cover ;
     background-position: center;
-    // & ::before {
-    //   content: "";
-    //   background: #000;
-    //   position: absolute;
-    //   inset: 0;
-    //   // background-image: url("https://storage.googleapis.com/vue-course-api.appspot.com/z58occc/1769861309677.jpg");
-    //   background-size: 200%;
-    //   background-position: 5% 72.5%;
-    //   transform: scaleX(-1); /* 只反轉底圖 */
-    //   z-index: -1;
-    // }
   }
   .detail {
-    width: 65.94911%;
+    width: 72.5%;
     &-up {
       width: 100px;
     }
