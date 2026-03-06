@@ -15,30 +15,26 @@ export default function Home() {
   const carouselRef = useRef(null);
   const navigate = useNavigate();
   const [date, setDate] = useState(new Date());
-  const [lunar, setLunar] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    let lunar = Lunar.fromDate(date);
-    const jueQi = lunar.getPrevJieQi()._p.name;
-    const jueQiStr =
-      `${lunar.getPrevJieQi()._p.name}(國曆)${lunar.getPrevJieQi().getSolar().toYmd()}~${lunar.getNextJieQi().getSolar().toYmd()}`.replace(
-        /-/g,
-        "/",
-      );
-
-    setLunar({
-      year: lunar.getYearInGanZhiByLiChun(),
-      month: lunar.getMonthInChinese(),
-      day: lunar.getDayInChinese(),
-      dayChongDesc: lunar.getDayChongDesc(),
-      dayYi: lunar.getDayYi(),
-      dayJi: lunar.getDayJi(),
-      daySha: lunar.getDaySha(),
-      jueQi: jueQi,
-      jueQiStr: jueQiStr,
-    });
-  }, [date]);
+  const lunar = Lunar.fromDate(date);
+  const jueQi = lunar.getPrevJieQi()._p.name;
+  const jueQiStr =
+    `${lunar.getPrevJieQi()._p.name}(國曆)${lunar.getPrevJieQi().getSolar().toYmd()}~${lunar.getNextJieQi().getSolar().toYmd()}`.replace(
+      /-/g,
+      "/",
+    );
+  const lunarDetail = {
+    year: lunar.getYearInGanZhiByLiChun(),
+    month: lunar.getMonthInChinese(),
+    day: lunar.getDayInChinese(),
+    dayChongDesc: lunar.getDayChongDesc(),
+    dayYi: lunar.getDayYi(),
+    dayJi: lunar.getDayJi(),
+    daySha: lunar.getDaySha(),
+    jueQi: jueQi,
+    jueQiStr: jueQiStr,
+  };
 
   const QAcontent = [
     {
@@ -57,7 +53,7 @@ export default function Home() {
   const [collapseOpen, setCollapseOpen] = useState([true, true, true]);
 
   useEffect(() => {
-    const carousel = new Carousel(carouselRef.current);
+    new Carousel(carouselRef.current);
     carouselRef.current.addEventListener("slid.bs.carousel", (e) => {
       setCarouselIndex(e.to);
     });
@@ -703,11 +699,11 @@ export default function Home() {
               <div
                 className="solar-term py-md-64 p-4 position-relative  mb-4 "
                 style={{
-                  backgroundImage: `url(${jueQiImg[lunar?.jueQi]})`,
+                  backgroundImage: `url(${jueQiImg[lunarDetail?.jueQi]})`,
                 }}
               >
                 <h2 className="fs-lg-80 fs-3 solar-term-title d-inline-block p-md-4 p-3 text-nowrap">
-                  {lunar.jueQi}
+                  {lunarDetail.jueQi}
                 </h2>
               </div>
               <div className="detail  pt-36  pb-md-0 pb-40 ">
@@ -733,12 +729,13 @@ export default function Home() {
                     </li>
                     <li>
                       <p className="fs-7 p-md-4 py-md-3 p-3 mb-0 border-bottom border-black-300">
-                        農曆：{lunar?.year}年{lunar?.month}月{lunar?.day}
+                        農曆：{lunarDetail?.year}年{lunarDetail?.month}月
+                        {lunarDetail?.day}
                       </p>
                     </li>
                     <li>
                       <p className="fs-7 p-md-4 py-md-3 p-3 mb-0 border-bottom border-black-300">
-                        節氣：{lunar?.jueQiStr}
+                        節氣：{lunarDetail?.jueQiStr}
                       </p>
                     </li>
                   </ul>
@@ -751,7 +748,7 @@ export default function Home() {
                         沖
                       </h5>
                       <span className=" fs-7 ps-3 py-1 me-1">
-                        {lunar?.dayChongDesc}
+                        {lunarDetail?.dayChongDesc}
                       </span>
                     </div>
                   </li>
@@ -761,7 +758,7 @@ export default function Home() {
                         宜
                       </h5>
                       <div className="d-flex flex-wrap   ">
-                        {lunar?.dayYi?.map((item, i) => {
+                        {lunarDetail?.dayYi?.map((item, i) => {
                           return (
                             <span className="fs-7 px-2 py-1" key={i}>
                               {item}
@@ -776,7 +773,9 @@ export default function Home() {
                       <h5 className="fs-md-48 fs-2 mb-0 text-primary me-md-2 me-3">
                         煞
                       </h5>
-                      <span className="fs-7 px-2 py-1">{lunar?.daySha}方</span>
+                      <span className="fs-7 px-2 py-1">
+                        {lunarDetail?.daySha}方
+                      </span>
                     </div>
                   </li>
                   <li>
@@ -785,7 +784,7 @@ export default function Home() {
                         忌
                       </h5>
                       <div className="d-flex flex-wrap text-nowrap ">
-                        {lunar?.dayJi?.map((item, i) => {
+                        {lunarDetail?.dayJi?.map((item, i) => {
                           return (
                             <span className="fs-7 px-2 py-1" key={i}>
                               {item}

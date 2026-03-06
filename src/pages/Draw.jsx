@@ -156,8 +156,6 @@ export default function Draw() {
         } else {
           nextActionRef.current = () => handleShowAlert("continue", next);
         }
-
-        return next;
       });
     } else {
       setSuccessCount(0);
@@ -233,6 +231,7 @@ export default function Draw() {
   return (
     <>
       <div className="container">
+        <div className="d-none">{successCount}</div>
         <section className="draw py-md-80 py-40">
           <div className="row py-3 row-cols-12 ">
             <div className="col-md-5">
