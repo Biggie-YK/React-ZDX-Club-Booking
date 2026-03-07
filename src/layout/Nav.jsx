@@ -25,13 +25,12 @@ export default function Nav() {
       title: "立即預約",
     },
     {
-      url: "/appointment-management",
+      url: "/login",
       title: "登入/註冊",
     },
   ];
   const DownNavData = [
     {
-      url: "/",
       title: "服務內容",
     },
     {
