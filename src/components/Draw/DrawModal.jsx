@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import Swal from "sweetalert2";
 import Nzh from "nzh";
 import picks from "../../assets/picks.json";
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Modal } from "bootstrap";
 
-export default function DrawModal() {
+export default function DrawModal({ drawModal }) {
   const results = [
     {
       url: "https://lottie.host/26747bda-1d8f-4126-bc34-8f8d91293586/Qwc2ZB1vku.lottie",
@@ -24,7 +24,7 @@ export default function DrawModal() {
       weight: 5,
     },
   ];
-  const drawModal = useRef(null);
+
   const nextActionRef = useRef(null);
   const resultsTextRef = useRef(null);
   const [hasThreeSuccess, setHasThreeSuccess] = useState(false);
@@ -36,18 +36,6 @@ export default function DrawModal() {
   const [textKey, setTextKey] = useState(-1);
   const navigate = useNavigate();
   const modalInstance = useRef(null);
-
-useEffect(() => {
-  if (!drawModal.current) return;
-
-  modalInstance.current = Modal.getOrCreateInstance(drawModal.current, {
-    backdrop: "static",
-  });
-
-  return () => {
-    modalInstance.current?.dispose();
-  };
-}, []);
 
   function handleOtherPicks() {
     modalInstance.current.hide();
@@ -131,6 +119,7 @@ useEffect(() => {
         } else {
           nextActionRef.current = () => handleShowAlert("continue", next);
         }
+        return next;
       });
     } else {
       setSuccessCount(0);
@@ -211,6 +200,18 @@ useEffect(() => {
     setTextKey((prev) => prev - 1);
     setShowText(true);
   }
+
+  // function handleOpenModal() {
+  //   modalInstance.current.show();
+  //   handleTossingBlocks(false);
+  //   setHasThreeSuccess(false);
+  // }
+  // useEffect(() => {
+  //   modalInstance.current = new Modal(drawModal.current, {
+  //     backdrop: "static",
+  //   });
+  //   // handleOpenModal();
+  // }, []);
 
   return (
     <div className="modal draw-modal" tabIndex="-1" ref={drawModal}>

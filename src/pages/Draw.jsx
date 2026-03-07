@@ -1,24 +1,15 @@
-import { Modal } from "bootstrap";
-import Swal from "sweetalert2";
 import "animate.css";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { useEffect, useRef, useState } from "react";
-import picks from "../assets/picks.json";
-import Nzh from "nzh";
-import { useNavigate } from "react-router";
 import Intro from "../components/Draw/Intro";
 import Notice from "../components/Draw/Notice";
-import DrawModal from "../components/Draw/DrawModal";
+import { Modal } from "bootstrap";
+import { useState, useRef, useEffect } from "react";
+import Swal from "sweetalert2";
+import Nzh from "nzh";
+import picks from "../assets/picks.json";
+import { useNavigate } from "react-router";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export default function Draw() {
-  const [successCount, setSuccessCount] = useState(0);
-  const resultsTextRef = useRef(null);
-  const drawModal = useRef(null);
-  const [hasThreeSuccess, setHasThreeSuccess] = useState(false);
-  const nextActionRef = useRef(null);
-  const [pickNum, setPickNum] = useState(0);
-
-
   const results = [
     {
       url: "https://lottie.host/26747bda-1d8f-4126-bc34-8f8d91293586/Qwc2ZB1vku.lottie",
@@ -36,16 +27,115 @@ export default function Draw() {
       weight: 5,
     },
   ];
-  const [result, setResult] = useState(results[0]);
+
+  const nextActionRef = useRef(null);
+  const resultsTextRef = useRef(null);
+  const [hasThreeSuccess, setHasThreeSuccess] = useState(false);
   const [showText, setShowText] = useState(false);
+  const [result, setResult] = useState(results[0]);
   const [imgKey, setImgKey] = useState(0);
+  const [successCount, setSuccessCount] = useState(0);
+  const [pickNum, setPickNum] = useState(0);
   const [textKey, setTextKey] = useState(-1);
   const navigate = useNavigate();
+  const modalInstance = useRef(null);
+
+  const drawModal = useRef(null);
   useEffect(() => {
-    drawModal.current = new Modal(drawModal.current, {
+    modalInstance.current = new Modal(drawModal.current, {
       backdrop: "static",
     });
   }, []);
+
+  function handleOtherPicks() {
+    modalInstance.current.hide();
+    navigate("/other-picks");
+  }
+
+  function handleDrawAgain() {
+    setSuccessCount(0);
+    setHasThreeSuccess(false);
+    handleTossingBlocks(false);
+  }
+
+  function handleCloseModal() {
+    modalInstance.current.hide();
+  }
+
+  function handleAnimationEnd() {
+    if (nextActionRef.current) {
+      nextActionRef.current();
+      nextActionRef.current = null;
+    }
+  }
+
+  function getRandom(range) {
+    return Math.floor(Math.random() * range);
+  }
+
+  function handleDrawPicks() {
+    const i = getRandom(100) + 1;
+    setPickNum(i);
+    Swal.fire({
+      title: `求得籤詩 第${Nzh.hk.encodeS(i)}首`,
+      text: "您必須擲出3次聖筊,方能解籤",
+      icon: "info",
+      confirmButtonColor: "rgba(134, 102, 84, 1)",
+      confirmButtonText: "確認賜籤",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleTossingBlocks(true);
+      }
+    });
+  }
+
+  function getRandomByWeight(items) {
+    const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
+
+    const random = Math.random() * totalWeight;
+
+    let comulative = 0;
+
+    for (const item of items) {
+      comulative += item.weight;
+
+      if (random < comulative) {
+        return item;
+      }
+    }
+  }
+
+  function handleTossingBlocks(isSecondRound) {
+    setShowText(false);
+
+    const result = getRandomByWeight(results);
+    setResult(result);
+    setImgKey((prev) => prev + 1);
+
+    if (!isSecondRound) {
+      nextActionRef.current =
+        result.text === "聖筊"
+          ? () => handleShowAlert("canDraw")
+          : () => handleShowAlert("retry");
+      return;
+    }
+
+    if (result.text === "聖筊") {
+      setSuccessCount((prev) => {
+        const next = prev + 1;
+
+        if (next === 3) {
+          nextActionRef.current = () => handleShowAlert("showResult", next);
+        } else {
+          nextActionRef.current = () => handleShowAlert("continue", next);
+        }
+        return next;
+      });
+    } else {
+      setSuccessCount(0);
+      nextActionRef.current = () => handleShowAlert("restart");
+    }
+  }
 
   function handleShowAlert(state, successCount) {
     switch (state) {
@@ -116,107 +206,20 @@ export default function Draw() {
         break;
     }
   }
-
-  function handleTossingBlocks(isSecondRound) {
-    setShowText(false);
-
-    const result = getRandomByWeight(results);
-    setResult(result);
-    setImgKey((prev) => prev + 1);
-
-    if (!isSecondRound) {
-      nextActionRef.current =
-        result.text === "聖筊"
-          ? () => handleShowAlert("canDraw")
-          : () => handleShowAlert("retry");
-      return;
-    }
-
-    if (result.text === "聖筊") {
-      setSuccessCount((prev) => {
-        const next = prev + 1;
-
-        if (next === 3) {
-          nextActionRef.current = () => handleShowAlert("showResult", next);
-        } else {
-          nextActionRef.current = () => handleShowAlert("continue", next);
-        }
-      });
-    } else {
-      setSuccessCount(0);
-      nextActionRef.current = () => handleShowAlert("restart");
-    }
-  }
-
-  function handleOpenModal() {
-    drawModal.current.show();
-    handleTossingBlocks(false);
-    setHasThreeSuccess(false);
-  }
-
   function handleComplete() {
     setTextKey((prev) => prev - 1);
     setShowText(true);
   }
-  function handleAnimationEnd() {
-    if (nextActionRef.current) {
-      nextActionRef.current();
-      nextActionRef.current = null;
-    }
-  }
-  function handleOtherPicks() {
-    drawModal.current.hide();
-    navigate("/other-picks");
-  }
-  function handleDrawAgain() {
-    setSuccessCount(0);
-    setHasThreeSuccess(false);
+
+  function handleOpenModal() {
+    modalInstance.current.show();
     handleTossingBlocks(false);
-  }
-
-  function handleDrawPicks() {
-    const i = getRandom(100) + 1;
-    setPickNum(i);
-    Swal.fire({
-      title: `求得籤詩 第${Nzh.hk.encodeS(i)}首`,
-      text: "您必須擲出3次聖筊,方能解籤",
-      icon: "info",
-      confirmButtonColor: "rgba(134, 102, 84, 1)",
-      confirmButtonText: "確認賜籤",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        handleTossingBlocks(true);
-      }
-    });
-  }
-  function getRandom(range) {
-    return Math.floor(Math.random() * range);
-  }
-
-  function getRandomByWeight(items) {
-    const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
-
-    const random = Math.random() * totalWeight;
-
-    let comulative = 0;
-
-    for (const item of items) {
-      comulative += item.weight;
-
-      if (random < comulative) {
-        return item;
-      }
-    }
-  }
-
-  function handleCloseModal() {
-    drawModal.current.hide();
+    setHasThreeSuccess(false);
   }
 
   return (
     <>
       <div className="container">
-        <div className="d-none">{successCount}</div>
         <section className="draw py-md-80 py-40">
           <div className="row py-3 row-cols-12 ">
             <div className="col-md-5">
@@ -326,6 +329,7 @@ export default function Draw() {
         <Notice />
 
         <div className="modal draw-modal" tabIndex="-1" ref={drawModal}>
+          <div className="d-none">{successCount}</div>
           <div
             className="modal-dialog modal-lg-plus 
           modal-dialog-centered"
