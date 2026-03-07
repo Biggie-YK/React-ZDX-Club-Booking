@@ -42,7 +42,9 @@ function formatTime(timeStr) {
   return `時段 ${timeStr}`;
 }
 
-function FilterDropdown({ label }) {
+function FilterDropdown({ placeholder, items, value, onChange }) {
+  const label = items.find((i) => i.value === value)?.label ?? placeholder;
+
   return (
     <div className="dropdown flex-fill">
       <button
@@ -57,15 +59,25 @@ function FilterDropdown({ label }) {
 
       <ul className="dropdown-menu">
         <li>
-          <button className="dropdown-item" type="button">
-            新到舊
+          <button
+            className="dropdown-item"
+            type="button"
+            onClick={() => onChange('')}
+          >
+            全部
           </button>
         </li>
-        <li>
-          <button className="dropdown-item" type="button">
-            舊到新
-          </button>
-        </li>
+        {items.map((item) => (
+          <li key={item.value}>
+            <button
+              className="dropdown-item"
+              type="button"
+              onClick={() => onChange(item.value)}
+            >
+              {item.label}
+            </button>
+          </li>
+        ))}
       </ul>
     </div>
   );
@@ -184,6 +196,29 @@ function BookingCard({ booking }) {
 }
 
 export default function AppointmentManagement() {
+  const SERVICE_OPTIONS = [
+    { label: '紫微命盤', value: '紫微命盤' },
+    { label: '擇日開運', value: '擇日開運' },
+    { label: '小流年運勢分析', value: '小流年運勢分析' },
+    { label: '因緣與感情合盤', value: '因緣與感情合盤' },
+  ];
+
+  const TIME_OPTIONS = [
+    { label: '上午', value: '上午' },
+    { label: '下午', value: '下午' },
+    { label: '晚上', value: '晚上' },
+  ];
+
+  const STATUS_OPTIONS = [
+    { label: '已完成', value: 'completed' },
+    { label: '待確認', value: 'pending' },
+    { label: '已取消', value: 'canceled' },
+  ];
+
+  const [serviceFilter, setServiceFilter] = useState('');
+  const [timeFilter, setTimeFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errMsg, setErrMsg] = useState('');
@@ -209,9 +244,22 @@ export default function AppointmentManagement() {
     fetchBookings();
   }, []);
 
+  const filteredBookings = useMemo(() => {
+    return bookings.filter((b) => {
+      const matchService = serviceFilter ? b.service === serviceFilter : true;
+      const matchTime = timeFilter
+        ? normalizeTimeSlot(b.time) === timeFilter
+        : true;
+      const matchStatus = statusFilter
+        ? normalizeStatus(b.status) === statusFilter
+        : true;
+      return matchService && matchTime && matchStatus;
+    });
+  }, [bookings, serviceFilter, timeFilter, statusFilter]);
+
   const cards = useMemo(
-    () => bookings.map((b) => <BookingCard key={b.id} booking={b} />),
-    [bookings]
+    () => filteredBookings.map((b) => <BookingCard key={b.id} booking={b} />),
+    [filteredBookings]
   );
 
   return (
@@ -334,9 +382,24 @@ export default function AppointmentManagement() {
                   </div>
 
                   <div className="d-flex justify-content-between filter-group gap-4">
-                    <FilterDropdown label="服務項目" />
-                    <FilterDropdown label="預約時間" />
-                    <FilterDropdown label="預約裝態" />
+                    <FilterDropdown
+                      placeholder="服務項目"
+                      items={SERVICE_OPTIONS}
+                      value={serviceFilter}
+                      onChange={setServiceFilter}
+                    />
+                    <FilterDropdown
+                      placeholder="預約時間"
+                      items={TIME_OPTIONS}
+                      value={timeFilter}
+                      onChange={setTimeFilter}
+                    />
+                    <FilterDropdown
+                      placeholder="預約狀態"
+                      items={STATUS_OPTIONS}
+                      value={statusFilter}
+                      onChange={setStatusFilter}
+                    />
                   </div>
                 </div>
               </div>
@@ -388,9 +451,24 @@ export default function AppointmentManagement() {
               </div>
 
               <div className="d-flex flex-column gap-2">
-                <FilterDropdown label="服務項目" />
-                <FilterDropdown label="預約時間" />
-                <FilterDropdown label="預約裝態" />
+                <FilterDropdown
+                  placeholder="服務項目"
+                  items={SERVICE_OPTIONS}
+                  value={serviceFilter}
+                  onChange={setServiceFilter}
+                />
+                <FilterDropdown
+                  placeholder="預約時間"
+                  items={TIME_OPTIONS}
+                  value={timeFilter}
+                  onChange={setTimeFilter}
+                />
+                <FilterDropdown
+                  placeholder="預約狀態"
+                  items={STATUS_OPTIONS}
+                  value={statusFilter}
+                  onChange={setStatusFilter}
+                />
               </div>
             </div>
           </div>
@@ -404,4 +482,38 @@ export default function AppointmentManagement() {
       </div>
     </div>
   );
+}
+
+function normalizeStatus(status) {
+  const s = String(status || '').toLowerCase();
+  if (s === 'completed') return 'completed';
+  if (s === 'canceled' || s === 'cancelled') return 'canceled';
+  return 'pending';
+}
+
+function normalizeTimeSlot(time) {
+  const t = String(time || '').trim();
+
+  // 回 "上午/下午/晚上"
+  if (t === '上午' || t === '下午' || t === '晚上') return t;
+
+  // 回 "HH:mm"：用時間切
+  if (t.includes(':')) {
+    const hour = parseInt(t.split(':')[0], 10);
+    if (!Number.isNaN(hour)) {
+      if (hour < 12) return '上午';
+      if (hour < 18) return '下午';
+      return '晚上';
+    }
+  }
+
+  // 回數字時段（例：1,2,7）
+  const n = Number(t);
+  if (!Number.isNaN(n)) {
+    if (n <= 3) return '上午';
+    if (n <= 6) return '下午';
+    return '晚上';
+  }
+
+  return t; // 都不符合就原樣
 }
