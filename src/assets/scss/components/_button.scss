@@ -1,0 +1,67 @@
+@import "bootstrap/scss/functions";
+@import "../utils/variables";
+
+.btn-bg-primary-500,
+.btn-bg-black-950 {
+  white-space: nowrap;
+  position: relative;
+  color: $black-50;
+  font-size: 20px;
+  line-height: 1.5;
+  padding: 8px 32px;
+  border-radius: 0;
+  border-width: 1px 4px 1px 4px;
+  border-style: solid;
+  
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    width: 1px;
+    height: 100%;
+  }
+  &::before {
+    left: 12px;
+  }
+  &::after {
+    right: 12px;
+  }
+}
+
+// 顏色變化
+.btn-bg-primary-500 {
+  background-color: rgba($primary-500, 0.8);
+  border-color: $black-950;
+  &:hover {
+    background-color: $primary-500;
+  }
+  &:active {
+    background-color: $primary-500 !important;
+  }
+  &::before,
+  &::after {
+    background: $black-950;
+  }
+}
+
+.btn-bg-black-950 {
+  
+  background-color: rgba($black-950, 0.8);
+  border-color: $secondary-200;
+  padding: 8px 28px;
+  &:hover {
+    background-color: $black-950;
+  }
+  &:active {
+    background-color: $black-950 !important;
+  }
+  &::before,
+  &::after {
+    background: $secondary-200;
+  }
+  @media screen and (min-width: 767px) {
+    padding: 8px 32px;
+    
+  }
+}

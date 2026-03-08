@@ -105,14 +105,16 @@ export default function Reserve() {
           <div className="inside-border py-md-72 py-36">
             {!isAuth && (
               <div
-                className="alert alert-warning m-0 d-md-flex align-items-center justify-content-center fs-5"
+                className="alert alert-warning mb-md-3 mb-5  
+                d-md-flex align-items-center justify-content-center fs-md-5 fs-6
+                flex-column flex-md-row"
                 role="alert"
               >
-                <div className="mb-3 m-md-3">
+                <div className="text-center me-md-4 mb-3 mb-md-0">
                   您尚未登入,登入後可享有更便利的服務體驗
                 </div>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary col-12 col-md-auto px-4"
                   onClick={() => navigate("/login")}
                 >
                   前往登入

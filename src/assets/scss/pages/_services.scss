@@ -1,0 +1,106 @@
+@import "bootstrap/scss/functions";
+@import "../utils/variables";
+
+.dot-title {
+  position: relative;
+}
+
+.dot-title::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba($primary-500, 0.2);
+  @media (min-width: 767px) {
+    top: 0px;
+    left: 0px;
+  }
+}
+
+.header-bottom {
+  border-width: 4px 0px 4px 0px;
+  border-style: solid;
+  border-color: $primary-500;
+
+  .inner-header-bottom {
+    border-width: 1px 0px 1px 0px;
+    border-style: solid;
+    border-color: $primary-500;
+  }
+
+  .right-border,
+  .left-border {
+    position: relative;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: calc((100% - 15px) / 2);
+      width: 1px;
+      height: 15px;
+      background: $primary-500;
+      @media (min-width: 767px) {
+        width: 2px;
+      }
+    }
+  }
+  .left-border::before {
+    left: 0px;
+  }
+  .right-border::after {
+    right: 0px;
+  }
+}
+
+.services-header-image {
+  padding: 0px 55.5px;
+  @media (min-width: 767px) {
+    padding: 0px 0px;
+  }
+}
+
+.services-details {
+  .swiper-pagination {
+    bottom: 0px !important;
+  }
+
+  // 未選中狀態
+  .swiper-pagination-bullet {
+    width: 109px;
+    height: 8px;
+    border-radius: 2px;
+    background: $secondary-200;
+    opacity: 0.5;
+    margin: 0 12px; // 調整點之間的距離
+    transition: all 0.3s ease; // 添加過渡效果
+    @media (min-width: 767px) {
+      width: 120px;
+    }
+  }
+
+  .swiper-pagination-bullet-active {
+    background: $secondary-400;
+    opacity: 1;
+  }
+
+  .services-detail-card {
+    position: relative;
+  }
+
+  .btn-bg-black-950 {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+}
+
+.intro-header {
+  .highlight-box {
+    background-image: url("../../images/services/bg-highlight-box.png");
+    background: rgba($secondary-200, 0.5);
+  }
+}
