@@ -192,6 +192,7 @@ export default function Reserve() {
                           id="date"
                           className={`form-control pe-5 ${errors.date ? "input-error" : ""}`}
                           placeholder="年/月/日"
+                          min={new Date(Date.now() + 86400000).toISOString().split('T')[0]}
                           {...register("date", { required: "請選擇日期" })}
                         />
                         <i className="bi bi-calendar4-week position-absolute top-50 end-0 translate-middle-y me-3 text-muted pointer-events-none"></i>

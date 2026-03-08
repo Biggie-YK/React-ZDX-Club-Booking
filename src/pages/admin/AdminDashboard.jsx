@@ -80,7 +80,7 @@ export default function AdminDashboard() {
             className="sidebar-item"
             onClick={() => setMainContent("bookings")}
           >
-            <i className="bi bi-box me-2"></i> 預約管理
+            <i className="bi bi-box me-2"></i> 預約清單
           </div>
         </div>
 

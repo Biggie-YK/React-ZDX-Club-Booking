@@ -11,6 +11,7 @@ import Draw from "./pages/Draw";
 import OtherPicks from "./pages/OtherPicks";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Services from "./pages/Services";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -44,6 +45,7 @@ function App() {
           <Route path="/other-picks" element={<OtherPicks />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
+          <Route path="/services" element={<Services />}></Route>
           <Route path="/admin-dashboard" element={<AdminDashboard />}></Route>
         </Routes>
         {!hideFooterPaths.includes(location.pathname) && <Footer />}

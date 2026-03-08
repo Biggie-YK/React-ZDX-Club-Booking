@@ -113,7 +113,8 @@ export default function Login() {
                       <p className="mb-0">
                         還沒有帳戶？
                         <Link to="/register" className="text-decoration-none">
-                          立即註冊
+                          <span className="fs-5 fw-bold px-3"><i className="bi bi-person-plus me-2"></i>立即註冊</span>
+                        
                         </Link>
                       </p>
                     </div>
