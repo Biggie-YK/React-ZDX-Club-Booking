@@ -91,7 +91,7 @@ function BookingCard({ booking }) {
   const reminderText = reminderEnabled ? '已設定' : '未設定';
   const reminderClass = reminderEnabled ? 'calendar-green' : 'calendar-red';
 
-  const note = booking.remark || booking.comment || '';
+  const note = booking.remark || '';
 
   return (
     <div className="col">
@@ -126,8 +126,13 @@ function BookingCard({ booking }) {
             </div>
 
             <div className="d-flex justify-content-between">
-              <p className="mb-0">Email</p>
-              <p className="mb-0 text-primary">{booking.email || '-'}</p>
+              <p className="mb-20">Email</p>
+              <p className="mb-20 text-primary">{booking.email || '-'}</p>
+            </div>
+
+            <div className="d-flex justify-content-between">
+              <p className="mb-0">預約者訊息</p>
+              <p className="mb-0 text-primary">{booking.comment || '-'}</p>
             </div>
           </div>
 
