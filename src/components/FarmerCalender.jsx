@@ -4,8 +4,10 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { Lunar } from "lunar-javascript";
 import "../assets/scss/components/farmerCalender.scss";
 import { useRef } from "react";
+import * as OpenCC from "opencc-js";
 
 export default function Calendar({ setDate, setIsLoading }) {
+  const converter = OpenCC.Converter({ from: "cn", to: "tw" });
   const timeOutRef = useRef(null);
   const renderDayHeader = (arg) => {
     const days = ["日", "一", "二", "三", "四", "五", "六"];
@@ -29,7 +31,7 @@ export default function Calendar({ setDate, setIsLoading }) {
     }
 
     // 節氣
-    let jieqi = lunar.getJieQi();
+    let jieqi = converter(lunar.getJieQi());
 
     // 創建顯示元素
     let lunarEl = document.createElement("div");

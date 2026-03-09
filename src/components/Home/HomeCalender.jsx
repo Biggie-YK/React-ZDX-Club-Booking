@@ -3,28 +3,33 @@ import { jueQiImg } from "../../../htmlPages/Farmer-Calendar/sixtyJiaziDays";
 import { Lunar } from "lunar-javascript";
 import FarmerCalender from "../FarmerCalender";
 import { Oval } from "react-loader-spinner";
+import * as OpenCC from "opencc-js";
 
 export default function HomeCalender() {
   const [date, setDate] = useState(new Date());
   const [isLoading, setIsLoading] = useState(false);
-
   const lunar = Lunar.fromDate(date);
   const jueQi = lunar.getPrevJieQi()._p.name;
+  const converter = OpenCC.Converter({ from: "cn", to: "tw" });
   const jueQiStr =
     `${lunar.getPrevJieQi()._p.name}(國曆)${lunar.getPrevJieQi().getSolar().toYmd()}~${lunar.getNextJieQi().getSolar().toYmd()}`.replace(
       /-/g,
       "/",
     );
   const lunarDetail = {
-    year: lunar.getYearInGanZhiByLiChun(),
-    month: lunar.getMonthInChinese(),
-    day: lunar.getDayInChinese(),
-    dayChongDesc: lunar.getDayChongDesc(),
-    dayYi: lunar.getDayYi(),
-    dayJi: lunar.getDayJi(),
-    daySha: lunar.getDaySha(),
-    jueQi: jueQi,
-    jueQiStr: jueQiStr,
+    year: converter(lunar.getYearInGanZhiByLiChun()),
+    month: converter(lunar.getMonthInChinese()),
+    day: converter(lunar.getDayInChinese()),
+    dayChongDesc: converter(lunar.getDayChongDesc()),
+    dayYi: lunar.getDayYi().map((item) => {
+      return converter(item);
+    }),
+    dayJi: lunar.getDayJi().map((item) => {
+      return converter(item);
+    }),
+    daySha: converter(lunar.getDaySha()),
+    jueQi: converter(jueQi),
+    jueQiStr: converter(jueQiStr),
   };
 
   return (
@@ -45,7 +50,7 @@ export default function HomeCalender() {
           <FarmerCalender setDate={setDate} setIsLoading={setIsLoading} />
         </div>
         {isLoading ? (
-          <div className="lunar-calendar-oval d-flex w-50 justify-content-center align-items-center">
+          <div className="lunar-calendar-oval d-flex  justify-content-center align-items-center">
             <Oval
               visible={true}
               height="300"

@@ -116,6 +116,9 @@
   top: -120px;
 }
 .lunar-calendar {
+  &-oval{
+    width: 50%;
+  }
   &-white{
     margin-bottom: 300px;
   }
@@ -188,6 +191,12 @@
     }
   }
   .lunar-calendar {
+    &-oval{
+      width: 100%;
+    }
+    &-white{
+      margin-bottom: 0;
+    }
     margin-left: 0;
     .detail {
       width: 100%;
