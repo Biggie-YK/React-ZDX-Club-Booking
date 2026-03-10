@@ -33,9 +33,11 @@
 
   .right-border,
   .left-border {
-    position: relative;
-    &::before,
-    &::after {
+    position: relative;}
+
+    
+  .left-border::before,
+  .right-border::after {
       content: "";
       position: absolute;
       top: calc((100% - 15px) / 2);
@@ -53,7 +55,7 @@
   .right-border::after {
     right: 0px;
   }
-}
+
 
 .services-header-image {
   padding: 0px 55.5px;

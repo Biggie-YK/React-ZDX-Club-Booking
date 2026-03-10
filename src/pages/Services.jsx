@@ -1,72 +1,21 @@
 import "../assets/scss/pages/_services.scss";
-import Bbutton from "../components/Button/button";
+import Button from "../components/Button/button";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import servicesData from "../api/servicesData";
+import ItemList from "../components/Services/ItemList";
 
 export default function Services() {
   const navigate = useNavigate();
-  const services = [
-    {
-      title: "紫微命盤精解 | 人生底層設定解析",
-      description: "適合對象：人生迷惘期、方向不明、想重新定位自己的人",
-      image: "assets/images/services/services-title-bg-1.png",
-    },
-    {
-      title: "流年運勢分析 | 掌握關鍵年份",
-      description:
-        "你會知道：哪一年適合轉職、投資、創業，哪一年應避免風險與重大變動。",
-      image: "assets/images/services/services-title-bg-2.png",
-    },
-    {
-      title: "姻緣與感情合盤 | 看清關係走向",
-      description: "適合對象：曖昧、交往中、婚前評估、關係反覆者",
-      image: "assets/images/services/services-title-bg-3.png",
-    },
-  ];
-  const data = {
-    服務名稱: "紫微命盤精解",
-    所需資料: {
-      注意事項: "為確保解析準確，請於預約後提供以下資訊",
-      項目: [
-        "出生年月日 (西元)",
-        "出生時間 (請盡量精確，誤差不超過30分鐘)",
-        "出生地 (國家/城市)",
-        "目前最關心的 1 ~ 3 個人生議題 (如：職涯、方向、角色定位等)",
-      ],
-      隱私說明: "所有資料僅用於命盤分析，並嚴格保密。",
-    },
-    服務流程說明: [
-      {
-        步驟: "Step 1",
-        標題: "預約與資料提交",
-        內容: ["點擊下方按鈕完成預約", "填寫基本資料與關注議題"],
-      },
-      {
-        步驟: "Step 2",
-        標題: "專業命盤建構與分析",
-        內容: [
-          "依你提供的資料排製專屬紫微命盤",
-          "進行結構層級的性格與人生定位解析",
-        ],
-      },
-      {
-        步驟: "Step 3",
-        標題: "一對一深度解說 (線上/實體)",
-        內容: [
-          "逐項說明你的命盤重點",
-          "協助你理解自身模式如何影響現實選擇",
-          "回答你關於方向與定位的問題",
-        ],
-      },
-      {
-        步驟: "Step 4",
-        標題: "後續整理與參考重點",
-        內容: ["提供重點整理 (文字或重點摘要)", "讓你在未來做決策時可反覆參考"],
-      },
-    ],
+
+  const [servicesId, setServicesId] = useState(0);
+
+  const onHandleServices = (id) => {
+    setServicesId(id);
   };
 
   return (
@@ -90,7 +39,7 @@ export default function Services() {
                 </p>
               </div>
               <div className="px-32 d-none d-md-block">
-                <Bbutton
+                <Button
                   text="立即預約專屬命盤解析"
                   className="btn-bg-primary-500"
                   onClick={() => navigate("/reserve")}
@@ -106,7 +55,7 @@ export default function Services() {
                 />
               </div>
               <div className="px-32 d-block d-md-none">
-                <Bbutton
+                <Button
                   text="立即預約專屬命盤解析"
                   className="btn-bg-primary-500"
                   onClick={() => navigate("/reserve")}
@@ -159,7 +108,7 @@ export default function Services() {
       <section className="services-details py-40 py-md-80">
         <div className="container text-center">
           <div className="fs-4 fs-md-2 fw-bold lh-sm mb-36 mb-md-40">
-            服務細節說明{" "}
+            服務細節說明
           </div>
 
           <Swiper
@@ -175,97 +124,167 @@ export default function Services() {
               clickable: true,
             }}
           >
-            {services.map((service, index) => (
+            {servicesData.map((item, index) => (
               <SwiperSlide key={index}>
                 <div
                   className="pt-40 pt-md-80 pb-80"
                   style={{
-                    backgroundImage: `url(${service.image})`,
+                    backgroundImage: `url(${item.image})`,
                   }}
+                  onClick={() => onHandleServices(index)}
                 >
                   <div className="services-detail-card">
                     <div className="fs-5 fs-md-2 fw-bold lh-base lh-md-sm px-12 mb-3">
-                      {service.title}
+                      {item.title}
                     </div>
                     <div className="fs-6 lh-base text-start text-md-center px-12 pb-64">
-                      {service.description}
+                      {item.description}
                     </div>
-                    <Bbutton
-                      text="立即探索您專屬的服務"
+                    <Button
+                      text={servicesData[index].brnContent}
                       className="btn-bg-black-950 fs-6 fs-md-5"
                       onClick={() => navigate("/reserve")}
                     />
-                  </div>{" "}
+                  </div>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
       </section>
-
+      
       <section className="intro-header py-md-80 py-40">
         <div className="container">
           <div className="services-content-title text-center mb-36 mb-md-40">
             <div className="fs-5 fs-md-2 fw-bold lh-base lh-md-sm px-12 mb-3">
-              紫微命盤精解 | 人生底層設定解析
+              {servicesData[servicesId].title}
             </div>
             <div className="fs-6 fs-md-4 fw-bold">你是否也有這樣的感覺?</div>
           </div>
           <ul className="row g-0 g-md-4 fs-6 fs-md-5 text-center mb-0 mb-md-4">
-            <li className="col-12 col-md-4 py-0 py-md-3 px-1 px-md-3 my-3">
-              <div className="border border-secondary-200 py-30 py-md-36 px-5 px-md-60">
-                已經很努力，卻始終卡在某些模式裡反覆循環
-              </div>
-            </li>
-            <li className="col-12 col-md-4 py-0 py-md-3 px-1 px-md-3 my-3">
-              <div className="border border-secondary-200 py-30 py-md-36 px-5 px-md-60">
-                嘗試過不同方向，但每一條路都走得很耗能
-              </div>
-            </li>
-            <li className="col-12 col-md-4 py-0 py-md-3 px-1 px-md-3 my-3">
-              <div className="border border-secondary-200 py-30 py-md-36 px-5 px-md-60">
-                表面看起來沒問題，內在卻越來越不確定自己是誰、要往哪裡去
-              </div>
-            </li>
+            {servicesData[servicesId].contentData.csard.map((item, index) => (
+              <li
+                key={index}
+                className="col-12 col-md-4 py-0 py-md-3 px-1 px-md-3 my-3"
+              >
+                <div className="border border-secondary-200 py-30 py-md-36 px-5 px-md-60">
+                  {item}
+                </div>
+              </li>
+            ))}
           </ul>
           <div className="p-0 p-md-3">
             <div className="p-1 border border-secondary-400 border-4">
               <div className="highlight-box fs-6 fs-md-4 text-center text-secondary-400 fw-bold py-28 py-md-30 px-20 px-md-30 border border-secondary-400">
-                多數人的困境，並不是不夠努力，而是沒有理解自己的人生底層設定。
+                {servicesData[servicesId].contentData.highlightBox}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="chk services-content py-40 py-md-80">
+      <section className="services-content pt-40 pb-0 py-md-80 border-top border-black-600">
         <div className="container">
-          <div className="chk row d-flex justify-content-center">
-            <div className="chk col-4 px-0">
+          {/* 獲得 */}
+          <div className="row d-flex justify-content-center">
+            <div className="col-12 col-md-4 px-0">
               <div className="dot-title">
-                <div className="fs-2 fw-bold lh-sm py-3 px-32">
+                <div className="fs-4 fs-md-2 fw-bold lh-base lh-md-sm py-0 py-md-3 px-4 px-md-32">
                   你將獲得什麼?
                 </div>
               </div>
             </div>
-            <div className="chk col-6 py-40 px-0">
-              <div className="title fs-4 fw-bold text-secondary-400 mb-3">
-                性格與行為模式解析
+            <div className="col-md-6 py-2 py-md-40 px-4 px-md-0">
+              {servicesData[servicesId].contentData.get.map((item, index) => (
+                <div key={index} className="mb-32 mb-md-40">
+                  <div className="title fs-5 fs-md-4 fw-bold text-secondary-400 mb-2 mb-md-3">
+                    {item.getTitle}
+                  </div>
+                  <ItemList Items={item.getList} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 所需資料 */}
+          <div className="row d-flex justify-content-center border-top border-black-400 py-40">
+            <div className="col-12 col-md-4 px-0">
+              <div className="dot-title">
+                <div className="fs-4 fs-md-2 fw-bold lh-base lh-md-sm py-12 py-md-3 px-4 px-md-32 mb-0">
+                  {servicesData[servicesId].title.split("|")[0].trim()}
+                  <div className="fs-5 fw-bold text-secondary-400 py-0 py-md-2">
+                    所需資料
+                  </div>
+                </div>
               </div>
-              <ul className="px-2 lh-lg">
-                <li className="mb-0">
-                  <i className="bi bi-dot"></i>
-                  你的核心性格結構與內在動機
-                </li>
-                <li className="mb-0">
-                  <i className="bi bi-dot"></i>
-                  面對責任、關係、工作時的自動反應模式
-                </li>
-                <li className="mb-0">
-                  <i className="bi bi-dot"></i>
-                  不適合長期投入、容易内耗的方向
-                </li>
-              </ul>
+            </div>
+            <div className="col-12 col-md-6 py-2 py-md-40 px-4 px-md-0">
+              <div className="mb-0 mb-md-40 fs-6">
+                <div className="title fs-6 text-black-800 mb-3">
+                  {
+                    servicesData[servicesId].contentData.needData[0]
+                      .needDataTitle
+                  }
+                </div>
+                <div className="text-b">
+                  <ItemList
+                    Items={
+                      servicesData[servicesId].contentData.needData[0]
+                        .needDataList
+                    }
+                  />
+                </div>
+                <div className="remark mt-3 mb-0">
+                  {servicesData[servicesId].contentData.needData[0].remark}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 服務流程 */}
+          <div className="row d-flex justify-content-center border-top border-black-400 pt-40 pb-0 py-md-40">
+            <div className="col-12 col-md-4 px-0">
+              <div className="dot-title">
+                <div className="fs-4 fs-md-2 fw-bold lh-base lh-md-sm py-12 py-md-3 px-4 px-md-32 mb-0">
+                  服務流程說明
+                </div>
+              </div>
+            </div>
+            <div className="col-12 col-md-6 py-3 py-md-40 px-4 px-md-0">
+              <div className="mb-40 fs-6 text-black-600">
+                <div className="mb-4 mb-md-48">
+                  {servicesData[servicesId].contentData.steps.map(
+                    (item, index) => (
+                      <div
+                        key={index}
+                        className="d-flex flex-column flex-md-row mb-32"
+                      >
+                        <div className="fs-6 fs-md-1 fw-bold lh-1 text-secondary-200 pe-36 mb-3">
+                          Step{item.id}
+                        </div>
+                        <div>
+                          <div className="fs-5 fw-bold text-secondary-400">
+                            {item.title}
+                          </div>
+                          <ItemList Items={item.items} />
+                        </div>
+                      </div>
+                    ),
+                  )}
+                </div>
+              </div>
+              <div className="d-flex flex-column align-items-center align-items-md-start">
+                <Button
+                  text={servicesData[servicesId].brnContent}
+                  className="btn-bg-primary-500 mb-36 d-block"
+                  onClick={() => navigate("/reserve")}
+                />
+                <div className="text-nowrap fs-6 fs-md-5 fw-bold text-secondary-400">
+                  {servicesData[servicesId].footerContent}
+                </div>
+
+                <div className="text-black-600">名額有限，採預約制</div>
+              </div>
             </div>
           </div>
         </div>
