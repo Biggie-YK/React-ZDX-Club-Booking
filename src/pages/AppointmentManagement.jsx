@@ -1,6 +1,6 @@
 // src/pages/AppointmentManagement.jsx
-import { useEffect, useMemo, useState } from 'react';
-import { getBookings } from '../api/bookings';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+// import { getBookings } from '../api/bookings';
 
 import navBg from '../assets/images/index/nav-bg.png';
 import titleDeco from '../assets/images/index/title-deco.png';
@@ -10,21 +10,7 @@ import iconRefresh from '../assets/images/appointment-management/refresh.png';
 import iconAngleDown from '../assets/images/appointment-management/angle-small-down.png';
 import iconEdit from '../assets/images/appointment-management/u-edit.png';
 
-function getStatusMeta(status) {
-  switch ((status || 'pending').toLowerCase()) {
-    case 'completed':
-      return { text: '已完成', className: 'calendar-green' };
-    case 'canceled':
-    case 'cancelled':
-      return { text: '已取消', className: 'calendar-red' };
-    case 'no_show':
-    case 'noshow':
-      return { text: '未出席', className: 'calendar-red' };
-    case 'pending':
-    default:
-      return { text: '待確認', className: 'calendar-yellow' };
-  }
-}
+import { getBookings, updateBooking } from '../api/bookings';
 
 function formatDate(dateStr) {
   if (!dateStr) return '';
@@ -83,8 +69,39 @@ function FilterDropdown({ placeholder, items, value, onChange }) {
   );
 }
 
-function BookingCard({ booking }) {
-  const status = getStatusMeta(booking.status);
+const STATUS_OPTIONS = [
+  { label: '待處理/待審核', value: 'pending', colorClass: 'calendar-yellow' },
+  { label: '已確認', value: 'confirmed', colorClass: 'calendar-green' },
+  { label: '已取消', value: 'cancelled', colorClass: 'calendar-red' },
+  { label: '已完成', value: 'completed', colorClass: 'calendar-green' },
+  { label: '已逾期', value: 'expired', colorClass: 'calendar-red' },
+];
+
+// function getStatusMeta(status) {
+//   switch ((status || 'pending').toLowerCase()) {
+//     case 'completed':
+//       return { text: '已完成', className: 'calendar-green' };
+//     case 'canceled':
+//       return { text: '已取消', className: 'calendar-red' };
+//     case 'noshow':
+//       return { text: '未出席', className: 'calendar-red' };
+//     case 'pending':
+//     default:
+//       return { text: '待確認', className: 'calendar-yellow' };
+//   }
+// }
+
+function statusMeta(status) {
+  const s = String(status || 'pending').toLowerCase();
+  const hit = STATUS_OPTIONS.find((o) => o.value === s);
+  if (hit) return { text: hit.label, className: hit.colorClass };
+  return { text: '待處理/待審核', className: 'calendar-yellow' };
+}
+
+function BookingCard({ booking, onEdit }) {
+  const status = statusMeta(booking.status);
+  <p className={`mb-0 fw-bold ${status.className}`}>{status.text}</p>;
+
   const switchId = `reminderSwitch-${booking.id}`;
 
   const reminderEnabled = Boolean(booking.reminderEnabled);
@@ -147,10 +164,7 @@ function BookingCard({ booking }) {
                 <button
                   type="button"
                   className="btn rounded-1 p-2 text-black-600 d-inline-flex align-items-center"
-                  onClick={() => {
-                    // 之後要做編輯(PATCH/PUT)再接
-                    console.log('edit booking', booking);
-                  }}
+                  onClick={() => onEdit(booking)}
                 >
                   <img
                     src={iconEdit}
@@ -200,6 +214,168 @@ function BookingCard({ booking }) {
   );
 }
 
+function EditBookingModal({ booking, open, onClose, onSave, saving }) {
+  // 因為我們在父層加了 key，所以 booking.id 變會重新掛載，初始值會重新抓
+  const initStatus = String(booking?.status || 'pending').toLowerCase();
+  const initRemark = booking?.remark || '';
+
+  const [status, setStatus] = useState(initStatus);
+  const [remark, setRemark] = useState(initRemark);
+
+  const isDirty = status !== initStatus || remark !== initRemark;
+
+  const requestClose = useCallback(() => {
+    if (saving) return;
+    if (isDirty) {
+      const ok = window.confirm('你有尚未儲存的變更，確定要關閉嗎？');
+      if (!ok) return;
+    }
+    onClose?.();
+  }, [saving, isDirty, onClose]);
+
+  // ESC 關閉
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') requestClose();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [open, requestClose]);
+
+  if (!open || !booking) return null;
+
+  const requestSave = () => {
+    if (saving) return;
+
+    if (!isDirty) {
+      onClose?.();
+      return;
+    }
+
+    const ok = window.confirm('確定要儲存這次變更嗎？');
+    if (!ok) return;
+
+    onSave({ status, remark });
+  };
+
+  return (
+    <>
+      {/* backdrop：點擊關閉 */}
+      <div className="modal-backdrop fade show" onClick={requestClose} />
+
+      <div
+        className="modal fade show d-block"
+        tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
+      >
+        <div
+          className="modal-dialog modal-dialog-centered"
+          role="document"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="modal-content rounded-0">
+            <div className="modal-header">
+              <h5 className="modal-title">編輯預約（#{booking.id}）</h5>
+              <button
+                type="button"
+                className="btn-close"
+                aria-label="Close"
+                onClick={requestClose}
+              />
+            </div>
+
+            <div className="modal-body">
+              <div className="mb-3">
+                <label className="form-label">預約狀態</label>
+                <select
+                  className="form-select"
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                >
+                  {STATUS_OPTIONS.map((o) => (
+                    <option key={o.value} value={o.value}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="mb-2">
+                <label className="form-label">大仙備註</label>
+                <textarea
+                  className="form-control"
+                  rows={4}
+                  value={remark}
+                  onChange={(e) => setRemark(e.target.value)}
+                  placeholder="只給後台看的備註..."
+                />
+              </div>
+
+              {isDirty ? (
+                <div className="small text-danger mt-2">你有尚未儲存的變更</div>
+              ) : null}
+            </div>
+
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-outline-secondary"
+                onClick={requestClose}
+                disabled={saving}
+              >
+                取消
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={requestSave}
+                disabled={saving}
+              >
+                {saving ? '儲存中...' : '儲存'}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function SuccessToast({ show, message, onClose }) {
+  useEffect(() => {
+    if (!show) return;
+    const t = setTimeout(() => onClose?.(), 2500);
+    return () => clearTimeout(t);
+  }, [show, onClose]);
+
+  return (
+    <div
+      className="toast-container position-fixed top-0 start-50 translate-middle-x p-3"
+      style={{ zIndex: 2000 }}
+    >
+      <div
+        className={`toast ${show ? 'show' : 'hide'}`}
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div className="toast-header">
+          <strong className="me-auto">更新成功</strong>
+          <button
+            type="button"
+            className="btn-close"
+            aria-label="Close"
+            onClick={onClose}
+          />
+        </div>
+        <div className="toast-body">{message}</div>
+      </div>
+    </div>
+  );
+}
+
 export default function AppointmentManagement() {
   const SERVICE_OPTIONS = [
     { label: '紫微命盤', value: '紫微命盤' },
@@ -214,19 +390,20 @@ export default function AppointmentManagement() {
     { label: '晚上', value: '晚上' },
   ];
 
-  const STATUS_OPTIONS = [
-    { label: '已完成', value: 'completed' },
-    { label: '待確認', value: 'pending' },
-    { label: '已取消', value: 'canceled' },
-  ];
-
   const [serviceFilter, setServiceFilter] = useState('');
   const [timeFilter, setTimeFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
 
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [editing, setEditing] = useState(null); // 被編輯的 booking
+  const [editOpen, setEditOpen] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [errMsg, setErrMsg] = useState('');
+
+  const [toastOpen, setToastOpen] = useState(false);
+  const [toastMsg, setToastMsg] = useState('');
 
   async function fetchBookings() {
     setErrMsg('');
@@ -263,9 +440,40 @@ export default function AppointmentManagement() {
   }, [bookings, serviceFilter, timeFilter, statusFilter]);
 
   const cards = useMemo(
-    () => filteredBookings.map((b) => <BookingCard key={b.id} booking={b} />),
+    () =>
+      filteredBookings.map((b) => (
+        <BookingCard key={b.id} booking={b} onEdit={openEdit} />
+      )),
     [filteredBookings]
   );
+
+  function openEdit(booking) {
+    setEditing(booking);
+    setEditOpen(true);
+  }
+
+  async function handleSave(patch) {
+    if (!editing) return;
+    setSaving(true);
+    setErrMsg('');
+
+    try {
+      const updated = await updateBooking(editing.id, patch);
+      // 立刻更新前端列表
+      setBookings((prev) =>
+        prev.map((b) => (b.id === updated.id ? updated : b))
+      );
+      setEditOpen(false);
+      setEditing(null);
+      // toast
+      setToastMsg('預約狀態與備註已更新');
+      setToastOpen(true);
+    } catch (e) {
+      setErrMsg(e instanceof Error ? e.message : '更新失敗');
+    } finally {
+      setSaving(false);
+    }
+  }
 
   return (
     <div style={{ backgroundImage: `url(${navBg})` }}>
@@ -485,6 +693,23 @@ export default function AppointmentManagement() {
           )}
         </div>
       </div>
+
+      <EditBookingModal
+        key={editing?.id ?? 'empty'}
+        booking={editing}
+        open={editOpen}
+        onClose={() => {
+          setEditOpen(false);
+          setEditing(null);
+        }}
+        onSave={handleSave}
+        saving={saving}
+      />
+      <SuccessToast
+        show={toastOpen}
+        message={toastMsg}
+        onClose={() => setToastOpen(false)}
+      />
     </div>
   );
 }
