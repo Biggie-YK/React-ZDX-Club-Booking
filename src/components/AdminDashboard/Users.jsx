@@ -41,7 +41,8 @@ export default function Users({ users }) {
     setModalType(type);
     if (type === "edit" && userData.id) {
       setCurrentUserId(userData.id);
-      reset(userData);
+      const { password, ...safeData } = userData;
+      reset(safeData);
     } else {
       setCurrentUserId(null);
       reset(INITIAL_USER_DATA);
@@ -76,8 +77,9 @@ export default function Users({ users }) {
   };
 
   const handleUserEdit = async (data) => {
+    const { password, ...editData } = data; // 排除 password，const openModal 要一併設定safeData 
     try {
-      const response = await userEdit(currentUserId, data); // 呼叫 API 編輯
+      const response = await userEdit(currentUserId, editData); // 呼叫 API 編輯
       if (response.success) {
         closeModal();
         setUsersData((prevData) =>

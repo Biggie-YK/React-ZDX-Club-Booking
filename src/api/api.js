@@ -98,6 +98,7 @@ export const userRegister = async (data) => {
       role: "user",
       remark: "",
     });
+    userLogin({ email: data.email, password: data.password });
     return { success: true, data: response.data };
   } catch (error) {
     console.error("註冊失敗:", error.response?.data || error.message);
@@ -119,7 +120,7 @@ export const userDelete = async (userId) => {
 // 編輯使用者 API
 export const userEdit = async (userId, data) => {
   try {
-    const response = await axios.put(`${API_URL}/users/${userId}`, data);
+    const response = await axios.patch(`${API_URL}/users/${userId}`, data);
     return { success: true, data: response.data };
   } catch (error) {
     console.error("編輯失敗:", error.response?.data || error.message);

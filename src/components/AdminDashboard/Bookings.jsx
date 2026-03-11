@@ -284,6 +284,7 @@ export default function Bookings({ bookings }) {
                       </label>
                       <input
                         type="email"
+                         readOnly={modalType === "edit"}
                         className={`form-control ${errors.email ? "is-invalid" : ""}`}
                         id="email"
                         {...register("email", {
@@ -309,6 +310,7 @@ export default function Bookings({ bookings }) {
                       </label>
                       <input
                         type="text"
+                         readOnly={modalType === "edit"}
                         className={`form-control ${errors.name ? "is-invalid" : ""}`}
                         id="name"
                         {...register("name", {
@@ -329,6 +331,7 @@ export default function Bookings({ bookings }) {
                       </label>
                       <input
                         type="text"
+                         readOnly={modalType === "edit"}
                         className={`form-control ${errors.phone ? "is-invalid" : ""}`}
                         id="phone"
                         {...register("phone", {
@@ -352,6 +355,7 @@ export default function Bookings({ bookings }) {
                         服務項目 <span className="text-danger">*</span>
                       </label>
                       <select
+                      style={modalType === "edit" ? { pointerEvents: "none", backgroundColor: "#e9ecef" } : {}}
                         className="form-select"
                         id="service"
                         {...register("service", {
@@ -384,6 +388,7 @@ export default function Bookings({ bookings }) {
                               onChange={(date) => field.onChange(date)}
                               dateFormat="yyyy/MM/dd"
                               placeholderText="請選擇日期"
+                              readOnly={modalType === "edit"}
                             />
                           )}
                         />
@@ -403,6 +408,7 @@ export default function Bookings({ bookings }) {
                       <select
                         className="form-select"
                         id="time"
+                        style={modalType === "edit" ? { pointerEvents: "none", backgroundColor: "#e9ecef" } : {}}
                         {...register("time", {
                           required: "時段為必填欄位",
                         })}
