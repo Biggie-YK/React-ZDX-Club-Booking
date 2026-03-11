@@ -92,7 +92,7 @@ const STATUS_OPTIONS = [
 // }
 
 function statusMeta(status) {
-  const s = String(status || 'pending').toLowerCase();
+  const s = normalizeStatus(status);
   const hit = STATUS_OPTIONS.find((o) => o.value === s);
   if (hit) return { text: hit.label, className: hit.colorClass };
   return { text: '待處理/待審核', className: 'calendar-yellow' };
@@ -100,7 +100,6 @@ function statusMeta(status) {
 
 function BookingCard({ booking, onEdit }) {
   const status = statusMeta(booking.status);
-  <p className={`mb-0 fw-bold ${status.className}`}>{status.text}</p>;
 
   const switchId = `reminderSwitch-${booking.id}`;
 
@@ -857,9 +856,15 @@ export default function AppointmentManagement() {
 }
 
 function normalizeStatus(status) {
-  const s = String(status || '').toLowerCase();
+  const s = String(status || 'pending').toLowerCase();
+
+  if (s === 'pending') return 'pending';
+  if (s === 'confirmed') return 'confirmed';
   if (s === 'completed') return 'completed';
-  if (s === 'canceled' || s === 'cancelled') return 'canceled';
+  if (s === 'expired') return 'expired';
+
+  if (s === 'canceled' || s === 'cancelled') return 'cancelled';
+
   return 'pending';
 }
 
