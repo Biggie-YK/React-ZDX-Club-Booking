@@ -1,31 +1,32 @@
-import { Routes, Route, useLocation } from 'react-router';
-import Home from './pages/Home';
-import About from './pages/About';
-import Knowledge from './pages/Knowledge';
-import KnowledgeArticle from './components/KnowledgeArticle';
-import Reserve from './pages/Reserve';
-import Nav from './layout/Nav';
-import Footer from './layout/Footer';
-import Draw from './pages/Draw';
-import OtherPicks from './pages/OtherPicks';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Services from './pages/Services';
-import AdminDashboard from './pages/admin/AdminDashboard';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import { Routes, Route, useLocation } from "react-router";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Knowledge from "./pages/Knowledge";
+import KnowledgeArticle from "./components/KnowledgeArticle";
+import Reserve from "./pages/Reserve";
+import Nav from "./layout/Nav";
+import Footer from "./layout/Footer";
+import Draw from "./pages/Draw";
+import OtherPicks from "./pages/OtherPicks";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Services from "./pages/Services";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import bg from "../public/assets/images/index/nav-bg.png";
 
 function App() {
   const location = useLocation();
-  const hideFooterPaths = ['/login', '/register', '/admin-dashboard']; // 不顯示 footer 的路徑
+  const hideFooterPaths = ["/login", "/register", "/admin-dashboard"]; // 不顯示 footer 的路徑
 
   return (
     <>
       <div
         style={{
-          backgroundImage: "url(../public/assets/images/index/nav-bg.png)",
+          backgroundImage: `url(${ bg })`,
         }}
       >
         <Nav />
