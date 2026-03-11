@@ -24,7 +24,9 @@ function App() {
   return (
     <>
       <div
-        style={{ backgroundImage: 'url(../assets/images/index/nav-bg.png)' }}
+        style={{
+          backgroundImage: "url(../public/assets/images/index/nav-bg.png)",
+        }}
       >
         <Nav />
         <Routes>
