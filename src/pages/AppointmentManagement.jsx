@@ -101,11 +101,11 @@ function statusMeta(status) {
 function BookingCard({ booking, onEdit }) {
   const status = statusMeta(booking.status);
 
-  const switchId = `reminderSwitch-${booking.id}`;
+  // const switchId = `reminderSwitch-${booking.id}`;
 
-  const reminderEnabled = Boolean(booking.reminderEnabled);
-  const reminderText = reminderEnabled ? '已設定' : '未設定';
-  const reminderClass = reminderEnabled ? 'calendar-green' : 'calendar-red';
+  // const reminderEnabled = Boolean(booking.reminderEnabled);
+  // const reminderText = reminderEnabled ? '已設定' : '未設定';
+  // const reminderClass = reminderEnabled ? 'calendar-green' : 'calendar-red';
 
   const note = booking.remark || '';
 
@@ -182,6 +182,7 @@ function BookingCard({ booking, onEdit }) {
           </div>
 
           {/* 下段：提醒狀態（目前僅顯示，不回寫） */}
+          {/*
           <div className="pt-20 d-flex justify-content-between align-items-center me-1">
             <div>
               <p className="mb-3">提醒狀態</p>
@@ -207,6 +208,7 @@ function BookingCard({ booking, onEdit }) {
               <label className="form-check-label" htmlFor={switchId}></label>
             </div>
           </div>
+          */}
         </div>
       </div>
     </div>
