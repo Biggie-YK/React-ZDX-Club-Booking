@@ -214,54 +214,180 @@ function BookingCard({ booking, onEdit }) {
   );
 }
 
+function ConfirmModal({
+  open,
+  title = '確認',
+  message = '',
+  confirmText = '確定',
+  cancelText = '取消',
+  onConfirm,
+  onCancel,
+  disabled = false,
+  zIndex = 2005,
+}) {
+  // ESC 取消
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') onCancel?.();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [open, onCancel]);
+
+  if (!open) return null;
+
+  return (
+    <>
+      {/* backdrop */}
+      <div
+        className="modal-backdrop fade show"
+        style={{ zIndex: zIndex - 1 }}
+        onClick={() => !disabled && onCancel?.()}
+      />
+
+      <div
+        className="modal fade show d-block"
+        tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
+        style={{ zIndex }}
+      >
+        <div
+          className="modal-dialog modal-dialog-centered"
+          role="document"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="modal-content rounded-0">
+            <div className="modal-header">
+              <h5 className="modal-title">{title}</h5>
+              <button
+                type="button"
+                className="btn-close"
+                aria-label="Close"
+                onClick={() => !disabled && onCancel?.()}
+              />
+            </div>
+
+            <div className="modal-body">
+              <p className="mb-0">{message}</p>
+            </div>
+
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-outline-secondary"
+                onClick={() => !disabled && onCancel?.()}
+                disabled={disabled}
+              >
+                {cancelText}
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={onConfirm}
+                disabled={disabled}
+              >
+                {confirmText}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
 function EditBookingModal({ booking, open, onClose, onSave, saving }) {
-  // 因為我們在父層加了 key，所以 booking.id 變會重新掛載，初始值會重新抓
   const initStatus = String(booking?.status || 'pending').toLowerCase();
   const initRemark = booking?.remark || '';
 
   const [status, setStatus] = useState(initStatus);
   const [remark, setRemark] = useState(initRemark);
 
+  // Confirm modal 狀態
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [confirmMode, setConfirmMode] = useState(''); // "close" | "save"
+
   const isDirty = status !== initStatus || remark !== initRemark;
 
+  const closeConfirm = useCallback(() => {
+    setConfirmOpen(false);
+    setConfirmMode('');
+  }, []);
+
+  // 想關閉主 modal（X/取消/backdrop/ESC）時呼叫
   const requestClose = useCallback(() => {
     if (saving) return;
+
     if (isDirty) {
-      const ok = window.confirm('你有尚未儲存的變更，確定要關閉嗎？');
-      if (!ok) return;
+      setConfirmMode('close');
+      setConfirmOpen(true);
+      return;
     }
+
     onClose?.();
   }, [saving, isDirty, onClose]);
 
-  // ESC 關閉
-  useEffect(() => {
-    if (!open) return;
-    const onKeyDown = (e) => {
-      if (e.key === 'Escape') requestClose();
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [open, requestClose]);
-
-  if (!open || !booking) return null;
-
+  // 想儲存時呼叫（先跳確認）
   const requestSave = () => {
     if (saving) return;
 
     if (!isDirty) {
+      // 沒改就直接關閉（或你想提醒也可改成開 confirm）
       onClose?.();
       return;
     }
 
-    const ok = window.confirm('確定要儲存這次變更嗎？');
-    if (!ok) return;
+    setConfirmMode('save');
+    setConfirmOpen(true);
+  };
 
-    onSave({ status, remark });
+  // ESC：若 confirm 開著 -> 關 confirm；否則 requestClose
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (e) => {
+      if (e.key !== 'Escape') return;
+
+      if (confirmOpen) {
+        closeConfirm();
+      } else {
+        requestClose();
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [open, confirmOpen, closeConfirm, requestClose]);
+
+  if (!open || !booking) return null;
+
+  const confirmTitle = confirmMode === 'save' ? '確認儲存' : '尚未儲存的變更';
+  const confirmMessage =
+    confirmMode === 'save'
+      ? '即將更新預約狀態與後台備註，確定要儲存嗎？'
+      : '有尚未儲存的變更，確定要關閉嗎？';
+  const confirmText = confirmMode === 'save' ? '儲存' : '關閉';
+  const cancelText = confirmMode === 'save' ? '取消' : '繼續編輯';
+
+  const handleConfirm = () => {
+    if (saving) return;
+
+    if (confirmMode === 'save') {
+      closeConfirm();
+      onSave({ status, remark }); // 父層 PATCH 成功後會關閉 modal
+      return;
+    }
+
+    // confirmMode === "close"
+    closeConfirm();
+    onClose?.();
   };
 
   return (
     <>
-      {/* backdrop：點擊關閉 */}
+      {/* 主 modal backdrop：點擊 -> requestClose */}
       <div className="modal-backdrop fade show" onClick={requestClose} />
 
       <div
@@ -283,6 +409,7 @@ function EditBookingModal({ booking, open, onClose, onSave, saving }) {
                 className="btn-close"
                 aria-label="Close"
                 onClick={requestClose}
+                disabled={saving}
               />
             </div>
 
@@ -293,6 +420,7 @@ function EditBookingModal({ booking, open, onClose, onSave, saving }) {
                   className="form-select"
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
+                  disabled={saving}
                 >
                   {STATUS_OPTIONS.map((o) => (
                     <option key={o.value} value={o.value}>
@@ -309,7 +437,8 @@ function EditBookingModal({ booking, open, onClose, onSave, saving }) {
                   rows={4}
                   value={remark}
                   onChange={(e) => setRemark(e.target.value)}
-                  placeholder="只給後台看的備註..."
+                  placeholder="只給大仙看的備註..."
+                  disabled={saving}
                 />
               </div>
 
@@ -339,6 +468,19 @@ function EditBookingModal({ booking, open, onClose, onSave, saving }) {
           </div>
         </div>
       </div>
+
+      {/* 同風格確認視窗 */}
+      <ConfirmModal
+        open={confirmOpen}
+        title={confirmTitle}
+        message={confirmMessage}
+        confirmText={confirmText}
+        cancelText={cancelText}
+        onConfirm={handleConfirm}
+        onCancel={closeConfirm}
+        disabled={saving}
+        zIndex={2010} // 放在主 modal 之上
+      />
     </>
   );
 }
