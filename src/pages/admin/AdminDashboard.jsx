@@ -1,11 +1,12 @@
-import "../../assets/scss/pages/_admin-dashboard.scss";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Dashboard from "../../components/AdminDashboard/Dashboard";
-import Users from "../../components/AdminDashboard/Users";
-import Bookings from "../../components/AdminDashboard/Bookings";
+import '../../assets/scss/pages/_admin-dashboard.scss';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Dashboard from '../../components/AdminDashboard/Dashboard';
+import Users from '../../components/AdminDashboard/Users';
+import Bookings from '../../components/AdminDashboard/Bookings';
+import AppointmentQuery from '../../components/AdminDashboard/AppointmentQuery';
 
-import { fetchAllData, checkIsAuth, userLogout } from "../../api/api";
+import { fetchAllData, checkIsAuth, userLogout } from '../../api/api';
 
 export default function AdminDashboard() {
   const [adminInfo, setAdminInfo] = useState(null);
@@ -16,16 +17,16 @@ export default function AdminDashboard() {
     services: [],
   });
   const [loading, setLoading] = useState(true);
-  const [mainContent, setMainContent] = useState("dashboard"); // dashboard
+  const [mainContent, setMainContent] = useState('dashboard'); // dashboard
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const checkLoginAndRole = async () => {
       const [authStatus, user] = await checkIsAuth();
-      if (!authStatus || user.role !== "admin") {
-        alert("您尚未登入或沒有權限訪問此頁面，請先登入以繼續使用預約功能。");
-        navigate("/login");
+      if (!authStatus || user.role !== 'admin') {
+        alert('您尚未登入或沒有權限訪問此頁面，請先登入以繼續使用預約功能。');
+        navigate('/login');
       } else {
         setAdminInfo(user);
       }
@@ -60,7 +61,7 @@ export default function AdminDashboard() {
               className="btn btn-neutral-600 text-neutral-200 btn-sm"
               onClick={() => {
                 userLogout();
-                navigate("/login");
+                navigate('/login');
               }}
             >
               登出
@@ -69,18 +70,24 @@ export default function AdminDashboard() {
 
           <div
             className="sidebar-item"
-            onClick={() => setMainContent("dashboard")}
+            onClick={() => setMainContent('dashboard')}
           >
             <i className="bi bi-house me-2"></i> 儀表板
           </div>
-          <div className="sidebar-item" onClick={() => setMainContent("users")}>
+          <div className="sidebar-item" onClick={() => setMainContent('users')}>
             <i className="bi bi-people me-2"></i> 會員管理
           </div>
           <div
             className="sidebar-item"
-            onClick={() => setMainContent("bookings")}
+            onClick={() => setMainContent('bookings')}
           >
             <i className="bi bi-box me-2"></i> 預約清單
+          </div>
+          <div
+            className="sidebar-item"
+            onClick={() => setMainContent('bookingQuery')}
+          >
+            <i className="bi bi-search me-2"></i> 查詢預約紀錄
           </div>
         </div>
 
@@ -89,10 +96,29 @@ export default function AdminDashboard() {
           {/* <!-- 主畫面 --> */}
           <div className="content bg-background-beige p-4">
             <div className="row g-4">
-              {mainContent === "dashboard" && <Dashboard datas={datas} />}
-              {mainContent === "users" && <Users users={datas.users} />}
-              {mainContent === "bookings" && (
+              {mainContent === 'dashboard' && <Dashboard datas={datas} />}
+              {mainContent === 'users' && <Users users={datas.users} />}
+              {mainContent === 'bookings' && (
                 <Bookings bookings={datas.bookings} />
+              )}
+              {mainContent === 'bookingQuery' && (
+                <AppointmentQuery
+                  bookings={datas.bookings}
+                  onRefresh={async () => {
+                    setLoading(true);
+                    const result = await fetchAllData();
+                    setDatas(result);
+                    setLoading(false);
+                  }}
+                  onBookingUpdated={(updated) => {
+                    setDatas((prev) => ({
+                      ...prev,
+                      bookings: prev.bookings.map((b) =>
+                        b.id === updated.id ? updated : b
+                      ),
+                    }));
+                  }}
+                />
               )}
             </div>
           </div>
