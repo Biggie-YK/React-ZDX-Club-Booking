@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { userRegister, userEdit, userDelete } from "../../api/api";
 
@@ -11,7 +11,7 @@ const INITIAL_USER_DATA = {
 };
 
 export default function Users({ users }) {
-  const [usersData, setUsersData] = useState([]);
+  const [usersData, setUsersData] = useState(users);
   const [currentUserId, setCurrentUserId] = useState(null);
   const [modalType, setModalType] = useState("create"); // "create" 或 "edit"
 
@@ -28,7 +28,6 @@ export default function Users({ users }) {
   const bsModalRef = useRef(null);
 
   useEffect(() => {
-    setUsersData(users);
     if (userModalRef.current) {
       const bootstrap = window.bootstrap;
       if (bootstrap && bootstrap.Modal) {
@@ -41,7 +40,7 @@ export default function Users({ users }) {
     setModalType(type);
     if (type === "edit" && userData.id) {
       setCurrentUserId(userData.id);
-      const { password, ...safeData } = userData;
+      const { password: _password, ...safeData  } = userData;
       reset(safeData);
     } else {
       setCurrentUserId(null);
@@ -68,16 +67,14 @@ export default function Users({ users }) {
         setUsersData((prevData) => [...prevData, response.data]);
       } else {
         alert(`註冊失敗: ${response.error}`);
-      }
-      closeModal();
-      setUsersData((prevData) => [...prevData, response.data.user]);
+      }     
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleUserEdit = async (data) => {
-    const { password, ...editData } = data; // 排除 password，const openModal 要一併設定safeData 
+    const { password: _password, ...editData } = data; // 排除 password，const openModal 要一併設定safeData
     try {
       const response = await userEdit(currentUserId, editData); // 呼叫 API 編輯
       if (response.success) {
@@ -212,9 +209,10 @@ export default function Users({ users }) {
 
             <div className="modal-body bg-secondary bg-opacity-10 p-4">
               <form
-                onSubmit={handleSubmit(
-                  modalType === "edit" ? handleUserEdit : handleUserRegister,
-                )}
+                 onSubmit={(e) => {
+    const handler = modalType === "edit" ? handleUserEdit : handleUserRegister;
+    handleSubmit(handler)(e);
+  }}
                 id="userForm"
               >
                 <div className="row g-3 text-center">

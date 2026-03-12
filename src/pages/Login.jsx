@@ -19,6 +19,7 @@ export default function Login() {
 
   // 使用 useEffect 檢查登入狀態
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     checkAuth();
   }, []);
 
@@ -113,8 +114,9 @@ export default function Login() {
                       <p className="mb-0">
                         還沒有帳戶？
                         <Link to="/register" className="text-decoration-none">
-                          <span className="fs-5 fw-bold px-3"><i className="bi bi-person-plus me-2"></i>立即註冊</span>
-                        
+                          <span className="fs-5 fw-bold px-3">
+                            <i className="bi bi-person-plus me-2"></i>立即註冊
+                          </span>
                         </Link>
                       </p>
                     </div>

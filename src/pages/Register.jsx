@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-
 import { userRegister } from "../api/api";
 import UserAuthCard from "../components/UserAuthCard";
 
@@ -14,7 +13,7 @@ export default function Register() {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
+    getValues,
   } = useForm();
 
   // 檢查 Caps Lock 狀態
@@ -23,8 +22,6 @@ export default function Register() {
     const isCapsLock = e.getModifierState && e.getModifierState("CapsLock");
     setCapsLockOn(isCapsLock);
   };
-
-  const password = watch("password");
 
   const onSubmit = async (formData) => {
     try {
@@ -173,7 +170,8 @@ export default function Register() {
                           {...register("confirmPassword", {
                             required: "請確認密碼",
                             validate: (value) =>
-                              value === password || "兩次輸入的密碼不一致",
+                              value === getValues("password") ||
+                              "兩次輸入的密碼不一致",
                           })}
                         />
                         {errors.confirmPassword && (

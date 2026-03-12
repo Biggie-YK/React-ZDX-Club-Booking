@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 // react 日期選擇器
@@ -16,28 +16,22 @@ import {
 
 import { createBooking, updateBooking, deleteBooking } from "../../api/api";
 
-export default function Bookings({ bookings }) {
-  const [bookingsData, setBookingsData] = useState([]);
+const INITIAL_BOOKING_DATA = {
+  name: "",
+  phone: "",
+  service: "",
+  date: "",
+  time: "",
+  comment: "",
+  agreement: true,
+  status: "pending",
+  remark: "",
+};
+
+export default function Bookings({ bookings, onUpdate }) {
   const [currentBookingId, setCurrentBookingId] = useState(null);
   const [modalType, setModalType] = useState("create"); // "create" 或 "edit"
-
-  // react-datepicker 的日期狀態
-  const [startDate, setStartDate] = useState(new Date());
-
-  const bookingModalRef = useRef(null);
-
-  const INITIAL_BOOKING_DATA = {
-    name: "",
-    phone: "",
-    service: "",
-    date: "",
-    time: "",
-    comment: "",
-    agreement: true,
-    status: "pending",
-    remark: "",
-  };
-
+ 
   const {
     register,
     handleSubmit,
@@ -45,87 +39,89 @@ export default function Bookings({ bookings }) {
     reset,
     formState: { errors },
   } = useForm({
-   defaultValues: INITIAL_BOOKING_DATA,  // 使用完整的初始資料,
+    defaultValues: INITIAL_BOOKING_DATA, // 使用完整的初始資料,
   });
 
-  useEffect(() => {
-    if (bookings) {
-      setBookingsData(bookings);
-    }
-  }, [bookings]);
-
-  // 開啟 modal
-  const openModal = (type, bookingData) => {
-    setModalType(type);
-    if (type === "edit") {
-      setCurrentBookingId(bookingData.id);
-      reset({
-      ...bookingData,
-      date: bookingData.date ? new Date(bookingData.date) : null,  // 確保日期格式正確
-    });
-    } else {
-      reset(INITIAL_BOOKING_DATA);
-      setCurrentBookingId(null);
-    }
-
-    const modalElement = bookingModalRef.current;
-    const modal = new window.bootstrap.Modal(modalElement);
-    modal.show();
+  const getBookingModal = () => {
+    const modalElement = document.getElementById("userModal");
+    if (!modalElement) return null;
+    return window.bootstrap.Modal.getOrCreateInstance(modalElement);
   };
 
-  // 關閉 modal
-  const closeModal = () => {
-    const modalElement = bookingModalRef.current;
-    const modal = window.bootstrap.Modal.getInstance(modalElement);
-    if (modal) {
-      modal.hide();
-    }
+  const closeModal = useCallback(() => {
+    getBookingModal()?.hide();
     reset(INITIAL_BOOKING_DATA);
-  };
+  }, [reset]);
+
+  const openModal = useCallback(
+    (type, bookingData) => {
+      setModalType(type);
+      if (type === "edit") {
+        setCurrentBookingId(bookingData.id);
+        reset({
+          ...bookingData,
+          date: bookingData.date ? new Date(bookingData.date) : null, // 確保日期格式正確
+        });
+      } else {
+        reset(INITIAL_BOOKING_DATA);
+        setCurrentBookingId(null);
+      }
+
+      getBookingModal()?.show();
+    },
+    [reset],
+  );
 
   // 新增預約
-  const handlecreateBooking = async (data) => {
-    data.date ? (data.date = format(data.date, "yyyy-MM-dd")) : null;
-    try {
-      console.log("Creating booking with data:", data);
-      const newBooking = await createBooking(data);
-      setBookingsData((prev) => [...prev, newBooking]);
-      alert("預約新增成功");
-      closeModal();
-    } catch (error) {
-      console.error("Error creating booking:", error);
-    }
-  };
+  const handlecreateBooking = useCallback(
+    async (data) => {
+      data.date ? (data.date = format(data.date, "yyyy-MM-dd")) : null;
+      try {
+        console.log("Creating booking with data:", data);
+        await createBooking(data);
+        alert("預約新增成功");
+        onUpdate(); // 通知父元件更新
+        closeModal();
+      } catch (error) {
+        console.error("Error creating booking:", error);
+      }
+    },
+    [closeModal, onUpdate],
+  );
 
   // 編輯預約
-  const handleupdateBooking = async (data) => {
-    data.date ? (data.date = format(data.date, "yyyy-MM-dd")) : null;
-    try {
-      const response = await updateBooking(currentBookingId, data);
-      setBookingsData((prev) =>
-        prev.map((booking) =>
-          booking.id === currentBookingId ? response.data : booking,
-        ),
-      );
-      alert("預約更新成功");
-      
-      closeModal();
-    } catch (error) {
-      console.error("Error updating booking:", error);
-    }
-  };
+  const handleupdateBooking = useCallback(
+    async (data) => {
+      data.date ? (data.date = format(data.date, "yyyy-MM-dd")) : null;
+      try {
+        await updateBooking(currentBookingId, data);
+        alert("預約更新成功");
+        onUpdate(); // 通知父元件更新
+        closeModal();
+      } catch (error) {
+        console.error("Error updating booking:", error);
+      }
+    },
+    [currentBookingId, closeModal, onUpdate],
+  );
 
   // 刪除預約
   const handleDeleteBooking = async (bookingId) => {
     if (window.confirm("確定要刪除這筆預約嗎？")) {
       try {
         await deleteBooking(bookingId);
-        setBookingsData((prev) =>
-          prev.filter((booking) => booking.id !== bookingId),
-        );
+        onUpdate(); // 通知父元件更新
       } catch (error) {
         console.error("Error deleting booking:", error);
       }
+    }
+  };
+
+  const onFormSubmit = (data) => {
+    if (modalType === "edit") {
+      handleupdateBooking(data);
+    } else {
+      handlecreateBooking(data);
     }
   };
 
@@ -166,8 +162,8 @@ export default function Bookings({ bookings }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {bookingsData && bookingsData.length > 0 ? (
-                    bookingsData.map((booking) => {
+                  {bookings && bookings.length > 0 ? (
+                    bookings.map((booking) => {
                       const {
                         id,
                         name,
@@ -229,8 +225,8 @@ export default function Bookings({ bookings }) {
                     })
                   ) : (
                     <tr>
-                      <td colSpan="5" className="text-center">
-                        載入中...
+                      <td colSpan="11" className="text-center">
+                        {bookings ? "沒有預約資料" : "載入中..."}
                       </td>
                     </tr>
                   )}
@@ -250,7 +246,7 @@ export default function Bookings({ bookings }) {
         aria-hidden="true"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
-        ref={bookingModalRef}
+
       >
         <div className="modal-dialog modal-md modal-dialog-centered">
           <div className="modal-content ">
@@ -261,20 +257,13 @@ export default function Bookings({ bookings }) {
               <button
                 type="button"
                 className="btn-close btn-close-white"
-                data-bs-dismiss="modal"
                 aria-label="Close"
+                onClick={closeModal}
               ></button>
             </div>
 
             <div className="modal-body bg-secondary bg-opacity-10 p-4">
-              <form
-                onSubmit={handleSubmit(
-                  modalType === "edit"
-                    ? handleupdateBooking
-                    : handlecreateBooking,
-                )}
-                id="bookingForm"
-              >
+              <form onSubmit={handleSubmit(onFormSubmit)} id="bookingForm">
                 <div className="row g-3 text-center">
                   <div className="row text-start g-3">
                     {/* email */}
@@ -284,7 +273,7 @@ export default function Bookings({ bookings }) {
                       </label>
                       <input
                         type="email"
-                         readOnly={modalType === "edit"}
+                        readOnly={modalType === "edit"}
                         className={`form-control ${errors.email ? "is-invalid" : ""}`}
                         id="email"
                         {...register("email", {
@@ -310,7 +299,7 @@ export default function Bookings({ bookings }) {
                       </label>
                       <input
                         type="text"
-                         readOnly={modalType === "edit"}
+                        readOnly={modalType === "edit"}
                         className={`form-control ${errors.name ? "is-invalid" : ""}`}
                         id="name"
                         {...register("name", {
@@ -331,7 +320,7 @@ export default function Bookings({ bookings }) {
                       </label>
                       <input
                         type="text"
-                         readOnly={modalType === "edit"}
+                        readOnly={modalType === "edit"}
                         className={`form-control ${errors.phone ? "is-invalid" : ""}`}
                         id="phone"
                         {...register("phone", {
@@ -355,7 +344,14 @@ export default function Bookings({ bookings }) {
                         服務項目 <span className="text-danger">*</span>
                       </label>
                       <select
-                      style={modalType === "edit" ? { pointerEvents: "none", backgroundColor: "#e9ecef" } : {}}
+                        style={
+                          modalType === "edit"
+                            ? {
+                                pointerEvents: "none",
+                                backgroundColor: "#e9ecef",
+                              }
+                            : {}
+                        }
                         className="form-select"
                         id="service"
                         {...register("service", {
@@ -408,7 +404,14 @@ export default function Bookings({ bookings }) {
                       <select
                         className="form-select"
                         id="time"
-                        style={modalType === "edit" ? { pointerEvents: "none", backgroundColor: "#e9ecef" } : {}}
+                        style={
+                          modalType === "edit"
+                            ? {
+                                pointerEvents: "none",
+                                backgroundColor: "#e9ecef",
+                              }
+                            : {}
+                        }
                         {...register("time", {
                           required: "時段為必填欄位",
                         })}
@@ -458,8 +461,7 @@ export default function Bookings({ bookings }) {
                   <button
                     type="button"
                     className="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                    onClick={() => closeModal()}
+                    onClick={closeModal}
                   >
                     關閉
                   </button>
