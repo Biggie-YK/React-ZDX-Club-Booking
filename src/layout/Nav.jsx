@@ -13,7 +13,6 @@ export default function Nav() {
       title: "命理知識",
     },
     {
-      url: "/about",
       title: "命理師介紹",
     },
     {
@@ -43,7 +42,6 @@ export default function Nav() {
       title: "命理文章",
     },
     {
-      url: "/appointment-management",
       title: "預約管理",
     },
   ];
