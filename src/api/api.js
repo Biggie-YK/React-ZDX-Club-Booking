@@ -131,7 +131,6 @@ export const userEdit = async (userId, data) => {
 // 預約相關 API createBooking
 // 新增預約 API
 export const createBooking = async (data) => {
-  console.log(`預約資料data:`, data);
   try {
     const response = await axios.post(`${API_URL}/bookings`, data);
     return response.data;

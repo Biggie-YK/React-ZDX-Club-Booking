@@ -376,7 +376,6 @@ export default function KnowledgeArticle() {
       button?.click();
     }
   };
-  console.log();
 
   return (
     <>

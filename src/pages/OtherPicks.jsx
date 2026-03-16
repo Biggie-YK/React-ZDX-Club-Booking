@@ -35,12 +35,12 @@ export default function OtherPicks() {
             "
             >
               <div className="row row-cols-1">
-                <div className="col-md-5 col-12">
+                <div className="col-md-5 ">
                   <h6 className=" mt-md-4 mb-md-0 mb-4 fw-bold text-primary text-md-end ">
                     線上服務
                   </h6>
                 </div>
-                <div className="col-md-7 col-12">
+                <div className="col-md-7 ">
                   <h1 className="mb-md-0 mb-4 fw-bold fs-2 fs-md-1">解籤</h1>
                   <p className=" d-md-none">本站採用籤詩為雷雨師一百首</p>
                 </div>
@@ -64,7 +64,7 @@ export default function OtherPicks() {
                   />
                 </div>
               </div>
-              <div className="col-md-7 col-12">
+              <div className="col-md-7 ">
                 <div className="d-flex flex-wrap picks-zone justify-content-center overflow-auto py-3 py-md-0">
                   {picks.map((n, i) => {
                     return (
@@ -115,7 +115,7 @@ export default function OtherPicks() {
                 })}
               </div>
             </div>
-            <div className="col-md-3 col-12 ">
+            <div className="col-md-3 ">
               <Link
                 className="d-flex  align-items-center d-md-block text-decoration-none text-dark fw-bold"
                 to="/draw"

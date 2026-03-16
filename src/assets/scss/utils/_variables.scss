@@ -1263,7 +1263,7 @@ $nav-link-padding-y: 0.5rem !default;
 $nav-link-padding-x: 1rem !default;
 $nav-link-font-size: null !default;
 $nav-link-font-weight: null !default;
-$nav-link-color: var(--#{$prefix}link-color) !default;
+$nav-link-color: black;//var(--#{$prefix}link-color) !default;
 $nav-link-hover-color: var(--#{$prefix}link-hover-color) !default;
 $nav-link-transition: color 0.15s ease-in-out,
     background-color 0.15s ease-in-out, border-color 0.15s ease-in-out !default;
@@ -1275,8 +1275,8 @@ $nav-tabs-border-width: var(--#{$prefix}border-width) !default;
 $nav-tabs-border-radius: var(--#{$prefix}border-radius) !default;
 $nav-tabs-link-hover-border-color: var(--#{$prefix}secondary-bg)
     var(--#{$prefix}secondary-bg) $nav-tabs-border-color !default;
-$nav-tabs-link-active-color: var(--#{$prefix}emphasis-color) !default;
-$nav-tabs-link-active-bg: var(--#{$prefix}body-bg) !default;
+$nav-tabs-link-active-color: $primary;//var(--#{$prefix}emphasis-color) !default;
+$nav-tabs-link-active-bg: rgba(255, 0, 0, 0);//var(--#{$prefix}body-bg) !default;
 $nav-tabs-link-active-border-color: var(--#{$prefix}border-color)
     var(--#{$prefix}border-color) $nav-tabs-link-active-bg !default;
 

@@ -69,7 +69,7 @@ export default function Users({ users }) {
         alert(`註冊失敗: ${response.error}`);
       }     
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 
@@ -88,7 +88,7 @@ export default function Users({ users }) {
         alert(`編輯失敗: ${response.error}`);
       }
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 
@@ -97,7 +97,7 @@ export default function Users({ users }) {
       await userDelete(userId);
       setUsersData((prevData) => prevData.filter((user) => user.id !== userId));
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 

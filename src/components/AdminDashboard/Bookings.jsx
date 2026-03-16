@@ -77,7 +77,6 @@ export default function Bookings({ bookings, onUpdate }) {
     async (data) => {
       data.date ? (data.date = format(data.date, "yyyy-MM-dd")) : null;
       try {
-        console.log("Creating booking with data:", data);
         await createBooking(data);
         alert("預約新增成功");
         onUpdate(); // 通知父元件更新

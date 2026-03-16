@@ -1,9 +1,21 @@
+// .link-text{
+//   color: black;
+//   &:active{
+//     color: white;
+//   }
+// }
+// .active{
+//   color: white !important;
+// }
 .member-menu {
   width: 166px;
 }
 .downNav {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+}
+.nav{
+  z-index: 100;
 }
 @media (max-width: 768px) {
   .nav,
