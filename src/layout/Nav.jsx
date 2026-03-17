@@ -84,7 +84,7 @@ export default function Nav() {
     >
       <div className="container border-bottom border-black-400 py-md-40 py-3 ">
         <div className="d-flex d-md-none justify-content-between px-12 w-100">
-          <Link  to="/">
+          <Link to="/">
             <img
               className="logo-mb d-block"
               src="assets/images/nav/nav-mb/logo-mb.png"
@@ -105,6 +105,7 @@ export default function Nav() {
           >
             <img src="assets/images/nav/nav-mb/menu.png" alt="menu button" />
           </button>
+          {/* 手機版關閉導覽列按鈕 */}
           <button
             type="button"
             role="button"
@@ -123,20 +124,25 @@ export default function Nav() {
           </button>
         </div>
 
+        {/* 電腦版導覽列上半部 */}
         <ul
-          className="list-unstyled d-md-flex d-none px-106 align-items-center justify-content-between w-100
+          className="list-unstyled d-md-flex d-none  align-items-center justify-content-between w-100
          mb-3 nav-tabs border-0"
         >
           {navDatas.map((data, i) => {
             return (
               <li key={i} className=" py-3 px-4">
-                <NavLink to={data.url} className="nav-link border-0 text-decoration-none">
+                <NavLink
+                  to={data.url}
+                  className="nav-link border-0 text-decoration-none"
+                >
                   {data.img ? <img src={data.img} /> : data.title}
                 </NavLink>
               </li>
             );
           })}
         </ul>
+        {/* 電腦版導覽列下半部 */}
         <ul
           className="list-unstyled  px-106  w-100  downNav collapse nav-tabs border-0"
           ref={DownNavRef}
@@ -167,6 +173,7 @@ export default function Nav() {
           className="card card-body p-0 border-0"
           style={{ backgroundImage: `url(${navBg})` }}
         >
+          {/* 手機版導覽列 */}
           <ul className="list-unstyled text-center">
             {navDatas.map((data, i) => {
               return (
@@ -176,6 +183,7 @@ export default function Nav() {
                       <Link
                         className="text-dark text-decoration-none"
                         to={data.url}
+                        onClick={() => handleCollapse(true)}
                       >
                         {data.title}
                       </Link>
@@ -192,6 +200,7 @@ export default function Nav() {
                   <Link
                     to={data.url}
                     className="text-dark text-decoration-none  "
+                    onClick={() => handleCollapse(true)}
                   >
                     {data.img ? <img src={data.img} /> : data.title}
                   </Link>

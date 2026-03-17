@@ -27,10 +27,10 @@
     width: 120px;
   }
 }
-.curseor-pointer{
+.curseor-pointer {
   cursor: pointer;
 }
-@media (max-width: 768px) {
+@include media-breakpoint-down(md) {
   .picks {
     &-zone {
       background: rgba(134, 102, 84, 0.1);

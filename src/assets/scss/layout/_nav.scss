@@ -1,6 +1,8 @@
-.active {
-  font-weight: bolder;
-  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+.nav {
+  .active {
+    font-weight: bolder;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+  }
 }
 .member-menu {
   width: 166px;
@@ -12,7 +14,7 @@
 .nav {
   z-index: 100;
 }
-@media (max-width: 768px) {
+@include media-breakpoint-down(md) {
   .nav,
   .footer {
     .logo-mb {
