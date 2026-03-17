@@ -40,13 +40,16 @@
     opacity: 50%;
   }
 }
-@media (max-width: 768px) {
+@include media-breakpoint-down(md) {
   .footer {
     &-item {
       width: 100%;
     }
     &-center {
-    width: 100%;
+      width: 100%;
+    }
   }
-  }
+}
+.cursor-pointer {
+  cursor: pointer;
 }

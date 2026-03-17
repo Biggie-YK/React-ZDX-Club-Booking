@@ -116,10 +116,10 @@
   top: -120px;
 }
 .lunar-calendar {
-  &-oval{
+  &-oval {
     width: 50%;
   }
-  &-white{
+  &-white {
     margin-bottom: 300px;
   }
   margin-left: 16.25%;
@@ -131,7 +131,7 @@
       background: rgba(250, 250, 250, 0.8);
       min-width: 21.35225%;
     }
-    background-size:cover ;
+    background-size: cover;
     background-position: center;
   }
   .detail {
@@ -162,7 +162,7 @@
 .overflow-x-clip {
   overflow-x: clip;
 }
-@media (max-width: 768px) {
+@include media-breakpoint-down(md) {
   .service {
     .carousel {
       margin: 0 -12px;
@@ -191,10 +191,10 @@
     }
   }
   .lunar-calendar {
-    &-oval{
+    &-oval {
       width: 100%;
     }
-    &-white{
+    &-white {
       margin-bottom: 0;
     }
     margin-left: 0;

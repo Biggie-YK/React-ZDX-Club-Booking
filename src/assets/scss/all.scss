@@ -4,11 +4,14 @@
 // @import "../../node_modules/bootstrap/scss/functions";
 @import "../../../node_modules/bootstrap/scss/functions";
 @import "./utils/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
 @import "../../../node_modules/bootstrap";
 @import "./utils/modal";
 
 @import "./utils/utilities";
 @import "bootstrap/scss/utilities/api";
+
+@import "./components//farmerCalender.scss";
 
 @import "./layout/nav.scss";
 @import "./layout/footer.scss";

@@ -1,11 +1,20 @@
+.nav {
+  .active {
+    font-weight: bolder;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+  }
+}
 .member-menu {
   width: 166px;
 }
 .downNav {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
-@media (max-width: 768px) {
+.nav {
+  z-index: 100;
+}
+@include media-breakpoint-down(md) {
   .nav,
   .footer {
     .logo-mb {

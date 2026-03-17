@@ -2,7 +2,6 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import interactionPlugin from "@fullcalendar/interaction";
 import { Lunar } from "lunar-javascript";
-import "../assets/scss/components/farmerCalender.scss";
 import { useRef } from "react";
 import * as OpenCC from "opencc-js";
 

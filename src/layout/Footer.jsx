@@ -66,38 +66,49 @@ export default function Footer() {
               alt="pay"
             />
           </div>
-          <div className="px-36 flex-fill d-none d-md-block">
+          <div className="px-36 flex-fill d-none d-md-block ">
             <p className="text-primary mb-12">訂閱電子報</p>
-            <div className="d-flex align-items-center mb-2">
-              <div className=" border-end-0 p-11 ps-2 border border-primary">
-                <img
-                  className="ic-mail"
-                  src="assets/images/footer/ic_mail.png"
-                  alt="icon mail"
+            <a className="" href="mailto:">
+              <div className="d-flex align-items-center mb-2">
+                <div className=" border-end-0 p-11 ps-2 border border-primary">
+                  <img
+                    className="ic-mail"
+                    src="assets/images/footer/ic_mail.png"
+                    alt="icon mail"
+                  />
+                </div>
+                <input
+                  className="input-email border border-start-0 border-primary w-100 bg-transparent py-12 "
+                  type="email"
+                  placeholder="Enter Email"
                 />
               </div>
-              <input
-                className="input-email border border-start-0 border-primary w-100 bg-transparent py-12 "
-                type="email"
-                placeholder="Enter Email"
-              />
-            </div>
+            </a>
             <button type="button" className="btn btn-primary rounded-0 mb-36">
               立即探索您專屬的服務
             </button>
             <ul className="list-unstyled d-flex gap-20">
               <li className="p-2 footer-icon ">
-                <a href="#">
+                <a
+                  className="d-flex justify-content-center align-items-center"
+                  href="#"
+                >
                   <img src="assets/images/footer/ic-fb.png" alt="icon fb" />
                 </a>
               </li>
               <li className="p-2 footer-icon ">
-                <a href="#">
+                <a
+                  className="d-flex justify-content-center align-items-center"
+                  href="#"
+                >
                   <img src="assets/images/footer/ic-line.png" alt="icon line" />
                 </a>
               </li>
               <li className="p-2 footer-icon ">
-                <a href="#">
+                <a
+                  className="d-flex justify-content-center align-items-center"
+                  href="#"
+                >
                   <img
                     src="assets/images/footer/ic-youtube.png"
                     alt="icon youtube"
@@ -105,7 +116,10 @@ export default function Footer() {
                 </a>
               </li>
               <li className="p-2 footer-icon ">
-                <a href="#">
+                <a
+                  className="d-flex justify-content-center align-items-center"
+                  href="#"
+                >
                   <img
                     src="assets/images/footer/ic-ig.png"
                     alt="icon instagram"

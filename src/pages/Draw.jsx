@@ -376,7 +376,7 @@ export default function Draw() {
                 <div className="pt-5">
                   <div className="d-flex position-relative">
                     <i
-                      className="bi bi-x-circle display-1 position-absolute end-0 text-primary cursor-pointer"
+                      className="bi bi-x-circle position-absolute end-0 text-primary cursor-pointer"
                       onClick={handleCloseModal}
                     />
                   </div>

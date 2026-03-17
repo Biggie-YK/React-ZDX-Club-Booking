@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
+import { Link,NavLink } from "react-router";
 import { Collapse } from "bootstrap";
+import bg from "../../public/assets/images/index/nav-bg.png";
 
 export default function Nav() {
   const DownNavRef = useRef(null);
@@ -13,8 +14,8 @@ export default function Nav() {
       title: "命理知識",
     },
     {
-      url: "/about",
-      title: "命理師介紹",
+      url: "/services",
+      title: "服務內容",
     },
     {
       url: "/",
@@ -31,20 +32,12 @@ export default function Nav() {
   ];
   const DownNavData = [
     {
-      url: "/services",
-      title: "服務內容",
-    },
-    {
       url: "/draw",
       title: "線上求籤",
     },
     {
       url: "/knowledge-article",
       title: "命理文章",
-    },
-    {
-      url: "/appointment-management",
-      title: "預約管理",
     },
   ];
   const menuBtnRef = useRef(null);
@@ -80,7 +73,12 @@ export default function Nav() {
 
   return (
     <nav
-      className="nav navbar position-relative py-0"
+      style={{
+        backgroundImage: `url(${bg})`,
+      }}
+      className="nav navbar 
+      position-sticky top-0 
+       py-0"
       onMouseEnter={handleDownNavShow}
       onMouseLeave={handleDownNavHide}
     >
@@ -107,6 +105,7 @@ export default function Nav() {
           >
             <img src="assets/images/nav/nav-mb/menu.png" alt="menu button" />
           </button>
+          {/* 手機版關閉導覽列按鈕 */}
           <button
             type="button"
             role="button"
@@ -125,33 +124,38 @@ export default function Nav() {
           </button>
         </div>
 
+        {/* 電腦版導覽列上半部 */}
         <ul
-          className="list-unstyled d-md-flex d-none px-106 align-items-center justify-content-between w-100
-         mb-3"
+          className="list-unstyled d-md-flex d-none  align-items-center justify-content-between w-100
+         mb-3 nav-tabs border-0"
         >
           {navDatas.map((data, i) => {
             return (
               <li key={i} className=" py-3 px-4">
-                <Link to={data.url} className="text-dark text-decoration-none">
+                <NavLink
+                  to={data.url}
+                  className="nav-link border-0 text-decoration-none"
+                >
                   {data.img ? <img src={data.img} /> : data.title}
-                </Link>
+                </NavLink>
               </li>
             );
           })}
         </ul>
+        {/* 電腦版導覽列下半部 */}
         <ul
-          className="list-unstyled  px-106  w-100  downNav collapse "
+          className="list-unstyled  px-106  w-100  downNav collapse nav-tabs border-0"
           ref={DownNavRef}
         >
           {DownNavData.map((data, i) => {
             return (
               <li key={i} className="  px-4  ">
-                <Link
+                <NavLink
                   to={data.url}
-                  className="text-dark text-decoration-none  "
+                  className="nav-link text-decoration-none border-0  "
                 >
                   {data.img ? <img src={data.img} /> : data.title}
-                </Link>
+                </NavLink>
               </li>
             );
           })}
@@ -169,6 +173,7 @@ export default function Nav() {
           className="card card-body p-0 border-0"
           style={{ backgroundImage: `url(${navBg})` }}
         >
+          {/* 手機版導覽列 */}
           <ul className="list-unstyled text-center">
             {navDatas.map((data, i) => {
               return (
@@ -178,6 +183,7 @@ export default function Nav() {
                       <Link
                         className="text-dark text-decoration-none"
                         to={data.url}
+                        onClick={() => handleCollapse(true)}
                       >
                         {data.title}
                       </Link>
@@ -194,6 +200,7 @@ export default function Nav() {
                   <Link
                     to={data.url}
                     className="text-dark text-decoration-none  "
+                    onClick={() => handleCollapse(true)}
                   >
                     {data.img ? <img src={data.img} /> : data.title}
                   </Link>
