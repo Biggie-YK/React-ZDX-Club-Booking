@@ -73,6 +73,9 @@
   .modal-content {
     padding-bottom: 88px;
     border-radius: 48px;
+    .bi-x-circle{
+      font-size: 80px;
+    }
   }
   &-yes-img {
     width: 100%;
@@ -168,6 +171,9 @@
     .modal-content {
       width: 100%;
       aspect-ratio: 2/1.5;
+      .bi-x-circle{
+        font-size: 50px;
+      }
     }
     &-title {
       text-align: center;

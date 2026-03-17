@@ -1,55 +1,12 @@
-import { Routes, Route, useLocation } from "react-router";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Knowledge from "./pages/Knowledge";
-import KnowledgeArticle from "./components/KnowledgeArticle";
-import Reserve from "./pages/Reserve";
-import Nav from "./layout/Nav";
-import Footer from "./layout/Footer";
-import Draw from "./pages/Draw";
-import OtherPicks from "./pages/OtherPicks";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Services from "./pages/Services";
-import AdminDashboard from "./pages/admin/AdminDashboard";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import bg from "../public/assets/images/index/nav-bg.png";
 
 function App() {
-  const location = useLocation();
-  const hideFooterPaths = ["/login", "/register", "/admin-dashboard"]; // 不顯示 footer 的路徑
-
-  return (
-    <>
-      <div
-        style={{
-          backgroundImage: `url(${ bg })`,
-        }}
-      >
-        <Nav />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/about" element={<About />}></Route>
-          <Route path="/knowledge" element={<Knowledge />}></Route>
-          <Route
-            path="/knowledge-article"
-            element={<KnowledgeArticle />}
-          ></Route>
-          <Route path="/reserve" element={<Reserve />}></Route>
-          <Route path="/draw" element={<Draw />}></Route>
-          <Route path="/other-picks" element={<OtherPicks />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/register" element={<Register />}></Route>
-          <Route path="/services" element={<Services />}></Route>
-          <Route path="/admin-dashboard" element={<AdminDashboard />}></Route>
-        </Routes>
-        {!hideFooterPaths.includes(location.pathname) && <Footer />}
-      </div>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
