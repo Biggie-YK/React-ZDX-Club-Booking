@@ -36,7 +36,6 @@ export default function Reserve() {
       setIsAuth(authStatus);
       setUserData(userData);
 
-      // 如果有 userData，將姓名和電子郵件預填入表單
       if (userData) {
         reset(userData);
       }
@@ -47,7 +46,6 @@ export default function Reserve() {
   // API 串接
   const onSubmit = async (data) => {
     try {
-      // 若已登入且有 userData，將 userId 加入表單資料
       const bookingData = userData?.userId
         ? { ...data, userId: userData.userId }
         : data;
@@ -66,7 +64,7 @@ export default function Reserve() {
       <header className="pt-md-80">
         <div className="container ps-md-80 py-40">
           <div className="row align-items-center">
-            <div className="col-md-6  col-12">
+            <div className="col-md-6">
               <div className=" mx-24 position-relative  py-55">
                 <img
                   className="position-absolute align-items-center"
@@ -88,7 +86,7 @@ export default function Reserve() {
                 </div>
               </div>
             </div>
-            <div className="col-md-6 col-12">
+            <div className="col-md-6">
               <div className=" d-flex">
                 <img
                   className="img-fluid"
@@ -101,7 +99,6 @@ export default function Reserve() {
         </div>
       </header>
 
-      {/* 表單 */}
       <section className="container  py-40 py-md-80">
         <div className="outside-border">
           <div className="inside-border py-md-72 py-36">
@@ -116,7 +113,7 @@ export default function Reserve() {
                   您尚未登入,登入後可享有更便利的服務體驗
                 </div>
                 <button
-                  className="btn btn-primary col-12 col-md-auto px-4"
+                  className="btn btn-primary col-md-auto px-4"
                   onClick={() => navigate("/login")}
                 >
                   前往登入
@@ -174,9 +171,8 @@ export default function Reserve() {
                     </p>
                   )}
                 </div>
-                <div className="col-md-6 col-12 p-md-5 p-3">
+                <div className="col-md-6 p-md-5 p-3">
                   <ul>
-                    {/* date */}
                     <li className=" mb-4 W-540">
                       <label
                         htmlFor="date"
@@ -205,7 +201,6 @@ export default function Reserve() {
                         </p>
                       )}
                     </li>
-                    {/* time */}
                     <li className=" mb-4 W-540">
                       <label
                         htmlFor="time"
@@ -244,7 +239,6 @@ export default function Reserve() {
                         </p>
                       )}
                     </li>
-                    {/* name */}
                     <li className=" mb-4 W-540">
                       <label
                         htmlFor="name"
@@ -272,7 +266,6 @@ export default function Reserve() {
                         </p>
                       )}
                     </li>
-                    {/* phone */}
                     <li className=" mb-4 W-540">
                       <label
                         htmlFor="tel"
@@ -315,7 +308,6 @@ export default function Reserve() {
                         </p>
                       )}
                     </li>
-                    {/* email */}
                     <li className=" mb-4 W-540">
                       <label
                         htmlFor="email"
@@ -343,7 +335,6 @@ export default function Reserve() {
                         </p>
                       )}
                     </li>
-                    {/* comment */}
                     <li className=" mb-4 W-540">
                       <label htmlFor="comment" className="mb-12">
                         想告訴豬大仙...
@@ -359,7 +350,6 @@ export default function Reserve() {
                         ></textarea>
                       </div>
                     </li>
-                    {/* agreement */}
                     <div className="d-flex align-items-center">
                       <input
                         type="checkbox"
@@ -372,7 +362,6 @@ export default function Reserve() {
                       />
                       <p className="">我同意</p>
 
-                      {/* Button trigger modal */}
                       <button
                         type="button"
                         className="btn btn-primary btn-modals "
@@ -452,7 +441,6 @@ export default function Reserve() {
                         </div>
                       </div>
                       <p>與</p>
-                      {/* Button trigger modal */}
                       <button
                         type="button"
                         className="btn btn-primary btn-modals"
@@ -548,7 +536,7 @@ export default function Reserve() {
                   </ul>
                 </div>
               </div>
-              {/* 回上頁、送出按扭 */}
+              
               <div className="d-flex flex-column flex-md-row justify-content-md-center align-items-center">
                 <button className="me-md-36 mb-md-0 mb-3 btn-outside bg-transparent">
                   <div className="btn-inside">回上一步</div>
@@ -562,11 +550,10 @@ export default function Reserve() {
         </div>
       </section>
 
-      {/* 注意事項 */}
       <section className="container py-40">
         <div className="row flex-md-nowrap">
-          {/* 注意事項 */}
-          <div className="col-12 col-md-8  image-bg p-md-5 me-lg-3 mb-4 mb-md-0">
+
+          <div className="col-md-8  image-bg p-md-5 me-lg-3 mb-4 mb-md-0">
             <img
               className="list-bg img-fluid d-none d-md-block "
               src="assets/images/reserve/memo-bg1.png"
@@ -597,8 +584,8 @@ export default function Reserve() {
               </ul>
             </div>
           </div>
-          {/* 需要協助 */}
-          <div className="col-12 col-md-4  image-bg p-md-5">
+
+          <div className="col-md-4 image-bg p-md-5">
             <img
               className="list-bg img-fluid d-none d-md-block"
               src="assets/images/reserve/memo-bg2.png"

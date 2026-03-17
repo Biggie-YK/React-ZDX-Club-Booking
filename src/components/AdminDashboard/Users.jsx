@@ -40,7 +40,7 @@ export default function Users({ users }) {
     setModalType(type);
     if (type === "edit" && userData.id) {
       setCurrentUserId(userData.id);
-      const { password: _password, ...safeData  } = userData;
+      const { password: _password, ...safeData } = userData;
       reset(safeData);
     } else {
       setCurrentUserId(null);
@@ -67,9 +67,9 @@ export default function Users({ users }) {
         setUsersData((prevData) => [...prevData, response.data]);
       } else {
         alert(`註冊失敗: ${response.error}`);
-      }     
+      }
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 
@@ -88,7 +88,7 @@ export default function Users({ users }) {
         alert(`編輯失敗: ${response.error}`);
       }
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 
@@ -97,7 +97,7 @@ export default function Users({ users }) {
       await userDelete(userId);
       setUsersData((prevData) => prevData.filter((user) => user.id !== userId));
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 
@@ -209,10 +209,11 @@ export default function Users({ users }) {
 
             <div className="modal-body bg-secondary bg-opacity-10 p-4">
               <form
-                 onSubmit={(e) => {
-    const handler = modalType === "edit" ? handleUserEdit : handleUserRegister;
-    handleSubmit(handler)(e);
-  }}
+                onSubmit={(e) => {
+                  const handler =
+                    modalType === "edit" ? handleUserEdit : handleUserRegister;
+                  handleSubmit(handler)(e);
+                }}
                 id="userForm"
               >
                 <div className="row g-3 text-center">

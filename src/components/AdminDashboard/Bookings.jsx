@@ -1,7 +1,6 @@
 import { useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 
-// react 日期選擇器
 import DatePicker from "react-datepicker";
 import { Controller } from "react-hook-form";
 import "react-datepicker/dist/react-datepicker.css";
@@ -31,7 +30,7 @@ const INITIAL_BOOKING_DATA = {
 export default function Bookings({ bookings, onUpdate }) {
   const [currentBookingId, setCurrentBookingId] = useState(null);
   const [modalType, setModalType] = useState("create"); // "create" 或 "edit"
- 
+
   const {
     register,
     handleSubmit,
@@ -77,7 +76,6 @@ export default function Bookings({ bookings, onUpdate }) {
     async (data) => {
       data.date ? (data.date = format(data.date, "yyyy-MM-dd")) : null;
       try {
-        console.log("Creating booking with data:", data);
         await createBooking(data);
         alert("預約新增成功");
         onUpdate(); // 通知父元件更新
@@ -246,7 +244,6 @@ export default function Bookings({ bookings, onUpdate }) {
         aria-hidden="true"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
-
       >
         <div className="modal-dialog modal-md modal-dialog-centered">
           <div className="modal-content ">
@@ -266,7 +263,6 @@ export default function Bookings({ bookings, onUpdate }) {
               <form onSubmit={handleSubmit(onFormSubmit)} id="bookingForm">
                 <div className="row g-3 text-center">
                   <div className="row text-start g-3">
-                    {/* email */}
                     <div className="col-12 mb-3">
                       <label htmlFor="email" className="form-label mb-1">
                         Email <span className="text-danger">*</span>
@@ -292,7 +288,6 @@ export default function Bookings({ bookings, onUpdate }) {
                       )}
                     </div>
 
-                    {/* 姓名 */}
                     <div className="col-12 mb-3">
                       <label htmlFor="name" className="form-label mb-1">
                         姓名 <span className="text-danger">*</span>
@@ -313,7 +308,6 @@ export default function Bookings({ bookings, onUpdate }) {
                       )}
                     </div>
 
-                    {/* 電話 */}
                     <div className="col-12 mb-3">
                       <label htmlFor="phone" className="form-label mb-1">
                         電話 <span className="text-danger">*</span>
@@ -338,7 +332,6 @@ export default function Bookings({ bookings, onUpdate }) {
                       )}
                     </div>
 
-                    {/* 服務項目 */}
                     <div className="col-12 mb-3">
                       <label htmlFor="service" className="form-label mb-1">
                         服務項目 <span className="text-danger">*</span>
@@ -366,7 +359,6 @@ export default function Bookings({ bookings, onUpdate }) {
                       </select>
                     </div>
 
-                    {/* 日期 */}
                     <div className="col-12 mb-3">
                       <label htmlFor="date" className="form-label mb-1">
                         預約日期 <span className="text-danger">*</span>
@@ -396,7 +388,7 @@ export default function Bookings({ bookings, onUpdate }) {
                         )}
                       </div>
                     </div>
-                    {/* 時段 */}
+
                     <div className="col-12 mb-3">
                       <label htmlFor="time" className="form-label mb-1">
                         時段 <span className="text-danger">*</span>
@@ -425,7 +417,6 @@ export default function Bookings({ bookings, onUpdate }) {
                       </select>
                     </div>
 
-                    {/* 狀態 */}
                     <div className="col-12 mb-3">
                       <label htmlFor="status" className="form-label mb-1">
                         狀態
@@ -443,7 +434,6 @@ export default function Bookings({ bookings, onUpdate }) {
                       </select>
                     </div>
 
-                    {/* 備註 */}
                     <div className="col-12 mb-3">
                       <label htmlFor="remark" className="form-label mb-1">
                         備註

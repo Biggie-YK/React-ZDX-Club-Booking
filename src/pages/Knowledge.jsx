@@ -227,7 +227,7 @@ export default function Knowledge() {
             </p>
           </div>
           <div
-            className="km-solar-terms row d-flex flex-md-row flex-column-reverse align-items-center"
+            className="km-solar-terms row flex-md-row flex-column-reverse align-items-center"
             data-aos="flip-up"
             data-aos-anchor-placement="center-bottom"
           >

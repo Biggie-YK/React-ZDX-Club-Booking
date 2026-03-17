@@ -54,7 +54,6 @@ export default function Register() {
                       </p>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                      {/* 姓名欄位 */}
                       <div className="mb-3">
                         <label htmlFor="name" className="form-label">
                           姓名 <span className="text-danger">*</span>
@@ -83,7 +82,6 @@ export default function Register() {
                         )}
                       </div>
 
-                      {/* Email 欄位 */}
                       <div className="mb-3">
                         <label htmlFor="email" className="form-label">
                           Email <span className="text-danger">*</span>
@@ -108,7 +106,6 @@ export default function Register() {
                         )}
                       </div>
 
-                      {/* 密碼欄位 */}
                       <div className="mb-3">
                         <label htmlFor="password" className="form-label">
                           密碼 <span className="text-danger me-2">*</span>
@@ -149,7 +146,6 @@ export default function Register() {
                         </div>
                       </div>
 
-                      {/* 確認密碼欄位 */}
                       <div className="mb-3">
                         <label htmlFor="confirmPassword" className="form-label">
                           確認密碼 <span className="text-danger me-2">*</span>
@@ -181,7 +177,6 @@ export default function Register() {
                         )}
                       </div>
 
-                      {/* 提交按鈕 */}
                       <div className="d-grid gap-2">
                         <button
                           type="submit"
@@ -191,7 +186,6 @@ export default function Register() {
                         </button>
                       </div>
 
-                      {/* 登入連結 */}
                       <div className="text-center mt-3">
                         <p className="mb-0">
                           已經有帳戶了？{" "}

@@ -23,7 +23,7 @@ export default function Services() {
       <header className="py-40 py-md-80">
         <div className="container">
           <div className="row align-items-center mb-40 mb-md-4">
-            <div className="col-md-7 col-12">
+            <div className="col-md-7">
               <div className="dot-title px-md-32 px-12 px-md-3 py-2 py-md-3 mb-0 mb-md-4">
                 <p className="fs-5 fs-md-2 lh-base fw-bold lh-sm text-black-950">
                   當人生走到關鍵交叉口
@@ -46,7 +46,7 @@ export default function Services() {
                 />
               </div>
             </div>
-            <div className="col-md-5 col-12 px-3">
+            <div className="col-md-5 px-3">
               <div className="services-header-image d-flex mb-40 mb-md-0">
                 <img
                   className="img-fluid"
@@ -90,13 +90,13 @@ export default function Services() {
 
               {/* 電腦版列表 */}
               <ul className="row fs-6 fs-md-5 text-center text-primary-500 fw-bold py-3 d-none d-md-flex">
-                <li className="col-md-4 col-12 right-border">
+                <li className="col-md-4 right-border">
                   看懂你的命格結構與人生優勢配置
                 </li>
-                <li className="col-md-4 col-12 right-border">
+                <li className="col-md-4 right-border">
                   掌握流年高低起伏，避免錯誤時機
                 </li>
-                <li className="col-md-4 col-12">
+                <li className="col-md-4">
                   在結婚、創業、轉職等關鍵時刻，提前佈局
                 </li>
               </ul>
@@ -165,7 +165,7 @@ export default function Services() {
             {servicesData[servicesId].contentData.csard.map((item, index) => (
               <li
                 key={index}
-                className="col-12 col-md-4 py-0 py-md-3 px-1 px-md-3 my-3"
+                className="col-md-4 py-0 py-md-3 px-1 px-md-3 my-3"
               >
                 <div className="border border-secondary-200 py-30 py-md-36 px-5 px-md-60">
                   {item}
@@ -186,8 +186,8 @@ export default function Services() {
       <section className="services-content pt-40 pb-0 py-md-80 border-top border-black-600">
         <div className="container">
           {/* 獲得 */}
-          <div className="row d-flex justify-content-center">
-            <div className="col-12 col-md-4 px-0">
+          <div className="row justify-content-center">
+            <div className="col-md-4 px-0">
               <div className="dot-title">
                 <div className="fs-4 fs-md-2 fw-bold lh-base lh-md-sm py-0 py-md-3 px-4 px-md-32">
                   你將獲得什麼?
@@ -207,8 +207,8 @@ export default function Services() {
           </div>
 
           {/* 所需資料 */}
-          <div className="row d-flex justify-content-center border-top border-black-400 py-40">
-            <div className="col-12 col-md-4 px-0">
+          <div className="row justify-content-center border-top border-black-400 py-40">
+            <div className="col-md-4 px-0">
               <div className="dot-title">
                 <div className="fs-4 fs-md-2 fw-bold lh-base lh-md-sm py-12 py-md-3 px-4 px-md-32 mb-0">
                   {servicesData[servicesId].title.split("|")[0].trim()}
@@ -218,7 +218,7 @@ export default function Services() {
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-6 py-2 py-md-40 px-4 px-md-0">
+            <div className="col-md-6 py-2 py-md-40 px-4 px-md-0">
               <div className="mb-0 mb-md-40 fs-6">
                 <div className="title fs-6 text-black-800 mb-3">
                   {
@@ -241,16 +241,15 @@ export default function Services() {
             </div>
           </div>
 
-          {/* 服務流程 */}
-          <div className="row d-flex justify-content-center border-top border-black-400 pt-40 pb-0 py-md-40">
-            <div className="col-12 col-md-4 px-0">
+          <div className="row justify-content-center border-top border-black-400 pt-40 pb-0 py-md-40">
+            <div className="col-md-4 px-0">
               <div className="dot-title">
                 <div className="fs-4 fs-md-2 fw-bold lh-base lh-md-sm py-12 py-md-3 px-4 px-md-32 mb-0">
                   服務流程說明
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-6 py-3 py-md-40 px-4 px-md-0">
+            <div className="col-md-6 py-3 py-md-40 px-4 px-md-0">
               <div className="mb-40 fs-6 text-black-600">
                 <div className="mb-4 mb-md-48">
                   {servicesData[servicesId].contentData.steps.map(

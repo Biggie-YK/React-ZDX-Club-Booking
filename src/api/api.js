@@ -8,11 +8,9 @@ export const fetchAllData = async () => {
   const urlItems = [`users`, `bookings`, `posts`, `services`];
 
   try {
-    // Promise.all 並行請求
     const promises = urlItems.map((item) => axios.get(`${API_URL}/${item}`));
     const responses = await Promise.all(promises);
 
-    // 將結果整理成物件
     const result = {};
 
     urlItems.forEach((item, index) => {
@@ -47,7 +45,6 @@ export const checkIsAuth = async () => {
   // 檢查是否有 token
   const token = Cookies.get("token");
   if (token) {
-    // 讀取 userData
     const userData = Cookies.get("userData");
     return [true, userData ? JSON.parse(userData) : null];
   } else {
@@ -60,7 +57,6 @@ export const userLogin = async (data) => {
   try {
     const response = await axios.post(loginUrl, data);
 
-    // user data 寫入 cookie
     setUserCookie(response.data.user);
 
     const token = response.data.accessToken;
@@ -128,10 +124,8 @@ export const userEdit = async (userId, data) => {
   }
 };
 
-// 預約相關 API createBooking
 // 新增預約 API
 export const createBooking = async (data) => {
-  console.log(`預約資料data:`, data);
   try {
     const response = await axios.post(`${API_URL}/bookings`, data);
     return response.data;

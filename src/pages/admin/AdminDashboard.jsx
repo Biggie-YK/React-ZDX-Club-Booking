@@ -46,7 +46,6 @@ export default function AdminDashboard() {
   return (
     <>
       <div className="d-flex">
-        {/* <!-- Sidebar --> */}
         <div className="sidebar fw-bold text-neutral-50 bg-neutral-800">
           <div className="p-3 border-bottom h4">
             <i className="bi bi-speedometer2 me-2"></i> 後台管理
@@ -91,9 +90,7 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* <!-- Main --> */}
         <div className="flex-grow-1">
-          {/* <!-- 主畫面 --> */}
           <div className="content bg-background-beige p-4">
             <div className="row g-4">
               {mainContent === "dashboard" && <Dashboard datas={datas} />}
