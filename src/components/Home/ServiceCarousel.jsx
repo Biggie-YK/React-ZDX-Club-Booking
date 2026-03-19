@@ -144,7 +144,7 @@ export default function ServiceCarousel() {
           </div>
         </div>
 
-        <ul className="my-indicators list-unstyled mb-0 d-flex d-md-none  align-items-end row ">
+        <ul className="my-indicators list-unstyled mb-0 d-lg-none  align-items-end row ">
           <li className="col">
             <div className="my-indicator service-item "></div>
           </li>

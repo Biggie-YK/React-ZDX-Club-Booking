@@ -388,7 +388,7 @@ export default function KnowledgeArticle() {
             <p className="">紀錄命理、節氣、運勢與人生體悟的智慧手記</p>
           </div>
 
-          <div className="row d-flex px-12 px-md-0">
+          <div className="row  px-12 px-md-0">
             {/* 手機版顯示 */}
             <div className="dropdown mb-3 px-0 d-md-none d-block">
               <div

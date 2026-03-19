@@ -231,7 +231,7 @@ export default function Draw() {
               <h1 className="mb-0 fw-bold fs-md-1 fs-2">線上求籤</h1>
             </div>
           </div>
-          <div className="row d-none d-md-flex">
+          <div className="row d-none d-lg-flex">
             <div className="col-2 "></div>
             <div className="col-3 ">
               <div className="border border-secondary-200 position-relative">

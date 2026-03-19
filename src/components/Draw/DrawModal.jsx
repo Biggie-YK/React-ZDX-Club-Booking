@@ -4,7 +4,6 @@ import Nzh from "nzh";
 import picks from "../../assets/picks.json";
 import { useNavigate } from "react-router";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { Modal } from "bootstrap";
 
 export default function DrawModal({ drawModal }) {
   const results = [

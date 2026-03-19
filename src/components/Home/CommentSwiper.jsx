@@ -241,7 +241,7 @@ export default function CommentSwiper() {
         </div>
       </div>
 
-      <ul className="my-indicators list-unstyled mb-0 d-flex d-md-none  align-items-end row w-100">
+      <ul className="my-indicators list-unstyled mb-0 d-md-none  align-items-end row w-100">
         <li className="col">
           <div className="my-indicator  comment-item "></div>
         </li>
