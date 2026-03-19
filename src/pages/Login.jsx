@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { checkIsAuth, userLogin } from "../api/api.js";
 import UserAuthCard from "../components/UserAuthCard";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(false);
   const [userData, setUserData] = useState(null);
 
@@ -19,7 +21,6 @@ export default function Login() {
 
   // 使用 useEffect 檢查登入狀態
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     checkAuth();
   }, []);
 
@@ -43,6 +44,7 @@ export default function Login() {
       const loginResult = await userLogin(formData);
       if (loginResult.success) {
         checkAuth();
+        navigate("/login-success");
       }
     } catch (err) {
       console.error(err);

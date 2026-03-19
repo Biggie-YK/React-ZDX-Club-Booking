@@ -54,6 +54,10 @@ export const router = createHashRouter([
         path: "/login",
         element: <Login />,
       },
+           {
+        path: "/login-success",
+        element: <Login />,
+      },
       {
         path: "/register",
         element: <Register />,

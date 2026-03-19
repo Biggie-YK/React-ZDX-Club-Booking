@@ -1,13 +1,18 @@
-import { useEffect, useRef, useState } from "react";
-import { Link,NavLink } from "react-router";
+import { use, useEffect, useRef, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router";
 import { Collapse } from "bootstrap";
 import bg from "../../public/assets/images/index/nav-bg.png";
+import { checkIsAuth } from "../api/api.js";
 
 export default function Nav() {
+  const location = useLocation();
+
   const DownNavRef = useRef(null);
   const navBg =
     "https://biggie-yk.github.io/React-ZDX-Club-Booking/assets/images/index/nav-bg.png";
   const [showMenu, setShowMenu] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
+
   const navDatas = [
     {
       url: "/knowledge",
@@ -27,7 +32,7 @@ export default function Nav() {
     },
     {
       url: "/login",
-      title: "登入/註冊",
+      title: isAuth ? "個人頁面" : "登入/註冊",
     },
   ];
   const DownNavData = [
@@ -49,6 +54,15 @@ export default function Nav() {
       toggle: false,
     });
   }, []);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const [authStatus] = await checkIsAuth();
+      setIsAuth(authStatus);
+    };
+    checkAuth();
+  }, [location.pathname]);
+
   useEffect(() => {
     DownNavRef.current = new Collapse(DownNavRef.current, {
       toggle: false,
