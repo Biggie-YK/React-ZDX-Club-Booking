@@ -200,17 +200,6 @@ export default function DrawModal({ drawModal }) {
     setShowText(true);
   }
 
-  // function handleOpenModal() {
-  //   modalInstance.current.show();
-  //   handleTossingBlocks(false);
-  //   setHasThreeSuccess(false);
-  // }
-  // useEffect(() => {
-  //   modalInstance.current = new Modal(drawModal.current, {
-  //     backdrop: "static",
-  //   });
-  //   // handleOpenModal();
-  // }, []);
 
   return (
     <div className="modal draw-modal" tabIndex="-1" ref={drawModal}>

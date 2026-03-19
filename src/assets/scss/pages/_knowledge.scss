@@ -89,7 +89,7 @@ body {
     .bg-sp {
       // 春
 
-      //
+      
       background: rgba(234, 214, 209, 0.5);
       .sel-item:hover {
         border: 2px solid #f4d0c7;
@@ -214,8 +214,6 @@ body {
       text-decoration: none;
     }
     .article-nav-item:hover {
-      // background: $neutral-200;
-      // font-weight: 600;
       background-color: rgba($primary, 0.8);
       color: $black-50;
     }
