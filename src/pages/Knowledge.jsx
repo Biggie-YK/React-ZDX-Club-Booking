@@ -352,7 +352,7 @@ export default function Knowledge() {
             </p>
           </div>
           <ol className="timeline-items px-0">
-            <li className="timeline-item d-md-row d-flex align-items-center justify-content-start justify-content-md-end">
+            <li className="timeline-item d-md]-row d-flex align-items-center justify-content-start justify-content-md-end">
               <div className="timeline-tag fs-md-2 fs-4 fw-bold lh-sm text-black-800 col-md-2 d-flex justify-content-center">
                 <p className="tag-line d-flex justify-content-center align-items-center mb-0">
                   嬰
@@ -386,7 +386,7 @@ export default function Knowledge() {
               </div>
             </li>
 
-            <li className="timeline-item d-md-row d-flex flex-md-row-reverse align-items-center justify-content-start justify-content-md-end">
+            <li className="timeline-item d-md-row d-flex flex-lg-row-reverse align-items-center justify-content-start justify-content-md-end">
               <div className="timeline-tag fs-md-2 fs-4 fw-bold lh-sm text-black-800 col-md-2 d-flex justify-content-center">
                 <p className="tag-line d-flex justify-content-center align-items-center mb-0">
                   青
@@ -454,7 +454,7 @@ export default function Knowledge() {
               </div>
             </li>
 
-            <li className="timeline-item d-md-row d-flex flex-md-row-reverse align-items-center justify-content-start justify-content-md-end">
+            <li className="timeline-item d-md-row d-flex flex-lg-row-reverse align-items-center justify-content-start justify-content-md-end">
               <div className="timeline-tag fs-md-2 fs-4 fw-bold lh-sm text-black-800 col-md-2 d-flex justify-content-center">
                 <p className="tag-line d-flex justify-content-center align-items-center mb-0">
                   成
@@ -522,7 +522,7 @@ export default function Knowledge() {
               </div>
             </li>
 
-            <li className="timeline-item d-md-row d-flex flex-md-row-reverse align-items-center justify-content-start justify-content-md-end">
+            <li className="timeline-item d-md-row d-flex flex-lg-row-reverse align-items-center justify-content-start justify-content-md-end">
               <div className="timeline-tag fs-md-2 fs-4 fw-bold lh-sm text-black-800 col-md-2 d-flex justify-content-center">
                 <p className="tag d-flex justify-content-center align-items-center mb-0">
                   歸

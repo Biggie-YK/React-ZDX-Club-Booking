@@ -37,7 +37,7 @@ body {
   border-radius: 50%;
   background: rgba($primary-500, 0.2); // 透明度 20%
   z-index: 1;
-  @media (min-width: 767px) {
+  @media (min-width: 992px) {
     top: 8px;
     left: 8px;
   }
@@ -78,7 +78,7 @@ body {
       .sel-item {
         width: calc((100% - 2 * #{$sel-gap}) / 3);
       }
-      @media (min-width: 767px) {
+      @media (min-width: 992px) {
         $sel-gap: 16px;
         .sel-item {
           width: calc((100% - 5 * #{$sel-gap}) / 6);
@@ -163,7 +163,7 @@ body {
   .timeline-img {
     max-width: 64px;
   }
-  @media (min-width: 767px) {
+  @media (min-width: 992px) {
     .timeline-tag {
       margin-right: 0px;
     }
@@ -227,7 +227,7 @@ body {
   .article-content {
     border: 1px solid $black-600;
   }
-  @media (min-width: 767px) {
+  @media (min-width: 992px) {
     .article-content {
       border: none;
       background-image:
