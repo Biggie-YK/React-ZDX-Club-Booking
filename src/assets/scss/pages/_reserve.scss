@@ -198,7 +198,7 @@ input[type="date"] {
   // 手機版背景色和內距
   background-color: rgba($primary, 0.1);
   border-radius: 8px;
-  @media (min-width: 768px) {
+  @include media-breakpoint-down(md) {
     background-color: $background-beige;
   }
 }
@@ -218,12 +218,11 @@ input[type="date"] {
 .image-bg .content {
   position: relative;
   // 桌機版才用絕對定位
-  @media (min-width: 768px) {
+  @include media-breakpoint-down(md) {
     top: 0;
     left: 0;
   }
 }
-
 
 $error-color: #ef4444;
 $error-color-dark: #dc2626;
@@ -231,7 +230,7 @@ $error-color-dark: #dc2626;
 .input-error {
   border-color: $error-color;
   animation: pulse-border 1.5s ease-in-out infinite;
-  
+
   &:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba($error-color, 0.2);
@@ -239,12 +238,12 @@ $error-color-dark: #dc2626;
 }
 
 @keyframes pulse-border {
-  0%, 100% { 
-    border-color: $error-color; 
+  0%,
+  100% {
+    border-color: $error-color;
   }
-  50% { 
-    border-color: $error-color-dark; 
-    box-shadow: 0 0 0 3px rgba($error-color, 0.2); 
+  50% {
+    border-color: $error-color-dark;
+    box-shadow: 0 0 0 3px rgba($error-color, 0.2);
   }
 }
-

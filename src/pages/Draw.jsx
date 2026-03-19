@@ -223,7 +223,7 @@ export default function Draw() {
         <section className="draw py-md-80 py-40">
           <div className="row py-3 row-cols-12 ">
             <div className="col-md-5">
-              <h6 className=" mt-md-4  mb-3 mb-md-0 fw-bold text-primary text-md-end ">
+              <h6 className=" mt-md-4  mb-3 mb-md-0 fw-bold text-primary text-md-end text-start">
                 線上服務
               </h6>
             </div>
@@ -279,8 +279,8 @@ export default function Draw() {
               </div>
             </div>
           </div>
-          <div className="row d-md-none">
-            <div className="col-12">
+          <div className=" d-md-none d-flex">
+            <div>
               <div className="pt-4">
                 <p className="mb-12"> 請先靜下心來，在心中默念想詢問的事情。</p>
                 <p className="mb-12">

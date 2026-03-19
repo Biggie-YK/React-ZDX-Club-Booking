@@ -551,7 +551,7 @@ export default function Reserve() {
       </section>
 
       <section className="container py-40">
-        <div className="row flex-md-nowrap">
+        <div className="row flex-md-nowrap flex-wrap">
 
           <div className="col-md-8  image-bg p-md-5 me-lg-3 mb-4 mb-md-0">
             <img

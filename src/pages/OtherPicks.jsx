@@ -48,7 +48,7 @@ export default function OtherPicks() {
             </div>
             <img
               className="d-md-none mobile-img-other object-fit-cover"
-              src="../assets/images/draw/others.png"
+              src="assets/images/draw/others.png"
               alt="其他籤"
             />
           </div>
@@ -59,7 +59,7 @@ export default function OtherPicks() {
                   <p className="text-end">本站採用籤詩為雷雨師一百首</p>
                   <img
                     className="picks-img object-fit-cover position-absolute top-0"
-                    src="../assets/images/other-picks/picks-box.png"
+                    src="assets/images/other-picks/picks-box.png"
                     alt="籤箱"
                   />
                 </div>
@@ -122,7 +122,7 @@ export default function OtherPicks() {
               >
                 <img
                   className="picks-again-img py-3 me-3 me-md-0"
-                  src="../assets/images/other-picks/more-picks.png"
+                  src="assets/images/other-picks/more-picks.png"
                   alt="再抽一次"
                 />
 
