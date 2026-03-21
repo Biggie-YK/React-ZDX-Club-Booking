@@ -33,29 +33,28 @@
 
   .right-border,
   .left-border {
-    position: relative;}
+    position: relative;
+  }
 
-    
   .left-border::before,
   .right-border::after {
-      content: "";
-      position: absolute;
-      top: calc((100% - 15px) / 2);
-      width: 1px;
-      height: 15px;
-      background: $primary-500;
-      @media (min-width: 767px) {
-        width: 2px;
-      }
+    content: "";
+    position: absolute;
+    top: calc((100% - 15px) / 2);
+    width: 1px;
+    height: 15px;
+    background: $primary-500;
+    @media (min-width: 767px) {
+      width: 2px;
     }
   }
-  .left-border::before {
-    left: 0px;
-  }
-  .right-border::after {
-    right: 0px;
-  }
-
+}
+.left-border::before {
+  left: 0px;
+}
+.right-border::after {
+  right: 0px;
+}
 
 .services-header-image {
   padding: 0px 55.5px;
@@ -102,7 +101,11 @@
 
 .intro-header {
   .highlight-box {
-    background-image: url("../../images/services/bg-highlight-box.png");
-    background: rgba($secondary-200, 0.5);
+  background: 
+    linear-gradient(rgba($secondary-200, 0.5), rgba($secondary-200, 0.5)),
+    url("../../images/services/bg-highlight-box.png");
+  background-size: auto 100%;
+  background-position: left top;
+  background-repeat: repeat;
   }
 }

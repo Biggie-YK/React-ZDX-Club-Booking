@@ -1,4 +1,4 @@
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import { Collapse } from "bootstrap";
 import bg from "../../public/assets/images/index/nav-bg.png";

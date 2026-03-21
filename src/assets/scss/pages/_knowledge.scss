@@ -89,7 +89,6 @@ body {
     .bg-sp {
       // 春
 
-      
       background: rgba(234, 214, 209, 0.5);
       .sel-item:hover {
         border: 2px solid #f4d0c7;
@@ -133,6 +132,7 @@ body {
 }
 
 .timeline {
+  overflow-x: hidden;
   .timeline-items {
     .timeline-item {
       margin-bottom: 16px;

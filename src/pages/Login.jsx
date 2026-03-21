@@ -21,7 +21,14 @@ export default function Login() {
 
   // 使用 useEffect 檢查登入狀態
   useEffect(() => {
-    checkAuth();
+    const checkLoginStatus = async () => {
+      const [authStatus, user] = await checkIsAuth();
+      if (authStatus) {
+        setIsAuth(authStatus);
+        setUserData(user);
+      }
+    };
+    checkLoginStatus();
   }, []);
 
   // react hook form 相關設定
