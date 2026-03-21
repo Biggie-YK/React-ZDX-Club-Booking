@@ -168,6 +168,22 @@ export const deleteBooking = async (bookingId) => {
   }
 };
 
+// 取得命理師列表 API
+export const fetchMasters = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/users`);
+    const masters = response.data.filter((user) => user.role === "master");
+    const pigMaster = response.data.find((user) => user.name === "豬大仙");
+    if (pigMaster) {
+      masters.unshift(pigMaster);
+    }
+    return masters;
+  } catch (error) {
+    console.error("取得命理師列表失敗:", error.response?.data || error.message);
+    return [];
+  }
+};
+
 export default {
   userLogin,
   checkIsAuth,
@@ -180,4 +196,5 @@ export default {
   fetchBookings,
   updateBooking,
   deleteBooking,
+  fetchMasters,
 };

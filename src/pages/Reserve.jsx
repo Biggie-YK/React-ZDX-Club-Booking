@@ -3,13 +3,14 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { createBooking, checkIsAuth } from "../api/api.js";
+import { createBooking, checkIsAuth, fetchMasters } from "../api/api.js";
 
 import { timeOptions, serviceOptions } from "../api/fromOptionsData.js";
 
 export default function Reserve() {
   const [isAuth, setIsAuth] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [masters, setMasters] = useState([]);
 
   const [minDate] = useState(() => {
     return new Date(Date.now() + 86400000).toISOString().split("T")[0];
@@ -42,6 +43,15 @@ export default function Reserve() {
     };
     checkAuth();
   }, [reset]);
+
+  // 取得命理師列表
+  useEffect(() => {
+    const loadMasters = async () => {
+      const mastersList = await fetchMasters();
+      setMasters(mastersList);
+    };
+    loadMasters();
+  }, []);
 
   // API 串接
   const onSubmit = async (data) => {
@@ -335,9 +345,47 @@ export default function Reserve() {
                         </p>
                       )}
                     </li>
+
+                    {/* 選擇命理師 */}
+                    <li className=" mb-4 W-540">
+                      <label
+                        htmlFor="master"
+                        className="form-label mb-12 fs-6 pe-4"
+                      >
+                        請選擇命理師
+                        {errors.time && (
+                          <span className="fs-6 text-danger">*必填</span>
+                        )}
+                      </label>
+                      <div className="position-relative">       
+                        <select
+                          name="master"
+                          id="master"
+                          className={`form-control ${errors.master ? "input-error" : ""}`}
+                          defaultValue=""
+                          {...register("master", { required: "請選擇命理師" })}
+                        >
+                          <option value="" disabled>
+                            請選擇命理師
+                          </option>
+                          {masters.map((master) => (
+                            <option key={master.id} value={master.name}>
+                              {master.name}
+                            </option>
+                          ))}
+                        </select>
+                        <i className="bi bi-person position-absolute top-50 end-0 translate-middle-y me-3 text-muted pointer-events-none"></i>
+                      </div>
+                      {errors.master && (
+                        <p className="text-danger fs-6 mt-2">
+                          {errors.master.message}
+                        </p>
+                      )}
+                    </li>
+
                     <li className=" mb-4 W-540">
                       <label htmlFor="comment" className="mb-12">
-                        想告訴豬大仙...
+                        想告訴命理師...
                       </label>
                       <div>
                         <textarea
@@ -536,7 +584,7 @@ export default function Reserve() {
                   </ul>
                 </div>
               </div>
-              
+
               <div className="d-flex flex-column flex-md-row justify-content-md-center align-items-center">
                 <button className="me-md-36 mb-md-0 mb-3 btn-outside bg-transparent">
                   <div className="btn-inside">回上一步</div>
@@ -552,7 +600,6 @@ export default function Reserve() {
 
       <section className="container py-40">
         <div className="row flex-md-nowrap flex-wrap">
-
           <div className="col-md-8  image-bg p-md-5 me-lg-3 mb-4 mb-md-0">
             <img
               className="list-bg img-fluid d-none d-md-block "

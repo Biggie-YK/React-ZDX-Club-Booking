@@ -152,6 +152,7 @@ export default function Bookings({ bookings, onUpdate }) {
                     <th>服務項目</th>
                     <th>預約日期</th>
                     <td>預約時段</td>
+                    <td>預約命理師</td>
                     <td>預約者訊息</td>
                     <td>同意預約</td>
                     <td>預約狀態</td>
@@ -169,6 +170,7 @@ export default function Bookings({ bookings, onUpdate }) {
                         service,
                         date,
                         time,
+                        master,
                         comment,
                         agreement,
                         status,
@@ -185,6 +187,7 @@ export default function Bookings({ bookings, onUpdate }) {
                             {timeOptions.find((option) => option.value === time)
                               ?.label || time}
                           </td>
+                          <td>{master}</td>
                           <td>{comment}</td>
                           <td>{agreement ? "是" : "否"}</td>
                           <td>

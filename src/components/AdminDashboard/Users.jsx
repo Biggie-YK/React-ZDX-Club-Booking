@@ -301,6 +301,7 @@ export default function Users({ users }) {
                       >
                         <option value="user">一般使用者</option>
                         <option value="admin">管理員</option>
+                        <option value="master">命理師</option>
                       </select>
                       {errors.role && (
                         <div className="invalid-feedback">
